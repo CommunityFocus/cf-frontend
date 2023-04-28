@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { socket } from "../socket";
+import { socket } from "./socket";
 
-export function MyForm() {
+export function TimerForm() {
   const [value, setValue] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
@@ -9,7 +9,10 @@ export function MyForm() {
     event.preventDefault();
     setIsLoading(true);
 
-    socket.timeout(1000).emit("create-something", value, () => {
+    socket.timeout(1000).emit("startCountdown", {
+      roomName: window.location.href.split("/")[4],
+      durationInSeconds: parseInt(value),
+    }, () => {
       setIsLoading(false);
     });
   }

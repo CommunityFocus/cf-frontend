@@ -1,5 +1,5 @@
 
-import { socket } from "../socket";
+import { socket } from "./socket";
 
 export function ConnectionManager() {
   function connect() {
