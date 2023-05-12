@@ -10,7 +10,7 @@ function Room() {
   const [usersInRoom, setUsersInRoom] = useState(0);
 
   useEffect(() => {
-    const roomName = window.location.href.split("/")[4];
+    const roomName = window.location.href.split("/")[3];
     function onConnect() {
       socket.emit("join", roomName);
       console.log("join", roomName);
@@ -47,12 +47,12 @@ function Room() {
   useEffect(() => {
     console.log("timestamp", timestamp);
     // update the document title, with roomName and timestamp
-    document.title = `${timestamp}-${window.location.href.split("/")[4]}`;
+    document.title = `${timestamp}-${window.location.href.split("/")[3]}`;
   }, [timestamp]);
 
   useEffect(() => {
     console.log("URL", window.location.href);
-    console.log("roomId:", window.location.href.split("/")[4]);
+    console.log("roomId:", window.location.href.split("/")[3]);
   }, [isConnected]);
 
   return (

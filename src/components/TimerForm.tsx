@@ -10,7 +10,7 @@ export function TimerForm() {
     setIsLoading(true);
 
     socket.timeout(1000).emit("startCountdown", {
-      roomName: window.location.href.split("/")[4],
+      roomName: window.location.href.split("/")[3],
       durationInSeconds: parseInt(value),
     }, () => {
       setIsLoading(false);
