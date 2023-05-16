@@ -4,6 +4,7 @@ import { ConnectionState } from "./ConnectionState";
 import { ConnectionManager } from "./ConnectionManager";
 import { Timestamp } from "./Timestamp";
 import { TimerForm } from "./TimerForm";
+import formatTimestamp from "../helpers/formatTimestamp";
 
 function Room() {
   const [isConnected, setIsConnected] = useState<boolean>(socket.connected);
@@ -50,7 +51,8 @@ function Room() {
   useEffect(() => {
     console.log({ timestamp });
     // update the document title, with roomName and timestamp
-    document.title = `${timestamp}-${window.location.href.split("/")[3]}`;
+    const formattedTimestamp = formatTimestamp(timestamp);
+    document.title = `${formattedTimestamp}-${window.location.href.split("/")[3]}`;
   }, [timestamp]);
 
   useEffect(() => {

@@ -4,7 +4,6 @@ function formatTimestamp(timeRemaining: number) {
 	const seconds = Math.floor((timeRemaining % 60));
 	const padZeros = (num: number) => num.toString().padStart(2, '0');
 	const timestamp = `${padZeros(hours)}:${padZeros(minutes)}:${padZeros(seconds)}`;
-	console.log(timestamp);
 	return timestamp;
 }
 
