@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
 import { socket } from "./socket";
-import { ConnectionState } from "./ConnectionState";
+// import { ConnectionState } from "./ConnectionState";
 import { ConnectionManager } from "./ConnectionManager";
 import { Events } from "./Events";
 import { TimerForm } from "./TimerForm";
+
 function Room() {
-  const [isConnected, setIsConnected] = useState(socket.connected);
+  // const [isConnected, setIsConnected] = useState(socket.connected);
   const [timestamp, setTimestamp] = useState("0");
   const [usersInRoom, setUsersInRoom] = useState(0);
 
@@ -14,12 +15,12 @@ function Room() {
     function onConnect() {
       socket.emit("join", roomName);
       console.log("join", roomName);
-      setIsConnected(true);
+      // setIsConnected(true);
     }
 
     function onDisconnect() {
       socket.emit("disconnect", roomName);
-      setIsConnected(false);
+      // setIsConnected(false);
     }
 
     function onTimerUpdate(value: string) {
@@ -50,14 +51,14 @@ function Room() {
     document.title = `${timestamp}-${window.location.href.split("/")[3]}`;
   }, [timestamp]);
 
-  useEffect(() => {
-    console.log("URL", window.location.href);
-    console.log("roomId:", window.location.href.split("/")[3]);
-  }, [isConnected]);
+  // useEffect(() => {
+  //   console.log("URL", window.location.href);
+  //   console.log("roomId:", window.location.href.split("/")[3]);
+  // }, [isConnected]);
 
   return (
     <>
-      <ConnectionState isConnected={isConnected} />
+      {/* <ConnectionState isConnected={isConnected} /> */}
       <Events events={timestamp} />
       <ConnectionManager />
       <TimerForm />

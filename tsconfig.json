@@ -1,12 +1,14 @@
 {
   "compilerOptions": {
-    "target": "ESNext",
-    "lib": ["DOM", "DOM.Iterable", "ESNext"],
-    "module": "ESNext",
+    "target": "es2022",
+    "lib": ["DOM", "DOM.Iterable", "es2022"],
+    "module": "es2022",
     "skipLibCheck": true,
+    "types": ["jest", "node", "@testing-library/jest-dom"],
+    "esModuleInterop": true,
 
     /* Bundler mode */
-    "moduleResolution": "bundler",
+    "moduleResolution": "Node",
     "allowImportingTsExtensions": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
