@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { socket } from "./socket";
 import { ConnectionState } from "./ConnectionState";
 import { ConnectionManager } from "./ConnectionManager";
-import { Events } from "./Events";
+import { Timestamp } from "./Timestamp";
 import { TimerForm } from "./TimerForm";
 function Room() {
   const [isConnected, setIsConnected] = useState(socket.connected);
@@ -23,7 +23,6 @@ function Room() {
     }
 
     function onTimerUpdate(value: string) {
-      console.log("timer", value);
       setTimestamp(value);
     }
     function onUsersInRoom(value: number) {
@@ -45,7 +44,7 @@ function Room() {
   }, []);
 
   useEffect(() => {
-    console.log("timestamp", timestamp);
+    console.log({ timestamp });
     // update the document title, with roomName and timestamp
     document.title = `${timestamp}-${window.location.href.split("/")[3]}`;
   }, [timestamp]);
@@ -58,7 +57,7 @@ function Room() {
   return (
     <>
       <ConnectionState isConnected={isConnected} />
-      <Events events={timestamp} />
+      <Timestamp timestamp={timestamp} />
       <ConnectionManager />
       <TimerForm />
       <p>Users in room: {usersInRoom}</p>
