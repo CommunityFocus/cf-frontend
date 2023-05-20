@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { socket } from "./Socket";
+import { socket } from "./socket";
 
 export function TimerForm() {
   const [value, setValue] = useState("");
