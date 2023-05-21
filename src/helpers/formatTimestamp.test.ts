@@ -24,7 +24,7 @@ describe('formatTimestamp', () => {
     })
 
     describe('Given the number of seconds between 3599 and 360000', () => {
-        it('should return the timestamp in HH:MM:SS', () => {
+        it('should return the timestamp in "HHHH:MM:SS" padding the zeros at 2 digits', () => {
             const timeValues: Record<number, string> = {
                 3600: "01:00:00",
                 35999: "09:59:59",
@@ -43,7 +43,7 @@ describe('formatTimestamp', () => {
     })
 
     describe('Given the number of seconds over 359999', () => {
-        it('should return the timestamp in HH:MM:SS with additional "H" as needed', () => {
+        it('should return the timestamp in "HHHH:MM:SS" with additional place values as needed', () => {
             const timeValues: Record<number, string> = {
                 360000: "100:00:00",
                 360059: "100:00:59",
