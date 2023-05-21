@@ -51,8 +51,7 @@ function Room() {
   useEffect(() => {
     console.log({ timestamp });
     // update the document title, with roomName and timestamp
-    const formattedTimestamp = formatTimestamp(timestamp);
-    document.title = `${formattedTimestamp}-${window.location.href.split("/")[3]}`;
+    document.title = `${formatTimestamp(timestamp)}-${window.location.href.split("/")[3]}`;
   }, [timestamp]);
 
   useEffect(() => {
