@@ -16,12 +16,10 @@ function Room() {
 
     function onConnect() {
       socket.emit("join", roomName);
-      console.log("join", roomName);
       setIsConnected(true);
     }
 
     function onDisconnect() {
-      socket.emit("disconnect", roomName);
       setIsConnected(false);
     }
 
