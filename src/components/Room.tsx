@@ -4,13 +4,16 @@ import { ConnectionState } from "./ConnectionState";
 import { ConnectionManager } from "./ConnectionManager";
 import { Timestamp } from "./Timestamp";
 import { TimerForm } from "./TimerForm";
+import formatTimestamp from "../helpers/formatTimestamp";
+
 function Room() {
-  const [isConnected, setIsConnected] = useState(socket.connected);
-  const [timestamp, setTimestamp] = useState("0");
-  const [usersInRoom, setUsersInRoom] = useState(0);
+  const [isConnected, setIsConnected] = useState<boolean>(socket.connected);
+  const [timestamp, setTimestamp] = useState<number>(0);
+  const [usersInRoom, setUsersInRoom] = useState<number>(0);
 
   useEffect(() => {
     const roomName = window.location.href.split("/")[3];
+
     function onConnect() {
       socket.emit("join", roomName);
       console.log("join", roomName);
@@ -23,11 +26,13 @@ function Room() {
     }
 
     function onTimerUpdate(value: string) {
-      setTimestamp(value);
+      console.log("timer", value);
+      setTimestamp(parseInt(value));
     }
-    function onUsersInRoom(value: number) {
+
+    function onUsersInRoom(value: string) {
       console.log("usersInRoom", value);
-      setUsersInRoom(value);
+      setUsersInRoom(parseInt(value));
     }
 
     socket.on("connect", onConnect);
@@ -46,7 +51,7 @@ function Room() {
   useEffect(() => {
     console.log({ timestamp });
     // update the document title, with roomName and timestamp
-    document.title = `${timestamp}-${window.location.href.split("/")[3]}`;
+    document.title = `${formatTimestamp(timestamp)}-${window.location.href.split("/")[3]}`;
   }, [timestamp]);
 
   useEffect(() => {
