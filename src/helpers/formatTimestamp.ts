@@ -5,7 +5,7 @@ function formatTimestamp(timeRemaining: number) {
 	const padZeros = (num: number) => num.toString().padStart(2, '0');
 
 	// Sheds "HH:" when duration is under 1 hour (3600 seconds)
-	if (timeRemaining > 3600) {
+	if (timeRemaining >= 3600) {
 		return `${padZeros(hours)}:${padZeros(minutes)}:${padZeros(seconds)}`;
 	} else {
 		return `${padZeros(minutes)}:${padZeros(seconds)}`
