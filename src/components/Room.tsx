@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { socket } from "./socket";
 import { ConnectionState } from "./ConnectionState";
-import { ConnectionManager } from "./ConnectionManager";
 import { Timestamp } from "./Timestamp";
 import { TimerForm } from "./TimerForm";
 import formatTimestamp from "../helpers/formatTimestamp";
@@ -49,7 +48,9 @@ function Room() {
   useEffect(() => {
     console.log({ timestamp });
     // update the document title, with roomName and timestamp
-    document.title = `${formatTimestamp(timestamp)}-${window.location.href.split("/")[3]}`;
+    document.title = `${formatTimestamp(timestamp)}-${
+      window.location.href.split("/")[3]
+    }`;
   }, [timestamp]);
 
   useEffect(() => {
@@ -61,7 +62,6 @@ function Room() {
     <>
       <ConnectionState isConnected={isConnected} />
       <Timestamp timestamp={timestamp} />
-      <ConnectionManager />
       <TimerForm />
       <p>Users in room: {usersInRoom}</p>
     </>
