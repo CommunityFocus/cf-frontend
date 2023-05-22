@@ -3,7 +3,7 @@ import LandingPage from "./components/LandingPage";
 import Room from "./components/Room";
 import { themeChange } from "theme-change";
 import { useEffect } from "react";
-import { themeValues } from "../theme";
+import ThemePicker from "./components/ThemePicker";
 
 export default function App() {
   useEffect(() => {
@@ -14,14 +14,7 @@ export default function App() {
   return (
     <div className="App">
       <>
-        <select data-choose-theme>
-          <option value="">Default</option>
-          {themeValues.map((theme) => (
-            <option key={theme} value={theme}>
-              {theme}
-            </option>
-          ))}
-        </select>
+      <ThemePicker />
       </>
       <BrowserRouter>
         <Routes>

@@ -27,10 +27,11 @@ export function TimerForm() {
         onChange={(e) => setValue(e.target.value)}
         value={value}
         type="number"
-        placeholder="Enter something"
+        placeholder="Enter a number"
+        className="input input-bordered w-full max-w-xs"
       />
 
-      <button type="submit" disabled={isLoading}>
+      <button type="submit" disabled={isLoading} className="btn btn-primary">
         Submit
       </button>
     </form>

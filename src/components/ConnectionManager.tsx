@@ -12,8 +12,8 @@ export function ConnectionManager() {
 
   return (
     <>
-      <button onClick={connect}>Connect</button>
-      <button onClick={disconnect}>Disconnect</button>
+      <button onClick={connect} className="btn btn-secondary">Connect</button>
+      <button onClick={disconnect} className="btn btn-secondary">Disconnect</button>
     </>
   );
 }
