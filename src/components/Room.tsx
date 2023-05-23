@@ -58,12 +58,27 @@ function Room() {
     console.log("roomId:", window.location.href.split("/")[3]);
   }, [isConnected]);
 
+  async function shareRoom() {
+    try { await navigator.clipboard.writeText(location.href) }
+    catch (err) { console.error(`Copy failed with error: ${err}`) }
+
+    const copiedUrlAlert = document.createElement('span')
+    copiedUrlAlert.innerText = 'URL Copied to Clipboard!'
+    document.body.appendChild(copiedUrlAlert)
+
+    setTimeout(() => {
+      document.body.removeChild(copiedUrlAlert)
+    }, 500)
+    
+  }
+
   return (
     <>
       <ConnectionState isConnected={isConnected} />
       <Timestamp timestamp={timestamp} />
       <TimerForm />
       <p>Users in room: {usersInRoom}</p>
+      <button onClick={shareRoom}>Share Room</button>
     </>
   );
 }
