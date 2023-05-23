@@ -15,12 +15,14 @@ export default function App() {
         console.error("getSlug:", e);
       });
   }, []);
+  
   return (
     // reroute the user to a random slug when they click a btn
     <div className="App">
       <Link to={`/${slugName}`}>
         <button>Start a timer</button>
       </Link>
+
     </div>
   );
 }
