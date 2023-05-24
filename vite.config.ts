@@ -16,5 +16,6 @@ export default defineConfig({
   server: {
     // this will force the port number to always be 5173
     strictPort: true,
+    port: 5100,
   }
 })
