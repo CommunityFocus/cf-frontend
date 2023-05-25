@@ -4,6 +4,7 @@ import { ConnectionState } from "./ConnectionState";
 import { Timestamp } from "./Timestamp";
 import { TimerForm } from "./TimerForm";
 import formatTimestamp from "../helpers/formatTimestamp";
+import shareRoom from "../helpers/shareRoom";
 
 function Room() {
   const [isConnected, setIsConnected] = useState<boolean>(socket.connected);
@@ -58,19 +59,7 @@ function Room() {
     console.log("roomId:", window.location.href.split("/")[3]);
   }, [isConnected]);
 
-  async function shareRoom() {
-    try { await navigator.clipboard.writeText(location.href) }
-    catch (err) { console.error(`Copy failed with error: ${err}`) }
 
-    const copiedUrlAlert = document.createElement('span')
-    copiedUrlAlert.innerText = 'URL Copied to Clipboard!'
-    document.body.appendChild(copiedUrlAlert)
-
-    setTimeout(() => {
-      document.body.removeChild(copiedUrlAlert)
-    }, 500)
-    
-  }
 
   return (
     <>
