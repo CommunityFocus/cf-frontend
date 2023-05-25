@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { socket } from "./socket";
+import { roomName } from "../../common/common";
 
 export function TimerForm() {
   const [value, setValue] = useState("");
@@ -12,7 +13,7 @@ export function TimerForm() {
     socket.timeout(1000).emit(
       "startCountdown",
       {
-        roomName: window.location.href.split("/")[3],
+        roomName: roomName,
         durationInSeconds: parseInt(value),
       },
       () => {
