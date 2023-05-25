@@ -1,3 +1,5 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/0d92ac71-ba56-4b3b-bf4c-07dba3086b38/deploy-status)](https://app.netlify.com/sites/communityfocus/deploys)
+
 # cf-frontend
 A repo for issues and discussions for CommunityFocus
 
