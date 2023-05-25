@@ -108,7 +108,7 @@ describe('shareRoom', () => {
                 })
 
                 it('Should not append more spans', async () => {
-                    //jest.useFakeTimers();
+                    //jest.useFakeTimers(); - is this needed
 
                     await shareRoom();
                     await shareRoom();
@@ -116,7 +116,7 @@ describe('shareRoom', () => {
 
                     const spans = document.querySelectorAll('#copiedUrlAlert');
 
-                    //jest.advanceTimersByTime(500);
+                    //jest.advanceTimersByTime(500); - is this needed
 
                     expect(spans.length).toBe(1);
                 })
