@@ -1,25 +1,25 @@
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import {SERVER_URL} from "../common/common"
 export default function App() {
+
+  const [slugName, setSlugName] = useState<string>("")
   
-  const [randomURL, setRandomURL] = useState("")
    useEffect(() => {
-      axios.get("http://localhost:4000/randomid")
+      axios.get(`${SERVER_URL}/api/v1/getslug`)
      .then((res) => {
-      setRandomURL(res.data.string)
+      setSlugName(res.data.string)
      }).catch(e => {
-       console.log(e)
+      console.error('getSlug:', e)
      });
   
  }, [])
- 
-   
   return (
     
-    // reroute the user to a random url when they click a btn
+    // reroute the user to a random slug when they click a btn
     <div className="App">
-      <Link to={`/${randomURL}`}><button >Start a timer</button></Link>
+      <Link to={`/${slugName}`}><button >Start a timer</button></Link>
     </div>
   );
 }
