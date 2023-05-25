@@ -1,14 +1,10 @@
-import { io } from 'socket.io-client';
+import { io } from "socket.io-client";
+import { SERVER_URL, roomName } from "../../common/common";
 
-const NODE_ENV= process.env.VITE_NODE_ENV;
-const BACKEND_URL= process.env.BACKEND_URL||'null';
+console.log("SERVER_URL", SERVER_URL);
 
-const URL = NODE_ENV==='production' ? BACKEND_URL : 'http://localhost:4000';
-const roomName = window.location.href.split("/")[3] || "default";
-
-export const socket = io(URL,{
-    query: {
-        roomName: roomName
-    }
-
+export const socket = io(SERVER_URL, {
+  query: {
+    roomName: roomName,
+  },
 });
