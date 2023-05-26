@@ -18,17 +18,20 @@ const App = (): JSX.Element => {
 			});
 	}, []);
 
-  return (
-    <div className="App">
-      <h1>Community Focus</h1>
-      <button
-        onClick={() => {
-          navigate(`/${slugName}`);
-          window.location.reload();
-        }}
-      >
-        Join a room
-      </button>
-    </div>
-  );
-}
+	return (
+		<div className="App">
+			<h1>Community Focus</h1>
+			<button
+				type="button"
+				onClick={(): void => {
+					navigate(`/${slugName}`);
+					window.location.reload();
+				}}
+			>
+				Join a room
+			</button>
+		</div>
+	);
+};
+
+export default App;
