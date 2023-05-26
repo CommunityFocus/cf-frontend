@@ -23,7 +23,10 @@ const App = (): JSX.Element => {
 			<h1>Community Focus</h1>
 			<button
 				type="button"
-				onClick={(): void => navigate(`/${slugName}`)}
+				onClick={(): void => {
+					navigate(`/${slugName}`);
+					window.location.reload();
+				}}
 			>
 				Join a room
 			</button>
