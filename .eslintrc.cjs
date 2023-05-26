@@ -35,7 +35,6 @@ module.exports = {
     'prettier/prettier': ['error'],
     'react-refresh/only-export-components': 'warn',
     "@typescript-eslint/no-unused-vars": ["error"],
-    // "react/prop-types": "off",
     "react/jsx-filename-extension": [
       1,
       {
