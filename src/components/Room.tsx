@@ -16,24 +16,19 @@ const Room = (): JSX.Element => {
 	 * 	timer: setInterval(),
 	 * }
 	 */
-	const clientTimerStore = {};
+	const clientTimerStore: Record<string, ReturnType<typeof setInterval>> = {};
 
 	useEffect(() => {
 		const roomName = window.location.href.split("/")[3];
 
 		const onConnect = (): void => {
 			socket.emit("join", roomName);
-			socket.timeout(500).emit("timerRequest", { roomName });
+			socket.emit("timerRequest", { roomName });
 			setIsConnected(true);
 		};
 
 		const onDisconnect = (): void => {
 			setIsConnected(false);
-		};
-
-		const onTimerUpdate = (value: string): void => {
-			console.log("timer", value);
-			// setTimestamp(parseInt(value));
 		};
 
 		const onUsersInRoom = (value: string): void => {
@@ -48,7 +43,10 @@ const Room = (): JSX.Element => {
 			secondsRemaining: number;
 			isPaused: boolean;
 		}): void => {
-			console.log("timerResponse", secondsRemaining, isPaused);
+			console.log("timerResponse", {
+				secondsRemaining,
+				isPaused,
+			});
 			setTimestamp(secondsRemaining);
 			startCountdown({
 				durationInSeconds: secondsRemaining,
@@ -59,14 +57,12 @@ const Room = (): JSX.Element => {
 
 		socket.on("connect", onConnect);
 		socket.on("disconnect", onDisconnect);
-		socket.on("timerUpdated", onTimerUpdate);
 		socket.on("timerResponse", onTimerResponse);
 		socket.on("usersInRoom", onUsersInRoom);
 
 		return () => {
 			socket.off("connect", onConnect);
 			socket.off("disconnect", onDisconnect);
-			socket.off("timerUpdated", onTimerUpdate);
 			socket.off("timerResponse", onTimerResponse);
 			socket.off("usersInRoom", onUsersInRoom);
 		};
