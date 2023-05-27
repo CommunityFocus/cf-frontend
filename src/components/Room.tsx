@@ -5,6 +5,7 @@ import Timestamp from "./Timestamp";
 import TimerForm from "./TimerForm";
 import formatTimestamp from "../helpers/formatTimestamp";
 import startCountdown from "../helpers/startTimer";
+import { roomName } from "../../common/common";
 
 const Room = (): JSX.Element => {
 	const [isConnected, setIsConnected] = useState<boolean>(socket.connected);
@@ -12,6 +13,9 @@ const Room = (): JSX.Element => {
 	const [usersInRoom, setUsersInRoom] = useState<number>(0);
 
 	/*
+	 * A store of the timer interval for a given client.
+	 * This is used to store and clear the interval.
+	 *
 	 * clientTimerStore ={
 	 * 	timer: setInterval(),
 	 * }
@@ -19,8 +23,6 @@ const Room = (): JSX.Element => {
 	const clientTimerStore: Record<string, ReturnType<typeof setInterval>> = {};
 
 	useEffect(() => {
-		const roomName = window.location.href.split("/")[3];
-
 		const onConnect = (): void => {
 			socket.emit("join", roomName);
 			socket.emit("timerRequest", { roomName });
@@ -71,14 +73,12 @@ const Room = (): JSX.Element => {
 	useEffect(() => {
 		console.log({ timestamp });
 		// update the document title, with roomName and timestamp
-		document.title = `${formatTimestamp(timestamp)}-${
-			window.location.href.split("/")[3]
-		}`;
+		document.title = `${formatTimestamp(timestamp)}-${roomName}`;
 	}, [timestamp]);
 
 	useEffect(() => {
 		console.log("URL", window.location.href);
-		console.log("roomId:", window.location.href.split("/")[3]);
+		console.log("roomId:", roomName);
 	}, [isConnected]);
 
 	return (
