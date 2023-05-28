@@ -1,9 +1,9 @@
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { SERVER_URL } from "../common/common";
+import { SERVER_URL } from "../../common/common";
 
-const App = (): JSX.Element => {
+const LandingPage = (): JSX.Element => {
 	const [slugName, setSlugName] = useState<string>("");
 	const navigate = useNavigate();
 
@@ -19,7 +19,7 @@ const App = (): JSX.Element => {
 	}, []);
 
 	return (
-		<div className="App">
+		<>
 			<h1>Community Focus</h1>
 			<button
 				type="button"
@@ -30,8 +30,8 @@ const App = (): JSX.Element => {
 			>
 				Join a room
 			</button>
-		</div>
+		</>
 	);
 };
 
-export default App;
+export default LandingPage;
