@@ -18,7 +18,6 @@ describe("startCountdown", () => {
 
 	afterEach(() => {
 		jest.clearAllTimers();
-		jest.clearAllMocks();
 	});
 
 	describe("when the timer is already running", () => {
