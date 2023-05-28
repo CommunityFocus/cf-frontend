@@ -40,7 +40,9 @@ describe('shareRoom', () => {
         describe("When the navigator.clipboard.writeText method resolves", () => {
 
             beforeEach(async () => {
-                const mockClipboard = jest.fn().mockResolvedValueOnce("Success");
+                document.body.innerHTML = "";
+
+                const mockClipboard = jest.fn()
 
                 Object.assign(navigator, {
                     clipboard: {
@@ -49,27 +51,23 @@ describe('shareRoom', () => {
                 });
             });
 
-            afterEach(() => {
-                document.body.innerHTML = "";
-            });
-
-            it("should append a span to the document body", async () => {
-                await shareRoom();
-
-                const span = document.getElementById('copiedUrlAlert');
-
-                expect(span).not.toBeNull();
-            });
-
-            it("should be appended to the document body", async () => {
+            it("Should create a span element with ID copiedUrlAlert", async () => {
                 await shareRoom();
 
                 const span = document.getElementById('copiedUrlAlert') as HTMLSpanElement;
 
-                expect(span.parentElement).toBe(document.body);
+                expect(span).not.toBeNull()
             });
 
-            it("should have the correct innerText", async () => {
+            it("Should be appended to the document body", async () => {
+                await shareRoom();
+
+                const span = document.getElementById('copiedUrlAlert') as HTMLSpanElement;
+
+                expect(document.body.children).toContain(span)
+            });
+
+            it("Should have the correct innerText", async () => {
                 await shareRoom();
 
                 const span = document.getElementById('copiedUrlAlert') as HTMLSpanElement;
@@ -77,59 +75,61 @@ describe('shareRoom', () => {
                 expect(span.innerText).toBe("URL Copied to Clipboard!");
             });
 
-            it("should remove the span after 500ms", async () => {
+            it('Should not remove the span before 499ms', async () => {
+                jest.useFakeTimers();
+
+                await shareRoom();
+
+                const span = document.getElementById('copiedUrlAlert') as HTMLSpanElement;
+
+                expect(document.body.children).toContain(span)
+
+                jest.advanceTimersByTime(499);
+
+                expect(document.body.children).toContain(span)
+            })
+
+            it("Should remove the span after 500ms", async () => {
                 jest.useFakeTimers();
                 
                 await shareRoom();
 
                 const span = document.getElementById('copiedUrlAlert') as HTMLSpanElement;
 
-                expect(span).not.toBeNull();
+                expect(document.body.children).toContain(span)
 
                 jest.advanceTimersByTime(500);
 
-                expect(span.parentElement).toBeNull();
+                expect(document.body.children).not.toContain(span)
             });
 
             describe('When the span already exists', () => {
-
-                let span = document.getElementById('copiedUrlAlert') as HTMLSpanElement;
+                let existingSpan:HTMLSpanElement
 
                 beforeEach(() => {
-                    span = document.createElement('span')
-                    span.id = 'copiedUrlAlert'
-                    span.innerText = 'URL Copied to Clipboard'
+                    document.body.innerHTML = "";
 
-                    document.body.appendChild(span)
+                    existingSpan = document.createElement('span')
+                    existingSpan.id = 'copiedUrlAlert'
+                    existingSpan.innerText = 'URL Copied to Clipboard'
+
+                    document.body.appendChild(existingSpan)
                 });
 
-                afterEach(() => {
-                    document.body.removeChild(span)
-                })
-
                 it('Should not append more spans', async () => {
-                    //jest.useFakeTimers(); - is this needed
-
                     await shareRoom();
                     await shareRoom();
                     await shareRoom();
 
                     const spans = document.querySelectorAll('#copiedUrlAlert');
 
-                    //jest.advanceTimersByTime(500); - is this needed
-
                     expect(spans.length).toBe(1);
                 })
+
+                //TODO: 'Should not run setTimeout
             })
 
         });
     });
 
 })
-
-
-
-
-
-
-
