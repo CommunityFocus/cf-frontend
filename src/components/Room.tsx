@@ -4,7 +4,7 @@ import ConnectionState from "./ConnectionState";
 import Timestamp from "./Timestamp";
 import TimerForm from "./TimerForm";
 import formatTimestamp from "../helpers/formatTimestamp";
-import startCountdown from "../helpers/startTimer";
+import startCountdown from "../helpers/startCountdown";
 import { roomName } from "../../common/common";
 
 const Room = (): JSX.Element => {
@@ -48,6 +48,7 @@ const Room = (): JSX.Element => {
 			console.log("timerResponse", {
 				secondsRemaining,
 				isPaused,
+				clientTimerStore,
 			});
 			setTimestamp(secondsRemaining);
 			startCountdown({
