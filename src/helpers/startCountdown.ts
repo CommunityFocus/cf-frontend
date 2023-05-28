@@ -10,15 +10,15 @@ const startCountdown = ({
 	clearInterval(clientTimerStore.timer);
 
 	/* eslint-disable no-param-reassign */
-	clientTimerStore.timer = setInterval(() => {
-		if (durationInSeconds <= 0) {
-			setTimestamp(durationInSeconds);
-			clearInterval(clientTimerStore.timer);
-		} else {
+	if (durationInSeconds <= 0) {
+		setTimestamp(durationInSeconds);
+		clearInterval(clientTimerStore.timer);
+	} else {
+		clientTimerStore.timer = setInterval(() => {
 			durationInSeconds--;
 			setTimestamp(durationInSeconds);
-		}
-	}, 1000);
+		}, 1000);
+	}
 };
 
 export default startCountdown;

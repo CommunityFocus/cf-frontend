@@ -23,7 +23,9 @@ describe("startCountdown", () => {
 
 	describe("when the timer is already running", () => {
 		it("should clear the timer", () => {
-			clientTimerStore.timer = setInterval(() => {}, 1000);
+			clientTimerStore.timer = jest.fn() as unknown as ReturnType<
+				typeof setInterval
+			>;
 
 			startCountdown({
 				durationInSeconds,
@@ -46,20 +48,93 @@ describe("startCountdown", () => {
 			});
 
 			expect(setIntervalSpy).toHaveBeenCalledTimes(1);
-
 		});
 		it("should start the setInterval with 1000 ms", () => {
-			// clientTimerStore.timer = setInterval(() => {}, 1000);
+			clientTimerStore.timer = jest.fn() as unknown as ReturnType<
+				typeof setInterval
+			>;
+
+			startCountdown({
+				durationInSeconds,
+				clientTimerStore,
+				setTimestamp: mockSetTimestamp,
+			});
+
+			expect(setIntervalSpy).toHaveBeenCalledTimes(1);
+			expect(setIntervalSpy).toHaveBeenCalledWith(
+				expect.any(Function),
+				1000
+			);
 		});
 
 		describe("when the durationInSeconds is 0 or less", () => {
-			it("should set the timestamp to 0", () => {});
-			it("should clear the timer", () => {});
+			it("should set the timestamp to 0", () => {
+				startCountdown({
+					durationInSeconds: 0,
+					clientTimerStore,
+					setTimestamp: mockSetTimestamp,
+				});
+
+				expect(mockSetTimestamp).toHaveBeenCalled();
+				expect(mockSetTimestamp).toHaveBeenCalledWith(0);
+				expect(mockSetTimestamp).toHaveBeenCalledTimes(1);
+			});
+			it("should clear the timer", () => {
+				clientTimerStore.timer = jest.fn() as unknown as ReturnType<
+					typeof setInterval
+				>;
+				startCountdown({
+					durationInSeconds: 0,
+					clientTimerStore,
+					setTimestamp: mockSetTimestamp,
+				});
+
+				expect(clearIntervalSpy).toHaveBeenCalledTimes(2);
+			});
 		});
 
 		describe("when the durationInSeconds is greater than 0", () => {
-			it("should decrement the durationInSeconds by 1", () => {});
-			it("should set the timestamp to the durationInSeconds", () => {});
+			it("should clear the timer", () => {
+				clientTimerStore.timer = jest.fn() as unknown as ReturnType<
+					typeof setInterval
+				>;
+				startCountdown({
+					durationInSeconds,
+					clientTimerStore,
+					setTimestamp: mockSetTimestamp,
+				});
+
+				expect(clearIntervalSpy).toHaveBeenCalledTimes(1);
+			});
+
+			it("should set the timestamp to the durationInSeconds with the decremented value by 1", () => {
+				startCountdown({
+					durationInSeconds,
+					clientTimerStore,
+					setTimestamp: mockSetTimestamp,
+				});
+				jest.advanceTimersByTime(1000);
+
+				expect(mockSetTimestamp).toHaveBeenCalledWith(9);
+			});
+
+			describe("when the durationInSeconds changes multiple times", () => {
+				it("should set the timestamp to the durationInSeconds with the decremented value by 1", () => {
+					startCountdown({
+						durationInSeconds,
+						clientTimerStore,
+						setTimestamp: mockSetTimestamp,
+					});
+					jest.advanceTimersByTime(1000);
+					expect(mockSetTimestamp).toHaveBeenCalledWith(9);
+
+					jest.advanceTimersByTime(1000);
+					expect(mockSetTimestamp).toHaveBeenCalledWith(8);
+
+					jest.advanceTimersByTime(1000);
+					expect(mockSetTimestamp).toHaveBeenCalledWith(7);
+				});
+			});
 		});
 	});
 });
