@@ -59,15 +59,17 @@ const Room = (): JSX.Element => {
 		console.log("roomId:", window.location.href.split("/")[3]);
 	}, [isConnected]);
 
-  return (
-    <>
-      <ConnectionState isConnected={isConnected} />
-      <Timestamp timestamp={timestamp} />
-      <TimerForm />
-      <p>Users in room: {usersInRoom}</p>
-      <button onClick={shareRoom}>Share Room</button>
-    </>
-  );
-}
+	return (
+		<>
+			<ConnectionState isConnected={isConnected} />
+			<Timestamp timestamp={timestamp} />
+			<TimerForm />
+			<p>Users in room: {usersInRoom}</p>
+			<button type="button" onClick={shareRoom}>
+				Share Room
+			</button>
+		</>
+	);
+};
 
 export default Room;
