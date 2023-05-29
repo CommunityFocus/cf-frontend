@@ -8,7 +8,6 @@ import shareRoom from "../helpers/shareRoom";
 import startCountdown from "../helpers/startCountdown";
 import { roomName } from "../../common/common";
 
-
 const Room = (): JSX.Element => {
 	const [isConnected, setIsConnected] = useState<boolean>(socket.connected);
 	const [timestamp, setTimestamp] = useState<number>(0);

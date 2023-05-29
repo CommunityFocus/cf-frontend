@@ -1,4 +1,4 @@
-export default async function shareRoom(): Promise<void> {
+export default async (): Promise<void> => {
 	try {
 		await navigator.clipboard.writeText(window.location.href);
 
@@ -20,4 +20,4 @@ export default async function shareRoom(): Promise<void> {
 	} catch (err) {
 		console.error(`Copy failed with error: ${err}`);
 	}
-}
+};
