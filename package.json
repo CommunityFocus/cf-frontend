@@ -9,8 +9,8 @@
     "format": "npx prettier --write",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "test": "jest --watch",
-    "test:ci": "jest --ci --coverage"
+    "test": "jest --watch --verbose --coverage",
+    "test:ci": "jest --ci --coverage --verbose"
   },
   "dependencies": {
     "axios": "^1.4.0",
