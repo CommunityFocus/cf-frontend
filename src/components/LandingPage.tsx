@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { SERVER_URL } from "../../common/common";
+import { Title, Center, Button } from "./LandingPage.styled";
 
 const LandingPage = (): JSX.Element => {
 	const [slugName, setSlugName] = useState<string>("");
@@ -19,9 +20,10 @@ const LandingPage = (): JSX.Element => {
 	}, []);
 
 	return (
-		<>
-			<h1>Community Focus</h1>
-			<button
+		<Center>
+			<Title>Community Focus</Title>
+
+			<Button
 				type="button"
 				onClick={(): void => {
 					navigate(`/${slugName}`);
@@ -29,8 +31,8 @@ const LandingPage = (): JSX.Element => {
 				}}
 			>
 				Join a room
-			</button>
-		</>
+			</Button>
+		</Center>
 	);
 };
 

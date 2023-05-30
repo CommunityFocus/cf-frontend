@@ -50,7 +50,17 @@ module.exports = {
 			},
 		],
 		"import/prefer-default-export": "warn",
-		"import/extensions": ["error", "never"],
+		"import/extensions": [
+			"error",
+			"never",
+			{
+				js: "never",
+				jsx: "never",
+				ts: "never",
+				tsx: "never",
+				styled: "ignorePackages",
+			},
+		],
 		"no-plusplus": "off",
 		"react/react-in-jsx-scope": 0,
 		"react/jsx-uses-react": 0,
