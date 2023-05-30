@@ -21,9 +21,13 @@ const Room = (): JSX.Element => {
 	 * 	timer: setInterval(),
 	 * }
 	 */
-	const clientTimerStore: Record<string, ReturnType<typeof setInterval>> = {};
 
 	useEffect(() => {
+		const clientTimerStore: Record<
+			string,
+			ReturnType<typeof setInterval>
+		> = {};
+
 		const onConnect = (): void => {
 			socket.emit("join", roomName);
 			socket.emit("timerRequest", { roomName });
