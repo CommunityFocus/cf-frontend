@@ -1,11 +1,13 @@
 [![Netlify Status](https://api.netlify.com/api/v1/badges/0d92ac71-ba56-4b3b-bf4c-07dba3086b38/deploy-status)](https://app.netlify.com/sites/communityfocus/deploys)
 
 # cf-frontend
+
 A repo for issues and discussions for CommunityFocus
 
 CommunityFocus is a sharable time tracking app for teams
 
 ## Getting Started
+
 To contibute:
 
 1. Clone the backend and frontend repos (linked below)
@@ -17,6 +19,7 @@ To contibute:
 ## Stack
 
 ### Related repositories
-- [Issues, Discussions, Documentation] - https://github.com/CommunityFocus/CommunityFocus
-- [CommunityFocus Backend] - https://github.com/CommunityFocus/cf-backend
-- [CommunityFocus Frontend] - https://github.com/CommunityFocus/cf-frontend
+
+-   [Issues, Discussions, Documentation] - https://github.com/CommunityFocus/CommunityFocus
+-   [CommunityFocus Backend] - https://github.com/CommunityFocus/cf-backend
+-   [CommunityFocus Frontend] - https://github.com/CommunityFocus/cf-frontend
