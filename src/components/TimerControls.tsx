@@ -6,12 +6,9 @@ const TimerControls = ({
 	isTimerPaused: boolean;
 }): JSX.Element => {
 	return (
-		<>
-			<p>Paused: {isTimerPaused}</p>
-			<button type="button" onClick={pauseTimer}>
-				Pause
-			</button>
-		</>
+		<button type="button" onClick={pauseTimer}>
+			{isTimerPaused ? "Resume" : "Pause"}
+		</button>
 	);
 };
 

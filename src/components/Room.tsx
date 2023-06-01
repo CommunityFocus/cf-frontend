@@ -100,7 +100,6 @@ const Room = (): JSX.Element => {
 				pauseTimer={pauseTimer}
 				isTimerPaused={isTimerPaused}
 			/>
-
 			<TimerForm />
 			<p>Users in room: {usersInRoom}</p>
 			<button type="button" onClick={shareRoom}>
