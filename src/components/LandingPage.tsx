@@ -3,6 +3,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { SERVER_URL } from "../../common/common";
 import { Title, Center, Button } from "./LandingPage.styled";
+import Footer from "./Footer";
 
 const LandingPage = (): JSX.Element => {
 	const [slugName, setSlugName] = useState<string>("");
@@ -32,6 +33,7 @@ const LandingPage = (): JSX.Element => {
 			>
 				Join a room
 			</Button>
+			<Footer></Footer>
 		</Center>
 	);
 };
