@@ -90,7 +90,7 @@ const Room = (): JSX.Element => {
 
 	return (
 		<>
-			<WelcomeMessage />
+			<WelcomeMessage name="Mario" />
 			<ConnectionState isConnected={isConnected} />
 			<Timestamp timestamp={timestamp} />
 			<TimerForm />
