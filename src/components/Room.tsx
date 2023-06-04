@@ -7,6 +7,7 @@ import formatTimestamp from "../helpers/formatTimestamp";
 import shareRoom from "../helpers/shareRoom";
 import startCountdown from "../helpers/startCountdown";
 import { roomName } from "../../common/common";
+import WelcomeMessage from "./WelcomeMessage";
 
 const Room = (): JSX.Element => {
 	const [isConnected, setIsConnected] = useState<boolean>(socket.connected);
@@ -89,6 +90,7 @@ const Room = (): JSX.Element => {
 
 	return (
 		<>
+			<WelcomeMessage />
 			<ConnectionState isConnected={isConnected} />
 			<Timestamp timestamp={timestamp} />
 			<TimerForm />
