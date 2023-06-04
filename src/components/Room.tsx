@@ -28,6 +28,10 @@ const Room = (): JSX.Element => {
 		socket.emit("pauseCountdown", { roomName });
 	};
 
+	const resetTimer = (): void => {
+		socket.emit("resetCountdown", { roomName });
+	};
+
 	useEffect(() => {
 		const clientTimerStore: Record<
 			string,
@@ -99,6 +103,7 @@ const Room = (): JSX.Element => {
 			<TimerControls
 				pauseTimer={pauseTimer}
 				isTimerPaused={isTimerPaused}
+				resetTimer={resetTimer}
 			/>
 			<TimerForm />
 			<p>Users in room: {usersInRoom}</p>
