@@ -33,7 +33,7 @@ const LandingPage = (): JSX.Element => {
 			>
 				Join a room
 			</Button>
-			<Footer></Footer>
+			<Footer numUsers={5} />
 		</Center>
 	);
 };
