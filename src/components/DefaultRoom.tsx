@@ -4,6 +4,7 @@ const DefaultRoom = (): JSX.Element => {
 	const Navigate = useNavigate();
 	return (
 		<>
+			<header>Hello</header>
 			<h1>This room is not available.</h1>
 			<button
 				type="button"

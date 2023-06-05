@@ -21,8 +21,9 @@ const LandingPage = (): JSX.Element => {
 
 	return (
 		<Center>
+			
 			<Title>Community Focus</Title>
-
+			
 			<Button
 				type="button"
 				onClick={(): void => {

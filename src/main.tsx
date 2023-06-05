@@ -4,9 +4,11 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Room from "./components/Room.tsx";
 import DefaultRoom from "./components/DefaultRoom.tsx";
 import LandingPage from "./components/LandingPage.tsx";
+import Title from "./components/Header/Header.tsx";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
 	<React.StrictMode>
+		<Title></Title>
 		<BrowserRouter>
 			<Routes>
 				<Route path="/" element={<LandingPage />} />
