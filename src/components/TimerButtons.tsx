@@ -12,8 +12,7 @@ const TimerButtons = () => {
 			<TimerButton value={40} />
 			<TimerButton value={45} />
 			<TimerButton value={50} />
-            <TimerButton value={55} />
-
+			<TimerButton value={55} />
 		</>
 	);
 };
