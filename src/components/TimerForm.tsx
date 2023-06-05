@@ -3,8 +3,8 @@ import socket from "./socket";
 import { roomName } from "../../common/common";
 
 const TimerForm = (): JSX.Element => {
-	const [value, setValue] = useState("");
-	const [isLoading, setIsLoading] = useState(false);
+	const [value, setValue] = useState<string>("");
+	const [isLoading, setIsLoading] = useState<boolean>(false);
 
 	const onSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
 		event.preventDefault();
