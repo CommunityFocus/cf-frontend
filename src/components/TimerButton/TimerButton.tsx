@@ -12,12 +12,11 @@ const TimerButton = (props: {
 			roomName,
 			durationInSeconds: minutes,
 		});
-		socket.emit("timerRequest", { roomName });
 	};
 
 	return (
 		<button type="button" onClick={(): void => clickHandler(value)}>
-			{value}
+			{value} min
 		</button>
 	);
 };

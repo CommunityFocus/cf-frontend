@@ -20,7 +20,6 @@ const TimerForm = (): JSX.Element => {
 				setIsLoading(false);
 			}
 		);
-		socket.emit("timerRequest", { roomName });
 	};
 
 	return (
