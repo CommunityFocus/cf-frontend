@@ -92,6 +92,16 @@ const Room = (): JSX.Element => {
 			<ConnectionState isConnected={isConnected} />
 			<Timestamp timestamp={timestamp} />
 			<button>5</button>
+			<button>10</button>
+			<button>15</button>
+			<button>20</button>
+			<button>25</button>
+			<button>30</button>
+			<button>35</button>
+			<button>40</button>
+			<button>45</button>
+			<button>50</button>
+			<button>55</button>
 			<TimerForm />
 			<p>Users in room: {usersInRoom}</p>
 			<button type="button" onClick={shareRoom}>
