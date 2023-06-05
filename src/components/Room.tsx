@@ -92,7 +92,7 @@ const Room = (): JSX.Element => {
 		<>
 			<ConnectionState isConnected={isConnected} />
 			<Timestamp timestamp={timestamp} />
-			<TimerButtons />
+			<TimerButtons roomName={roomName} />
 			<TimerForm />
 			<p>Users in room: {usersInRoom}</p>
 			<button type="button" onClick={shareRoom}>

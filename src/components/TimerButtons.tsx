@@ -1,18 +1,19 @@
 import TimerButton from "./TimerButton";
-const TimerButtons = () => {
+const TimerButtons = (props) => {
+	const { roomName } = props;
 	return (
 		<>
-			<TimerButton value={5} />
-			<TimerButton value={10} />
-			<TimerButton value={15} />
-			<TimerButton value={20} />
-			<TimerButton value={25} />
-			<TimerButton value={30} />
-			<TimerButton value={35} />
-			<TimerButton value={40} />
-			<TimerButton value={45} />
-			<TimerButton value={50} />
-			<TimerButton value={55} />
+			<TimerButton roomName={roomName} value={5} />
+			<TimerButton roomName={roomName} value={10} />
+			<TimerButton roomName={roomName} value={15} />
+			<TimerButton roomName={roomName} value={20} />
+			<TimerButton roomName={roomName} value={25} />
+			<TimerButton roomName={roomName} value={30} />
+			<TimerButton roomName={roomName} value={35} />
+			<TimerButton roomName={roomName} value={40} />
+			<TimerButton roomName={roomName} value={45} />
+			<TimerButton roomName={roomName} value={50} />
+			<TimerButton roomName={roomName} value={55} />
 		</>
 	);
 };
