@@ -12,4 +12,3 @@ const formatTimestamp = (timeRemaining: number): string => {
 };
 
 export default formatTimestamp;
-// formatTimestamp
