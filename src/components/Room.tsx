@@ -7,6 +7,7 @@ import formatTimestamp from "../helpers/formatTimestamp";
 import shareRoom from "../helpers/shareRoom";
 import startCountdown from "../helpers/startCountdown";
 import { roomName } from "../../common/common";
+import Footer from "./Footer";
 
 const Room = (): JSX.Element => {
 	const [isConnected, setIsConnected] = useState<boolean>(socket.connected);
@@ -96,6 +97,7 @@ const Room = (): JSX.Element => {
 			<button type="button" onClick={shareRoom}>
 				Share Room
 			</button>
+			<Footer numUsers={5} />
 		</>
 	);
 };
