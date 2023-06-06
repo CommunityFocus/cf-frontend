@@ -3,6 +3,9 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { SERVER_URL } from "../../common/common";
 import { Title, Center, Button } from "./LandingPage.styled";
+import LogoTitle from "./Logo/LogoTitle";
+
+
 
 const LandingPage = (): JSX.Element => {
 	const [slugName, setSlugName] = useState<string>("");
@@ -21,6 +24,7 @@ const LandingPage = (): JSX.Element => {
 
 	return (
 		<Center>
+			<LogoTitle />
 			<Title>Community Focus</Title>
 
 			<Button
