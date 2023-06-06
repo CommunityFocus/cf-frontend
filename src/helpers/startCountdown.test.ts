@@ -30,6 +30,7 @@ describe("startCountdown", () => {
 				durationInSeconds,
 				clientTimerStore,
 				setTimestamp: mockSetTimestamp,
+				isTimerPaused: false,
 			});
 
 			expect(clearIntervalSpy).toHaveBeenCalledTimes(1);
@@ -44,6 +45,7 @@ describe("startCountdown", () => {
 				durationInSeconds,
 				clientTimerStore,
 				setTimestamp: mockSetTimestamp,
+				isTimerPaused: false,
 			});
 
 			expect(setIntervalSpy).toHaveBeenCalledTimes(1);
@@ -57,6 +59,7 @@ describe("startCountdown", () => {
 				durationInSeconds,
 				clientTimerStore,
 				setTimestamp: mockSetTimestamp,
+				isTimerPaused: false,
 			});
 
 			expect(setIntervalSpy).toHaveBeenCalledTimes(1);
@@ -72,6 +75,7 @@ describe("startCountdown", () => {
 					durationInSeconds: 0,
 					clientTimerStore,
 					setTimestamp: mockSetTimestamp,
+					isTimerPaused: false,
 				});
 
 				expect(mockSetTimestamp).toHaveBeenCalled();
@@ -86,6 +90,7 @@ describe("startCountdown", () => {
 					durationInSeconds: 0,
 					clientTimerStore,
 					setTimestamp: mockSetTimestamp,
+					isTimerPaused: false,
 				});
 
 				expect(clearIntervalSpy).toHaveBeenCalledTimes(2);
@@ -101,6 +106,7 @@ describe("startCountdown", () => {
 					durationInSeconds,
 					clientTimerStore,
 					setTimestamp: mockSetTimestamp,
+					isTimerPaused: false,
 				});
 
 				expect(clearIntervalSpy).toHaveBeenCalledTimes(1);
@@ -111,10 +117,25 @@ describe("startCountdown", () => {
 					durationInSeconds,
 					clientTimerStore,
 					setTimestamp: mockSetTimestamp,
+					isTimerPaused: false,
 				});
 				jest.advanceTimersByTime(1000);
 
 				expect(mockSetTimestamp).toHaveBeenCalledWith(9);
+			});
+
+			describe("when the timer is paused", () => {
+				it("should not decrement the durationInSeconds", () => {
+					startCountdown({
+						durationInSeconds,
+						clientTimerStore,
+						setTimestamp: mockSetTimestamp,
+						isTimerPaused: true,
+					});
+					jest.advanceTimersByTime(1000);
+
+					expect(mockSetTimestamp).toHaveBeenCalledWith(10);
+				});
 			});
 
 			describe("when the durationInSeconds changes multiple times", () => {
@@ -123,6 +144,7 @@ describe("startCountdown", () => {
 						durationInSeconds,
 						clientTimerStore,
 						setTimestamp: mockSetTimestamp,
+						isTimerPaused: false,
 					});
 					jest.advanceTimersByTime(1000);
 					expect(mockSetTimestamp).toHaveBeenCalledWith(9);
