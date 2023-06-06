@@ -7,6 +7,7 @@ import formatTimestamp from "../helpers/formatTimestamp";
 import shareRoom from "../helpers/shareRoom";
 import startCountdown from "../helpers/startCountdown";
 import { roomName } from "../../common/common";
+import WelcomeMessage from "./WelcomeMessage";
 import TimerControls from "./TimerControls";
 import Footer from "./Footer";
 
@@ -96,6 +97,7 @@ const Room = (): JSX.Element => {
 
 	return (
 		<>
+			<WelcomeMessage name="Mario" />
 			<ConnectionState isConnected={isConnected} />
 			<Timestamp timestamp={timestamp} />
 			<TimerControls
