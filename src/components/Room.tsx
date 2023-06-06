@@ -7,10 +7,10 @@ import formatTimestamp from "../helpers/formatTimestamp";
 import shareRoom from "../helpers/shareRoom";
 import startCountdown from "../helpers/startCountdown";
 import { roomName } from "../../common/common";
+import TimerButtons from "./TimerButton/TimerButtons";
 import WelcomeMessage from "./WelcomeMessage";
 import TimerControls from "./TimerControls";
 import Footer from "./Footer";
-
 
 const Room = (): JSX.Element => {
 	const [isConnected, setIsConnected] = useState<boolean>(socket.connected);
@@ -100,6 +100,7 @@ const Room = (): JSX.Element => {
 			<WelcomeMessage name="Mario" />
 			<ConnectionState isConnected={isConnected} />
 			<Timestamp timestamp={timestamp} />
+			<TimerButtons roomName={roomName} />
 			<TimerControls
 				pauseTimer={pauseTimer}
 				isTimerPaused={isTimerPaused}
