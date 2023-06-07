@@ -7,11 +7,16 @@ import formatTimestamp from "../helpers/formatTimestamp";
 import shareRoom from "../helpers/shareRoom";
 import startCountdown from "../helpers/startCountdown";
 import { roomName } from "../../common/common";
+import TimerButtons from "./TimerButton/TimerButtons";
+import WelcomeMessage from "./WelcomeMessage";
+import TimerControls from "./TimerControls";
+import Footer from "./Footer";
 
 const Room = (): JSX.Element => {
 	const [isConnected, setIsConnected] = useState<boolean>(socket.connected);
 	const [timestamp, setTimestamp] = useState<number>(0);
 	const [usersInRoom, setUsersInRoom] = useState<number>(0);
+	const [isTimerPaused, setIsTimerPaused] = useState<boolean>(false);
 
 	/*
 	 * A store of the timer interval for a given client.
@@ -21,6 +26,10 @@ const Room = (): JSX.Element => {
 	 * 	timer: setInterval(),
 	 * }
 	 */
+
+	const pauseTimer = (): void => {
+		socket.emit("pauseCountdown", { roomName });
+	};
 
 	useEffect(() => {
 		const clientTimerStore: Record<
@@ -50,16 +59,15 @@ const Room = (): JSX.Element => {
 			secondsRemaining: number;
 			isPaused: boolean;
 		}): void => {
-			console.log("timerResponse", {
-				secondsRemaining,
-				isPaused,
-				clientTimerStore,
-			});
 			setTimestamp(secondsRemaining);
+
+			setIsTimerPaused(isPaused);
+
 			startCountdown({
 				durationInSeconds: secondsRemaining,
 				clientTimerStore,
 				setTimestamp,
+				isTimerPaused: isPaused,
 			});
 		};
 
@@ -77,10 +85,10 @@ const Room = (): JSX.Element => {
 	}, []);
 
 	useEffect(() => {
-		console.log({ timestamp });
+		console.log({ timestamp, isTimerPaused });
 		// update the document title, with roomName and timestamp
 		document.title = `${formatTimestamp(timestamp)}-${roomName}`;
-	}, [timestamp]);
+	}, [isTimerPaused, timestamp]);
 
 	useEffect(() => {
 		console.log("URL", window.location.href);
@@ -89,13 +97,20 @@ const Room = (): JSX.Element => {
 
 	return (
 		<>
+			<WelcomeMessage name="Mario" />
 			<ConnectionState isConnected={isConnected} />
 			<Timestamp timestamp={timestamp} />
+			<TimerButtons roomName={roomName} />
+			<TimerControls
+				pauseTimer={pauseTimer}
+				isTimerPaused={isTimerPaused}
+			/>
 			<TimerForm />
 			<p>Users in room: {usersInRoom}</p>
 			<button type="button" onClick={shareRoom}>
 				Share Room
 			</button>
+			<Footer numUsers={5} />
 		</>
 	);
 };
