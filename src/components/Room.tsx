@@ -91,7 +91,7 @@ const Room = (): JSX.Element => {
 	useEffect(() => {
 		console.log({ timestamp, isTimerPaused });
 		// update the document title, with roomName and timestamp
-		document.title = `${formatTimestamp(timestamp)}-${roomName}`;
+		document.title = `${formatTimestamp(timestamp)}`;
 	}, [isTimerPaused, timestamp]);
 
 	useEffect(() => {
