@@ -12,6 +12,7 @@ import WelcomeMessage from "./WelcomeMessage";
 import TimerControls from "./TimerControls";
 import Footer from "./Footer";
 import LogoTitle from "./Logo/LogoTitle";
+import UserBubbles from "./UserBubbles/UserBubbles";
 
 const Room = (props: { globalUsersConnected: number }): JSX.Element => {
 	const { globalUsersConnected } = props;
@@ -19,6 +20,7 @@ const Room = (props: { globalUsersConnected: number }): JSX.Element => {
 	const [timestamp, setTimestamp] = useState<number>(0);
 	const [usersInRoom, setUsersInRoom] = useState<number>(0);
 	const [isTimerPaused, setIsTimerPaused] = useState<boolean>(false);
+	const [userListInRoom, setUserListInRoom] = useState<string[]>([]);
 
 	/*
 	 * A store of the timer interval for a given client.
@@ -114,6 +116,7 @@ const Room = (props: { globalUsersConnected: number }): JSX.Element => {
 			<button type="button" onClick={shareRoom}>
 				Share Room
 			</button>
+			<UserBubbles userListInRoom={userListInRoom} />
 			<Footer numUsers={globalUsersConnected} />
 		</>
 	);
