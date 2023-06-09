@@ -10,7 +10,7 @@ dns.setDefaultResultOrder("ipv4first");
 export default defineConfig({
 	plugins: [react(), EnvironmentPlugin("all")],
 	server: {
-		// this will force the port number to always be 5173
+		// this will force the port number to always be 5100
 		strictPort: true,
 		port: 5100,
 	},
