@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const UserBubbleStyled = styled.div<{ $borderColor?: string }>`
+export const UserBubbleStyled = styled.a<{ $borderColor?: string }>`
 	border-radius: 50%;
 	width: 30px;
 	height: 30px;
@@ -24,4 +24,8 @@ export const UserBubblesContainer = styled.div`
 	right: 0;
 	margin: auto;
 	gap: 5px;
+`;
+
+export const TooltipContainer = styled.div`
+	border-radius: 50%;
 `;
