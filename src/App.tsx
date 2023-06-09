@@ -1,9 +1,9 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { useEffect, useState } from "react";
 import socket from "./components/socket";
-import Room from "./components/Room.tsx";
-import DefaultRoom from "./components/DefaultRoom.tsx";
-import LandingPage from "./components/LandingPage.tsx";
+import Room from "./components/Room";
+import DefaultRoom from "./components/DefaultRoom";
+import LandingPage from "./components/LandingPage";
 
 const App = (): JSX.Element => {
 	const [globalUsersConnected, setGlobalUsersConnected] = useState<number>(0);
