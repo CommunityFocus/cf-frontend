@@ -31,6 +31,10 @@ const Room = (): JSX.Element => {
 		socket.emit("pauseCountdown", { roomName });
 	};
 
+	const resetTimer = (): void => {
+		socket.emit("resetCountdown", { roomName });
+	};
+
 	useEffect(() => {
 		const clientTimerStore: Record<
 			string,
@@ -87,7 +91,7 @@ const Room = (): JSX.Element => {
 	useEffect(() => {
 		console.log({ timestamp, isTimerPaused });
 		// update the document title, with roomName and timestamp
-		document.title = `${formatTimestamp(timestamp)}-${roomName}`;
+		document.title = `${formatTimestamp(timestamp)}`;
 	}, [isTimerPaused, timestamp]);
 
 	useEffect(() => {
@@ -104,6 +108,7 @@ const Room = (): JSX.Element => {
 			<TimerControls
 				pauseTimer={pauseTimer}
 				isTimerPaused={isTimerPaused}
+				resetTimer={resetTimer}
 			/>
 			<TimerForm />
 			<p>Users in room: {usersInRoom}</p>
