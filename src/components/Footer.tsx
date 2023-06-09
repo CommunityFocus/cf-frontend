@@ -6,10 +6,11 @@ interface FooterProps {
 }
 
 const Footer: React.FC<FooterProps> = ({ numUsers }) => {
+	console.log(numUsers);
 	return (
 		<StyledFooter>
 			<StyledText>
-				{numUsers} members are currently using the Community Focus app
+				{numUsers} users are currently using the Community Focus app
 			</StyledText>
 		</StyledFooter>
 	);

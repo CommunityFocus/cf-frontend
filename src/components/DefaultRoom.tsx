@@ -1,6 +1,8 @@
 import { useNavigate } from "react-router-dom";
+import Footer from "./Footer";
 
-const DefaultRoom = (): JSX.Element => {
+const DefaultRoom = (props: { globalUsersConnected: number }): JSX.Element => {
+	const { globalUsersConnected } = props;
 	const Navigate = useNavigate();
 	return (
 		<>
@@ -13,6 +15,7 @@ const DefaultRoom = (): JSX.Element => {
 			>
 				Back
 			</button>
+			<Footer numUsers={globalUsersConnected} />
 		</>
 	);
 };
