@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { SERVER_URL } from "../../common/common";
 import { Title, Center, Button } from "./LandingPage.styled";
 import Footer from "./Footer";
+import LogoTitle from "./Logo/LogoTitle";
 
 const LandingPage = (props: { globalUsersConnected: number }): JSX.Element => {
 	const { globalUsersConnected } = props;
@@ -23,6 +24,7 @@ const LandingPage = (props: { globalUsersConnected: number }): JSX.Element => {
 
 	return (
 		<Center>
+			<LogoTitle />
 			<Title>Community Focus</Title>
 
 			<Button

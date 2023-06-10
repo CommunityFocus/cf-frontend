@@ -11,6 +11,7 @@ import TimerButtons from "./TimerButton/TimerButtons";
 import WelcomeMessage from "./WelcomeMessage";
 import TimerControls from "./TimerControls";
 import Footer from "./Footer";
+import LogoTitle from "./Logo/LogoTitle";
 
 const Room = (props: { globalUsersConnected: number }): JSX.Element => {
 	const { globalUsersConnected } = props;
@@ -99,6 +100,7 @@ const Room = (props: { globalUsersConnected: number }): JSX.Element => {
 	return (
 		<>
 			<WelcomeMessage name="Mario" />
+			<LogoTitle />
 			<ConnectionState isConnected={isConnected} />
 			<Timestamp timestamp={timestamp} />
 			<TimerButtons roomName={roomName} />
