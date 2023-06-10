@@ -9,7 +9,7 @@ const Footer: React.FC<FooterProps> = ({ numUsers }) => {
 	return (
 		<StyledFooter>
 			<StyledText>
-				{numUsers} members are currently using the Community Focus app
+				{numUsers} users are currently using the Community Focus app
 			</StyledText>
 		</StyledFooter>
 	);
