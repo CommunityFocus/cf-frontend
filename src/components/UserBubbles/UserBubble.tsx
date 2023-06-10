@@ -3,7 +3,6 @@ import { TooltipContainer, UserBubbleStyled } from "./UserBubble.styled";
 
 const UserBubble = (props: { user: string }) => {
 	const { user } = props;
-	// first and last character of user name
 	return (
 		<TooltipContainer>
 			<UserBubbleStyled
