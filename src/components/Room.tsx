@@ -49,7 +49,6 @@ const Room = (props: { globalUsersConnected: number }): JSX.Element => {
 	};
 
 	const onUsersInRoom = (value: string): void => {
-		console.log("usersInRoom", value);
 		setUsersInRoom(parseInt(value));
 	};
 
