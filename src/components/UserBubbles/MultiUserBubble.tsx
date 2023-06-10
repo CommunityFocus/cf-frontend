@@ -1,7 +1,7 @@
 import { Tooltip } from "react-tooltip";
 import { TooltipContainer, UserBubbleStyled } from "./UserBubble.styled";
 
-const MultiUserBubble = (props: { users: string[] }) => {
+const MultiUserBubble = (props: { users: string[] }): JSX.Element => {
 	const { users } = props;
 	return (
 		<TooltipContainer>
