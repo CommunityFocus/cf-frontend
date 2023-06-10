@@ -51,8 +51,15 @@ const Room = (props: { globalUsersConnected: number }): JSX.Element => {
 		setIsConnected(false);
 	};
 
-	const onUsersInRoom = (value: string): void => {
-		setUsersInRoom(parseInt(value));
+	const onUsersInRoom = ({
+		numUsers,
+		userList,
+	}: {
+		numUsers: number;
+		userList: string[];
+	}): void => {
+		setUsersInRoom(numUsers);
+		setUserListInRoom(userList);
 	};
 
 	const onTimerResponse = ({
