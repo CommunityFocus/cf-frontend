@@ -8,7 +8,7 @@ CommunityFocus is a sharable time tracking app for teams
 
 ## Getting Started
 
-To contibute:
+To contribute:
 
 1. Clone the backend and frontend repos (linked below)
 2. Install nodejs (we will be using npm)
