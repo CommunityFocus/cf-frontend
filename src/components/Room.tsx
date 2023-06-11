@@ -13,6 +13,7 @@ import TimerControls from "./TimerControls";
 import Footer from "./Footer";
 import LogoTitle from "./Logo/LogoTitle";
 import UserBubbles from "./UserBubbles/UserBubbles";
+import { TimerResponseArgs, UsersInRoomArgs } from "../../common/types/types";
 
 const Room = (props: { globalUsersConnected: number }): JSX.Element => {
 	const { globalUsersConnected } = props;
@@ -51,13 +52,7 @@ const Room = (props: { globalUsersConnected: number }): JSX.Element => {
 		setIsConnected(false);
 	};
 
-	const onUsersInRoom = ({
-		numUsers,
-		userList,
-	}: {
-		numUsers: number;
-		userList: string[];
-	}): void => {
+	const onUsersInRoom = ({ numUsers, userList }: UsersInRoomArgs): void => {
 		setUsersInRoom(numUsers);
 		setUserListInRoom(userList);
 	};
@@ -65,10 +60,7 @@ const Room = (props: { globalUsersConnected: number }): JSX.Element => {
 	const onTimerResponse = ({
 		secondsRemaining,
 		isPaused,
-	}: {
-		secondsRemaining: number;
-		isPaused: boolean;
-	}): void => {
+	}: TimerResponseArgs): void => {
 		setTimestamp(secondsRemaining);
 
 		setIsTimerPaused(isPaused);
