@@ -1,0 +1,21 @@
+import { Tooltip } from "react-tooltip";
+import { TooltipContainer, UserBubbleStyled } from "./UserBubble.styled";
+
+const MultiUserBubble = (props: { users: string[] }): JSX.Element => {
+	const { users } = props;
+	return (
+		<TooltipContainer>
+			<UserBubbleStyled
+				$borderColor="brown"
+				data-tooltip-id="my-tooltip-multilin"
+				data-tooltip-html={users.join("<br />")}
+				data-tooltip-place="top"
+			>
+				<Tooltip id="my-tooltip-multilin" />
+				{`${users.length}+`}
+			</UserBubbleStyled>
+		</TooltipContainer>
+	);
+};
+
+export default MultiUserBubble;

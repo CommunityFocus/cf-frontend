@@ -4,8 +4,10 @@ import { useEffect, useState } from "react";
 import { SERVER_URL } from "../../common/common";
 import { Title, Center, Button } from "./LandingPage.styled";
 import Footer from "./Footer";
+import LogoTitle from "./Logo/LogoTitle";
 
-const LandingPage = (): JSX.Element => {
+const LandingPage = (props: { globalUsersConnected: number }): JSX.Element => {
+	const { globalUsersConnected } = props;
 	const [slugName, setSlugName] = useState<string>("");
 	const navigate = useNavigate();
 
@@ -22,6 +24,7 @@ const LandingPage = (): JSX.Element => {
 
 	return (
 		<Center>
+			<LogoTitle />
 			<Title>Community Focus</Title>
 
 			<Button
@@ -33,7 +36,7 @@ const LandingPage = (): JSX.Element => {
 			>
 				Join a room
 			</Button>
-			<Footer numUsers={5} />
+			<Footer numUsers={globalUsersConnected} />
 		</Center>
 	);
 };
