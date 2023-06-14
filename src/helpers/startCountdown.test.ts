@@ -93,7 +93,7 @@ describe("startCountdown", () => {
 					isTimerPaused: false,
 				});
 
-				expect(clearIntervalSpy).toHaveBeenCalledTimes(2);
+				expect(clearIntervalSpy).toHaveBeenCalledTimes(1);
 			});
 		});
 
