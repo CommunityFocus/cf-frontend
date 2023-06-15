@@ -7,7 +7,6 @@ export const StyledMain = styled.main`
     padding: 1%;
 `;
 
-
 export const GlobalStyle = createGlobalStyle`
     body {
         margin: 0;
