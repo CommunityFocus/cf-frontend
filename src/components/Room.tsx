@@ -102,7 +102,7 @@ const Room = (props: { globalUsersConnected: number }): JSX.Element => {
 	return (
 		<>
 			<StyledMain>
-				<GlobalStyle/>
+				<GlobalStyle />
 				<WelcomeMessage name="Mario" />
 				<LogoTitle />
 				<ConnectionState isConnected={isConnected} />
