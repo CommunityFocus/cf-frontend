@@ -100,26 +100,28 @@ const Room = (props: { globalUsersConnected: number }): JSX.Element => {
 	}, [isConnected]);
 
 	return (
-		<StyledMain>
-			<GlobalStyle/>
-			<WelcomeMessage name="Mario" />
-			<LogoTitle />
-			<ConnectionState isConnected={isConnected} />
-			<Timestamp timestamp={timestamp} />
-			<TimerButtons roomName={roomName} />
-			<TimerControls
-				pauseTimer={pauseTimer}
-				isTimerPaused={isTimerPaused}
-				resetTimer={resetTimer}
-			/>
-			<TimerForm />
-			<p>Users in room: {usersInRoom}</p>
-			<button type="button" onClick={shareRoom}>
-				Share Room
-			</button>
-			<UserBubbles userListInRoom={userListInRoom} />
-			<Footer numUsers={globalUsersConnected} />
-		</StyledMain>
+		<>
+			<StyledMain>
+				<GlobalStyle/>
+				<WelcomeMessage name="Mario" />
+				<LogoTitle />
+				<ConnectionState isConnected={isConnected} />
+				<Timestamp timestamp={timestamp} />
+				<TimerButtons roomName={roomName} />
+				<TimerControls
+					pauseTimer={pauseTimer}
+					isTimerPaused={isTimerPaused}
+					resetTimer={resetTimer}
+				/>
+				<TimerForm />
+				<p>Users in room: {usersInRoom}</p>
+				<button type="button" onClick={shareRoom}>
+					Share Room
+				</button>
+				<UserBubbles userListInRoom={userListInRoom} />
+				<Footer numUsers={globalUsersConnected} />
+			</StyledMain>
+		</>
 	);
 };
 
