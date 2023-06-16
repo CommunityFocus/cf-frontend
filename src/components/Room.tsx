@@ -11,12 +11,17 @@ import TimerButtons from "./TimerButton/TimerButtons";
 import WelcomeMessage from "./WelcomeMessage";
 import TimerControls from "./TimerControls";
 import Footer from "./Footer";
+import LogoTitle from "./Logo/LogoTitle";
+import UserBubbles from "./UserBubbles/UserBubbles";
+import { TimerResponseArgs, UsersInRoomArgs } from "../../common/types/types";
 
-const Room = (): JSX.Element => {
+const Room = (props: { globalUsersConnected: number }): JSX.Element => {
+	const { globalUsersConnected } = props;
 	const [isConnected, setIsConnected] = useState<boolean>(socket.connected);
 	const [timestamp, setTimestamp] = useState<number>(0);
 	const [usersInRoom, setUsersInRoom] = useState<number>(0);
 	const [isTimerPaused, setIsTimerPaused] = useState<boolean>(false);
+	const [userListInRoom, setUserListInRoom] = useState<string[]>([]);
 
 	/*
 	 * A store of the timer interval for a given client.
@@ -27,50 +32,48 @@ const Room = (): JSX.Element => {
 	 * }
 	 */
 
+	const clientTimerStore: Record<string, ReturnType<typeof setInterval>> = {};
+
 	const pauseTimer = (): void => {
 		socket.emit("pauseCountdown", { roomName });
 	};
 
+	const resetTimer = (): void => {
+		socket.emit("resetCountdown", { roomName });
+	};
+
+	const onConnect = (): void => {
+		socket.emit("join", roomName);
+		socket.emit("timerRequest", { roomName });
+		setIsConnected(true);
+	};
+
+	const onDisconnect = (): void => {
+		setIsConnected(false);
+	};
+
+	const onUsersInRoom = ({ numUsers, userList }: UsersInRoomArgs): void => {
+		setUsersInRoom(numUsers);
+		setUserListInRoom(userList);
+	};
+
+	const onTimerResponse = ({
+		secondsRemaining,
+		isPaused,
+	}: TimerResponseArgs): void => {
+		setTimestamp(secondsRemaining);
+
+		setIsTimerPaused(isPaused);
+
+		startCountdown({
+			durationInSeconds: secondsRemaining,
+			clientTimerStore,
+			setTimestamp,
+			isTimerPaused: isPaused,
+		});
+	};
+
 	useEffect(() => {
-		const clientTimerStore: Record<
-			string,
-			ReturnType<typeof setInterval>
-		> = {};
-
-		const onConnect = (): void => {
-			socket.emit("join", roomName);
-			socket.emit("timerRequest", { roomName });
-			setIsConnected(true);
-		};
-
-		const onDisconnect = (): void => {
-			setIsConnected(false);
-		};
-
-		const onUsersInRoom = (value: string): void => {
-			console.log("usersInRoom", value);
-			setUsersInRoom(parseInt(value));
-		};
-
-		const onTimerResponse = ({
-			secondsRemaining,
-			isPaused,
-		}: {
-			secondsRemaining: number;
-			isPaused: boolean;
-		}): void => {
-			setTimestamp(secondsRemaining);
-
-			setIsTimerPaused(isPaused);
-
-			startCountdown({
-				durationInSeconds: secondsRemaining,
-				clientTimerStore,
-				setTimestamp,
-				isTimerPaused: isPaused,
-			});
-		};
-
 		socket.on("connect", onConnect);
 		socket.on("disconnect", onDisconnect);
 		socket.on("timerResponse", onTimerResponse);
@@ -87,7 +90,7 @@ const Room = (): JSX.Element => {
 	useEffect(() => {
 		console.log({ timestamp, isTimerPaused });
 		// update the document title, with roomName and timestamp
-		document.title = `${formatTimestamp(timestamp)}-${roomName}`;
+		document.title = `${formatTimestamp(timestamp)}`;
 	}, [isTimerPaused, timestamp]);
 
 	useEffect(() => {
@@ -98,19 +101,22 @@ const Room = (): JSX.Element => {
 	return (
 		<>
 			<WelcomeMessage name="Mario" />
+			<LogoTitle />
 			<ConnectionState isConnected={isConnected} />
 			<Timestamp timestamp={timestamp} />
 			<TimerButtons roomName={roomName} />
 			<TimerControls
 				pauseTimer={pauseTimer}
 				isTimerPaused={isTimerPaused}
+				resetTimer={resetTimer}
 			/>
 			<TimerForm />
 			<p>Users in room: {usersInRoom}</p>
 			<button type="button" onClick={shareRoom}>
 				Share Room
 			</button>
-			<Footer numUsers={5} />
+			<UserBubbles userListInRoom={userListInRoom} />
+			<Footer numUsers={globalUsersConnected} />
 		</>
 	);
 };
