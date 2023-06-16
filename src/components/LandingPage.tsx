@@ -32,6 +32,7 @@ const LandingPage = (props: { globalUsersConnected: number }): JSX.Element => {
 				onClick={(): void => {
 					navigate(`/${slugName}`);
 					window.location.reload();
+					test();
 				}}
 			>
 				Join a room
