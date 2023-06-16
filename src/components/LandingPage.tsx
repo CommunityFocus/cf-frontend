@@ -32,6 +32,8 @@ const LandingPage = (props: { globalUsersConnected: number }): JSX.Element => {
 				onClick={(): void => {
 					navigate(`/${slugName}`);
 					window.location.reload();
+					// eslint-disable-next-line
+					// @ts-ignore
 					test();
 				}}
 			>
