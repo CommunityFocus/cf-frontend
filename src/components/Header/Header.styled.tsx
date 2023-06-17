@@ -1,12 +1,12 @@
 import styled from "styled-components";
 
-const Title = styled.div`   
-    box-sizing: border-box;
-    width: 100%;
-    display: flex;
-    align-items: baseline;
-    background-color: #a1bca4;
-    padding:2em;
-`
+const StyledHeader = styled.div`
+	box-sizing: border-box;
+	width: 100%;
+	display: flex;
+	background-color: #a1bca4;
+	padding: 2em;
+	justify-content: space-between;
+`;
 
-export default Title
+export default StyledHeader;

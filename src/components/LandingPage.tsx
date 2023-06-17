@@ -5,6 +5,7 @@ import { SERVER_URL } from "../../common/common";
 import { Title, Center, Button } from "./LandingPage.styled";
 import Footer from "./Footer";
 import LogoTitle from "./Logo/LogoTitle";
+import Header from "./Header/Header";
 
 const LandingPage = (props: { globalUsersConnected: number }): JSX.Element => {
 	const { globalUsersConnected } = props;
@@ -23,21 +24,21 @@ const LandingPage = (props: { globalUsersConnected: number }): JSX.Element => {
 	}, []);
 
 	return (
-		<Center>
-			<LogoTitle />
-			<Title>Community Focus</Title>
-
-			<Button
-				type="button"
-				onClick={(): void => {
-					navigate(`/${slugName}`);
-					window.location.reload();
-				}}
-			>
-				Join a room
-			</Button>
-			<Footer numUsers={globalUsersConnected} />
-		</Center>
+		<>
+			<Header />
+			<Center>
+				<Title>Community Focus</Title>
+				<Button
+					type="button"
+					onClick={(): void => {
+						navigate(`/${slugName}`);
+						window.location.reload();
+					}}
+				>
+					Join a room
+				</Button>
+			</Center>
+		</>
 	);
 };
 
