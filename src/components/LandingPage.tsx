@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import { SERVER_URL } from "../../common/common";
 import { Title, Center, Button } from "./LandingPage.styled";
 import Footer from "./Footer";
-import LogoTitle from "./Logo/LogoTitle";
 import Header from "./Header/Header";
 
 const LandingPage = (props: { globalUsersConnected: number }): JSX.Element => {
@@ -37,6 +36,7 @@ const LandingPage = (props: { globalUsersConnected: number }): JSX.Element => {
 				>
 					Join a room
 				</Button>
+				<Footer numUsers={globalUsersConnected} />
 			</Center>
 		</>
 	);
