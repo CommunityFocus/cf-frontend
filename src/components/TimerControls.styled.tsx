@@ -16,7 +16,6 @@ export const PlayButton = styled(FaRegPlayCircle)`
 `;
 
 export const PauseButton = styled(FaRegPauseCircle)`
-	/* CSS styles for the Pause button */
 	font-size: 2rem;
 	color: #595959;
 `;
