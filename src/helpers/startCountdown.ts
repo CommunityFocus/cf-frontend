@@ -13,14 +13,16 @@ const startCountdown = ({
 
 	/* eslint-disable no-param-reassign */
 	if (durationInSeconds <= 0) {
-		setTimestamp(durationInSeconds);
-		clearInterval(clientTimerStore.timer);
+		setTimestamp(0);
 	} else {
 		clientTimerStore.timer = setInterval(() => {
 			if (!isTimerPaused) {
 				durationInSeconds--;
 			}
 			setTimestamp(durationInSeconds);
+			if (durationInSeconds <= 0) {
+				clearInterval(clientTimerStore.timer);
+			}
 		}, 1000);
 	}
 };
