@@ -8,12 +8,11 @@ import shareRoom from "../helpers/shareRoom";
 import startCountdown from "../helpers/startCountdown";
 import { roomName } from "../../common/common";
 import TimerButtons from "./TimerButton/TimerButtons";
-import WelcomeMessage from "./WelcomeMessage";
 import TimerControls from "./TimerControls";
 import Footer from "./Footer";
-import LogoTitle from "./Logo/LogoTitle";
 import UserBubbles from "./UserBubbles/UserBubbles";
 import { TimerResponseArgs, UsersInRoomArgs } from "../../common/types/types";
+import Header from "./Header/Header";
 
 const Room = (props: { globalUsersConnected: number }): JSX.Element => {
 	const { globalUsersConnected } = props;
@@ -100,8 +99,7 @@ const Room = (props: { globalUsersConnected: number }): JSX.Element => {
 
 	return (
 		<>
-			<WelcomeMessage name="Mario" />
-			<LogoTitle />
+			<Header />
 			<ConnectionState isConnected={isConnected} />
 			<Timestamp timestamp={timestamp} />
 			<TimerButtons roomName={roomName} />
