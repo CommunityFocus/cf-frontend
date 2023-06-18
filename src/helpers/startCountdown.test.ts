@@ -123,6 +123,20 @@ describe("startCountdown", () => {
 
 				expect(mockSetTimestamp).toHaveBeenCalledWith(9);
 			});
+			describe("when the timer ticks to 0", () => {
+				it("should clear the timer", () => {
+					startCountdown({
+						durationInSeconds,
+						clientTimerStore,
+						setTimestamp: mockSetTimestamp,
+						isTimerPaused: false,
+					});
+					jest.advanceTimersByTime(9000); // 9 seconds have passed. Should not have cleared the timer yet.
+					expect(clearIntervalSpy).toHaveBeenCalledTimes(1);
+					jest.advanceTimersByTime(1000); // 10 seconds have passed. Should have cleared the timer.
+					expect(clearIntervalSpy).toHaveBeenCalledTimes(2);
+				});
+			});
 
 			describe("when the timer is paused", () => {
 				it("should not decrement the durationInSeconds", () => {
