@@ -8,12 +8,12 @@ import shareRoom from "../helpers/shareRoom";
 import startCountdown from "../helpers/startCountdown";
 import { roomName } from "../../common/common";
 import TimerButtons from "./TimerButton/TimerButtons";
-import WelcomeMessage from "./WelcomeMessage";
 import TimerControls from "./TimerControls";
 import Footer from "./Footer";
-import LogoTitle from "./Logo/LogoTitle";
 import UserBubbles from "./UserBubbles/UserBubbles";
 import { TimerResponseArgs, UsersInRoomArgs } from "../../common/types/types";
+import Header from "./Header/Header";
+import { GlobalStyle, StyledMain } from "./Room.styled";
 
 const Room = (props: { globalUsersConnected: number }): JSX.Element => {
 	const { globalUsersConnected } = props;
@@ -100,23 +100,25 @@ const Room = (props: { globalUsersConnected: number }): JSX.Element => {
 
 	return (
 		<>
-			<WelcomeMessage name="Mario" />
-			<LogoTitle />
-			<ConnectionState isConnected={isConnected} />
-			<Timestamp timestamp={timestamp} />
-			<TimerButtons roomName={roomName} />
-			<TimerControls
-				pauseTimer={pauseTimer}
-				isTimerPaused={isTimerPaused}
-				resetTimer={resetTimer}
-			/>
-			<TimerForm />
-			<p>Users in room: {usersInRoom}</p>
-			<button type="button" onClick={shareRoom}>
-				Share Room
-			</button>
-			<UserBubbles userListInRoom={userListInRoom} />
-			<Footer numUsers={globalUsersConnected} />
+			<Header />
+			<StyledMain>
+				<GlobalStyle />
+				<ConnectionState isConnected={isConnected} />
+				<Timestamp timestamp={timestamp} />
+				<TimerButtons roomName={roomName} />
+				<TimerControls
+					pauseTimer={pauseTimer}
+					isTimerPaused={isTimerPaused}
+					resetTimer={resetTimer}
+				/>
+				<TimerForm />
+				<p>Users in room: {usersInRoom}</p>
+				<button type="button" onClick={shareRoom}>
+					Share Room
+				</button>
+				<UserBubbles userListInRoom={userListInRoom} />
+				<Footer numUsers={globalUsersConnected} />
+			</StyledMain>
 		</>
 	);
 };
