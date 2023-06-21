@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { SERVER_URL } from "../../common/common";
 import { Title, Center, Button } from "./LandingPage.styled";
 import Footer from "./Footer";
+import UserNameForm from "./UserNameForm";
 
 const LandingPage = (): JSX.Element => {
 	const [slugName, setSlugName] = useState<string>("");
@@ -33,6 +34,7 @@ const LandingPage = (): JSX.Element => {
 			>
 				Join a room
 			</Button>
+			<UserNameForm />
 			<Footer numUsers={5} />
 		</Center>
 	);
