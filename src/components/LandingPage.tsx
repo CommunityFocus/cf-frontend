@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { SERVER_URL } from "../../common/common";
 import { Title, Center, Button } from "./LandingPage.styled";
 import Footer from "./Footer";
-import UserNameForm from "./UserNameForm";
+import UserNameForm from "./UserName/UserNameForm";
 
 const LandingPage = (): JSX.Element => {
 	const [slugName, setSlugName] = useState<string>("");

@@ -4,11 +4,11 @@
 // Once in the room, present users the option to change their username on a name change modal and update their local storage with the updated username on submission.
 
 // ? Things to do:
-// ?  Form for username input
-// ?  Modal on joining a room
-// ?  validation of username input?
-// ?  On submission of username input, update local storage with the new username
-// ?  on submission, should route to the room page
+// todo: user joins the room --> then if localStorage is empty --> Modal dialog pops up
+// todo: user joins the room --> if localStorage has username already --> Modal dialog doesn't pop up
+// todo: on Landing Page don't show user name modal
+// todo: use react-modal npm package and try shit out
+
 import React, { useContext, ReactNode } from "react";
 import useModal, { ModalContextInterface } from "./useModal";
 
