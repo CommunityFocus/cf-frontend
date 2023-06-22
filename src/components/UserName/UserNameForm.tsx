@@ -3,7 +3,7 @@ import React, { useState } from "react";
 const UserNameForm = (): JSX.Element => {
 	const [userNameData, setUserNameData] = useState<string>("");
 
-	const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+	const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
 		const { value } = event.target;
 		setUserNameData(value.toString());
 	};

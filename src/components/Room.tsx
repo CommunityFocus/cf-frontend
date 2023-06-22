@@ -11,12 +11,16 @@ import TimerButtons from "./TimerButton/TimerButtons";
 import WelcomeMessage from "./WelcomeMessage";
 import TimerControls from "./TimerControls";
 import Footer from "./Footer";
+import ModalProvider from "../context/ModalContext/Modal";
+import useModal from "../context/ModalContext/useModal";
 
 const Room = (): JSX.Element => {
 	const [isConnected, setIsConnected] = useState<boolean>(socket.connected);
 	const [timestamp, setTimestamp] = useState<number>(0);
 	const [usersInRoom, setUsersInRoom] = useState<number>(0);
 	const [isTimerPaused, setIsTimerPaused] = useState<boolean>(false);
+	const { isOpen } = useModal();
+	const storedUserName = localStorage.getItem("userName");
 
 	/*
 	 * A store of the timer interval for a given client.
@@ -97,6 +101,9 @@ const Room = (): JSX.Element => {
 
 	return (
 		<>
+			<ModalProvider>
+				{/* {localStorage.getItem("userName") === "" && UserNameModal} */}
+			</ModalProvider>
 			<WelcomeMessage name="Mario" />
 			<ConnectionState isConnected={isConnected} />
 			<Timestamp timestamp={timestamp} />
