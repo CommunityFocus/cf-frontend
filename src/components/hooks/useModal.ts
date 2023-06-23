@@ -9,6 +9,7 @@ export interface ModalContextInterface {
 
 const useModal = (): ModalContextInterface => {
 	const [isOpen, setIsOpen] = useState<boolean>(false);
+	// const [modalContent, setModalContent] = useState<string>("Modal Content");
 
 	const handleOpen = (): void => {
 		setIsOpen(true);
