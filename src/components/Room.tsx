@@ -12,7 +12,9 @@ import WelcomeMessage from "./WelcomeMessage";
 import TimerControls from "./TimerControls";
 import Footer from "./Footer";
 import UserNameFormModal from "./Modal/UserNameFormModal";
-import ModalProviderContext from "../context/ModalContext/ModalContext";
+import ModalProviderContext, {
+	useModalContext,
+} from "../context/ModalContext/ModalContext";
 // import useModal from "../context/ModalContext/useModal";
 
 const Room = (): JSX.Element => {
@@ -21,10 +23,10 @@ const Room = (): JSX.Element => {
 	const [usersInRoom, setUsersInRoom] = useState<number>(0);
 	const [isTimerPaused, setIsTimerPaused] = useState<boolean>(false);
 	const [showModal, setShowModal] = useState<boolean>(false);
-
-	const openModal = () => {
-		setShowModal((prev) => !prev);
-	};
+	const formModal = useModalContext();
+	// const openModal = () => {
+	// 	setShowModal((prev) => !prev);
+	// };
 
 	// * Local Storage State Management
 	const [userName, setUserName] = useState(
