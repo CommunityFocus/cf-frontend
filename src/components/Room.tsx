@@ -14,6 +14,7 @@ import UserBubbles from "./UserBubbles/UserBubbles";
 import { TimerResponseArgs, UsersInRoomArgs } from "../../common/types/types";
 import Header from "./Header/Header";
 import { GlobalStyle, StyledMain } from "./Room.styled";
+import WorkBreakButton from "./TimerButton/WorkBreakButton";
 
 const Room = (props: { globalUsersConnected: number }): JSX.Element => {
 	const { globalUsersConnected } = props;
@@ -106,6 +107,7 @@ const Room = (props: { globalUsersConnected: number }): JSX.Element => {
 				<ConnectionState isConnected={isConnected} />
 				<Timestamp timestamp={timestamp} />
 				<TimerButtons roomName={roomName} />
+				<WorkBreakButton roomName={roomName} />
 				<TimerControls
 					pauseTimer={pauseTimer}
 					isTimerPaused={isTimerPaused}

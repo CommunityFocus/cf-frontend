@@ -1,11 +1,10 @@
-import "./Footer.styled";
 import { StyledFooter, StyledText } from "./Footer.styled";
 
 interface FooterProps {
 	numUsers: number;
 }
 
-const Footer: React.FC<FooterProps> = ({ numUsers }) => {
+const Footer: React.FC<FooterProps> = ({ numUsers }: { numUsers: number }) => {
 	return (
 		<StyledFooter>
 			<StyledText>
