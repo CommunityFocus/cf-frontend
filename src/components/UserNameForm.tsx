@@ -1,33 +1,43 @@
-import React, { useState } from "react";
+import React from "react";
 
-const UserNameForm = (): JSX.Element => {
-	const [userNameData, setUserNameData] = useState<string>("");
+interface PropInterface {
+	userName: string;
+	setUserName: (userName: string) => void;
+	showModal: boolean;
+	setShowModal: (showModal: boolean) => void;
+}
 
-	const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-		const { value } = event.target;
-		setUserNameData(value.toString());
-	};
+const UserNameForm = (props): JSX.Element => {
+	// const [userNameData, setUserNameData] = useState<string>("");
+	const { userName, setUserName, showModal, setShowModal } = props;
 
-	const handleSubmit = (event: React.SyntheticEvent<HTMLFormElement>): void => {
+	// * does handle change need to be here if we have a submit button?
+	// const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
+	// 	const { value } = event.target;
+	// 	setUserName(value);
+	// };
+
+	const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
 		event.preventDefault();
-		localStorage.setItem("userName", userNameData);
+		setUserName(event.target.userName.value);
 	};
-
+	// remove classNames from return (styled components - see LandingPage styled file)
 	return (
-		<div className="form--container">
-			<form onSubmit={handleSubmit}>
-				<div className="form-group">
-					Please enter your username:
-					<input
-						type="text"
-						className="form-control"
-						placeholder="Username"
-						name="userName"
-						onChange={handleChange}
-					/>
-				</div>
-				<button type="submit">Submit</button>
-			</form>
+		<div>
+			{showModal ? (
+				<form onSubmit={handleSubmit}>
+					<div>
+						Username:
+						<input
+							type="text"
+							placeholder="Username"
+							name="userName"
+							// onChange={handleChange}
+						/>
+					</div>
+					<button type="submit">Submit</button>
+				</form>
+			) : null}
 		</div>
 	);
 };

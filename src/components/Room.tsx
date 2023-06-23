@@ -11,12 +11,27 @@ import TimerButtons from "./TimerButton/TimerButtons";
 import WelcomeMessage from "./WelcomeMessage";
 import TimerControls from "./TimerControls";
 import Footer from "./Footer";
+import UserNameFormModal from "./Modal/UserNameFormModal";
+import ModalProviderContext, {
+	useModalContext,
+} from "../context/ModalContext/ModalContext";
+// import useModal from "../context/ModalContext/useModal";
 
 const Room = (): JSX.Element => {
 	const [isConnected, setIsConnected] = useState<boolean>(socket.connected);
 	const [timestamp, setTimestamp] = useState<number>(0);
 	const [usersInRoom, setUsersInRoom] = useState<number>(0);
 	const [isTimerPaused, setIsTimerPaused] = useState<boolean>(false);
+	const [showModal, setShowModal] = useState<boolean>(false);
+	const formModal = useModalContext();
+	// const openModal = () => {
+	// 	setShowModal((prev) => !prev);
+	// };
+
+	// * Local Storage State Management
+	const [userName, setUserName] = useState(
+		JSON.parse(localStorage.getItem("userName")) || ""
+	);
 
 	/*
 	 * A store of the timer interval for a given client.
@@ -26,6 +41,11 @@ const Room = (): JSX.Element => {
 	 * 	timer: setInterval(),
 	 * }
 	 */
+
+	// * On change of userName changes -> local storage sets username key with userName value
+	useEffect(() => {
+		localStorage.setItem("userName", JSON.stringify(userName));
+	}, [userName]);
 
 	const pauseTimer = (): void => {
 		socket.emit("pauseCountdown", { roomName });
@@ -96,8 +116,15 @@ const Room = (): JSX.Element => {
 	}, [isConnected]);
 
 	return (
-		<>
-			<WelcomeMessage name="Mario" />
+		<ModalProviderContext>
+			<UserNameFormModal
+				openModal={openModal}
+				userName={userName}
+				setUserName={setUserName}
+				showModal={showModal}
+				setShowModal={setShowModal}
+			/>
+			<WelcomeMessage name={userName} />
 			<ConnectionState isConnected={isConnected} />
 			<Timestamp timestamp={timestamp} />
 			<TimerButtons roomName={roomName} />
@@ -111,7 +138,7 @@ const Room = (): JSX.Element => {
 				Share Room
 			</button>
 			<Footer numUsers={5} />
-		</>
+		</ModalProviderContext>
 	);
 };
 
