@@ -1,9 +1,10 @@
 import TimerButton from "./TimerButton";
+import { ButtonContainer } from "./TimerButtons.styled";
 
 const TimerButtons = (props: { roomName: string }): JSX.Element => {
 	const { roomName } = props;
 	return (
-		<>
+		<ButtonContainer>
 			<TimerButton roomName={roomName} value={1} />
 			<TimerButton roomName={roomName} value={2} />
 			<TimerButton roomName={roomName} value={5} />
@@ -18,7 +19,7 @@ const TimerButtons = (props: { roomName: string }): JSX.Element => {
 			<TimerButton roomName={roomName} value={50} />
 			<TimerButton roomName={roomName} value={55} />
 			<TimerButton roomName={roomName} value={60} />
-		</>
+		</ButtonContainer>
 	);
 };
 

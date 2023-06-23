@@ -26,7 +26,7 @@ const LandingPage = (props: { globalUsersConnected: number }): JSX.Element => {
 		<>
 			<Header />
 			<Center>
-				<Title>Community Focus</Title>
+				<Title>Community FocusSSS</Title>
 				<Button
 					type="button"
 					onClick={(): void => {
