@@ -1,11 +1,14 @@
-import { useState } from "react";
 import socket from "../socket";
 
-const WorkBreakButton = ({ roomName }: { roomName: string }): JSX.Element => {
-	// It may be needed to fetch from the server whether the user is on a break or not.
-	// The default isBreak state below is just a placeholder for now.
-	const [isBreak, setBreak] = useState(false);
+interface WorkBreakButtonProps {
+	roomName: string;
+	isBreak: boolean;
+}
 
+const WorkBreakButton = ({
+	roomName,
+	isBreak,
+}: WorkBreakButtonProps): JSX.Element => {
 	const onClickHandler = (): void => {
 		// const userName = localStorage.getItem('');
 		if (!isBreak) {
@@ -13,13 +16,11 @@ const WorkBreakButton = ({ roomName }: { roomName: string }): JSX.Element => {
 				userName: "name-functionality-is-yet-to-be-implemented",
 				roomName,
 			});
-			setBreak(true);
 		} else if (isBreak) {
 			socket.emit("workTimer", {
 				userName: "name-functionality-is-yet-to-be-implemented",
 				roomName,
 			});
-			setBreak(false);
 		}
 	};
 

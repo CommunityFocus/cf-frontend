@@ -23,6 +23,8 @@ const Room = (props: { globalUsersConnected: number }): JSX.Element => {
 	const [usersInRoom, setUsersInRoom] = useState<number>(0);
 	const [isTimerPaused, setIsTimerPaused] = useState<boolean>(false);
 	const [userListInRoom, setUserListInRoom] = useState<string[]>([]);
+	// TODO: setBreak should set the state after receiving response from the server
+	const [isBreak, setBreak] = useState(false);
 
 	/*
 	 * A store of the timer interval for a given client.
@@ -107,7 +109,7 @@ const Room = (props: { globalUsersConnected: number }): JSX.Element => {
 				<ConnectionState isConnected={isConnected} />
 				<Timestamp timestamp={timestamp} />
 				<TimerButtons roomName={roomName} />
-				<WorkBreakButton roomName={roomName} />
+				<WorkBreakButton roomName={roomName} isBreak={isBreak} />
 				<TimerControls
 					pauseTimer={pauseTimer}
 					isTimerPaused={isTimerPaused}

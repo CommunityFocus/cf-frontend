@@ -4,7 +4,7 @@ interface FooterProps {
 	numUsers: number;
 }
 
-const Footer: React.FC<FooterProps> = ({ numUsers }: { numUsers: number }) => {
+const Footer = ({ numUsers }: FooterProps): JSX.Element => {
 	return (
 		<StyledFooter>
 			<StyledText>
