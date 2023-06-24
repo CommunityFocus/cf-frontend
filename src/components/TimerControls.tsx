@@ -1,3 +1,5 @@
+import ResetButton from "./TimerControls.styled";
+
 const TimerControls = ({
 	pauseTimer,
 	isTimerPaused,
@@ -13,9 +15,7 @@ const TimerControls = ({
 				{isTimerPaused ? "Resume" : "Pause"}
 			</button>
 
-			<button type="button" onClick={resetTimer}>
-				Reset
-			</button>
+			<ResetButton type="button" onClick={resetTimer}></ResetButton>
 		</>
 	);
 };
