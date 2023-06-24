@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const ResetButton = styled.button`
-    background: url('../public/Restart.png') center no-repeat;
+    background: url('/Restart.png') center no-repeat;
     background-size: 100%;
     width: 3%;
     border: none;
