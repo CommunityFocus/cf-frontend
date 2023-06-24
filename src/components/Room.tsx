@@ -23,8 +23,9 @@ const Room = (props: { globalUsersConnected: number }): JSX.Element => {
 	const [usersInRoom, setUsersInRoom] = useState<number>(0);
 	const [isTimerPaused, setIsTimerPaused] = useState<boolean>(false);
 	const [userListInRoom, setUserListInRoom] = useState<string[]>([]);
+	// TODO: include setBreak in the destructured array of useState hook which includes 'isBreak'
 	// TODO: setBreak should set the state after receiving response from the server
-	const [isBreak, setBreak] = useState(false);
+	const [isBreak] = useState<boolean>(false);
 
 	/*
 	 * A store of the timer interval for a given client.

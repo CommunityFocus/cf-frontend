@@ -10,7 +10,6 @@ const WorkBreakButton = ({
 	isBreak,
 }: WorkBreakButtonProps): JSX.Element => {
 	const onClickHandler = (): void => {
-		// const userName = localStorage.getItem('');
 		if (!isBreak) {
 			socket.emit("breakTimer", {
 				userName: "name-functionality-is-yet-to-be-implemented",
