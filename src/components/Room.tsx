@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import Modal from "react-modal";
 import socket from "./socket";
 import ConnectionState from "./ConnectionState";
 import Timestamp from "./Timestamp";
@@ -11,10 +12,8 @@ import TimerButtons from "./TimerButton/TimerButtons";
 import WelcomeMessage from "./WelcomeMessage";
 import TimerControls from "./TimerControls";
 import Footer from "./Footer";
-import UserNameFormModal from "./Modal/UserNameFormModal";
-import ModalProviderContext, {
-	useModalContext,
-} from "../context/ModalContext/ModalContext";
+import UserNameForm from "./UserNameForm";
+
 // import useModal from "../context/ModalContext/useModal";
 
 const Room = (): JSX.Element => {
@@ -22,17 +21,13 @@ const Room = (): JSX.Element => {
 	const [timestamp, setTimestamp] = useState<number>(0);
 	const [usersInRoom, setUsersInRoom] = useState<number>(0);
 	const [isTimerPaused, setIsTimerPaused] = useState<boolean>(false);
-	const [showModal, setShowModal] = useState<boolean>(false);
-	const formModal = useModalContext();
-	// const openModal = () => {
-	// 	setShowModal((prev) => !prev);
-	// };
 
 	// * Local Storage State Management
-	const [userName, setUserName] = useState(
-		JSON.parse(localStorage.getItem("userName")) || ""
+	const [userName, setUserName] = useState<string>(
+		JSON.parse(localStorage.getItem("userName") as string) || ""
 	);
 
+	const [isModalOpen, setIsModalOpen] = useState<boolean>(userName === "");
 	/*
 	 * A store of the timer interval for a given client.
 	 * This is used to store and clear the interval.
@@ -45,6 +40,9 @@ const Room = (): JSX.Element => {
 	// * On change of userName changes -> local storage sets username key with userName value
 	useEffect(() => {
 		localStorage.setItem("userName", JSON.stringify(userName));
+		if (userName === "") {
+			setIsModalOpen(true);
+		}
 	}, [userName]);
 
 	const pauseTimer = (): void => {
@@ -116,14 +114,18 @@ const Room = (): JSX.Element => {
 	}, [isConnected]);
 
 	return (
-		<ModalProviderContext>
-			<UserNameFormModal
-				openModal={openModal}
-				userName={userName}
-				setUserName={setUserName}
-				showModal={showModal}
-				setShowModal={setShowModal}
-			/>
+		<>
+			<button onClick={() => setIsModalOpen(true)} type="button">
+				Change Username
+			</button>
+			<Modal isOpen={isModalOpen}>
+				<p>this is a modal</p>
+				<UserNameForm
+					userName={userName}
+					setUserName={setUserName}
+					setIsModalOpen={setIsModalOpen}
+				/>
+			</Modal>
 			<WelcomeMessage name={userName} />
 			<ConnectionState isConnected={isConnected} />
 			<Timestamp timestamp={timestamp} />
@@ -138,7 +140,7 @@ const Room = (): JSX.Element => {
 				Share Room
 			</button>
 			<Footer numUsers={5} />
-		</ModalProviderContext>
+		</>
 	);
 };
 
