@@ -14,8 +14,6 @@ import TimerControls from "./TimerControls";
 import Footer from "./Footer";
 import UserNameForm from "./UserNameForm";
 
-// import useModal from "../context/ModalContext/useModal";
-
 const Room = (): JSX.Element => {
 	const [isConnected, setIsConnected] = useState<boolean>(socket.connected);
 	const [timestamp, setTimestamp] = useState<number>(0);
@@ -37,7 +35,6 @@ const Room = (): JSX.Element => {
 	 * }
 	 */
 
-	// * On change of userName changes -> local storage sets username key with userName value
 	useEffect(() => {
 		localStorage.setItem("userName", JSON.stringify(userName));
 		if (userName === "") {
@@ -115,13 +112,11 @@ const Room = (): JSX.Element => {
 
 	return (
 		<>
-			<button onClick={() => setIsModalOpen(true)} type="button">
+			<button onClick={(): void => setIsModalOpen(true)} type="button">
 				Change Username
 			</button>
 			<Modal isOpen={isModalOpen}>
-				<p>this is a modal</p>
 				<UserNameForm
-					userName={userName}
 					setUserName={setUserName}
 					setIsModalOpen={setIsModalOpen}
 				/>
