@@ -15,7 +15,7 @@ const TimerControls = ({
 				{isTimerPaused ? "Resume" : "Pause"}
 			</button>
 
-			<ResetButton type="button" onClick={resetTimer}/>
+			<ResetButton type="button" onClick={resetTimer} />
 		</>
 	);
 };
