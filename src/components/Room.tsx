@@ -14,6 +14,7 @@ import UserBubbles from "./UserBubbles/UserBubbles";
 import { TimerResponseArgs, UsersInRoomArgs } from "../../common/types/types";
 import Header from "./Header/Header";
 import { GlobalStyle, StyledDiv } from "./Room.styled";
+import WorkBreakButton from "./TimerButton/WorkBreakButton";
 
 const Room = (props: { globalUsersConnected: number }): JSX.Element => {
 	const { globalUsersConnected } = props;
@@ -22,6 +23,9 @@ const Room = (props: { globalUsersConnected: number }): JSX.Element => {
 	const [usersInRoom, setUsersInRoom] = useState<number>(0);
 	const [isTimerPaused, setIsTimerPaused] = useState<boolean>(false);
 	const [userListInRoom, setUserListInRoom] = useState<string[]>([]);
+	// TODO: include setBreak in the destructured array of useState hook which includes 'isBreak'
+	// TODO: setBreak should set the state after receiving response from the server
+	const [isBreak] = useState<boolean>(false);
 
 	/*
 	 * A store of the timer interval for a given client.
@@ -106,6 +110,7 @@ const Room = (props: { globalUsersConnected: number }): JSX.Element => {
 				<ConnectionState isConnected={isConnected} />
 				<Timestamp timestamp={timestamp} />
 				<TimerButtons roomName={roomName} />
+				<WorkBreakButton roomName={roomName} isBreak={isBreak} />
 				<TimerControls
 					pauseTimer={pauseTimer}
 					isTimerPaused={isTimerPaused}
