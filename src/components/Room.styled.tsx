@@ -1,6 +1,6 @@
 import styled, { createGlobalStyle } from "styled-components";
 
-export const StyledMain = styled.div`
+export const StyledDiv = styled.div`
 	background: #c7ddc9;
 	height: 93vh;
 	padding: 1%;
