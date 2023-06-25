@@ -13,8 +13,9 @@ import Footer from "./Footer";
 import UserBubbles from "./UserBubbles/UserBubbles";
 import { TimerResponseArgs, UsersInRoomArgs } from "../../common/types/types";
 import Header from "./Header/Header";
-import { GlobalStyle, StyledDiv } from "./Room.styled";
+import { Center, GlobalStyle, StyledDiv } from "./Room.styled";
 import WorkBreakButton from "./TimerButton/WorkBreakButton";
+
 
 const Room = (props: { globalUsersConnected: number }): JSX.Element => {
 	const { globalUsersConnected } = props;
@@ -107,6 +108,7 @@ const Room = (props: { globalUsersConnected: number }): JSX.Element => {
 			<Header />
 			<StyledDiv>
 				<GlobalStyle />
+        <Center>
 				<ConnectionState isConnected={isConnected} />
 				<Timestamp timestamp={timestamp} />
 				<TimerButtons roomName={roomName} />
@@ -121,6 +123,7 @@ const Room = (props: { globalUsersConnected: number }): JSX.Element => {
 				<button type="button" onClick={shareRoom}>
 					Share Room
 				</button>
+       </Center>
 				<UserBubbles userListInRoom={userListInRoom} />
 				<Footer numUsers={globalUsersConnected} />
 			</StyledDiv>

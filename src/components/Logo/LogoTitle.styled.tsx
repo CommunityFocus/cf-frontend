@@ -1,6 +1,5 @@
-import styled from "styled-components"
-
+import styled from "styled-components";
 
 export const LogoText = styled.h1`
-color: #000
-`
+	color: #000;
+`;
