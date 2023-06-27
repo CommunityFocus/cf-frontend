@@ -1,9 +1,13 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { useEffect, useState } from "react";
+import TimeAgo from "javascript-time-ago";
+import en from "javascript-time-ago/locale/en.json";
 import socket from "./components/socket";
 import Room from "./components/Room";
 import DefaultRoom from "./components/DefaultRoom";
 import LandingPage from "./components/LandingPage";
+
+TimeAgo.addDefaultLocale(en);
 
 const App = (): JSX.Element => {
 	const [globalUsersConnected, setGlobalUsersConnected] = useState<number>(0);

@@ -9,14 +9,17 @@ const UserBubbles = (props: { userListInRoom: string[] }): JSX.Element => {
 		<UserBubblesContainer>
 			{userListInRoom.length < 7 ? (
 				userListInRoom.map((user: string) => (
-					<UserBubble user={user} key={user} />
+					<UserBubble user={user} key={user} size={30} />
 				))
 			) : (
 				<>
 					{userListInRoom.slice(0, 6).map((user: string) => (
-						<UserBubble user={user} key={user} />
+						<UserBubble user={user} key={user} size={30} />
 					))}
-					<MultiUserBubble users={userListInRoom.slice(6)} />
+					<MultiUserBubble
+						users={userListInRoom.slice(6)}
+						size={30}
+					/>
 				</>
 			)}
 		</UserBubblesContainer>

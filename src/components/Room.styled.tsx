@@ -2,7 +2,7 @@ import styled, { createGlobalStyle } from "styled-components";
 
 export const StyledDiv = styled.div`
 	background: #c7ddc9;
-	height: 93vh;
+	height: 82vh;
 	padding: 1%;
 	display: flex;
 	align-items: center;

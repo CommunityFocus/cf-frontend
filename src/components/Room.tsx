@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import socket from "./socket";
 import ConnectionState from "./ConnectionState";
 import Timestamp from "./Timestamp";
@@ -15,7 +15,7 @@ import { TimerResponseArgs, UsersInRoomArgs } from "../../common/types/types";
 import Header from "./Header/Header";
 import { Center, GlobalStyle, StyledDiv } from "./Room.styled";
 import WorkBreakButton from "./TimerButton/WorkBreakButton";
-
+import UpdateLogs from "./UpdateLog/UpdateLogs";
 
 const Room = (props: { globalUsersConnected: number }): JSX.Element => {
 	const { globalUsersConnected } = props;
@@ -24,9 +24,22 @@ const Room = (props: { globalUsersConnected: number }): JSX.Element => {
 	const [usersInRoom, setUsersInRoom] = useState<number>(0);
 	const [isTimerPaused, setIsTimerPaused] = useState<boolean>(false);
 	const [userListInRoom, setUserListInRoom] = useState<string[]>([]);
+	const [updateLogList, setUpdateLogList] = useState<
+		Array<{
+			message: string;
+			user: string;
+			time: Date;
+		}>
+	>([]);
 	// TODO: include setBreak in the destructured array of useState hook which includes 'isBreak'
 	// TODO: setBreak should set the state after receiving response from the server
 	const [isBreak] = useState<boolean>(false);
+
+	// use memo to avoid re-rendering the UpdateLogs component unless the updateLogList changes
+	const memoizedUpdateLogs = useMemo(
+		() => <UpdateLogs logs={updateLogList} />,
+		[updateLogList]
+	);
 
 	/*
 	 * A store of the timer interval for a given client.
@@ -78,17 +91,48 @@ const Room = (props: { globalUsersConnected: number }): JSX.Element => {
 		});
 	};
 
+	const onUpdateLog = ({
+		message,
+		user,
+		time,
+	}: {
+		message: string;
+		user: string;
+		time: Date;
+	}): void => {
+		// push the new log to the updateLogList
+		// setUpdateLogList((prev) => [...prev].concat({ message, user, time }));
+		setUpdateLogList((prev) => [...prev, { message, user, time }]);
+		console.log("2", { updateLogList });
+	};
+
+	const onUpdateLogHistory = ({
+		updateLog,
+	}: {
+		updateLog: Array<{ message: string; user: string; time: Date }>;
+	}): void => {
+		// console.log({ updateLog });
+
+		setUpdateLogList([...updateLog]);
+
+		console.log("1", { updateLogList });
+	};
+
 	useEffect(() => {
 		socket.on("connect", onConnect);
 		socket.on("disconnect", onDisconnect);
 		socket.on("timerResponse", onTimerResponse);
 		socket.on("usersInRoom", onUsersInRoom);
+		socket.on("updateLog", onUpdateLog);
+		socket.on("updateLogHistory", onUpdateLogHistory);
 
 		return () => {
 			socket.off("connect", onConnect);
 			socket.off("disconnect", onDisconnect);
 			socket.off("timerResponse", onTimerResponse);
 			socket.off("usersInRoom", onUsersInRoom);
+			socket.off("updateLog", onUpdateLog);
+			socket.off("updateLogHistory", onUpdateLogHistory);
 		};
 	}, []);
 
@@ -103,27 +147,30 @@ const Room = (props: { globalUsersConnected: number }): JSX.Element => {
 		console.log("roomId:", roomName);
 	}, [isConnected]);
 
+	// useEffect(() => {}, [updateLogList]);
+
 	return (
 		<>
 			<Header />
 			<StyledDiv>
 				<GlobalStyle />
-        <Center>
-				<ConnectionState isConnected={isConnected} />
-				<Timestamp timestamp={timestamp} />
-				<TimerButtons roomName={roomName} />
-				<WorkBreakButton roomName={roomName} isBreak={isBreak} />
-				<TimerControls
-					pauseTimer={pauseTimer}
-					isTimerPaused={isTimerPaused}
-					resetTimer={resetTimer}
-				/>
-				<TimerForm />
-				<p>Users in room: {usersInRoom}</p>
-				<button type="button" onClick={shareRoom}>
-					Share Room
-				</button>
-       </Center>
+				{memoizedUpdateLogs}
+				<Center>
+					<ConnectionState isConnected={isConnected} />
+					<Timestamp timestamp={timestamp} />
+					<TimerButtons roomName={roomName} />
+					<WorkBreakButton roomName={roomName} isBreak={isBreak} />
+					<TimerControls
+						pauseTimer={pauseTimer}
+						isTimerPaused={isTimerPaused}
+						resetTimer={resetTimer}
+					/>
+					<TimerForm />
+					<p>Users in room: {usersInRoom}</p>
+					<button type="button" onClick={shareRoom}>
+						Share Room
+					</button>
+				</Center>
 				<UserBubbles userListInRoom={userListInRoom} />
 				<Footer numUsers={globalUsersConnected} />
 			</StyledDiv>

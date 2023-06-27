@@ -1,9 +1,12 @@
 import styled from "styled-components";
 
-export const UserBubbleStyled = styled.a<{ $borderColor?: string }>`
+export const UserBubbleStyled = styled.a<{
+	$borderColor?: string;
+	$size?: number;
+}>`
 	border-radius: 50%;
-	width: 30px;
-	height: 30px;
+	width: ${(props): string => `${props.$size}px` || "30px"};
+	height: ${(props): string => `${props.$size}px` || "30px"};
 	background-color: #393034;
 	display: flex;
 	justify-content: center;
