@@ -8,7 +8,9 @@ const Footer = ({ numUsers }: FooterProps): JSX.Element => {
 	return (
 		<StyledFooter>
 			<StyledText>
-				{numUsers} users are currently using the Community Focus app
+				{`${numUsers} ${
+					numUsers === 0 || numUsers > 1 ? "users are" : "user is"
+				} currently using the Community Focus app`}
 			</StyledText>
 		</StyledFooter>
 	);
