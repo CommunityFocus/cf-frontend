@@ -1,6 +1,7 @@
 import styled from "styled-components";
+import { FaRegPlayCircle, FaRegPauseCircle } from "react-icons/fa";
 
-const ResetButton = styled.button`
+export const ResetButton = styled.button`
 	background: url("/Restart.png") center no-repeat;
 	background-size: 100%;
 	width: 3%;
@@ -9,4 +10,13 @@ const ResetButton = styled.button`
 	cursor: pointer;
 `;
 
-export default ResetButton;
+export const PlayButton = styled(FaRegPlayCircle)`
+	font-size: 2rem;
+	color: #595959;
+`;
+
+export const PauseButton = styled(FaRegPauseCircle)`
+	/* CSS styles for the Pause button */
+	font-size: 2rem;
+	color: #595959;
+`;

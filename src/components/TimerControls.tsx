@@ -1,4 +1,5 @@
-import ResetButton from "./TimerControls.styled";
+import { FaRegPlayCircle, FaRegPauseCircle } from "react-icons/fa";
+import { PlayButton, PauseButton, ResetButton } from "./TimerControls.styled";
 
 const TimerControls = ({
 	pauseTimer,
@@ -11,9 +12,15 @@ const TimerControls = ({
 }): JSX.Element => {
 	return (
 		<>
-			<button type="button" onClick={pauseTimer}>
-				{isTimerPaused ? "Resume" : "Pause"}
-			</button>
+			{isTimerPaused ? (
+				<PlayButton onClick={pauseTimer}>
+					<FaRegPlayCircle className="fa-icon" />
+				</PlayButton>
+			) : (
+				<PauseButton onClick={pauseTimer}>
+					<FaRegPauseCircle />
+				</PauseButton>
+			)}
 
 			<ResetButton type="button" onClick={resetTimer} />
 		</>
