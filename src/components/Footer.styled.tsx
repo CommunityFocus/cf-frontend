@@ -11,7 +11,7 @@ export const StyledFooter = styled.div`
 	height: 25px;
 `;
 
-export const StyledText = styled.h3`
+export const StyledText = styled.p`
 	color: #393034;
 	margin-top: 5px;
 	font-size: 14px;

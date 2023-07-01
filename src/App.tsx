@@ -12,7 +12,7 @@ const App = (): JSX.Element => {
 		globalUsersCount,
 	}: {
 		globalUsersCount: number;
-	}) => {
+	}): void => {
 		setGlobalUsersConnected(globalUsersCount);
 	};
 
