@@ -16,7 +16,6 @@ import Header from "./Header/Header";
 import { Center, GlobalStyle, StyledDiv } from "./Room.styled";
 import WorkBreakButton from "./TimerButton/WorkBreakButton";
 
-
 const Room = (props: { globalUsersConnected: number }): JSX.Element => {
 	const { globalUsersConnected } = props;
 	const [isConnected, setIsConnected] = useState<boolean>(socket.connected);
@@ -108,22 +107,22 @@ const Room = (props: { globalUsersConnected: number }): JSX.Element => {
 			<Header />
 			<StyledDiv>
 				<GlobalStyle />
-        <Center>
-				<ConnectionState isConnected={isConnected} />
-				<Timestamp timestamp={timestamp} />
-				<TimerButtons roomName={roomName} />
-				<WorkBreakButton roomName={roomName} isBreak={isBreak} />
-				<TimerControls
-					pauseTimer={pauseTimer}
-					isTimerPaused={isTimerPaused}
-					resetTimer={resetTimer}
-				/>
-				<TimerForm />
-				<p>Users in room: {usersInRoom}</p>
-				<button type="button" onClick={shareRoom}>
-					Share Room
-				</button>
-       </Center>
+				<Center>
+					<ConnectionState isConnected={isConnected} />
+					<Timestamp timestamp={timestamp} />
+					<TimerButtons roomName={roomName} />
+					<WorkBreakButton roomName={roomName} isBreak={isBreak} />
+					<TimerControls
+						pauseTimer={pauseTimer}
+						isTimerPaused={isTimerPaused}
+						resetTimer={resetTimer}
+					/>
+					<TimerForm />
+					<p>Users in room: {usersInRoom}</p>
+					<button type="button" onClick={shareRoom}>
+						Share Room
+					</button>
+				</Center>
 				<UserBubbles userListInRoom={userListInRoom} />
 				<Footer numUsers={globalUsersConnected} />
 			</StyledDiv>
