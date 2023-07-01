@@ -8,7 +8,7 @@ import shareRoom from "../helpers/shareRoom";
 import startCountdown from "../helpers/startCountdown";
 import { roomName } from "../../common/common";
 import TimerButtons from "./TimerButton/TimerButtons";
-import TimerControls from "./TimerControls";
+import TimerControls from "./TimerButton/TimerControls";
 import Footer from "./Footer";
 import UserBubbles from "./UserBubbles/UserBubbles";
 import { TimerResponseArgs, UsersInRoomArgs } from "../../common/types/types";

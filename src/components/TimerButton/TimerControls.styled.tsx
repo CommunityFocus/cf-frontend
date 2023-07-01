@@ -10,7 +10,7 @@ export const ResetButton = styled.button`
 	cursor: pointer;
 `;
 
-export const PlayButton = styled(FaRegPlayCircle)`
+export const ResumeButton = styled(FaRegPlayCircle)`
 	font-size: 2rem;
 	color: #595959;
 `;
