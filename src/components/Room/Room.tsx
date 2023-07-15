@@ -1,6 +1,7 @@
-import { useState, useEffect, useContext, SetStateAction } from "react";
+import { useState, useEffect, useContext } from "react";
 import { ThemeContext } from "styled-components";
-import Select from "react-select";
+
+import Dropdown from "react-dropdown";
 import socket from "../Socket/socket";
 import ConnectionState from "../ConnectionState/ConnectionState";
 import Timestamp from "../Timestamp/Timestamp";
@@ -20,11 +21,12 @@ import {
 import Header from "../Header/Header";
 import { Center, GlobalStyle, StyledDiv } from "./Room.styled";
 import WorkBreakButton from "../TimerButton/WorkBreakButton";
-import { Theme, themeOptions } from "../../../common/theme";
+import { ThemeType, theme, themeOptions } from "../../../common/theme";
+import "react-dropdown/style.css";
 
 const Room = (props: {
 	globalUsersConnected: number;
-	setThemeGroup: React.Dispatch<SetStateAction<Theme>>;
+	setThemeGroup: React.Dispatch<React.SetStateAction<keyof typeof ThemeType>>;
 }): JSX.Element => {
 	const { globalUsersConnected, setThemeGroup } = props;
 	const [isConnected, setIsConnected] = useState<boolean>(socket.connected);
@@ -36,7 +38,9 @@ const Room = (props: {
 	// TODO: setBreak should set the state after receiving response from the server
 	const [isBreak] = useState<boolean>(false);
 
-	const { workBackground } = useContext(ThemeContext);
+	const { themeGroup } = useContext(ThemeContext);
+
+	const { workBackground } = theme[themeGroup as keyof typeof theme];
 
 	/*
 	 * A store of the timer interval for a given client.
@@ -119,30 +123,22 @@ const Room = (props: {
 			<StyledDiv backColor={workBackground}>
 				<GlobalStyle />
 				<Center>
-					{/* <button
-						type="button"
-						onClick={(): void => {
-							console.log(
-								"themeGroup3: ",
-								themeGroup,
-								themeOptions
-							);
-							setThemeGroup(
-								themeGroup === theme.original
-									? theme.funky
-									: theme.original
-							);
-						}}
-					> */}
-					{/* Change Theme
-					</button> */}
-					<Select
+					<Dropdown
 						options={themeOptions}
-						defaultInputValue={themeOptions[0]}
 						onChange={(selectedOption): void => {
-							setThemeGroup(selectedOption.value);
+							setThemeGroup(
+								selectedOption.value as keyof typeof ThemeType
+							);
+
+							localStorage.setItem(
+								"themeGroup",
+								selectedOption.value as keyof typeof ThemeType
+							);
 						}}
+						value={themeGroup}
+						placeholder="Select an option"
 					/>
+
 					<ConnectionState isConnected={isConnected} />
 					<Timestamp timestamp={timestamp} />
 					<TimerButtons roomName={roomName} />

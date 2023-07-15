@@ -5,11 +5,16 @@ import socket from "./components/Socket/socket";
 import Room from "./components/Room/Room";
 import DefaultRoom from "./components/DefaultRoom/DefaultRoom";
 import LandingPage from "./components/LandingPage/LandingPage";
-import { theme } from "../common/theme";
+import { ThemeType } from "../common/theme";
 
 const App = (): JSX.Element => {
 	const [globalUsersConnected, setGlobalUsersConnected] = useState<number>(0);
-	const [themeGroup, setThemeGroup] = useState(theme.original);
+	const [themeGroup, setThemeGroup] = useState<keyof typeof ThemeType>(
+		(localStorage.getItem("themeGroup") as keyof typeof ThemeType) in
+			ThemeType
+			? (localStorage.getItem("themeGroup") as keyof typeof ThemeType)
+			: "original"
+	);
 
 	const onGlobalUsers = ({
 		globalUsersCount,
@@ -27,7 +32,7 @@ const App = (): JSX.Element => {
 		};
 	}, []);
 	return (
-		<ThemeProvider theme={themeGroup}>
+		<ThemeProvider theme={{ themeGroup }}>
 			<BrowserRouter>
 				<Routes>
 					<Route
