@@ -32,7 +32,7 @@ const App = (): JSX.Element => {
 		};
 	}, []);
 	return (
-		<ThemeProvider theme={{ themeGroup }}>
+		<ThemeProvider theme={{ themeGroup, setThemeGroup }}>
 			<BrowserRouter>
 				<Routes>
 					<Route
@@ -46,10 +46,7 @@ const App = (): JSX.Element => {
 					<Route
 						path="/:room"
 						element={
-							<Room
-								globalUsersConnected={globalUsersConnected}
-								setThemeGroup={setThemeGroup}
-							/>
+							<Room globalUsersConnected={globalUsersConnected} />
 						}
 					/>
 					<Route

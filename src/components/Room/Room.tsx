@@ -1,7 +1,6 @@
 import { useState, useEffect, useContext } from "react";
 import { ThemeContext } from "styled-components";
 
-import Dropdown from "react-dropdown";
 import socket from "../Socket/socket";
 import ConnectionState from "../ConnectionState/ConnectionState";
 import Timestamp from "../Timestamp/Timestamp";
@@ -21,14 +20,11 @@ import {
 import Header from "../Header/Header";
 import { Center, GlobalStyle, StyledDiv } from "./Room.styled";
 import WorkBreakButton from "../TimerButton/WorkBreakButton";
-import { ThemeType, theme, themeOptions } from "../../../common/theme";
+import { theme } from "../../../common/theme";
 import "react-dropdown/style.css";
 
-const Room = (props: {
-	globalUsersConnected: number;
-	setThemeGroup: React.Dispatch<React.SetStateAction<keyof typeof ThemeType>>;
-}): JSX.Element => {
-	const { globalUsersConnected, setThemeGroup } = props;
+const Room = (props: { globalUsersConnected: number }): JSX.Element => {
+	const { globalUsersConnected } = props;
 	const [isConnected, setIsConnected] = useState<boolean>(socket.connected);
 	const [timestamp, setTimestamp] = useState<number>(0);
 	const [usersInRoom, setUsersInRoom] = useState<number>(0);
@@ -123,22 +119,6 @@ const Room = (props: {
 			<StyledDiv backColor={workBackground}>
 				<GlobalStyle />
 				<Center>
-					<Dropdown
-						options={themeOptions}
-						onChange={(selectedOption): void => {
-							setThemeGroup(
-								selectedOption.value as keyof typeof ThemeType
-							);
-
-							localStorage.setItem(
-								"themeGroup",
-								selectedOption.value as keyof typeof ThemeType
-							);
-						}}
-						value={themeGroup}
-						placeholder="Select an option"
-					/>
-
 					<ConnectionState isConnected={isConnected} />
 					<Timestamp timestamp={timestamp} />
 					<TimerButtons roomName={roomName} />

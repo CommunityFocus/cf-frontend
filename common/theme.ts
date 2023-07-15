@@ -1,3 +1,5 @@
+import { createContext } from "react";
+
 export enum ThemeType {
 	original = "original",
 	funky = "funky",
@@ -29,3 +31,5 @@ export const theme: { [key in ThemeType]: Theme } = {
 		breakAccent: "#c5930c",
 	},
 };
+
+export const themeSwitchContext = createContext("original");
