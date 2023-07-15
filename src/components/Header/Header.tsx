@@ -3,8 +3,8 @@ import { useContext } from "react";
 import Dropdown from "react-dropdown";
 import LogoTitle from "../Logo/LogoTitle";
 import WelcomeMessage from "../WelcomeMessage/WelcomeMessage";
-import StyledHeader from "./Header.styled";
 import { ThemeType, theme, themeOptions } from "../../../common/theme";
+import { StyledDiv, StyledHeader } from "./Header.styled";
 
 const Header = (): JSX.Element => {
 	const { themeGroup, setThemeGroup } = useContext(ThemeContext);
@@ -13,23 +13,26 @@ const Header = (): JSX.Element => {
 
 	return (
 		<StyledHeader backColor={workAccent}>
-			<Dropdown
-				options={themeOptions}
-				onChange={(selectedOption): void => {
-					setThemeGroup(
-						selectedOption.value as keyof typeof ThemeType
-					);
-
-					localStorage.setItem(
-						"themeGroup",
-						selectedOption.value as keyof typeof ThemeType
-					);
-				}}
-				value={themeGroup}
-				placeholder="Pick a theme"
-			/>
 			<LogoTitle />
-			<WelcomeMessage name="Mario" />
+			<StyledDiv>
+				<Dropdown
+					options={themeOptions}
+					onChange={(selectedOption): void => {
+						setThemeGroup(
+							selectedOption.value as keyof typeof ThemeType
+						);
+
+						localStorage.setItem(
+							"themeGroup",
+							selectedOption.value as keyof typeof ThemeType
+						);
+					}}
+					value={themeGroup}
+					placeholder="Pick a theme"
+				/>
+
+				<WelcomeMessage name="Mario" />
+			</StyledDiv>
 		</StyledHeader>
 	);
 };

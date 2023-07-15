@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const StyledHeader = styled.div<{ backColor: string }>`
+export const StyledHeader = styled.div<{ backColor: string }>`
 	box-sizing: border-box;
 	width: 100%;
 	display: flex;
@@ -15,4 +15,8 @@ const StyledHeader = styled.div<{ backColor: string }>`
 	right: 0;
 `;
 
-export default StyledHeader;
+export const StyledDiv = styled.div`
+	display: flex;
+	align-items: center;
+	column-gap: 20px;
+`;
