@@ -1,4 +1,4 @@
-import formatTimestamp from "../helpers/formatTimestamp";
+import formatTimestamp from "../../helpers/formatTimestamp";
 
 const Timestamp = ({ timestamp }: { timestamp: number }): JSX.Element => {
 	return (

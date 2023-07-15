@@ -1,7 +1,7 @@
 import styled, { createGlobalStyle } from "styled-components";
 
-export const StyledDiv = styled.div`
-	background: #c7ddc9;
+export const StyledDiv = styled.div<{ backColor: string }>`
+	background: ${({ backColor }): string => backColor};
 	height: 93vh;
 	padding: 1%;
 	display: flex;

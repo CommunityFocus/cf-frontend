@@ -1,10 +1,10 @@
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { SERVER_URL } from "../../common/common";
+import { SERVER_URL } from "../../../common/common";
 import { Title, Center, Button } from "./LandingPage.styled";
-import Footer from "./Footer";
-import Header from "./Header/Header";
+import Footer from "../Footer/Footer";
+import Header from "../Header/Header";
 
 const LandingPage = (props: { globalUsersConnected: number }): JSX.Element => {
 	const { globalUsersConnected } = props;

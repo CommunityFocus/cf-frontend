@@ -1,3 +1,5 @@
+import { ThemeContext } from "styled-components";
+import { useContext } from "react";
 import { StyledFooter, StyledText } from "./Footer.styled";
 
 interface FooterProps {
@@ -5,8 +7,10 @@ interface FooterProps {
 }
 
 const Footer = ({ numUsers }: FooterProps): JSX.Element => {
+	const { workAccent } = useContext(ThemeContext);
+
 	return (
-		<StyledFooter>
+		<StyledFooter backColor={workAccent}>
 			<StyledText>
 				{`${numUsers} ${
 					numUsers === 0 || numUsers > 1 ? "users are" : "user is"

@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
-import Footer from "./Footer";
-import Header from "./Header/Header";
+import Footer from "../Footer/Footer";
+import Header from "../Header/Header";
 
 const DefaultRoom = (props: { globalUsersConnected: number }): JSX.Element => {
 	const { globalUsersConnected } = props;
