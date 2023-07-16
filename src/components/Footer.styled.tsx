@@ -9,6 +9,10 @@ export const StyledFooter = styled.div`
 	background-color: #a1bca4;
 	text-align: center;
 	height: 25px;
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	right: 0;
 `;
 
 export const StyledText = styled.h3`

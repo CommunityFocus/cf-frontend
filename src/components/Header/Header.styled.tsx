@@ -9,6 +9,10 @@ const StyledHeader = styled.div`
 	padding: 0 2em;
 	height: 60px;
 	justify-content: space-between;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
 `;
 
 export default StyledHeader;
