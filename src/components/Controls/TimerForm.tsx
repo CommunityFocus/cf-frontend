@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import socket from "./socket";
-import { roomName } from "../../common/common";
+import socket from "../Socket/socket";
+import { roomName } from "../../../common/common";
 
 const TimerForm = (): JSX.Element => {
 	const [value, setValue] = useState<string>("");

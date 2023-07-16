@@ -1,12 +1,42 @@
+import { ThemeContext } from "styled-components";
+import { useContext } from "react";
+import Dropdown from "react-dropdown";
 import LogoTitle from "../Logo/LogoTitle";
-import WelcomeMessage from "../WelcomeMessage";
-import StyledHeader from "./Header.styled";
+import WelcomeMessage from "../WelcomeMessage/WelcomeMessage";
+import { ThemeType, theme, themeOptions } from "../../../common/theme";
+import { StyledDiv, StyledHeader } from "./Header.styled";
 
-const Header = (): JSX.Element => {
+interface HeaderProps {
+	isBreak: boolean;
+}
+
+const Header = ({ isBreak }: HeaderProps): JSX.Element => {
+	const { themeGroup, setThemeGroup } = useContext(ThemeContext);
+
+	const { workAccent, breakAccent } = theme[themeGroup as keyof typeof theme];
+
 	return (
-		<StyledHeader>
+		<StyledHeader backColor={!isBreak ? workAccent : breakAccent}>
 			<LogoTitle />
-			<WelcomeMessage name="Mario" />
+			<StyledDiv>
+				<Dropdown
+					options={themeOptions}
+					onChange={(selectedOption): void => {
+						setThemeGroup(
+							selectedOption.value as keyof typeof ThemeType
+						);
+
+						localStorage.setItem(
+							"themeGroup",
+							selectedOption.value as keyof typeof ThemeType
+						);
+					}}
+					value={themeGroup}
+					placeholder="Pick a theme"
+				/>
+
+				<WelcomeMessage name="Mario" />
+			</StyledDiv>
 		</StyledHeader>
 	);
 };

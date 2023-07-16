@@ -1,24 +1,35 @@
-import { useState, useEffect } from "react";
-import socket from "./socket";
-import ConnectionState from "./ConnectionState";
-import Timestamp from "./Timestamp";
-import TimerForm from "./TimerForm";
-import formatTimestamp from "../helpers/formatTimestamp";
-import shareRoom from "../helpers/shareRoom";
-import startCountdown from "../helpers/startCountdown";
-import { roomName } from "../../common/common";
-import TimerButtons from "./TimerButton/TimerButtons";
-import TimerControls from "./TimerControls";
-import Footer from "./Footer";
-import UserBubbles from "./UserBubbles/UserBubbles";
-import { TimerResponseArgs, UsersInRoomArgs } from "../../common/types/types";
-import Header from "./Header/Header";
+import { useState, useEffect, useContext } from "react";
+import { ThemeContext } from "styled-components";
+
+import socket from "../Socket/socket";
+import ConnectionState from "../ConnectionState/ConnectionState";
+import Timestamp from "../Timestamp/Timestamp";
+import TimerForm from "../Controls/TimerForm";
+import formatTimestamp from "../../helpers/formatTimestamp";
+import shareRoom from "../../helpers/shareRoom";
+import startCountdown from "../../helpers/startCountdown";
+import { roomName } from "../../../common/common";
+import TimerButtons from "../TimerButton/TimerButtons";
+import TimerControls from "../Controls/TimerControls";
+import Footer from "../Footer/Footer";
+import UserBubbles from "../UserBubbles/UserBubbles";
+import {
+	TimerResponseArgs,
+	UsersInRoomArgs,
+	WorkBreakResponseArgs,
+} from "../../../common/types/types";
+import Header from "../Header/Header";
 import { Center, GlobalStyle, StyledDiv } from "./Room.styled";
-import WorkBreakButton from "./TimerButton/WorkBreakButton";
+import WorkBreakButton from "../TimerButton/WorkBreakButton";
+import { theme } from "../../../common/theme";
+import "react-dropdown/style.css";
 
-
-const Room = (props: { globalUsersConnected: number }): JSX.Element => {
-	const { globalUsersConnected } = props;
+const Room = (props: {
+	globalUsersConnected: number;
+	isBreak: boolean;
+	setIsBreak: React.Dispatch<React.SetStateAction<boolean>>;
+}): JSX.Element => {
+	const { globalUsersConnected, isBreak, setIsBreak } = props;
 	const [isConnected, setIsConnected] = useState<boolean>(socket.connected);
 	const [timestamp, setTimestamp] = useState<number>(0);
 	const [usersInRoom, setUsersInRoom] = useState<number>(0);
@@ -26,7 +37,11 @@ const Room = (props: { globalUsersConnected: number }): JSX.Element => {
 	const [userListInRoom, setUserListInRoom] = useState<string[]>([]);
 	// TODO: include setBreak in the destructured array of useState hook which includes 'isBreak'
 	// TODO: setBreak should set the state after receiving response from the server
-	const [isBreak] = useState<boolean>(false);
+
+	const { themeGroup } = useContext(ThemeContext);
+
+	const { workBackground, breakBackground } =
+		theme[themeGroup as keyof typeof theme];
 
 	/*
 	 * A store of the timer interval for a given client.
@@ -78,17 +93,28 @@ const Room = (props: { globalUsersConnected: number }): JSX.Element => {
 		});
 	};
 
+	// eslint-disable-next-line no-shadow
+	const onWorkBreakResponse = ({
+		userName,
+		isBreakMode,
+	}: WorkBreakResponseArgs): void => {
+		setIsBreak(isBreakMode);
+		console.log("isBreak", { userName, isBreakMode });
+	};
+
 	useEffect(() => {
 		socket.on("connect", onConnect);
 		socket.on("disconnect", onDisconnect);
 		socket.on("timerResponse", onTimerResponse);
 		socket.on("usersInRoom", onUsersInRoom);
+		socket.on("workBreakResponse", onWorkBreakResponse);
 
 		return () => {
 			socket.off("connect", onConnect);
 			socket.off("disconnect", onDisconnect);
 			socket.off("timerResponse", onTimerResponse);
 			socket.off("usersInRoom", onUsersInRoom);
+			socket.off("workBreakResponse", onWorkBreakResponse);
 		};
 	}, []);
 
@@ -105,27 +131,29 @@ const Room = (props: { globalUsersConnected: number }): JSX.Element => {
 
 	return (
 		<>
-			<Header />
+			<Header isBreak={isBreak} />
+			<GlobalStyle
+				backColor={!isBreak ? workBackground : breakBackground}
+			/>
 			<StyledDiv>
-				<GlobalStyle />
-        <Center>
-				<ConnectionState isConnected={isConnected} />
-				<Timestamp timestamp={timestamp} />
-				<TimerButtons roomName={roomName} />
-				<WorkBreakButton roomName={roomName} isBreak={isBreak} />
-				<TimerControls
-					pauseTimer={pauseTimer}
-					isTimerPaused={isTimerPaused}
-					resetTimer={resetTimer}
-				/>
-				<TimerForm />
-				<p>Users in room: {usersInRoom}</p>
-				<button type="button" onClick={shareRoom}>
-					Share Room
-				</button>
-       </Center>
+				<Center>
+					<ConnectionState isConnected={isConnected} />
+					<Timestamp timestamp={timestamp} />
+					<TimerButtons roomName={roomName} />
+					<WorkBreakButton roomName={roomName} isBreak={isBreak} />
+					<TimerControls
+						pauseTimer={pauseTimer}
+						isTimerPaused={isTimerPaused}
+						resetTimer={resetTimer}
+					/>
+					<TimerForm />
+					<p>Users in room: {usersInRoom}</p>
+					<button type="button" onClick={shareRoom}>
+						Share Room
+					</button>
+				</Center>
 				<UserBubbles userListInRoom={userListInRoom} />
-				<Footer numUsers={globalUsersConnected} />
+				<Footer numUsers={globalUsersConnected} isBreak={isBreak} />
 			</StyledDiv>
 		</>
 	);

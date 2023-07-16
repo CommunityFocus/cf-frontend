@@ -1,4 +1,4 @@
-import socket from "../socket";
+import socket from "../Socket/socket";
 
 interface WorkBreakButtonProps {
 	roomName: string;

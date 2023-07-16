@@ -1,10 +1,10 @@
 import styled from "styled-components";
 
-const StyledHeader = styled.div`
+export const StyledHeader = styled.div<{ backColor: string }>`
+	background-color: ${({ backColor }): string => backColor};
 	box-sizing: border-box;
 	width: 100%;
 	display: flex;
-	background-color: #a1bca4;
 	align-items: center;
 	padding: 0 2em;
 	height: 60px;
@@ -15,4 +15,8 @@ const StyledHeader = styled.div`
 	right: 0;
 `;
 
-export default StyledHeader;
+export const StyledDiv = styled.div`
+	display: flex;
+	align-items: center;
+	column-gap: 20px;
+`;
