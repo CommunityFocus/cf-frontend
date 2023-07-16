@@ -9,6 +9,7 @@ import { ThemeType } from "../common/theme";
 
 const App = (): JSX.Element => {
 	const [globalUsersConnected, setGlobalUsersConnected] = useState<number>(0);
+	const [isBreak, setIsBreak] = useState<boolean>(false);
 	const [themeGroup, setThemeGroup] = useState<keyof typeof ThemeType>(
 		(localStorage.getItem("themeGroup") as keyof typeof ThemeType) in
 			ThemeType
@@ -40,13 +41,18 @@ const App = (): JSX.Element => {
 						element={
 							<LandingPage
 								globalUsersConnected={globalUsersConnected}
+								isBreak={isBreak}
 							/>
 						}
 					/>
 					<Route
 						path="/:room"
 						element={
-							<Room globalUsersConnected={globalUsersConnected} />
+							<Room
+								globalUsersConnected={globalUsersConnected}
+								isBreak={isBreak}
+								setIsBreak={setIsBreak}
+							/>
 						}
 					/>
 					<Route
@@ -54,6 +60,7 @@ const App = (): JSX.Element => {
 						element={
 							<DefaultRoom
 								globalUsersConnected={globalUsersConnected}
+								isBreak={isBreak}
 							/>
 						}
 					/>

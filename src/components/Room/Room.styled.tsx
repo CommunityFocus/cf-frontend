@@ -1,7 +1,6 @@
 import styled, { createGlobalStyle } from "styled-components";
 
-export const StyledDiv = styled.div<{ backColor: string }>`
-	background: ${({ backColor }): string => backColor};
+export const StyledDiv = styled.div`
 	height: 93vh;
 	padding: 1%;
 	display: flex;
@@ -9,9 +8,10 @@ export const StyledDiv = styled.div<{ backColor: string }>`
 	justify-content: center;
 `;
 
-export const GlobalStyle = createGlobalStyle`
+export const GlobalStyle = createGlobalStyle<{ backColor: string }>`
     body {
         margin: 0;
+		background: ${({ backColor }): string => backColor};
     }
 `;
 

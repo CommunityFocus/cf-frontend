@@ -6,13 +6,17 @@ import WelcomeMessage from "../WelcomeMessage/WelcomeMessage";
 import { ThemeType, theme, themeOptions } from "../../../common/theme";
 import { StyledDiv, StyledHeader } from "./Header.styled";
 
-const Header = (): JSX.Element => {
+interface HeaderProps {
+	isBreak: boolean;
+}
+
+const Header = ({ isBreak }: HeaderProps): JSX.Element => {
 	const { themeGroup, setThemeGroup } = useContext(ThemeContext);
 
-	const { workAccent } = theme[themeGroup as keyof typeof theme];
+	const { workAccent, breakAccent } = theme[themeGroup as keyof typeof theme];
 
 	return (
-		<StyledHeader backColor={workAccent}>
+		<StyledHeader backColor={!isBreak ? workAccent : breakAccent}>
 			<LogoTitle />
 			<StyledDiv>
 				<Dropdown

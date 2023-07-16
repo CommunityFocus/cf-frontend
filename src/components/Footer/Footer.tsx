@@ -5,15 +5,16 @@ import { theme } from "../../../common/theme";
 
 interface FooterProps {
 	numUsers: number;
+	isBreak: boolean;
 }
 
-const Footer = ({ numUsers }: FooterProps): JSX.Element => {
+const Footer = ({ numUsers, isBreak }: FooterProps): JSX.Element => {
 	const { themeGroup } = useContext(ThemeContext);
 
-	const { workAccent } = theme[themeGroup as keyof typeof theme];
+	const { workAccent, breakAccent } = theme[themeGroup as keyof typeof theme];
 
 	return (
-		<StyledFooter backColor={workAccent}>
+		<StyledFooter backColor={!isBreak ? workAccent : breakAccent}>
 			<StyledText>
 				{`${numUsers} ${
 					numUsers === 0 || numUsers > 1 ? "users are" : "user is"

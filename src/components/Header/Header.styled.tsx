@@ -1,10 +1,10 @@
 import styled from "styled-components";
 
 export const StyledHeader = styled.div<{ backColor: string }>`
+	background-color: ${({ backColor }): string => backColor};
 	box-sizing: border-box;
 	width: 100%;
 	display: flex;
-	background-color: ${({ backColor }): string => backColor};
 	align-items: center;
 	padding: 0 2em;
 	height: 60px;

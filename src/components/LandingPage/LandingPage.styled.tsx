@@ -5,6 +5,7 @@ export const Title = styled.h1`
 	color: black;
 	font-size: 50px;
 `;
+
 export const Center = styled.div`
 	display: flex;
 	justify-content: center;
@@ -14,8 +15,8 @@ export const Center = styled.div`
 `;
 
 export const Button = styled.button`
-border-radius: 2px
-text-align: center;
-font-size: 1.2rem;
-color: tomato;
+	border-radius: 2px
+	text-align: center;
+	font-size: 1.2rem;
+	color: tomato;
 `;

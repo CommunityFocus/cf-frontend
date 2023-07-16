@@ -1,15 +1,26 @@
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { ThemeContext } from "styled-components";
 import { SERVER_URL } from "../../../common/common";
 import { Title, Center, Button } from "./LandingPage.styled";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
+import { theme } from "../../../common/theme";
+import { GlobalStyle } from "../Room/Room.styled";
 
-const LandingPage = (props: { globalUsersConnected: number }): JSX.Element => {
-	const { globalUsersConnected } = props;
+const LandingPage = (props: {
+	globalUsersConnected: number;
+	isBreak: boolean;
+}): JSX.Element => {
+	const { globalUsersConnected, isBreak } = props;
 	const [slugName, setSlugName] = useState<string>("");
 	const navigate = useNavigate();
+
+	const { themeGroup } = useContext(ThemeContext);
+
+	const { workBackground, breakBackground } =
+		theme[themeGroup as keyof typeof theme];
 
 	useEffect(() => {
 		axios
@@ -24,7 +35,11 @@ const LandingPage = (props: { globalUsersConnected: number }): JSX.Element => {
 
 	return (
 		<>
-			<Header />
+			<Header isBreak={isBreak} />
+			<GlobalStyle
+				backColor={!isBreak ? workBackground : breakBackground}
+			/>
+
 			<Center>
 				<Title>Community Focus</Title>
 				<Button
@@ -36,7 +51,7 @@ const LandingPage = (props: { globalUsersConnected: number }): JSX.Element => {
 				>
 					Join a room
 				</Button>
-				<Footer numUsers={globalUsersConnected} />
+				<Footer numUsers={globalUsersConnected} isBreak={isBreak} />
 			</Center>
 		</>
 	);
