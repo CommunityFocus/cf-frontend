@@ -137,7 +137,6 @@ const Room = (props: {
 			/>
 			<StyledDiv>
 				<Center>
-					<ConnectionState isConnected={isConnected} />
 					<Timestamp timestamp={timestamp} />
 					<TimerButtons roomName={roomName} />
 					<WorkBreakButton roomName={roomName} isBreak={isBreak} />
@@ -153,7 +152,13 @@ const Room = (props: {
 					</button>
 				</Center>
 				<UserBubbles userListInRoom={userListInRoom} />
-				<Footer numUsers={globalUsersConnected} isBreak={isBreak} />
+				<Footer
+					numUsers={globalUsersConnected}
+					isBreak={isBreak}
+					connectionStatus={
+						<ConnectionState isConnected={isConnected} />
+					}
+				/>
 			</StyledDiv>
 		</>
 	);

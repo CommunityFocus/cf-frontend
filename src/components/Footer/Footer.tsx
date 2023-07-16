@@ -1,26 +1,44 @@
 import { ThemeContext } from "styled-components";
 import { useContext } from "react";
-import { StyledFooter, StyledText } from "./Footer.styled";
+import {
+	StyledConnectionState,
+	StyledFooter,
+	StyledText,
+} from "./Footer.styled";
 import { theme } from "../../../common/theme";
 
 interface FooterProps {
 	numUsers: number;
 	isBreak: boolean;
+	connectionStatus?: JSX.Element | null;
 }
 
-const Footer = ({ numUsers, isBreak }: FooterProps): JSX.Element => {
+const Footer = ({
+	numUsers,
+	isBreak,
+	connectionStatus,
+}: FooterProps): JSX.Element => {
 	const { themeGroup } = useContext(ThemeContext);
 
-	const { workAccent, breakAccent } = theme[themeGroup as keyof typeof theme];
+	const { workAccent, breakAccent, workGrey } =
+		theme[themeGroup as keyof typeof theme];
 
 	return (
 		<StyledFooter backColor={!isBreak ? workAccent : breakAccent}>
-			<StyledText>
+			<StyledText color={workGrey}>
 				{`${numUsers} ${
 					numUsers === 0 || numUsers > 1 ? "users are" : "user is"
 				} currently using the Community Focus app`}
 			</StyledText>
+			<StyledConnectionState color={workGrey}>
+				{connectionStatus}
+			</StyledConnectionState>
 		</StyledFooter>
 	);
 };
+
+Footer.defaultProps = {
+	connectionStatus: null,
+};
+
 export default Footer;

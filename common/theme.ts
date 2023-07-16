@@ -15,6 +15,7 @@ export interface Theme {
 	workAccent: string;
 	breakBackground: string;
 	breakAccent: string;
+	workGrey: string;
 }
 
 export const theme: { [key in ThemeType]: Theme } = {
@@ -23,12 +24,14 @@ export const theme: { [key in ThemeType]: Theme } = {
 		workAccent: "#0d4a30",
 		breakBackground: "#266b9c",
 		breakAccent: "#105396",
+		workGrey: "#141f1b",
 	},
 	funky: {
 		workBackground: "#c200fb",
 		workAccent: "#a101d2",
 		breakBackground: "#ffbc0a",
 		breakAccent: "#c5930c",
+		workGrey: "#1f1f1f",
 	},
 };
 
