@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
-export const Title = styled.h1`
+export const Title = styled.h1<{ color: string }>`
+	color: ${({ color }): string => color};
 	font-family: monospace;
-	color: black;
 	font-size: 50px;
 `;
 

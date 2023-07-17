@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const StyledDiv = styled.div`
+export const StyledDiv = styled.div`
 	height: 93vh;
 	width: 100%;
 	display: flex;
@@ -9,4 +9,6 @@ const StyledDiv = styled.div`
 	align-items: center;
 `;
 
-export default StyledDiv;
+export const StyledText = styled.h1<{ color: string }>`
+	color: ${({ color }): string => color};
+`;

@@ -4,7 +4,7 @@ import { ThemeContext } from "styled-components";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
 import { theme } from "../../../common/theme";
-import StyledDiv from "./DefaultRoom.styled";
+import { StyledDiv, StyledText } from "./DefaultRoom.styled";
 import { GlobalStyle } from "../Room/Room.styled";
 
 const DefaultRoom = (props: {
@@ -16,7 +16,7 @@ const DefaultRoom = (props: {
 
 	const { themeGroup } = useContext(ThemeContext);
 
-	const { workBackground, breakBackground } =
+	const { workBackground, breakBackground, workGrey } =
 		theme[themeGroup as keyof typeof theme];
 
 	return (
@@ -27,8 +27,9 @@ const DefaultRoom = (props: {
 			/>
 
 			<StyledDiv>
-				<h1>404</h1>
-				<h1>This room is not available.</h1>
+				<StyledText color={workGrey}>
+					This room is not available
+				</StyledText>
 				<button
 					type="button"
 					onClick={(): void => {

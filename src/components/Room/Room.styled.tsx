@@ -12,6 +12,7 @@ export const GlobalStyle = createGlobalStyle<{ backColor: string }>`
     body {
         margin: 0;
 		background: ${({ backColor }): string => backColor};
+		font-family: 'Open Sans', sans-serif;
     }
 `;
 
@@ -20,4 +21,8 @@ export const Center = styled.div`
 	justify-content: center;
 	align-items: center;
 	flex-direction: column;
+`;
+
+export const StyledUserCount = styled.p<{ color: string }>`
+	color: ${({ color }): string => color};
 `;

@@ -19,7 +19,7 @@ const LandingPage = (props: {
 
 	const { themeGroup } = useContext(ThemeContext);
 
-	const { workBackground, breakBackground } =
+	const { workBackground, breakBackground, workGrey } =
 		theme[themeGroup as keyof typeof theme];
 
 	useEffect(() => {
@@ -41,7 +41,7 @@ const LandingPage = (props: {
 			/>
 
 			<Center>
-				<Title>Community Focus</Title>
+				<Title color={workGrey}>Community Focus</Title>
 				<Button
 					type="button"
 					onClick={(): void => {

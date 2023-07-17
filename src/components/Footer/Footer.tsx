@@ -32,9 +32,7 @@ const Footer = ({
 					} currently using the Community Focus app`}
 				</span>
 			</StyledText>
-			<StyledConnectionState color={workGrey}>
-				{connectionStatus}
-			</StyledConnectionState>
+			<StyledConnectionState>{connectionStatus}</StyledConnectionState>
 		</StyledFooter>
 	);
 };

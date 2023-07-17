@@ -1,5 +1,7 @@
 import styled from "styled-components";
 
-export const LogoText = styled.h1<{ color: string }>`
+const StyledText = styled.span<{ color: string }>`
 	color: ${({ color }): string => color};
 `;
+
+export default StyledText;
