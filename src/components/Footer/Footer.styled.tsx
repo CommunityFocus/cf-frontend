@@ -14,23 +14,21 @@ export const StyledFooter = styled.div<{ backColor: string }>`
 	grid-template-columns: 1fr 3fr 1fr;
 `;
 
-export const FooterText = styled.span`
+export const FooterText = styled.div`
 	font-weight: bold;
 	font-size: 14px;
 `;
 
-export const StyledText = styled(FooterText)<{ color: string }>`
+export const StyledText = styled.div<{ color: string }>`
 	color: ${({ color }): string => color};
 	margin-top: 5px;
 	grid-column: 2;
+	font-weight: bold;
+	font-size: 14px;
 `;
 
 export const StyledConnectionState = styled.div<{ color: string }>`
 	color: ${({ color }): string => color};
 	margin-top: 5px;
-
-	// display: flex;
-	// justify-content: center;
-	// align-content: center;
 	grid-column: 4;
 `;

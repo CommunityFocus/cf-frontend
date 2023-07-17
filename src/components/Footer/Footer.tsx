@@ -26,9 +26,11 @@ const Footer = ({
 	return (
 		<StyledFooter backColor={!isBreak ? workAccent : breakAccent}>
 			<StyledText color={workGrey}>
-				{`${numUsers} ${
-					numUsers === 0 || numUsers > 1 ? "users are" : "user is"
-				} currently using the Community Focus app`}
+				<span>
+					{`${numUsers} ${
+						numUsers === 0 || numUsers > 1 ? "users are" : "user is"
+					} currently using the Community Focus app`}
+				</span>
 			</StyledText>
 			<StyledConnectionState color={workGrey}>
 				{connectionStatus}

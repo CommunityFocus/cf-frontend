@@ -11,12 +11,12 @@ const ConnectionState = ({
 	return (
 		<FooterText>
 			{isConnected ? (
-				<StyledDiv>
+				<StyledDiv color="green">
 					Connected
 					<Connected />
 				</StyledDiv>
 			) : (
-				<StyledDiv>
+				<StyledDiv color="red">
 					Disconnected
 					<Disconnected />
 				</StyledDiv>
