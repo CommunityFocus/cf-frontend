@@ -1,10 +1,6 @@
 import styled from "styled-components";
 
 export const StyledFooter = styled.div<{ backColor: string }>`
-	position: absolute;
-	right: 0;
-	bottom: 0;
-	left: 0;
 	padding: 1rem;
 	background-color: ${({ backColor }): string => backColor};
 	text-align: center;
@@ -13,10 +9,26 @@ export const StyledFooter = styled.div<{ backColor: string }>`
 	bottom: 0;
 	left: 0;
 	right: 0;
+
+	display: grid;
+	grid-template-columns: 1fr 3fr 1fr;
 `;
 
-export const StyledText = styled.h3`
-	color: #393034;
-	margin-top: 5px;
+export const FooterText = styled.div`
+	font-weight: bold;
 	font-size: 14px;
+`;
+
+export const StyledText = styled.div<{ color: string }>`
+	color: ${({ color }): string => color};
+	margin-top: 5px;
+	grid-column: 2;
+	font-weight: bold;
+	font-size: 14px;
+`;
+
+export const StyledConnectionState = styled.div<{ color: string }>`
+	color: ${({ color }): string => color};
+	margin-top: 5px;
+	grid-column: 4;
 `;
