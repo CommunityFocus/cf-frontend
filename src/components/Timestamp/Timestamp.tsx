@@ -1,10 +1,17 @@
 import formatTimestamp from "../../helpers/formatTimestamp";
+import StyledTimestamp from "./Timestamp.styled";
 
-const Timestamp = ({ timestamp }: { timestamp: number }): JSX.Element => {
+interface TimestampProps {
+	timestamp: number;
+	color: string;
+}
+
+const Timestamp = (props: TimestampProps): JSX.Element => {
+	const { timestamp, color } = props;
 	return (
-		<div>
-			<h2>{formatTimestamp(timestamp)}</h2>
-		</div>
+		<StyledTimestamp color={color}>
+			{formatTimestamp(timestamp)}
+		</StyledTimestamp>
 	);
 };
 

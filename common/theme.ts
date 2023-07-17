@@ -24,7 +24,7 @@ export const theme: { [key in ThemeType]: Theme } = {
 		workAccent: "#0d4a30",
 		breakBackground: "#266b9c",
 		breakAccent: "#105396",
-		workGrey: "#141f1b",
+		workGrey: "#8bbfac",
 	},
 	funky: {
 		workBackground: "#c200fb",

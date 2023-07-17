@@ -13,11 +13,12 @@ interface HeaderProps {
 const Header = ({ isBreak }: HeaderProps): JSX.Element => {
 	const { themeGroup, setThemeGroup } = useContext(ThemeContext);
 
-	const { workAccent, breakAccent } = theme[themeGroup as keyof typeof theme];
+	const { workAccent, breakAccent, workGrey } =
+		theme[themeGroup as keyof typeof theme];
 
 	return (
 		<StyledHeader backColor={!isBreak ? workAccent : breakAccent}>
-			<LogoTitle />
+			<LogoTitle color={workGrey} />
 			<StyledDiv>
 				<Dropdown
 					options={themeOptions}
@@ -35,7 +36,7 @@ const Header = ({ isBreak }: HeaderProps): JSX.Element => {
 					placeholder="Pick a theme"
 				/>
 
-				<WelcomeMessage name="Mario" />
+				<WelcomeMessage name="Mario" color={workGrey} />
 			</StyledDiv>
 		</StyledHeader>
 	);

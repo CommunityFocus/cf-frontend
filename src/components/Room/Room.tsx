@@ -19,7 +19,7 @@ import {
 	WorkBreakResponseArgs,
 } from "../../../common/types/types";
 import Header from "../Header/Header";
-import { Center, GlobalStyle, StyledDiv } from "./Room.styled";
+import { Center, GlobalStyle, StyledDiv, StyledUserCount } from "./Room.styled";
 import WorkBreakButton from "../TimerButton/WorkBreakButton";
 import { theme } from "../../../common/theme";
 import "react-dropdown/style.css";
@@ -40,7 +40,7 @@ const Room = (props: {
 
 	const { themeGroup } = useContext(ThemeContext);
 
-	const { workBackground, breakBackground } =
+	const { workBackground, breakBackground, workGrey } =
 		theme[themeGroup as keyof typeof theme];
 
 	/*
@@ -137,7 +137,7 @@ const Room = (props: {
 			/>
 			<StyledDiv>
 				<Center>
-					<Timestamp timestamp={timestamp} />
+					<Timestamp timestamp={timestamp} color={workGrey} />
 					<TimerButtons roomName={roomName} />
 					<WorkBreakButton roomName={roomName} isBreak={isBreak} />
 					<TimerControls
@@ -146,7 +146,9 @@ const Room = (props: {
 						resetTimer={resetTimer}
 					/>
 					<TimerForm />
-					<p>Users in room: {usersInRoom}</p>
+					<StyledUserCount color={workGrey}>
+						Users in room: {usersInRoom}
+					</StyledUserCount>
 					<button type="button" onClick={shareRoom}>
 						Share Room
 					</button>

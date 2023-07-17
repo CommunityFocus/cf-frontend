@@ -27,8 +27,7 @@ export const StyledText = styled.div<{ color: string }>`
 	font-size: 14px;
 `;
 
-export const StyledConnectionState = styled.div<{ color: string }>`
-	color: ${({ color }): string => color};
+export const StyledConnectionState = styled.div`
 	margin-top: 5px;
 	grid-column: 4;
 `;

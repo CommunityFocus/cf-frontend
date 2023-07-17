@@ -1,7 +1,12 @@
 import { useNavigate } from "react-router-dom";
 import { LogoText } from "./LogoTitle.styled";
 
-const LogoTitle = (): JSX.Element => {
+interface LogoTitleProps {
+	color: string;
+}
+
+const LogoTitle = (props: LogoTitleProps): JSX.Element => {
+	const { color } = props;
 	// useNavigate to go to home page
 	const navigate = useNavigate();
 
@@ -11,6 +16,7 @@ const LogoTitle = (): JSX.Element => {
 				onClick={(): void => {
 					navigate("/");
 				}}
+				color={color}
 			>
 				CommunityFocus
 			</LogoText>
