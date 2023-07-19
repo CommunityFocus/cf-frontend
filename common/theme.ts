@@ -16,6 +16,8 @@ export interface Theme {
 	breakBackground: string;
 	breakAccent: string;
 	workGrey: string;
+	workButtonColor: string;
+	workButtonTextColor: string;
 }
 
 export const theme: { [key in ThemeType]: Theme } = {
@@ -25,6 +27,8 @@ export const theme: { [key in ThemeType]: Theme } = {
 		breakBackground: "#266b9c",
 		breakAccent: "#105396",
 		workGrey: "#8bbfac",
+		workButtonColor: "#44c18d",
+		workButtonTextColor: "#ffffff",
 	},
 	funky: {
 		workBackground: "#c200fb",
@@ -32,6 +36,8 @@ export const theme: { [key in ThemeType]: Theme } = {
 		breakBackground: "#ffbc0a",
 		breakAccent: "#c5930c",
 		workGrey: "#1f1f1f",
+		workButtonColor: "#ffbc0a",
+		workButtonTextColor: "#000000",
 	},
 };
 

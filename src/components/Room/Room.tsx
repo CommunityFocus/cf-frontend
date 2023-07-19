@@ -23,6 +23,7 @@ import { Center, GlobalStyle, StyledDiv, StyledUserCount } from "./Room.styled";
 import WorkBreakButton from "../TimerButton/WorkBreakButton";
 import { theme } from "../../../common/theme";
 import "react-dropdown/style.css";
+import AddTimerButton from "../TimerButton/AddTimerButton";
 
 const Room = (props: {
 	globalUsersConnected: number;
@@ -35,6 +36,9 @@ const Room = (props: {
 	const [usersInRoom, setUsersInRoom] = useState<number>(0);
 	const [isTimerPaused, setIsTimerPaused] = useState<boolean>(false);
 	const [userListInRoom, setUserListInRoom] = useState<string[]>([]);
+	const [timerMinuteButtons, setTimerMinuteButtons] = useState<number[]>([
+		1, 5, 10, 15, 20, 25, 30, 45, 60,
+	]);
 	// TODO: include setBreak in the destructured array of useState hook which includes 'isBreak'
 	// TODO: setBreak should set the state after receiving response from the server
 
@@ -138,7 +142,13 @@ const Room = (props: {
 			<StyledDiv>
 				<Center>
 					<Timestamp timestamp={timestamp} color={workGrey} />
-					<TimerButtons roomName={roomName} />
+					<TimerButtons
+						roomName={roomName}
+						timerMinuteButtons={timerMinuteButtons}
+					/>
+					<AddTimerButton
+						setTimerMinuteButtons={setTimerMinuteButtons}
+					/>
 					<WorkBreakButton roomName={roomName} isBreak={isBreak} />
 					<TimerControls
 						pauseTimer={pauseTimer}
