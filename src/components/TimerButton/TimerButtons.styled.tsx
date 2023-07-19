@@ -1,7 +1,13 @@
 import styled from "styled-components";
 
 export const ButtonContainer = styled.div`
-	flex-direction: row;
+	// flex-direction: row;
+
+	// position: absolute;
+	// background: red;
+	// width: 20px;
+	// height: 20px;
+	// color: white;
 `;
 
 export const StyledButton = styled.button`
@@ -18,6 +24,7 @@ export const StyledTimeButton = styled(StyledButton)<{
 	size: number;
 	fontColor: string;
 }>`
+	position: absolute;
 	background-color: ${({ color }): string => color};
 	border-radius: 50%;
 	height: ${({ size }): number => size}px;

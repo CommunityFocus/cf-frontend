@@ -9,7 +9,7 @@ import formatTimestamp from "../../helpers/formatTimestamp";
 import shareRoom from "../../helpers/shareRoom";
 import startCountdown from "../../helpers/startCountdown";
 import { roomName } from "../../../common/common";
-import TimerButtons from "../TimerButton/TimerButtons";
+// import TimerButtons from "../TimerButton/TimerButtons";
 import TimerControls from "../Controls/TimerControls";
 import Footer from "../Footer/Footer";
 import UserBubbles from "../UserBubbles/UserBubbles";
@@ -37,7 +37,7 @@ const Room = (props: {
 	const [isTimerPaused, setIsTimerPaused] = useState<boolean>(false);
 	const [userListInRoom, setUserListInRoom] = useState<string[]>([]);
 	const [timerMinuteButtons, setTimerMinuteButtons] = useState<number[]>([
-		1, 5, 10, 15, 20, 25, 30, 45, 60,
+		1, 5, 10, 15, 20, 25, 30,
 	]);
 	// TODO: include setBreak in the destructured array of useState hook which includes 'isBreak'
 	// TODO: setBreak should set the state after receiving response from the server
@@ -141,11 +141,16 @@ const Room = (props: {
 			/>
 			<StyledDiv>
 				<Center>
-					<Timestamp timestamp={timestamp} color={workGrey} />
-					<TimerButtons
+					<Timestamp
+						timestamp={timestamp}
+						color={workGrey}
 						roomName={roomName}
 						timerMinuteButtons={timerMinuteButtons}
 					/>
+					{/* <TimerButtons
+						roomName={roomName}
+						timerMinuteButtons={timerMinuteButtons}
+					/> */}
 					<AddTimerButton
 						setTimerMinuteButtons={setTimerMinuteButtons}
 					/>

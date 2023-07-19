@@ -8,8 +8,13 @@ import { theme } from "../../../common/theme";
 const TimerButton = (props: {
 	roomName: string;
 	value: number;
+	css: {
+		radius: number;
+		rotate: number;
+		rotateReverse: number;
+	};
 }): JSX.Element => {
-	const { roomName, value } = props;
+	const { roomName, value, css } = props;
 
 	const { themeGroup } = useContext(ThemeContext);
 
@@ -33,6 +38,10 @@ const TimerButton = (props: {
 			color={workButtonColor}
 			fontColor={workButtonTextColor}
 			size={size}
+			style={{
+				// transformOrigin: "center",
+				transform: `rotate(${css.rotate}deg) translate(${css.radius}px) rotate(${css.rotateReverse}deg) translate(-25%, -25%)`,
+			}}
 		>
 			{value}
 		</StyledTimeButton>

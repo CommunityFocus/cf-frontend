@@ -36,7 +36,7 @@ export const theme: { [key in ThemeType]: Theme } = {
 		breakBackground: "#ffbc0a",
 		breakAccent: "#c5930c",
 		workGrey: "#1f1f1f",
-		workButtonColor: "#ffbc0a",
+		workButtonColor: "#ddc174",
 		workButtonTextColor: "#000000",
 	},
 };

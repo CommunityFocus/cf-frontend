@@ -1,9 +1,9 @@
 export default (timeValue: number): number => {
 	// Based on timeValue, return the appropriate button size
 	// return should be between 30 to 70 and should be a whole number
-
-	const max = 80;
-	const min = 40;
+	// return 25;
+	const max = 60;
+	const min = 30;
 
 	// take timeValue and calculate the button size between 30 and 70
 	// if timeValue is 0, return 30
