@@ -1,3 +1,4 @@
+import buttonSize from "../../helpers/buttonSize";
 import { ICircleState } from "../Timestamp/Timestamp";
 import TimerButton from "./TimerButton";
 import { ButtonContainer } from "./TimerButtons.styled";
@@ -10,7 +11,7 @@ interface TimerButtonsProps {
 
 const TimerButtons = (props: TimerButtonsProps): JSX.Element => {
 	const { roomName, timerMinuteButtons, circleState } = props;
-	console.log({ roomName, timerMinuteButtons, circleState });
+	
 	return (
 		<ButtonContainer>
 			{circleState.timeCircle.map(
@@ -19,6 +20,10 @@ const TimerButtons = (props: TimerButtonsProps): JSX.Element => {
 						key={timerMinuteButton}
 						roomName={roomName}
 						value={timerMinuteButton}
+						size={buttonSize({
+							buttonList: timerMinuteButtons,
+							currentButton: timerMinuteButton,
+						})}
 						css={{ radius, rotate, rotateReverse }}
 					/>
 				)

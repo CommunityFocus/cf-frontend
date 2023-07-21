@@ -19,7 +19,7 @@ import {
 	WorkBreakResponseArgs,
 } from "../../../common/types/types";
 import Header from "../Header/Header";
-import { Center, GlobalStyle, StyledDiv, StyledUserCount } from "./Room.styled";
+import { Center, GlobalStyle, StyledDiv } from "./Room.styled";
 import WorkBreakButton from "../TimerButton/WorkBreakButton";
 import { theme } from "../../../common/theme";
 import "react-dropdown/style.css";
@@ -152,6 +152,7 @@ const Room = (props: {
 						timerMinuteButtons={timerMinuteButtons}
 					/> */}
 					<AddTimerButton
+						timerMinuteButtons={timerMinuteButtons}
 						setTimerMinuteButtons={setTimerMinuteButtons}
 					/>
 					<WorkBreakButton roomName={roomName} isBreak={isBreak} />
@@ -161,9 +162,7 @@ const Room = (props: {
 						resetTimer={resetTimer}
 					/>
 					<TimerForm />
-					<StyledUserCount color={workGrey}>
-						Users in room: {usersInRoom}
-					</StyledUserCount>
+
 					<button type="button" onClick={shareRoom}>
 						Share Room
 					</button>
@@ -172,6 +171,7 @@ const Room = (props: {
 				<Footer
 					numUsers={globalUsersConnected}
 					isBreak={isBreak}
+					usersInRoom={usersInRoom}
 					connectionStatus={
 						<ConnectionState isConnected={isConnected} />
 					}

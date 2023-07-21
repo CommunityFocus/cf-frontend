@@ -33,7 +33,7 @@ const Timestamp = (props: TimestampProps): JSX.Element => {
 		const type = 1;
 		const radius = 100; // distance from center
 
-		const start = 0; // shift start from 0
+		const start = 270; // shift start from 0
 		const slice = (360 * type) / num;
 
 		const items = [];
@@ -55,7 +55,6 @@ const Timestamp = (props: TimestampProps): JSX.Element => {
 		});
 	};
 
-	console.log({ circleState });
 	useEffect(() => {
 		buildCircle();
 	}, [timerMinuteButtons]);

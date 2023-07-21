@@ -11,12 +11,14 @@ interface FooterProps {
 	numUsers: number;
 	isBreak: boolean;
 	connectionStatus?: JSX.Element | null;
+	usersInRoom: number;
 }
 
 const Footer = ({
 	numUsers,
 	isBreak,
 	connectionStatus,
+	usersInRoom,
 }: FooterProps): JSX.Element => {
 	const { themeGroup } = useContext(ThemeContext);
 
@@ -27,6 +29,12 @@ const Footer = ({
 		<StyledFooter backColor={!isBreak ? workAccent : breakAccent}>
 			<StyledText color={workGrey}>
 				<span>
+					{usersInRoom !== 0 &&
+						`${usersInRoom} ${
+							usersInRoom === 0 || usersInRoom > 1
+								? "users are"
+								: "user is"
+						} in the room || `}
 					{`${numUsers} ${
 						numUsers === 0 || numUsers > 1 ? "users are" : "user is"
 					} currently using the Community Focus app`}

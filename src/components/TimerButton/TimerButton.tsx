@@ -1,11 +1,11 @@
 import { ThemeContext } from "styled-components";
 import { useContext } from "react";
-import buttonSize from "../../helpers/buttonSize";
 import socket from "../Socket/socket";
 import { StyledTimeButton } from "./TimerButtons.styled";
 import { theme } from "../../../common/theme";
 
 const TimerButton = (props: {
+	size: number;
 	roomName: string;
 	value: number;
 	css: {
@@ -14,7 +14,7 @@ const TimerButton = (props: {
 		rotateReverse: number;
 	};
 }): JSX.Element => {
-	const { roomName, value, css } = props;
+	const { roomName, value, css, size } = props;
 
 	const { themeGroup } = useContext(ThemeContext);
 
@@ -29,8 +29,6 @@ const TimerButton = (props: {
 		});
 	};
 
-	const size = buttonSize(value);
-
 	return (
 		<StyledTimeButton
 			type="button"
@@ -39,7 +37,6 @@ const TimerButton = (props: {
 			fontColor={workButtonTextColor}
 			size={size}
 			style={{
-				// transformOrigin: "center",
 				transform: `rotate(${css.rotate}deg) translate(${css.radius}px) rotate(${css.rotateReverse}deg) translate(-25%, -25%)`,
 			}}
 		>

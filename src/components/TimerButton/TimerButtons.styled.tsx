@@ -16,7 +16,7 @@ export const StyledButton = styled.button`
 	}
 
 	&:active {
-		transform: translateY(2px);
+		transform: translateY(10px); !important;
 	}
 `;
 export const StyledTimeButton = styled(StyledButton)<{
