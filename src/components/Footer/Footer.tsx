@@ -11,14 +11,14 @@ interface FooterProps {
 	numUsers: number;
 	isBreak: boolean;
 	connectionStatus?: JSX.Element | null;
-	usersInRoom: number;
+	usersInRoom?: number;
 }
 
 const Footer = ({
 	numUsers,
 	isBreak,
 	connectionStatus,
-	usersInRoom,
+	usersInRoom = undefined,
 }: FooterProps): JSX.Element => {
 	const { themeGroup } = useContext(ThemeContext);
 
@@ -29,7 +29,8 @@ const Footer = ({
 		<StyledFooter backColor={!isBreak ? workAccent : breakAccent}>
 			<StyledText color={workGrey}>
 				<span>
-					{usersInRoom !== 0 &&
+					{usersInRoom !== undefined &&
+						usersInRoom !== 0 &&
 						`${usersInRoom} ${
 							usersInRoom === 0 || usersInRoom > 1
 								? "users are"
@@ -47,6 +48,7 @@ const Footer = ({
 
 Footer.defaultProps = {
 	connectionStatus: null,
+	usersInRoom: undefined,
 };
 
 export default Footer;

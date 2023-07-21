@@ -29,9 +29,17 @@ const Room = (props: {
 	globalUsersConnected: number;
 	isBreak: boolean;
 	setIsBreak: React.Dispatch<React.SetStateAction<boolean>>;
+	isConnected: boolean;
+	setIsConnected: React.Dispatch<React.SetStateAction<boolean>>;
 }): JSX.Element => {
-	const { globalUsersConnected, isBreak, setIsBreak } = props;
-	const [isConnected, setIsConnected] = useState<boolean>(socket.connected);
+	const {
+		globalUsersConnected,
+		isBreak,
+		setIsBreak,
+		isConnected,
+		setIsConnected,
+	} = props;
+
 	const [timestamp, setTimestamp] = useState<number>(0);
 	const [usersInRoom, setUsersInRoom] = useState<number>(0);
 	const [isTimerPaused, setIsTimerPaused] = useState<boolean>(false);

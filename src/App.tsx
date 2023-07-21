@@ -9,6 +9,7 @@ import { ThemeType } from "../common/theme";
 
 const App = (): JSX.Element => {
 	const [globalUsersConnected, setGlobalUsersConnected] = useState<number>(0);
+	const [isConnected, setIsConnected] = useState<boolean>(false);
 	const [isBreak, setIsBreak] = useState<boolean>(false);
 	const [themeGroup, setThemeGroup] = useState<keyof typeof ThemeType>(
 		(localStorage.getItem("themeGroup") as keyof typeof ThemeType) in
@@ -25,13 +26,26 @@ const App = (): JSX.Element => {
 		setGlobalUsersConnected(globalUsersCount);
 	};
 
+	const onConnect = (): void => {
+		setIsConnected(true);
+	};
+
+	const onDisconnect = (): void => {
+		setIsConnected(false);
+	};
+
 	useEffect(() => {
 		socket.on("globalUsers", onGlobalUsers);
+		socket.on("connect", onConnect);
+		socket.on("disconnect", onDisconnect);
 
 		return () => {
 			socket.off("globalUsers", onGlobalUsers);
+			socket.off("connect", onConnect);
+			socket.off("disconnect", onDisconnect);
 		};
 	}, []);
+
 	return (
 		<ThemeProvider theme={{ themeGroup, setThemeGroup }}>
 			<BrowserRouter>
@@ -42,6 +56,7 @@ const App = (): JSX.Element => {
 							<LandingPage
 								globalUsersConnected={globalUsersConnected}
 								isBreak={isBreak}
+								isConnected={isConnected}
 							/>
 						}
 					/>
@@ -52,6 +67,8 @@ const App = (): JSX.Element => {
 								globalUsersConnected={globalUsersConnected}
 								isBreak={isBreak}
 								setIsBreak={setIsBreak}
+								isConnected={isConnected}
+								setIsConnected={setIsConnected}
 							/>
 						}
 					/>
@@ -61,6 +78,7 @@ const App = (): JSX.Element => {
 							<DefaultRoom
 								globalUsersConnected={globalUsersConnected}
 								isBreak={isBreak}
+								isConnected={isConnected}
 							/>
 						}
 					/>

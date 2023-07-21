@@ -6,12 +6,14 @@ import Header from "../Header/Header";
 import { theme } from "../../../common/theme";
 import { StyledDiv, StyledText } from "./DefaultRoom.styled";
 import { GlobalStyle } from "../Room/Room.styled";
+import ConnectionState from "../ConnectionState/ConnectionState";
 
 const DefaultRoom = (props: {
 	globalUsersConnected: number;
 	isBreak: boolean;
+	isConnected: boolean;
 }): JSX.Element => {
-	const { globalUsersConnected, isBreak } = props;
+	const { globalUsersConnected, isBreak, isConnected } = props;
 	const Navigate = useNavigate();
 
 	const { themeGroup } = useContext(ThemeContext);
@@ -38,7 +40,13 @@ const DefaultRoom = (props: {
 				>
 					Back
 				</button>
-				<Footer numUsers={globalUsersConnected} isBreak={isBreak} />
+				<Footer
+					numUsers={globalUsersConnected}
+					isBreak={isBreak}
+					connectionStatus={
+						<ConnectionState isConnected={isConnected} />
+					}
+				/>
 			</StyledDiv>
 		</>
 	);
