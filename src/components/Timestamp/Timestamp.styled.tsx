@@ -5,7 +5,6 @@ export const StyledTimestamp = styled.h1<{ color: string }>`
 `;
 
 export const StyledBigCircle = styled.div`
-	// background: orange;
 	width: 200px;
 	height: 200px;
 

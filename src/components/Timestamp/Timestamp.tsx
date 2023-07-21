@@ -68,9 +68,6 @@ const Timestamp = (props: TimestampProps): JSX.Element => {
 						timerMinuteButtons={timerMinuteButtons}
 						circleState={circleState}
 					/>
-					{/* {circleState.timeCircle.map((value, index) => {
-						return <Square css={value} num={index + 1} />;
-					})} */}
 				</StyledCircleHold>
 				<StyledTimestamp color={color}>
 					{formatTimestamp(timestamp)}

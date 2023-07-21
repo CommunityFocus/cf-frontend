@@ -9,7 +9,6 @@ import formatTimestamp from "../../helpers/formatTimestamp";
 import shareRoom from "../../helpers/shareRoom";
 import startCountdown from "../../helpers/startCountdown";
 import { roomName } from "../../../common/common";
-// import TimerButtons from "../TimerButton/TimerButtons";
 import TimerControls from "../Controls/TimerControls";
 import Footer from "../Footer/Footer";
 import UserBubbles from "../UserBubbles/UserBubbles";
@@ -155,10 +154,6 @@ const Room = (props: {
 						roomName={roomName}
 						timerMinuteButtons={timerMinuteButtons}
 					/>
-					{/* <TimerButtons
-						roomName={roomName}
-						timerMinuteButtons={timerMinuteButtons}
-					/> */}
 					<AddTimerButton
 						timerMinuteButtons={timerMinuteButtons}
 						setTimerMinuteButtons={setTimerMinuteButtons}
