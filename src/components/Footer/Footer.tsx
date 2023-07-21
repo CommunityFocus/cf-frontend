@@ -30,7 +30,6 @@ const Footer = ({
 			<StyledText color={workGrey}>
 				<span>
 					{usersInRoom !== undefined &&
-						usersInRoom !== 0 &&
 						`${usersInRoom} ${
 							usersInRoom === 0 || usersInRoom > 1
 								? "users are"
