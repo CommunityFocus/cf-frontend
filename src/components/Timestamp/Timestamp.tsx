@@ -12,6 +12,8 @@ interface TimestampProps {
 	color: string;
 	timerMinuteButtons: number[];
 	roomName: string;
+	isTimerRunningClient: boolean;
+	isBreak: boolean;
 }
 export interface ICircleState {
 	timeCircle: {
@@ -23,7 +25,14 @@ export interface ICircleState {
 }
 
 const Timestamp = (props: TimestampProps): JSX.Element => {
-	const { timestamp, color, timerMinuteButtons, roomName } = props;
+	const {
+		timestamp,
+		color,
+		timerMinuteButtons,
+		roomName,
+		isTimerRunningClient,
+		isBreak,
+	} = props;
 	const [circleState, setCircleState] = useState<ICircleState>({
 		timeCircle: [],
 	});
@@ -62,13 +71,17 @@ const Timestamp = (props: TimestampProps): JSX.Element => {
 	return (
 		<div>
 			<StyledBigCircle>
-				<StyledCircleHold>
-					<TimerButtons
-						roomName={roomName}
-						timerMinuteButtons={timerMinuteButtons}
-						circleState={circleState}
-					/>
-				</StyledCircleHold>
+				{!isTimerRunningClient && (
+					<StyledCircleHold>
+						<TimerButtons
+							roomName={roomName}
+							timerMinuteButtons={timerMinuteButtons}
+							circleState={circleState}
+							isBreak={isBreak}
+						/>
+					</StyledCircleHold>
+				)}
+
 				<StyledTimestamp color={color}>
 					{formatTimestamp(timestamp)}
 				</StyledTimestamp>

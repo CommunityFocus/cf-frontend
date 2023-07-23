@@ -46,6 +46,8 @@ const Room = (props: {
 	const [timerMinuteButtons, setTimerMinuteButtons] = useState<number[]>([
 		1, 5, 10, 15, 20, 25, 30,
 	]);
+	const [isTimerRunningClient, setIsTimerRunningClient] =
+		useState<boolean>(false);
 	// TODO: include setBreak in the destructured array of useState hook which includes 'isBreak'
 	// TODO: setBreak should set the state after receiving response from the server
 
@@ -91,6 +93,8 @@ const Room = (props: {
 	const onTimerResponse = ({
 		secondsRemaining,
 		isPaused,
+		isTimerRunning,
+		isBreakMode,
 	}: TimerResponseArgs): void => {
 		setTimestamp(secondsRemaining);
 
@@ -101,6 +105,16 @@ const Room = (props: {
 			clientTimerStore,
 			setTimestamp,
 			isTimerPaused: isPaused,
+		});
+
+		setIsTimerRunningClient(isTimerRunning);
+
+		setIsBreak(isBreakMode);
+
+		console.log("onTimerResponse", {
+			secondsRemaining,
+			isPaused,
+			isTimerRunning,
 		});
 	};
 
@@ -153,6 +167,8 @@ const Room = (props: {
 						color={workGrey}
 						roomName={roomName}
 						timerMinuteButtons={timerMinuteButtons}
+						isTimerRunningClient={isTimerRunningClient}
+						isBreak={isBreak}
 					/>
 					<AddTimerButton
 						timerMinuteButtons={timerMinuteButtons}

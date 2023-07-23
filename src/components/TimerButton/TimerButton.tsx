@@ -13,13 +13,18 @@ const TimerButton = (props: {
 		rotate: number;
 		rotateReverse: number;
 	};
+	isBreak: boolean;
 }): JSX.Element => {
-	const { roomName, value, css, size } = props;
+	const { roomName, value, css, size, isBreak } = props;
 
 	const { themeGroup } = useContext(ThemeContext);
 
-	const { workButtonColor, workButtonTextColor } =
-		theme[themeGroup as keyof typeof theme];
+	const {
+		workButtonColor,
+		workButtonTextColor,
+		breakButtonColor,
+		breakButtonTextColor,
+	} = theme[themeGroup as keyof typeof theme];
 
 	const clickHandler = (seconds: number): void => {
 		const minutes = seconds * 60;
@@ -33,8 +38,8 @@ const TimerButton = (props: {
 		<StyledTimeButton
 			type="button"
 			onClick={(): void => clickHandler(value)}
-			color={workButtonColor}
-			fontColor={workButtonTextColor}
+			color={!isBreak ? workButtonColor : breakButtonColor}
+			fontColor={!isBreak ? workButtonTextColor : breakButtonTextColor}
 			size={size}
 			style={{
 				transform: `rotate(${css.rotate}deg) translate(${css.radius}px) rotate(${css.rotateReverse}deg) translate(-25%, -25%)`,

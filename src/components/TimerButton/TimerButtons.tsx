@@ -6,10 +6,11 @@ interface TimerButtonsProps {
 	roomName: string;
 	timerMinuteButtons: number[];
 	circleState: ICircleState;
+	isBreak: boolean;
 }
 
 const TimerButtons = (props: TimerButtonsProps): JSX.Element => {
-	const { roomName, timerMinuteButtons, circleState } = props;
+	const { roomName, timerMinuteButtons, circleState, isBreak } = props;
 
 	return (
 		<>
@@ -24,6 +25,7 @@ const TimerButtons = (props: TimerButtonsProps): JSX.Element => {
 							currentButton: timerMinuteButton,
 						})}
 						css={{ radius, rotate, rotateReverse }}
+						isBreak={isBreak}
 					/>
 				)
 			)}

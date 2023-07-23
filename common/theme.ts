@@ -18,6 +18,8 @@ export interface Theme {
 	workGrey: string;
 	workButtonColor: string;
 	workButtonTextColor: string;
+	breakButtonColor: string;
+	breakButtonTextColor: string;
 }
 
 export const theme: { [key in ThemeType]: Theme } = {
@@ -29,6 +31,8 @@ export const theme: { [key in ThemeType]: Theme } = {
 		workGrey: "#8bbfac",
 		workButtonColor: "#44c18d",
 		workButtonTextColor: "#ffffff",
+		breakButtonColor: "#0589e8",
+		breakButtonTextColor: "#ffffff",
 	},
 	funky: {
 		workBackground: "#c200fb",
@@ -36,8 +40,10 @@ export const theme: { [key in ThemeType]: Theme } = {
 		breakBackground: "#ffbc0a",
 		breakAccent: "#c5930c",
 		workGrey: "#1f1f1f",
-		workButtonColor: "#ddc174",
-		workButtonTextColor: "#000000",
+		workButtonColor: "#9419ad",
+		workButtonTextColor: "#ffffff",
+		breakButtonColor: "#a37f19",
+		breakButtonTextColor: "#ffffff",
 	},
 };
 

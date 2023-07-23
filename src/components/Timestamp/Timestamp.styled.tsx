@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 export const StyledTimestamp = styled.h1<{ color: string }>`
 	color: ${({ color }): string => color};
+	font-size: 3rem;
 `;
 
 export const StyledBigCircle = styled.div`

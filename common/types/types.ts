@@ -6,6 +6,8 @@ export interface UsersInRoomArgs {
 export interface TimerResponseArgs {
 	secondsRemaining: number;
 	isPaused: boolean;
+	isTimerRunning: boolean;
+	isBreakMode: boolean;
 }
 
 export interface WorkBreakResponseArgs {
