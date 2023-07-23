@@ -198,6 +198,7 @@ const Room = (props: {
 						resetTimer={resetTimer}
 						shareRoom={shareRoom}
 						isLoaded={isLoaded}
+						isTimerRunningClient={isTimerRunningClient}
 					/>
 
 					<WorkBreakButton
