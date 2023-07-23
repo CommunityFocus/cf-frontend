@@ -36,6 +36,9 @@ const WorkBreakButton = ({
 		<StyledWorkBreakButtonDiv
 			onClick={onClickHandler}
 			show={(isLoaded && !isTimerRunningClient) || isTimerPaused}
+			data-tooltip-id="my-tooltip"
+			data-tooltip-content="Take a Break!"
+			data-tooltip-place="top"
 		>
 			<AiOutlineCoffee size={30} />
 			<span>Take a Break</span>
@@ -44,6 +47,9 @@ const WorkBreakButton = ({
 		<StyledWorkBreakButtonDiv
 			onClick={onClickHandler}
 			show={(isLoaded && !isTimerRunningClient) || isTimerPaused}
+			data-tooltip-id="my-tooltip"
+			data-tooltip-content="Do some Work!"
+			data-tooltip-place="top"
 		>
 			<MdOutlineWork size={30} />
 			<span>Do some Work</span>

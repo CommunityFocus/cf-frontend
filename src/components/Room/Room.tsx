@@ -132,6 +132,7 @@ const Room = (props: {
 		isBreakMode,
 	}: WorkBreakResponseArgs): void => {
 		setIsBreak(isBreakMode);
+
 		console.log("isBreak", { userName, isBreakMode });
 	};
 
@@ -196,6 +197,7 @@ const Room = (props: {
 						isTimerPaused={isTimerPaused}
 						resetTimer={resetTimer}
 						shareRoom={shareRoom}
+						isLoaded={isLoaded}
 					/>
 
 					<WorkBreakButton
@@ -208,6 +210,7 @@ const Room = (props: {
 				</Center>
 				<ToastContainer theme="dark" pauseOnFocusLoss />
 				<UserBubbles userListInRoom={userListInRoom} />
+
 				<Footer
 					numUsers={globalUsersConnected}
 					isBreak={isBreak}

@@ -44,6 +44,9 @@ const TimerButton = (props: {
 			style={{
 				transform: `rotate(${css.rotate}deg) translate(${css.radius}px) rotate(${css.rotateReverse}deg) translate(-25%, -25%)`,
 			}}
+			data-tooltip-id="my-tooltip"
+			data-tooltip-content={`Start a ${value} minute timer`}
+			data-tooltip-place="top"
 		>
 			{value}
 		</StyledTimeButton>

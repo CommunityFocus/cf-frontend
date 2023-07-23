@@ -1,5 +1,6 @@
 import { ThemeContext } from "styled-components";
 import { useContext } from "react";
+import { Tooltip } from "react-tooltip";
 import {
 	StyledConnectionState,
 	StyledFooter,
@@ -41,6 +42,7 @@ const Footer = ({
 				</span>
 			</StyledText>
 			<StyledConnectionState>{connectionStatus}</StyledConnectionState>
+			<Tooltip id="my-tooltip" />
 		</StyledFooter>
 	);
 };

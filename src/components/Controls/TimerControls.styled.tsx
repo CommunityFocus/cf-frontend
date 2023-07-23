@@ -1,6 +1,8 @@
 import styled from "styled-components";
 
-const StyledButtonRow = styled.div`
+const StyledButtonRow = styled.div<{
+	show: boolean;
+}>`
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
@@ -8,6 +10,7 @@ const StyledButtonRow = styled.div`
 	width: 100%;
 	gap: 10px;
 	margin: 20px;
+	visibility: ${({ show }): string => (show ? "visible" : "hidden")};
 `;
 
 export default StyledButtonRow;

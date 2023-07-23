@@ -8,22 +8,49 @@ const TimerControls = ({
 	isTimerPaused,
 	resetTimer,
 	shareRoom,
+	isLoaded,
 }: {
 	pauseTimer: () => void;
 	isTimerPaused: boolean;
 	resetTimer: () => void;
 	shareRoom: () => void;
+	isLoaded: boolean;
 }): JSX.Element => {
 	return (
-		<StyledButtonRow>
+		<StyledButtonRow show={isLoaded}>
 			{isTimerPaused ? (
-				<FaRegPlayCircle size={30} onClick={pauseTimer} />
+				<FaRegPlayCircle
+					size={30}
+					onClick={pauseTimer}
+					data-tooltip-id="my-tooltip"
+					data-tooltip-content="Resume the Timer"
+					data-tooltip-place="top"
+				/>
 			) : (
-				<FaRegPauseCircle size={30} onClick={pauseTimer} />
+				<FaRegPauseCircle
+					size={30}
+					onClick={pauseTimer}
+					data-tooltip-id="my-tooltip"
+					data-tooltip-content="Pause the Timer"
+					data-tooltip-place="top"
+				/>
 			)}
 
-			<LuTimerReset type="button" onClick={resetTimer} size={30} />
-			<BsFillShareFill onClick={shareRoom} size={30} />
+			<LuTimerReset
+				type="button"
+				onClick={resetTimer}
+				size={30}
+				data-tooltip-id="my-tooltip"
+				data-tooltip-content="Reset the Timer to the original previously set time"
+				data-tooltip-place="top"
+			/>
+			<BsFillShareFill
+				onClick={shareRoom}
+				size={30}
+				data-tooltip-id="my-tooltip"
+				data-tooltip-content="Share the timer with friends!"
+				data-tooltip-place="top"
+			/>
 		</StyledButtonRow>
 	);
 };
