@@ -40,6 +40,7 @@ const DefaultRoom = (props: {
 				>
 					Back
 				</button>
+
 				<Footer
 					numUsers={globalUsersConnected}
 					isBreak={isBreak}

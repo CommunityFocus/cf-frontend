@@ -26,3 +26,11 @@ export const StyledTimeButton = styled(StyledButton)<{
 		background-color: ${({ color }): string => color};
 	}
 `;
+
+export const StyledWorkBreakButtonDiv = styled.div<{ show: boolean }>`
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	visibility: ${({ show }): string => (show ? "visible" : "hidden")};
+`;

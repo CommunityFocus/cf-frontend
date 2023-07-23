@@ -11,12 +11,22 @@ const ConnectionState = ({
 	return (
 		<FooterText>
 			{isConnected ? (
-				<StyledDiv color="green">
+				<StyledDiv
+					color="green"
+					data-tooltip-id="my-tooltip"
+					data-tooltip-content="You are connected to the server! All good to go!"
+					data-tooltip-place="top"
+				>
 					Connected
 					<Connected />
 				</StyledDiv>
 			) : (
-				<StyledDiv color="red">
+				<StyledDiv
+					color="red"
+					data-tooltip-id="my-tooltip"
+					data-tooltip-content="Something went wrong! You are not connected to the server! Please try again later!"
+					data-tooltip-place="top"
+				>
 					Disconnected
 					<Disconnected />
 				</StyledDiv>

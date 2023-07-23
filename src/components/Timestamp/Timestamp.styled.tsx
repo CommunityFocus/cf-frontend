@@ -10,7 +10,7 @@ export const StyledBigCircle = styled.div`
 	height: 200px;
 
 	border-radius: 50%;
-	margin: 40px 40px 40px auto;
+	margin: 20px;
 	position: relative;
 	display: flex;
 	justify-content: center;

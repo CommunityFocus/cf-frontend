@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import ReactLoading from "react-loading";
 import formatTimestamp from "../../helpers/formatTimestamp";
 import {
 	StyledBigCircle,
@@ -14,6 +15,8 @@ interface TimestampProps {
 	roomName: string;
 	isTimerRunningClient: boolean;
 	isBreak: boolean;
+	isTimerPaused: boolean;
+	isLoaded: boolean;
 }
 export interface ICircleState {
 	timeCircle: {
@@ -32,6 +35,8 @@ const Timestamp = (props: TimestampProps): JSX.Element => {
 		roomName,
 		isTimerRunningClient,
 		isBreak,
+		isTimerPaused,
+		isLoaded,
 	} = props;
 	const [circleState, setCircleState] = useState<ICircleState>({
 		timeCircle: [],
@@ -71,20 +76,30 @@ const Timestamp = (props: TimestampProps): JSX.Element => {
 	return (
 		<div>
 			<StyledBigCircle>
-				{!isTimerRunningClient && (
-					<StyledCircleHold>
-						<TimerButtons
-							roomName={roomName}
-							timerMinuteButtons={timerMinuteButtons}
-							circleState={circleState}
-							isBreak={isBreak}
-						/>
-					</StyledCircleHold>
+				{isLoaded
+					? (!isTimerRunningClient || isTimerPaused) && (
+							<StyledCircleHold>
+								<TimerButtons
+									roomName={roomName}
+									timerMinuteButtons={timerMinuteButtons}
+									circleState={circleState}
+									isBreak={isBreak}
+								/>
+							</StyledCircleHold>
+					  )
+					: null}
+				{isLoaded ? (
+					<StyledTimestamp color={color}>
+						{formatTimestamp(timestamp)}
+					</StyledTimestamp>
+				) : (
+					<ReactLoading
+						type="bubbles"
+						color="#fff"
+						height={100}
+						width={100}
+					/>
 				)}
-
-				<StyledTimestamp color={color}>
-					{formatTimestamp(timestamp)}
-				</StyledTimestamp>
 			</StyledBigCircle>
 		</div>
 	);

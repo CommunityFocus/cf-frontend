@@ -35,7 +35,6 @@ const Header = ({ isBreak }: HeaderProps): JSX.Element => {
 					value={themeGroup}
 					placeholder="Pick a theme"
 				/>
-
 				<WelcomeMessage name="Mario" color={workGrey} />
 			</StyledDiv>
 		</StyledHeader>

@@ -6,6 +6,7 @@ import Room from "./components/Room/Room";
 import DefaultRoom from "./components/DefaultRoom/DefaultRoom";
 import LandingPage from "./components/LandingPage/LandingPage";
 import { ThemeType } from "../common/theme";
+import "reactjs-popup/dist/index.css";
 
 const App = (): JSX.Element => {
 	const [globalUsersConnected, setGlobalUsersConnected] = useState<number>(0);

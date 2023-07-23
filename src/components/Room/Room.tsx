@@ -1,10 +1,9 @@
 import { useState, useEffect, useContext } from "react";
 import { ThemeContext } from "styled-components";
-
-import socket from "../Socket/socket";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import ConnectionState from "../ConnectionState/ConnectionState";
 import Timestamp from "../Timestamp/Timestamp";
-import TimerForm from "../Controls/TimerForm";
 import formatTimestamp from "../../helpers/formatTimestamp";
 import shareRoom from "../../helpers/shareRoom";
 import startCountdown from "../../helpers/startCountdown";
@@ -18,11 +17,17 @@ import {
 	WorkBreakResponseArgs,
 } from "../../../common/types/types";
 import Header from "../Header/Header";
-import { Center, GlobalStyle, StyledDiv } from "./Room.styled";
+import {
+	Center,
+	GlobalStyle,
+	StyledDiv,
+	StyledWorkBreakBanner,
+} from "./Room.styled";
 import WorkBreakButton from "../TimerButton/WorkBreakButton";
 import { theme } from "../../../common/theme";
 import "react-dropdown/style.css";
 import AddTimerButton from "../TimerButton/AddTimerButton";
+import socket from "../Socket/socket";
 
 const Room = (props: {
 	globalUsersConnected: number;
@@ -48,6 +53,8 @@ const Room = (props: {
 	]);
 	const [isTimerRunningClient, setIsTimerRunningClient] =
 		useState<boolean>(false);
+
+	const [isLoaded, setIsLoaded] = useState<boolean>(false);
 	// TODO: include setBreak in the destructured array of useState hook which includes 'isBreak'
 	// TODO: setBreak should set the state after receiving response from the server
 
@@ -96,6 +103,7 @@ const Room = (props: {
 		isTimerRunning,
 		isBreakMode,
 	}: TimerResponseArgs): void => {
+		setIsLoaded(true);
 		setTimestamp(secondsRemaining);
 
 		setIsTimerPaused(isPaused);
@@ -124,6 +132,7 @@ const Room = (props: {
 		isBreakMode,
 	}: WorkBreakResponseArgs): void => {
 		setIsBreak(isBreakMode);
+
 		console.log("isBreak", { userName, isBreakMode });
 	};
 
@@ -162,6 +171,12 @@ const Room = (props: {
 			/>
 			<StyledDiv>
 				<Center>
+					<StyledWorkBreakBanner color={workGrey} isLoaded={isLoaded}>
+						{isBreak
+							? "Time for a break!"
+							: "Let's get some work done!"}
+					</StyledWorkBreakBanner>
+
 					<Timestamp
 						timestamp={timestamp}
 						color={workGrey}
@@ -169,24 +184,33 @@ const Room = (props: {
 						timerMinuteButtons={timerMinuteButtons}
 						isTimerRunningClient={isTimerRunningClient}
 						isBreak={isBreak}
+						isTimerPaused={isTimerPaused}
+						isLoaded={isLoaded}
 					/>
 					<AddTimerButton
 						timerMinuteButtons={timerMinuteButtons}
 						setTimerMinuteButtons={setTimerMinuteButtons}
 					/>
-					<WorkBreakButton roomName={roomName} isBreak={isBreak} />
+
 					<TimerControls
 						pauseTimer={pauseTimer}
 						isTimerPaused={isTimerPaused}
 						resetTimer={resetTimer}
+						shareRoom={shareRoom}
+						isLoaded={isLoaded}
 					/>
-					<TimerForm />
 
-					<button type="button" onClick={shareRoom}>
-						Share Room
-					</button>
+					<WorkBreakButton
+						roomName={roomName}
+						isBreak={isBreak}
+						isTimerPaused={isTimerPaused}
+						isTimerRunningClient={isTimerRunningClient}
+						isLoaded={isLoaded}
+					/>
 				</Center>
+				<ToastContainer theme="dark" pauseOnFocusLoss />
 				<UserBubbles userListInRoom={userListInRoom} />
+
 				<Footer
 					numUsers={globalUsersConnected}
 					isBreak={isBreak}
