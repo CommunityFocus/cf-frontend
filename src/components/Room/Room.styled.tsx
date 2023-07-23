@@ -23,6 +23,3 @@ export const Center = styled.div`
 	flex-direction: column;
 `;
 
-export const StyledUserCount = styled.p<{ color: string }>`
-	color: ${({ color }): string => color};
-`;

@@ -1,10 +1,30 @@
+import { ThemeContext } from "styled-components";
+import { useContext } from "react";
 import socket from "../Socket/socket";
+import { StyledTimeButton } from "./TimerButtons.styled";
+import { theme } from "../../../common/theme";
 
 const TimerButton = (props: {
+	size: number;
 	roomName: string;
 	value: number;
+	css: {
+		radius: number;
+		rotate: number;
+		rotateReverse: number;
+	};
+	isBreak: boolean;
 }): JSX.Element => {
-	const { roomName, value } = props;
+	const { roomName, value, css, size, isBreak } = props;
+
+	const { themeGroup } = useContext(ThemeContext);
+
+	const {
+		workButtonColor,
+		workButtonTextColor,
+		breakButtonColor,
+		breakButtonTextColor,
+	} = theme[themeGroup as keyof typeof theme];
 
 	const clickHandler = (seconds: number): void => {
 		const minutes = seconds * 60;
@@ -15,9 +35,18 @@ const TimerButton = (props: {
 	};
 
 	return (
-		<button type="button" onClick={(): void => clickHandler(value)}>
-			{value} min
-		</button>
+		<StyledTimeButton
+			type="button"
+			onClick={(): void => clickHandler(value)}
+			color={!isBreak ? workButtonColor : breakButtonColor}
+			fontColor={!isBreak ? workButtonTextColor : breakButtonTextColor}
+			size={size}
+			style={{
+				transform: `rotate(${css.rotate}deg) translate(${css.radius}px) rotate(${css.rotateReverse}deg) translate(-25%, -25%)`,
+			}}
+		>
+			{value}
+		</StyledTimeButton>
 	);
 };
 export default TimerButton;

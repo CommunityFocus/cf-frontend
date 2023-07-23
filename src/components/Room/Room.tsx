@@ -9,7 +9,6 @@ import formatTimestamp from "../../helpers/formatTimestamp";
 import shareRoom from "../../helpers/shareRoom";
 import startCountdown from "../../helpers/startCountdown";
 import { roomName } from "../../../common/common";
-import TimerButtons from "../TimerButton/TimerButtons";
 import TimerControls from "../Controls/TimerControls";
 import Footer from "../Footer/Footer";
 import UserBubbles from "../UserBubbles/UserBubbles";
@@ -19,22 +18,36 @@ import {
 	WorkBreakResponseArgs,
 } from "../../../common/types/types";
 import Header from "../Header/Header";
-import { Center, GlobalStyle, StyledDiv, StyledUserCount } from "./Room.styled";
+import { Center, GlobalStyle, StyledDiv } from "./Room.styled";
 import WorkBreakButton from "../TimerButton/WorkBreakButton";
 import { theme } from "../../../common/theme";
 import "react-dropdown/style.css";
+import AddTimerButton from "../TimerButton/AddTimerButton";
 
 const Room = (props: {
 	globalUsersConnected: number;
 	isBreak: boolean;
 	setIsBreak: React.Dispatch<React.SetStateAction<boolean>>;
+	isConnected: boolean;
+	setIsConnected: React.Dispatch<React.SetStateAction<boolean>>;
 }): JSX.Element => {
-	const { globalUsersConnected, isBreak, setIsBreak } = props;
-	const [isConnected, setIsConnected] = useState<boolean>(socket.connected);
+	const {
+		globalUsersConnected,
+		isBreak,
+		setIsBreak,
+		isConnected,
+		setIsConnected,
+	} = props;
+
 	const [timestamp, setTimestamp] = useState<number>(0);
 	const [usersInRoom, setUsersInRoom] = useState<number>(0);
 	const [isTimerPaused, setIsTimerPaused] = useState<boolean>(false);
 	const [userListInRoom, setUserListInRoom] = useState<string[]>([]);
+	const [timerMinuteButtons, setTimerMinuteButtons] = useState<number[]>([
+		1, 5, 10, 15, 20, 25, 30,
+	]);
+	const [isTimerRunningClient, setIsTimerRunningClient] =
+		useState<boolean>(false);
 	// TODO: include setBreak in the destructured array of useState hook which includes 'isBreak'
 	// TODO: setBreak should set the state after receiving response from the server
 
@@ -80,6 +93,8 @@ const Room = (props: {
 	const onTimerResponse = ({
 		secondsRemaining,
 		isPaused,
+		isTimerRunning,
+		isBreakMode,
 	}: TimerResponseArgs): void => {
 		setTimestamp(secondsRemaining);
 
@@ -90,6 +105,16 @@ const Room = (props: {
 			clientTimerStore,
 			setTimestamp,
 			isTimerPaused: isPaused,
+		});
+
+		setIsTimerRunningClient(isTimerRunning);
+
+		setIsBreak(isBreakMode);
+
+		console.log("onTimerResponse", {
+			secondsRemaining,
+			isPaused,
+			isTimerRunning,
 		});
 	};
 
@@ -137,8 +162,18 @@ const Room = (props: {
 			/>
 			<StyledDiv>
 				<Center>
-					<Timestamp timestamp={timestamp} color={workGrey} />
-					<TimerButtons roomName={roomName} />
+					<Timestamp
+						timestamp={timestamp}
+						color={workGrey}
+						roomName={roomName}
+						timerMinuteButtons={timerMinuteButtons}
+						isTimerRunningClient={isTimerRunningClient}
+						isBreak={isBreak}
+					/>
+					<AddTimerButton
+						timerMinuteButtons={timerMinuteButtons}
+						setTimerMinuteButtons={setTimerMinuteButtons}
+					/>
 					<WorkBreakButton roomName={roomName} isBreak={isBreak} />
 					<TimerControls
 						pauseTimer={pauseTimer}
@@ -146,9 +181,7 @@ const Room = (props: {
 						resetTimer={resetTimer}
 					/>
 					<TimerForm />
-					<StyledUserCount color={workGrey}>
-						Users in room: {usersInRoom}
-					</StyledUserCount>
+
 					<button type="button" onClick={shareRoom}>
 						Share Room
 					</button>
@@ -157,6 +190,7 @@ const Room = (props: {
 				<Footer
 					numUsers={globalUsersConnected}
 					isBreak={isBreak}
+					usersInRoom={usersInRoom}
 					connectionStatus={
 						<ConnectionState isConnected={isConnected} />
 					}

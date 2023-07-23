@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { LogoText } from "./LogoTitle.styled";
+import { LogoText, StyledDiv, StyledImg } from "./LogoTitle.styled";
 
 interface LogoTitleProps {
 	color: string;
@@ -11,16 +11,17 @@ const LogoTitle = (props: LogoTitleProps): JSX.Element => {
 	const navigate = useNavigate();
 
 	return (
-		<div>
+		<StyledDiv>
 			<LogoText
 				onClick={(): void => {
 					navigate("/");
 				}}
 				color={color}
 			>
+				<StyledImg src="/src/images/communityFocus.png" alt="logo" />
 				CommunityFocus
 			</LogoText>
-		</div>
+		</StyledDiv>
 	);
 };
 

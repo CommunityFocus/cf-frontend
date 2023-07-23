@@ -8,12 +8,14 @@ import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
 import { theme } from "../../../common/theme";
 import { GlobalStyle } from "../Room/Room.styled";
+import ConnectionState from "../ConnectionState/ConnectionState";
 
 const LandingPage = (props: {
 	globalUsersConnected: number;
 	isBreak: boolean;
+	isConnected: boolean;
 }): JSX.Element => {
-	const { globalUsersConnected, isBreak } = props;
+	const { globalUsersConnected, isBreak, isConnected } = props;
 	const [slugName, setSlugName] = useState<string>("");
 	const navigate = useNavigate();
 
@@ -51,7 +53,13 @@ const LandingPage = (props: {
 				>
 					Join a room
 				</Button>
-				<Footer numUsers={globalUsersConnected} isBreak={isBreak} />
+				<Footer
+					numUsers={globalUsersConnected}
+					isBreak={isBreak}
+					connectionStatus={
+						<ConnectionState isConnected={isConnected} />
+					}
+				/>
 			</Center>
 		</>
 	);
