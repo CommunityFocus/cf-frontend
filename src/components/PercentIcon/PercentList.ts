@@ -1,31 +1,46 @@
 const path = "/src/images/percentIcons/";
 const ext = ".svg";
 
-const PercentList = {
-	green: {
-		5: `${path}green5${ext}`,
-		10: `${path}green10${ext}`,
-		25: `${path}green25${ext}`,
-		35: `${path}green35${ext}`,
-		50: `${path}green50${ext}`,
-		65: `${path}green65${ext}`,
-		75: `${path}green75${ext}`,
-		80: `${path}green80${ext}`,
-		95: `${path}green95${ext}`,
-		100: `${path}green100${ext}`,
-	},
-	red: {
-		5: `${path}red5${ext}`,
-		10: `${path}red10${ext}`,
-		25: `${path}red25${ext}`,
-		35: `${path}red35${ext}`,
-		50: `${path}red50${ext}`,
-		65: `${path}red65${ext}`,
-		75: `${path}red75${ext}`,
-		80: `${path}red80${ext}`,
-		95: `${path}red95${ext}`,
-		100: `${path}red100${ext}`,
-	},
+const percents = [5, 10, 25, 35, 50, 65, 75, 80, 95, 100];
+
+interface PercentIconProps {
+	percentRemaining: number;
+	color: "green" | "red";
+}
+
+export const PercentRemaining = ({
+	secondsRemaining,
+	originalDuration,
+}: {
+	secondsRemaining: number;
+	originalDuration: number;
+}): number => {
+	const roundedPercent = Math.round(
+		((originalDuration - secondsRemaining) / originalDuration) * 100
+	);
+
+	console.log("roundedPercent", roundedPercent);
+	// find the next percent in the array.
+	const nextPercent = percents.find((percent) => percent >= roundedPercent);
+	if (!nextPercent) {
+		return 0;
+	}
+	return nextPercent;
 };
 
-export default PercentList;
+export const PercentIcon = ({
+	percentRemaining,
+	color,
+}: PercentIconProps): string => {
+	if (percentRemaining === 0) {
+		return `/src/images/communityFocus.png`;
+	}
+	if (!["green", "red"].includes(color)) {
+		console.error("Invalid color of percent icon");
+	}
+	if (!percents.includes(percentRemaining)) {
+		console.error("Invalid percent complete for icon");
+	}
+
+	return `${path}${color}${percentRemaining}${ext}`;
+};

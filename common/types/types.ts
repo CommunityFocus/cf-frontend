@@ -8,6 +8,7 @@ export interface TimerResponseArgs {
 	isPaused: boolean;
 	isTimerRunning: boolean;
 	isBreakMode: boolean;
+	originalDuration: number;
 }
 
 export interface WorkBreakResponseArgs {

@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from "react";
 import { ThemeContext } from "styled-components";
-
+// import { Helmet } from "react-helmet";
 import socket from "../Socket/socket";
 import ConnectionState from "../ConnectionState/ConnectionState";
 import Timestamp from "../Timestamp/Timestamp";
@@ -17,12 +17,13 @@ import {
 	UsersInRoomArgs,
 	WorkBreakResponseArgs,
 } from "../../../common/types/types";
-import Header from "../Header/Header";
 import { Center, GlobalStyle, StyledDiv } from "./Room.styled";
+import Header from "../Header/Header";
 import WorkBreakButton from "../TimerButton/WorkBreakButton";
 import { theme } from "../../../common/theme";
 import "react-dropdown/style.css";
 import AddTimerButton from "../TimerButton/AddTimerButton";
+import { PercentIcon, PercentRemaining } from "../PercentIcon/PercentList";
 
 const Room = (props: {
 	globalUsersConnected: number;
@@ -48,6 +49,10 @@ const Room = (props: {
 	]);
 	const [isTimerRunningClient, setIsTimerRunningClient] =
 		useState<boolean>(false);
+
+	let clientOriginalDuration = 0;
+
+	const [percentComplete, setPercentComplete] = useState<number>(0);
 	// TODO: include setBreak in the destructured array of useState hook which includes 'isBreak'
 	// TODO: setBreak should set the state after receiving response from the server
 
@@ -95,6 +100,7 @@ const Room = (props: {
 		isPaused,
 		isTimerRunning,
 		isBreakMode,
+		originalDuration,
 	}: TimerResponseArgs): void => {
 		setTimestamp(secondsRemaining);
 
@@ -110,6 +116,14 @@ const Room = (props: {
 		setIsTimerRunningClient(isTimerRunning);
 
 		setIsBreak(isBreakMode);
+
+		clientOriginalDuration = originalDuration;
+		setPercentComplete(
+			PercentRemaining({
+				secondsRemaining,
+				originalDuration: clientOriginalDuration,
+			}) || 0
+		);
 
 		console.log("onTimerResponse", {
 			secondsRemaining,
@@ -154,8 +168,11 @@ const Room = (props: {
 		console.log("roomId:", roomName);
 	}, [isConnected]);
 
+
+
 	return (
 		<>
+
 			<Header isBreak={isBreak} />
 			<GlobalStyle
 				backColor={!isBreak ? workBackground : breakBackground}
