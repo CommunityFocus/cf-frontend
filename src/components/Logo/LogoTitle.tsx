@@ -18,7 +18,7 @@ const LogoTitle = (props: LogoTitleProps): JSX.Element => {
 				}}
 				color={color}
 			>
-				<StyledImg src="/src/images/communityFocus.png" alt="logo" />
+				<StyledImg src="/images/communityFocus.png" alt="logo" />
 				CommunityFocus
 			</LogoText>
 		</StyledDiv>
