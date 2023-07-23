@@ -23,3 +23,11 @@ export const Center = styled.div`
 	flex-direction: column;
 `;
 
+export const StyledWorkBreakBanner = styled.h1<{
+	color: string;
+	isLoaded: boolean;
+}>`
+	color: ${({ color }): string => color};
+	font-size: 3rem;
+	visibility: ${({ isLoaded }): string => (isLoaded ? "visible" : "hidden")};
+`;

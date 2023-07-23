@@ -1,12 +1,13 @@
 import styled from "styled-components";
 
-const ResetButton = styled.button`
-	background: url("/Restart.png") center no-repeat;
-	background-size: 100%;
-	width: 3%;
-	border: none;
-	height: 6vh;
-	cursor: pointer;
+const StyledButtonRow = styled.div`
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	gap: 10px;
+	margin: 20px;
 `;
 
-export default ResetButton;
+export default StyledButtonRow;
