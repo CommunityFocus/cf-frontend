@@ -5,6 +5,10 @@ import LogoTitle from "../Logo/LogoTitle";
 import WelcomeMessage from "../WelcomeMessage/WelcomeMessage";
 import { ThemeType, theme, themeOptions } from "../../../common/theme";
 import { StyledDiv, StyledHeader } from "./Header.styled";
+import ModalContext from "../Modal/ModalContext";
+import ModalComponent from "../Modal/Modal";
+import UsernameModal from "../Modal/UsernameModal";
+import UsernameContext from "../Username/UsernameContext";
 
 interface HeaderProps {
 	isBreak: boolean;
@@ -12,6 +16,8 @@ interface HeaderProps {
 
 const Header = ({ isBreak }: HeaderProps): JSX.Element => {
 	const { themeGroup, setThemeGroup } = useContext(ThemeContext);
+	const { isModalOpen, setIsModalOpen } = useContext(ModalContext);
+	const { userName, setUserName } = useContext(UsernameContext);
 
 	const { workAccent, breakAccent, workGrey } =
 		theme[themeGroup as keyof typeof theme];
@@ -35,7 +41,24 @@ const Header = ({ isBreak }: HeaderProps): JSX.Element => {
 					value={themeGroup}
 					placeholder="Pick a theme"
 				/>
-				<WelcomeMessage name="Mario" color={workGrey} />
+				<WelcomeMessage
+					name={userName || "Guest"}
+					color={workGrey}
+					onClick={(): void => {
+						setIsModalOpen(!isModalOpen);
+					}}
+				/>
+				<ModalComponent
+					isModalOpen={isModalOpen}
+					setIsModalOpen={setIsModalOpen}
+				>
+					<UsernameModal
+						userName={userName}
+						setUserName={setUserName}
+						setIsModalOpen={setIsModalOpen}
+						isModalOpen={isModalOpen}
+					/>
+				</ModalComponent>
 			</StyledDiv>
 		</StyledHeader>
 	);

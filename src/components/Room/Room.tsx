@@ -28,6 +28,8 @@ import { theme } from "../../../common/theme";
 import "react-dropdown/style.css";
 import AddTimerButton from "../TimerButton/AddTimerButton";
 import socket from "../Socket/socket";
+import ModalContext from "../Modal/ModalContext";
+import UsernameContext from "../Username/UsernameContext";
 
 const Room = (props: {
 	globalUsersConnected: number;
@@ -55,10 +57,10 @@ const Room = (props: {
 		useState<boolean>(false);
 
 	const [isLoaded, setIsLoaded] = useState<boolean>(false);
-	// TODO: include setBreak in the destructured array of useState hook which includes 'isBreak'
-	// TODO: setBreak should set the state after receiving response from the server
 
 	const { themeGroup } = useContext(ThemeContext);
+	const { setIsModalOpen } = useContext(ModalContext);
+	const { userName } = useContext(UsernameContext);
 
 	const { workBackground, breakBackground, workGrey } =
 		theme[themeGroup as keyof typeof theme];
@@ -128,12 +130,12 @@ const Room = (props: {
 
 	// eslint-disable-next-line no-shadow
 	const onWorkBreakResponse = ({
-		userName,
+		userNameFromServer,
 		isBreakMode,
 	}: WorkBreakResponseArgs): void => {
 		setIsBreak(isBreakMode);
 
-		console.log("isBreak", { userName, isBreakMode });
+		console.log("isBreak", { userNameFromServer, isBreakMode });
 	};
 
 	useEffect(() => {
@@ -162,6 +164,12 @@ const Room = (props: {
 		console.log("URL", window.location.href);
 		console.log("roomId:", roomName);
 	}, [isConnected]);
+
+	useEffect(() => {
+		if (!userName) {
+			setIsModalOpen(true);
+		}
+	}, [userName, setIsModalOpen]);
 
 	return (
 		<>

@@ -11,6 +11,6 @@ export interface TimerResponseArgs {
 }
 
 export interface WorkBreakResponseArgs {
-	userName: string;
+	userNameFromServer: string;
 	isBreakMode: boolean;
 }

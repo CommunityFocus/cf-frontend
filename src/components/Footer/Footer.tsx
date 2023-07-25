@@ -1,6 +1,7 @@
 import { ThemeContext } from "styled-components";
 import { useContext } from "react";
 import { Tooltip } from "react-tooltip";
+// import Modal from "react-modal";
 import {
 	StyledConnectionState,
 	StyledFooter,
@@ -43,6 +44,13 @@ const Footer = ({
 			</StyledText>
 			<StyledConnectionState>{connectionStatus}</StyledConnectionState>
 			<Tooltip id="my-tooltip" />
+			{/* <Modal
+				isOpen={modalIsOpen}
+				onRequestClose={closeModal}
+				contentLabel="Example Modal"
+			>
+				<h1>TEST</h1>
+			</Modal> */}
 		</StyledFooter>
 	);
 };
