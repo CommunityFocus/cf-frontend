@@ -21,6 +21,8 @@ export const StyledTimeButton = styled(StyledButton)<{
 	width: ${({ size }): number => size}px;
 	border: none;
 	color: ${({ fontColor }): string => fontColor};
+	// shadow
+	box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
 
 	&:active {
 		background-color: ${({ color }): string => color};

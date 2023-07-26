@@ -1,5 +1,5 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { ThemeProvider } from "styled-components";
 import socket from "./components/Socket/socket";
 import Room from "./components/Room/Room";
@@ -7,6 +7,8 @@ import DefaultRoom from "./components/DefaultRoom/DefaultRoom";
 import LandingPage from "./components/LandingPage/LandingPage";
 import { ThemeType } from "../common/theme";
 import "reactjs-popup/dist/index.css";
+import ModalContext from "./components/Modal/ModalContext";
+import UsernameContext from "./components/Username/UsernameContext";
 
 const App = (): JSX.Element => {
 	const [globalUsersConnected, setGlobalUsersConnected] = useState<number>(0);
@@ -17,6 +19,10 @@ const App = (): JSX.Element => {
 			ThemeType
 			? (localStorage.getItem("themeGroup") as keyof typeof ThemeType)
 			: "original"
+	);
+	const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+	const [userName, setUserName] = useState<string>(
+		localStorage.getItem("userName") || ""
 	);
 
 	const onGlobalUsers = ({
@@ -49,42 +55,68 @@ const App = (): JSX.Element => {
 
 	return (
 		<ThemeProvider theme={{ themeGroup, setThemeGroup }}>
-			<BrowserRouter>
-				<Routes>
-					<Route
-						path="/"
-						element={
-							<LandingPage
-								globalUsersConnected={globalUsersConnected}
-								isBreak={isBreak}
-								isConnected={isConnected}
+			<UsernameContext.Provider
+				value={useMemo(
+					() => ({
+						userName,
+						setUserName,
+					}),
+					[userName, setUserName]
+				)}
+			>
+				<ModalContext.Provider
+					value={useMemo(
+						() => ({
+							isModalOpen,
+							setIsModalOpen,
+						}),
+						[isModalOpen, setIsModalOpen]
+					)}
+				>
+					<BrowserRouter>
+						<Routes>
+							<Route
+								path="/"
+								element={
+									<LandingPage
+										globalUsersConnected={
+											globalUsersConnected
+										}
+										isBreak={isBreak}
+										isConnected={isConnected}
+									/>
+								}
 							/>
-						}
-					/>
-					<Route
-						path="/:room"
-						element={
-							<Room
-								globalUsersConnected={globalUsersConnected}
-								isBreak={isBreak}
-								setIsBreak={setIsBreak}
-								isConnected={isConnected}
-								setIsConnected={setIsConnected}
+							<Route
+								path="/:room"
+								element={
+									<Room
+										globalUsersConnected={
+											globalUsersConnected
+										}
+										isBreak={isBreak}
+										setIsBreak={setIsBreak}
+										isConnected={isConnected}
+										setIsConnected={setIsConnected}
+									/>
+								}
 							/>
-						}
-					/>
-					<Route
-						path="/default"
-						element={
-							<DefaultRoom
-								globalUsersConnected={globalUsersConnected}
-								isBreak={isBreak}
-								isConnected={isConnected}
+							<Route
+								path="/default"
+								element={
+									<DefaultRoom
+										globalUsersConnected={
+											globalUsersConnected
+										}
+										isBreak={isBreak}
+										isConnected={isConnected}
+									/>
+								}
 							/>
-						}
-					/>
-				</Routes>
-			</BrowserRouter>
+						</Routes>
+					</BrowserRouter>
+				</ModalContext.Provider>
+			</UsernameContext.Provider>
 		</ThemeProvider>
 	);
 };

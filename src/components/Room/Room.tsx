@@ -28,6 +28,8 @@ import { theme } from "../../../common/theme";
 import "react-dropdown/style.css";
 import AddTimerButton from "../TimerButton/AddTimerButton";
 import socket from "../Socket/socket";
+import ModalContext from "../Modal/ModalContext";
+import UsernameContext from "../Username/UsernameContext";
 
 const Room = (props: {
 	globalUsersConnected: number;
@@ -55,10 +57,10 @@ const Room = (props: {
 		useState<boolean>(false);
 
 	const [isLoaded, setIsLoaded] = useState<boolean>(false);
-	// TODO: include setBreak in the destructured array of useState hook which includes 'isBreak'
-	// TODO: setBreak should set the state after receiving response from the server
 
 	const { themeGroup } = useContext(ThemeContext);
+	const { setIsModalOpen } = useContext(ModalContext);
+	const { userName } = useContext(UsernameContext);
 
 	const { workBackground, breakBackground, workGrey } =
 		theme[themeGroup as keyof typeof theme];
@@ -83,7 +85,7 @@ const Room = (props: {
 	};
 
 	const onConnect = (): void => {
-		socket.emit("join", roomName);
+		socket.emit("join", { roomName, userName: userName || "defaultUser" });
 		socket.emit("timerRequest", { roomName });
 		setIsConnected(true);
 	};
@@ -118,22 +120,13 @@ const Room = (props: {
 		setIsTimerRunningClient(isTimerRunning);
 
 		setIsBreak(isBreakMode);
-
-		console.log("onTimerResponse", {
-			secondsRemaining,
-			isPaused,
-			isTimerRunning,
-		});
 	};
 
 	// eslint-disable-next-line no-shadow
 	const onWorkBreakResponse = ({
-		userName,
 		isBreakMode,
 	}: WorkBreakResponseArgs): void => {
 		setIsBreak(isBreakMode);
-
-		console.log("isBreak", { userName, isBreakMode });
 	};
 
 	useEffect(() => {
@@ -153,15 +146,15 @@ const Room = (props: {
 	}, []);
 
 	useEffect(() => {
-		console.log({ timestamp, isTimerPaused });
 		// update the document title, with roomName and timestamp
 		document.title = `${formatTimestamp(timestamp)}`;
 	}, [isTimerPaused, timestamp]);
 
 	useEffect(() => {
-		console.log("URL", window.location.href);
-		console.log("roomId:", roomName);
-	}, [isConnected]);
+		if (!userName) {
+			setIsModalOpen(true);
+		}
+	}, [userName, setIsModalOpen]);
 
 	return (
 		<>

@@ -1,6 +1,7 @@
 import { ThemeContext } from "styled-components";
 import { useContext } from "react";
 import { Tooltip } from "react-tooltip";
+// import Modal from "react-modal";
 import {
 	StyledConnectionState,
 	StyledFooter,

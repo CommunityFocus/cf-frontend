@@ -11,6 +11,7 @@ export const UserBubbleStyled = styled.a<{ $borderColor?: string }>`
 	border: 4px solid ${(props): string => props.$borderColor || "#BF4F74"};
 	color: #fff;
 	font-size: 0.8rem;
+	box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
 `;
 
 export const UserBubblesContainer = styled.div`
