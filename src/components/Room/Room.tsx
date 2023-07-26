@@ -124,12 +124,9 @@ const Room = (props: {
 
 	// eslint-disable-next-line no-shadow
 	const onWorkBreakResponse = ({
-		userNameFromServer,
 		isBreakMode,
 	}: WorkBreakResponseArgs): void => {
 		setIsBreak(isBreakMode);
-
-		console.log("isBreak", { userNameFromServer, isBreakMode });
 	};
 
 	useEffect(() => {

@@ -44,13 +44,6 @@ const Footer = ({
 			</StyledText>
 			<StyledConnectionState>{connectionStatus}</StyledConnectionState>
 			<Tooltip id="my-tooltip" />
-			{/* <Modal
-				isOpen={modalIsOpen}
-				onRequestClose={closeModal}
-				contentLabel="Example Modal"
-			>
-				<h1>TEST</h1>
-			</Modal> */}
 		</StyledFooter>
 	);
 };
