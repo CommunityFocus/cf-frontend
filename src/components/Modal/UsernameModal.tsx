@@ -5,6 +5,8 @@ import {
 	StyledUsernameModalContainer,
 } from "./UsernameModal.styled";
 import ValidationInput from "./ValidationInput";
+import socket from "../Socket/socket";
+import { roomName } from "../../../common/common";
 
 interface UsernameModalProps {
 	userName: string;
@@ -45,6 +47,10 @@ const UsernameModal = (props: UsernameModalProps): JSX.Element => {
 		if (inputValidation(inputValue) === false && inputValue !== userName) {
 			setUserName(inputValue);
 			localStorage.setItem("userName", inputValue);
+			socket.emit("changeUsername", {
+				roomName,
+				userName: inputValue,
+			});
 		}
 		setIsModalOpen(false);
 	};

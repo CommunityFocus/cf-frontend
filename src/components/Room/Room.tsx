@@ -85,7 +85,7 @@ const Room = (props: {
 	};
 
 	const onConnect = (): void => {
-		socket.emit("join", roomName);
+		socket.emit("join", { roomName, userName: userName || "defaultUser" });
 		socket.emit("timerRequest", { roomName });
 		setIsConnected(true);
 	};
@@ -120,12 +120,6 @@ const Room = (props: {
 		setIsTimerRunningClient(isTimerRunning);
 
 		setIsBreak(isBreakMode);
-
-		console.log("onTimerResponse", {
-			secondsRemaining,
-			isPaused,
-			isTimerRunning,
-		});
 	};
 
 	// eslint-disable-next-line no-shadow
@@ -155,15 +149,9 @@ const Room = (props: {
 	}, []);
 
 	useEffect(() => {
-		console.log({ timestamp, isTimerPaused });
 		// update the document title, with roomName and timestamp
 		document.title = `${formatTimestamp(timestamp)}`;
 	}, [isTimerPaused, timestamp]);
-
-	useEffect(() => {
-		console.log("URL", window.location.href);
-		console.log("roomId:", roomName);
-	}, [isConnected]);
 
 	useEffect(() => {
 		if (!userName) {
