@@ -2,13 +2,13 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { useEffect, useMemo, useState } from "react";
 import { ThemeProvider } from "styled-components";
 import socket from "./components/Socket/socket";
-import Room from "./components/Room/Room";
-import DefaultRoom from "./components/DefaultRoom/DefaultRoom";
 import LandingPage from "./components/LandingPage/LandingPage";
 import { ThemeType } from "../common/theme";
 import "reactjs-popup/dist/index.css";
 import ModalContext from "./components/Modal/ModalContext";
 import UsernameContext from "./components/Username/UsernameContext";
+import ValidRoom from "./components/Room/ValidRoom";
+import DefaultRoom from "./components/DefaultRoom/DefaultRoom";
 
 const App = (): JSX.Element => {
 	const [globalUsersConnected, setGlobalUsersConnected] = useState<number>(0);
@@ -87,10 +87,11 @@ const App = (): JSX.Element => {
 									/>
 								}
 							/>
+
 							<Route
 								path="/:room"
 								element={
-									<Room
+									<ValidRoom
 										globalUsersConnected={
 											globalUsersConnected
 										}
@@ -102,7 +103,7 @@ const App = (): JSX.Element => {
 								}
 							/>
 							<Route
-								path="/default"
+								path="*"
 								element={
 									<DefaultRoom
 										globalUsersConnected={

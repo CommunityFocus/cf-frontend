@@ -30,14 +30,9 @@ import AddTimerButton from "../TimerButton/AddTimerButton";
 import socket from "../Socket/socket";
 import ModalContext from "../Modal/ModalContext";
 import UsernameContext from "../Username/UsernameContext";
+import RoomProps from "./RoomProps";
 
-const Room = (props: {
-	globalUsersConnected: number;
-	isBreak: boolean;
-	setIsBreak: React.Dispatch<React.SetStateAction<boolean>>;
-	isConnected: boolean;
-	setIsConnected: React.Dispatch<React.SetStateAction<boolean>>;
-}): JSX.Element => {
+const Room = (props: RoomProps): JSX.Element => {
 	const {
 		globalUsersConnected,
 		isBreak,

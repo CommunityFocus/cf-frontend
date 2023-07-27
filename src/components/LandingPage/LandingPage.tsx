@@ -2,13 +2,22 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { ThemeContext } from "styled-components";
+import { HiOutlineRefresh } from "react-icons/hi";
 import { SERVER_URL } from "../../../common/common";
-import { Title, Center, Button } from "./LandingPage.styled";
+import {
+	Title,
+	Center,
+	Button,
+	StyledDivRow,
+	StyledDivSpacer,
+} from "./LandingPage.styled";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
 import { theme } from "../../../common/theme";
 import { GlobalStyle } from "../Room/Room.styled";
 import ConnectionState from "../ConnectionState/ConnectionState";
+import ValidationInput from "../Modal/ValidationInput";
+import validRoomname from "../../helpers/validRoomname";
 
 const LandingPage = (props: {
 	globalUsersConnected: number;
@@ -17,6 +26,7 @@ const LandingPage = (props: {
 }): JSX.Element => {
 	const { globalUsersConnected, isBreak, isConnected } = props;
 	const [slugName, setSlugName] = useState<string>("");
+
 	const navigate = useNavigate();
 
 	const { themeGroup } = useContext(ThemeContext);
@@ -24,15 +34,24 @@ const LandingPage = (props: {
 	const { workBackground, breakBackground, workGrey } =
 		theme[themeGroup as keyof typeof theme];
 
-	useEffect(() => {
+	const getSlug = async (): Promise<void> => {
 		axios
 			.get(`${SERVER_URL}/api/v1/getSlug`)
 			.then((res) => {
 				setSlugName(res.data.slug);
 			})
 			.catch((err) => {
-				console.log(err);
+				console.error(err);
 			});
+	};
+
+	const navigateToRoom = (): void => {
+		navigate(`/${slugName}`);
+		window.location.reload();
+	};
+
+	useEffect(() => {
+		getSlug();
 	}, []);
 
 	return (
@@ -44,15 +63,44 @@ const LandingPage = (props: {
 
 			<Center>
 				<Title color={workGrey}>Community Focus</Title>
-				<Button
-					type="button"
-					onClick={(): void => {
-						navigate(`/${slugName}`);
-						window.location.reload();
-					}}
-				>
-					Join a room
-				</Button>
+				<StyledDivSpacer>
+					<StyledDivRow>
+						<ValidationInput
+							type="text"
+							id="slug"
+							placeholder="Enter a room name"
+							value={slugName}
+							validationText={validRoomname(slugName)}
+							onChange={(
+								event: React.ChangeEvent<HTMLInputElement>
+							): void => {
+								setSlugName(event.target.value);
+							}}
+							onKeyDown={(
+								event: React.KeyboardEvent<HTMLInputElement>
+							): void => {
+								if (event.key === "Enter") {
+									navigateToRoom();
+								}
+							}}
+						/>
+
+						<HiOutlineRefresh
+							size={30}
+							onClick={(): void => {
+								getSlug();
+							}}
+						/>
+					</StyledDivRow>
+					<Button
+						type="button"
+						onClick={(): void => {
+							navigateToRoom();
+						}}
+					>
+						Join a room
+					</Button>
+				</StyledDivSpacer>
 				<Footer
 					numUsers={globalUsersConnected}
 					isBreak={isBreak}

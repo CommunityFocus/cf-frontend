@@ -1,5 +1,5 @@
 import StyledUsernameModal from "./Modal.styled";
-import { StyledButton } from "./UsernameModal.styled";
+import { StyledModalButton } from "./UsernameModal.styled";
 
 interface ModalProps {
 	isModalOpen: boolean;
@@ -22,12 +22,12 @@ const ModalComponent = ({
 			}}
 		>
 			{children}
-			<StyledButton
+			<StyledModalButton
 				type="button"
 				onClick={(): void => setIsModalOpen(false)}
 			>
 				Close
-			</StyledButton>
+			</StyledModalButton>
 		</StyledUsernameModal>
 	);
 };

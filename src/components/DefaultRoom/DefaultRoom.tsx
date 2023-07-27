@@ -7,6 +7,7 @@ import { theme } from "../../../common/theme";
 import { StyledDiv, StyledText } from "./DefaultRoom.styled";
 import { GlobalStyle } from "../Room/Room.styled";
 import ConnectionState from "../ConnectionState/ConnectionState";
+import { StyledButton } from "../Button/Button";
 
 const DefaultRoom = (props: {
 	globalUsersConnected: number;
@@ -32,14 +33,14 @@ const DefaultRoom = (props: {
 				<StyledText color={workGrey}>
 					This room is not available
 				</StyledText>
-				<button
+				<StyledButton
 					type="button"
 					onClick={(): void => {
 						Navigate("/");
 					}}
 				>
-					Back
-				</button>
+					Go Back
+				</StyledButton>
 
 				<Footer
 					numUsers={globalUsersConnected}
