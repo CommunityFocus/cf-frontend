@@ -27,6 +27,10 @@ export const StyledWorkBreakBanner = styled.h1<{
 	color: string;
 	isLoaded: boolean;
 }>`
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
 	color: ${({ color }): string => color};
 	font-size: 3rem;
 	visibility: ${({ isLoaded }): string => (isLoaded ? "visible" : "hidden")};

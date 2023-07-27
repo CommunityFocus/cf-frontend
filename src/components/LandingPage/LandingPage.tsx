@@ -10,6 +10,7 @@ import {
 	Button,
 	StyledDivRow,
 	StyledDivSpacer,
+	StyledShareText,
 } from "./LandingPage.styled";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
@@ -26,6 +27,7 @@ const LandingPage = (props: {
 }): JSX.Element => {
 	const { globalUsersConnected, isBreak, isConnected } = props;
 	const [slugName, setSlugName] = useState<string>("");
+	const [isActivated, setIsActivated] = useState<boolean>(false);
 
 	const navigate = useNavigate();
 
@@ -63,6 +65,9 @@ const LandingPage = (props: {
 
 			<Center>
 				<Title color={workGrey}>Community Focus</Title>
+				<StyledShareText color={workGrey}>
+					Create a shareable link
+				</StyledShareText>
 				<StyledDivSpacer>
 					<StyledDivRow>
 						<ValidationInput
@@ -84,11 +89,19 @@ const LandingPage = (props: {
 								}
 							}}
 						/>
-
 						<HiOutlineRefresh
 							size={30}
 							onClick={(): void => {
 								getSlug();
+								setIsActivated(true);
+								setTimeout(() => {
+									setIsActivated(false);
+								}, 500);
+							}}
+							style={{
+								cursor: "pointer",
+								transform: isActivated ? "rotate(360deg)" : "",
+								transition: "transform 0.5s ease",
 							}}
 						/>
 					</StyledDivRow>
@@ -97,6 +110,7 @@ const LandingPage = (props: {
 						onClick={(): void => {
 							navigateToRoom();
 						}}
+						disabled={validRoomname(slugName) !== false}
 					>
 						Join a room
 					</Button>

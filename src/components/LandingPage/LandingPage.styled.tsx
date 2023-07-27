@@ -8,6 +8,17 @@ export const Title = styled.h1<{ color: string }>`
 	text-align: center;
 `;
 
+export const StyledText = styled.p<{ color: string }>`
+	color: ${({ color }): string => color};
+	font-family: monospace;
+	font-size: 20px;
+	text-align: center;
+`;
+
+export const StyledShareText = styled(StyledText)`
+	margin-right: 20px;
+`;
+
 export const Center = styled.div`
 	display: flex;
 	justify-content: center;
