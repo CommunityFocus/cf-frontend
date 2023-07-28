@@ -1,15 +1,11 @@
 import styled from "styled-components";
+import { StyledButton } from "../Button/Button";
 
 export const StyledTitle = styled.h3`
 	text-align: center;
 `;
 
-export const StyledButton = styled.button`
-	border: none;
-	border-radius: 5px;
-	padding: 10px;
-	// shadow
-	box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
+export const StyledModalButton = styled(StyledButton)`
 	margin-bottom: 20px;
 `;
 

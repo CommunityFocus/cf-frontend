@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import {
-	StyledButton,
+	StyledModalButton,
 	StyledTitle,
 	StyledUsernameModalContainer,
 } from "./UsernameModal.styled";
@@ -90,13 +90,13 @@ const UsernameModal = (props: UsernameModalProps): JSX.Element => {
 					}
 				}}
 			/>
-			<StyledButton
+			<StyledModalButton
 				type="button"
 				onClick={submitHandler}
 				disabled={inputValidation(inputValue) !== false}
 			>
 				Save username
-			</StyledButton>
+			</StyledModalButton>
 		</StyledUsernameModalContainer>
 	);
 };
