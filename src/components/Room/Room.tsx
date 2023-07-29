@@ -54,7 +54,7 @@ const Room = (props: RoomProps): JSX.Element => {
 	const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
 	const { themeGroup } = useContext(ThemeContext);
-	const { setIsModalOpen } = useContext(ModalContext);
+	const { setIsUsernameModalOpen } = useContext(ModalContext);
 	const { userName } = useContext(UsernameContext);
 
 	const { workBackground, breakBackground, workGrey } =
@@ -147,9 +147,9 @@ const Room = (props: RoomProps): JSX.Element => {
 
 	useEffect(() => {
 		if (!userName) {
-			setIsModalOpen(true);
+			setIsUsernameModalOpen(true);
 		}
-	}, [userName, setIsModalOpen]);
+	}, [userName, setIsUsernameModalOpen]);
 
 	return (
 		<>

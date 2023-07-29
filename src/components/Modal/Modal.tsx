@@ -1,34 +1,34 @@
-import StyledUsernameModal from "./Modal.styled";
+import StyledModal from "./Modal.styled";
 import { StyledModalButton } from "./UsernameModal.styled";
 
 interface ModalProps {
-	isModalOpen: boolean;
-	setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+	isUsernamModalOpen: boolean;
+	setIsUsernameModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
 	children: React.ReactNode;
 }
 
 const ModalComponent = ({
-	isModalOpen,
-	setIsModalOpen,
+	isUsernamModalOpen,
+	setIsUsernameModalOpen,
 	children,
 }: ModalProps): JSX.Element => {
-	StyledUsernameModal.setAppElement("#root");
+	StyledModal.setAppElement("#root");
 
 	return (
-		<StyledUsernameModal
-			isOpen={isModalOpen}
+		<StyledModal
+			isOpen={isUsernamModalOpen}
 			onRequestClose={(): void => {
-				setIsModalOpen(false);
+				setIsUsernameModalOpen(false);
 			}}
 		>
 			{children}
 			<StyledModalButton
 				type="button"
-				onClick={(): void => setIsModalOpen(false)}
+				onClick={(): void => setIsUsernameModalOpen(false)}
 			>
 				Close
 			</StyledModalButton>
-		</StyledUsernameModal>
+		</StyledModal>
 	);
 };
 

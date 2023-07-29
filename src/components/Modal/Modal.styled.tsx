@@ -2,7 +2,7 @@ import styled from "styled-components";
 import ReactModal from "react-modal";
 import { Theme } from "../../../common/theme";
 
-const StyledUsernameModal = styled(ReactModal)<{ theme: Theme }>`
+const StyledModal = styled(ReactModal)<{ theme: Theme }>`
 	background-color: white;
 	border-radius: 10px;
 	height: 280px;
@@ -23,4 +23,4 @@ const StyledUsernameModal = styled(ReactModal)<{ theme: Theme }>`
 	gap: 10px;
 `;
 
-export default StyledUsernameModal;
+export default StyledModal;

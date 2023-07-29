@@ -11,11 +11,11 @@ import { roomName } from "../../../common/common";
 interface UsernameModalProps {
 	userName: string;
 	setUserName: (userName: string) => void;
-	setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
-	isModalOpen: boolean;
+	setIsUsernameModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+	isUsernamModalOpen: boolean;
 }
 const UsernameModal = (props: UsernameModalProps): JSX.Element => {
-	const { userName, setUserName, setIsModalOpen, isModalOpen } = props;
+	const { userName, setUserName, setIsUsernameModalOpen, isUsernamModalOpen } = props;
 	const [inputValue, setInputValue] = useState<string>("");
 
 	const inputValidation = (input: string): string | false => {
@@ -52,15 +52,15 @@ const UsernameModal = (props: UsernameModalProps): JSX.Element => {
 				userName: inputValue,
 			});
 		}
-		setIsModalOpen(false);
+		setIsUsernameModalOpen(false);
 	};
 
 	useEffect(() => {
-		if (isModalOpen) {
+		if (isUsernamModalOpen) {
 			// focus on the input when the modal opens
 			document.getElementById("username-input")?.focus();
 		}
-	}, [isModalOpen]);
+	}, [isUsernamModalOpen]);
 
 	return (
 		<StyledUsernameModalContainer>
