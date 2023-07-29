@@ -1,5 +1,6 @@
 import { FaRegPauseCircle, FaRegPlayCircle } from "react-icons/fa";
 import { LuTimerReset } from "react-icons/lu";
+import { BiAlarmAdd } from "react-icons/bi";
 import { BsFillShareFill } from "react-icons/bs";
 import StyledButtonRow from "./TimerControls.styled";
 
@@ -10,6 +11,7 @@ const TimerControls = ({
 	shareRoom,
 	isLoaded,
 	isTimerRunningClient,
+	setIsTimerAddModalOpen,
 }: {
 	pauseTimer: () => void;
 	isTimerPaused: boolean;
@@ -17,6 +19,7 @@ const TimerControls = ({
 	shareRoom: () => void;
 	isLoaded: boolean;
 	isTimerRunningClient: boolean;
+	setIsTimerAddModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }): JSX.Element => {
 	return (
 		<StyledButtonRow show={isLoaded}>
@@ -53,6 +56,12 @@ const TimerControls = ({
 				data-tooltip-id="my-tooltip"
 				data-tooltip-content="Share the timer with friends!"
 				data-tooltip-place="top"
+			/>
+
+			<BiAlarmAdd
+				type="button"
+				onClick={(): void => setIsTimerAddModalOpen(true)}
+				size="30px"
 			/>
 		</StyledButtonRow>
 	);

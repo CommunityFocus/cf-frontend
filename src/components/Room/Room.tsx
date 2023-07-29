@@ -186,6 +186,7 @@ const Room = (props: RoomProps): JSX.Element => {
 						shareRoom={shareRoom}
 						isLoaded={isLoaded}
 						isTimerRunningClient={isTimerRunningClient}
+						setIsTimerAddModalOpen={setIsTimerAddModalOpen}
 					/>
 
 					<WorkBreakButton
@@ -195,13 +196,6 @@ const Room = (props: RoomProps): JSX.Element => {
 						isTimerRunningClient={isTimerRunningClient}
 						isLoaded={isLoaded}
 					/>
-					<button
-						type="button"
-						onClick={(): void => setIsTimerAddModalOpen(true)}
-					>
-						{" "}
-						Add Timer{" "}
-					</button>
 				</Center>
 				<ToastContainer theme="dark" pauseOnFocusLoss />
 				<UserBubbles userListInRoom={userListInRoom} />
@@ -215,7 +209,6 @@ const Room = (props: RoomProps): JSX.Element => {
 						setTimerMinuteButtons={setTimerMinuteButtons}
 						setIsTimerAddModalOpen={setIsTimerAddModalOpen}
 						isTimerAddModalOpen={isTimerAddModalOpen}
-						
 					/>
 				</ModalComponent>
 
