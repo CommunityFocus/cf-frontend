@@ -20,7 +20,7 @@ const App = (): JSX.Element => {
 			? (localStorage.getItem("themeGroup") as keyof typeof ThemeType)
 			: "original"
 	);
-	const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+	const [isUsernamModalOpen, setIsUsernameModalOpen] = useState<boolean>(false);
 	const [userName, setUserName] = useState<string>(
 		localStorage.getItem("userName") || ""
 	);
@@ -67,10 +67,10 @@ const App = (): JSX.Element => {
 				<ModalContext.Provider
 					value={useMemo(
 						() => ({
-							isModalOpen,
-							setIsModalOpen,
+							isUsernamModalOpen,
+							setIsUsernameModalOpen,
 						}),
-						[isModalOpen, setIsModalOpen]
+						[isUsernamModalOpen, setIsUsernameModalOpen]
 					)}
 				>
 					<BrowserRouter>

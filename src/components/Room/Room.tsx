@@ -26,11 +26,12 @@ import {
 import WorkBreakButton from "../TimerButton/WorkBreakButton";
 import { theme } from "../../../common/theme";
 import "react-dropdown/style.css";
-import AddTimerButton from "../TimerButton/AddTimerButton";
 import socket from "../Socket/socket";
 import ModalContext from "../Modal/ModalContext";
 import UsernameContext from "../Username/UsernameContext";
 import RoomProps from "./RoomProps";
+import ModalComponent from "../Modal/Modal";
+import AddTimerModal from "../Modal/AddTimerModal";
 
 const Room = (props: RoomProps): JSX.Element => {
 	const {
@@ -52,9 +53,11 @@ const Room = (props: RoomProps): JSX.Element => {
 		useState<boolean>(false);
 
 	const [isLoaded, setIsLoaded] = useState<boolean>(false);
+	const [isTimerAddModalOpen, setIsTimerAddModalOpen] =
+		useState<boolean>(false);
 
 	const { themeGroup } = useContext(ThemeContext);
-	const { setIsModalOpen } = useContext(ModalContext);
+	const { setIsUsernameModalOpen } = useContext(ModalContext);
 	const { userName } = useContext(UsernameContext);
 
 	const { workBackground, breakBackground, workGrey } =
@@ -147,9 +150,9 @@ const Room = (props: RoomProps): JSX.Element => {
 
 	useEffect(() => {
 		if (!userName) {
-			setIsModalOpen(true);
+			setIsUsernameModalOpen(true);
 		}
-	}, [userName, setIsModalOpen]);
+	}, [userName, setIsUsernameModalOpen]);
 
 	return (
 		<>
@@ -175,10 +178,6 @@ const Room = (props: RoomProps): JSX.Element => {
 						isTimerPaused={isTimerPaused}
 						isLoaded={isLoaded}
 					/>
-					<AddTimerButton
-						timerMinuteButtons={timerMinuteButtons}
-						setTimerMinuteButtons={setTimerMinuteButtons}
-					/>
 
 					<TimerControls
 						pauseTimer={pauseTimer}
@@ -187,6 +186,7 @@ const Room = (props: RoomProps): JSX.Element => {
 						shareRoom={shareRoom}
 						isLoaded={isLoaded}
 						isTimerRunningClient={isTimerRunningClient}
+						setIsTimerAddModalOpen={setIsTimerAddModalOpen}
 					/>
 
 					<WorkBreakButton
@@ -199,6 +199,18 @@ const Room = (props: RoomProps): JSX.Element => {
 				</Center>
 				<ToastContainer theme="dark" pauseOnFocusLoss />
 				<UserBubbles userListInRoom={userListInRoom} />
+
+				<ModalComponent
+					isModalOpen={isTimerAddModalOpen}
+					setIsModalOpen={setIsTimerAddModalOpen}
+				>
+					<AddTimerModal
+						timerMinuteButtons={timerMinuteButtons}
+						setTimerMinuteButtons={setTimerMinuteButtons}
+						setIsTimerAddModalOpen={setIsTimerAddModalOpen}
+						isTimerAddModalOpen={isTimerAddModalOpen}
+					/>
+				</ModalComponent>
 
 				<Footer
 					numUsers={globalUsersConnected}

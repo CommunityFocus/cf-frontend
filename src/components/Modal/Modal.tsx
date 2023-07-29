@@ -1,4 +1,4 @@
-import StyledUsernameModal from "./Modal.styled";
+import StyledModal from "./Modal.styled";
 import { StyledModalButton } from "./UsernameModal.styled";
 
 interface ModalProps {
@@ -12,10 +12,10 @@ const ModalComponent = ({
 	setIsModalOpen,
 	children,
 }: ModalProps): JSX.Element => {
-	StyledUsernameModal.setAppElement("#root");
+	StyledModal.setAppElement("#root");
 
 	return (
-		<StyledUsernameModal
+		<StyledModal
 			isOpen={isModalOpen}
 			onRequestClose={(): void => {
 				setIsModalOpen(false);
@@ -28,7 +28,7 @@ const ModalComponent = ({
 			>
 				Close
 			</StyledModalButton>
-		</StyledUsernameModal>
+		</StyledModal>
 	);
 };
 
