@@ -16,7 +16,8 @@ interface HeaderProps {
 
 const Header = ({ isBreak }: HeaderProps): JSX.Element => {
 	const { themeGroup, setThemeGroup } = useContext(ThemeContext);
-	const { isUsernamModalOpen, setIsUsernameModalOpen } = useContext(ModalContext);
+	const { isUsernamModalOpen, setIsUsernameModalOpen } =
+		useContext(ModalContext);
 	const { userName, setUserName } = useContext(UsernameContext);
 
 	const { workAccent, breakAccent, workGrey } =
@@ -49,8 +50,8 @@ const Header = ({ isBreak }: HeaderProps): JSX.Element => {
 					}}
 				/>
 				<ModalComponent
-					isUsernamModalOpen={isUsernamModalOpen}
-					setIsUsernameModalOpen={setIsUsernameModalOpen}
+					isModalOpen={isUsernamModalOpen}
+					setIsModalOpen={setIsUsernameModalOpen}
 				>
 					<UsernameModal
 						userName={userName}

@@ -15,7 +15,12 @@ interface UsernameModalProps {
 	isUsernamModalOpen: boolean;
 }
 const UsernameModal = (props: UsernameModalProps): JSX.Element => {
-	const { userName, setUserName, setIsUsernameModalOpen, isUsernamModalOpen } = props;
+	const {
+		userName,
+		setUserName,
+		setIsUsernameModalOpen,
+		isUsernamModalOpen,
+	} = props;
 	const [inputValue, setInputValue] = useState<string>("");
 
 	const inputValidation = (input: string): string | false => {
