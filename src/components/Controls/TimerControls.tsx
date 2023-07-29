@@ -2,6 +2,7 @@ import { FaRegPauseCircle, FaRegPlayCircle } from "react-icons/fa";
 import { LuTimerReset } from "react-icons/lu";
 import { BiAlarmAdd } from "react-icons/bi";
 import { BsFillShareFill } from "react-icons/bs";
+import { RxOpenInNewWindow } from "react-icons/rx";
 import StyledButtonRow from "./TimerControls.styled";
 
 const TimerControls = ({
@@ -61,6 +62,18 @@ const TimerControls = ({
 			<BiAlarmAdd
 				type="button"
 				onClick={(): void => setIsTimerAddModalOpen(true)}
+				size="30px"
+			/>
+
+			<RxOpenInNewWindow
+				type="button"
+				onClick={(): void => {
+					window.open(
+						window.location.href,
+						"minimode",
+						"resizable,width=480=height=575"
+					);
+				}}
 				size="30px"
 			/>
 		</StyledButtonRow>
