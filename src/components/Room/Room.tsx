@@ -32,6 +32,9 @@ import UsernameContext from "../Username/UsernameContext";
 import RoomProps from "./RoomProps";
 import ModalComponent from "../Modal/Modal";
 import AddTimerModal from "../Modal/AddTimerModal";
+import MessageLogContainer from "../MessageLog/MessageLogContainer";
+import MessageLogBubble from "../MessageLog/MessageLogBubble";
+import MessageLog from "../MessageLog/MessageLog";
 
 const Room = (props: RoomProps): JSX.Element => {
 	const {
@@ -55,6 +58,10 @@ const Room = (props: RoomProps): JSX.Element => {
 	const [isLoaded, setIsLoaded] = useState<boolean>(false);
 	const [isTimerAddModalOpen, setIsTimerAddModalOpen] =
 		useState<boolean>(false);
+
+	const [messageList, setMessageList] = useState<
+		{ message: string; userName: string; date: Date }[]
+	>([]);
 
 	const { themeGroup } = useContext(ThemeContext);
 	const { setIsUsernameModalOpen } = useContext(ModalContext);
@@ -127,12 +134,24 @@ const Room = (props: RoomProps): JSX.Element => {
 		setIsBreak(isBreakMode);
 	};
 
-	const onMessageLog = (message: string): void => {
-		console.log("messageLog", message);
+	const onMessageLog = (message: {
+		messageLog: string;
+		date: Date;
+	}): void => {
+		setMessageList((prev) => [
+			...prev,
+			{
+				message: message.messageLog,
+				userName: userName || "Anonymous",
+				date: message.date,
+			},
+		]);
 	};
 
-	const onMessageLogArray = (message: string[]): void => {
-		console.log("messageLogArray", message);
+	const onMessageLogArray = (message: {
+		messageHistory: { message: string; userName: string; date: Date }[];
+	}): void => {
+		setMessageList(message.messageHistory);
 	};
 
 	useEffect(() => {
@@ -209,6 +228,18 @@ const Room = (props: RoomProps): JSX.Element => {
 						isLoaded={isLoaded}
 					/>
 				</Center>
+				{messageList.length > 0 && (
+					<MessageLogContainer>
+						{messageList.map((msg) => (
+							<MessageLogBubble key={crypto.randomUUID()}>
+								<MessageLog
+									message={msg.message}
+									date={msg.date}
+								/>
+							</MessageLogBubble>
+						))}
+					</MessageLogContainer>
+				)}
 				<ToastContainer theme="dark" pauseOnFocusLoss />
 				<UserBubbles userListInRoom={userListInRoom} />
 

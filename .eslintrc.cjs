@@ -59,6 +59,7 @@ module.exports = {
 				ts: "never",
 				tsx: "never",
 				styled: "ignorePackages",
+				json: "ignorePackages",
 			},
 		],
 		"no-plusplus": "off",
