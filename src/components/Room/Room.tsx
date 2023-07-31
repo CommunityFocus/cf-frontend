@@ -127,12 +127,22 @@ const Room = (props: RoomProps): JSX.Element => {
 		setIsBreak(isBreakMode);
 	};
 
+	const onMessageLog = (message: string): void => {
+		console.log("messageLog", message);
+	};
+
+	const onMessageLogArray = (message: string[]): void => {
+		console.log("messageLogArray", message);
+	};
+
 	useEffect(() => {
 		socket.on("connect", onConnect);
 		socket.on("disconnect", onDisconnect);
 		socket.on("timerResponse", onTimerResponse);
 		socket.on("usersInRoom", onUsersInRoom);
 		socket.on("workBreakResponse", onWorkBreakResponse);
+		socket.on("messageLog", onMessageLog);
+		socket.on("messageLogArray", onMessageLogArray);
 
 		return () => {
 			socket.off("connect", onConnect);
@@ -140,6 +150,8 @@ const Room = (props: RoomProps): JSX.Element => {
 			socket.off("timerResponse", onTimerResponse);
 			socket.off("usersInRoom", onUsersInRoom);
 			socket.off("workBreakResponse", onWorkBreakResponse);
+			socket.off("messageLog", onMessageLog);
+			socket.off("messageLogArray", onMessageLogArray);
 		};
 	}, []);
 
