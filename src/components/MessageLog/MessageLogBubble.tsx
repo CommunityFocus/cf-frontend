@@ -1,11 +1,11 @@
-import { StyledMessageLogBubble } from "./MessageLog.styled";
+// import { StyledMessageLogBubble } from "./MessageLog.styled";
 
-interface MessageLogBubbleProps {
-	children: React.ReactNode;
-}
+// interface MessageLogBubbleProps {
+// 	children: React.ReactNode;
+// }
 
-const MessageLogBubble = ({ children }: MessageLogBubbleProps): JSX.Element => {
-	return <StyledMessageLogBubble>{children}</StyledMessageLogBubble>;
-};
+// const MessageLogBubble = ({ children }: MessageLogBubbleProps): JSX.Element => {
+// 	return <StyledMessageLogBubble>{children}</StyledMessageLogBubble>;
+// };
 
-export default MessageLogBubble;
+// export default MessageLogBubble;

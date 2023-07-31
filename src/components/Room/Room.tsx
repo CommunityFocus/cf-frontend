@@ -32,9 +32,7 @@ import UsernameContext from "../Username/UsernameContext";
 import RoomProps from "./RoomProps";
 import ModalComponent from "../Modal/Modal";
 import AddTimerModal from "../Modal/AddTimerModal";
-import MessageLogContainer from "../MessageLog/MessageLogContainer";
-import MessageLogBubble from "../MessageLog/MessageLogBubble";
-import MessageLog from "../MessageLog/MessageLog";
+import MessageLogs from "../MessageLog/MessageLogs";
 
 const Room = (props: RoomProps): JSX.Element => {
 	const {
@@ -228,18 +226,9 @@ const Room = (props: RoomProps): JSX.Element => {
 						isLoaded={isLoaded}
 					/>
 				</Center>
-				{messageList.length > 0 && (
-					<MessageLogContainer>
-						{messageList.map((msg) => (
-							<MessageLogBubble key={crypto.randomUUID()}>
-								<MessageLog
-									message={msg.message}
-									date={msg.date}
-								/>
-							</MessageLogBubble>
-						))}
-					</MessageLogContainer>
-				)}
+
+				<MessageLogs messageList={messageList} />
+
 				<ToastContainer theme="dark" pauseOnFocusLoss />
 				<UserBubbles userListInRoom={userListInRoom} />
 

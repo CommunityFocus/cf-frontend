@@ -3,7 +3,7 @@ import ReactTimeAgo from "react-time-ago";
 import {
 	MessageLogDate,
 	MessageLogMessage,
-	PaddingDiv,
+	StyledMessageLogBubble,
 } from "./MessageLog.styled";
 
 interface MessageLogProps {
@@ -17,20 +17,20 @@ const MessageLog = ({
 	date,
 }: MessageLogProps): JSX.Element => {
 	return (
-		<>
+		<StyledMessageLogBubble>
 			<MessageLogMessage>{message}</MessageLogMessage>
-			<MessageLogDate>
-				{new Date(date).toLocaleTimeString("en-US", {
-					hour: "numeric",
-					minute: "numeric",
-				})}
+			<div>
+				<MessageLogDate>
+					{new Date(date).toLocaleTimeString("en-US", {
+						hour: "numeric",
+						minute: "numeric",
+					})}
 
-				<PaddingDiv>
 					{" | "}
 					<ReactTimeAgo date={Date.parse(`${date}`)} locale="en-US" />
-				</PaddingDiv>
-			</MessageLogDate>
-		</>
+				</MessageLogDate>
+			</div>
+		</StyledMessageLogBubble>
 	);
 };
 
