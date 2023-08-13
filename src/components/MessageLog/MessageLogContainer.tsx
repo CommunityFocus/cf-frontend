@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
-import { BsArrowUpCircleFill } from "react-icons/bs";
+import { BsArrowDownCircleFill, BsArrowUpCircleFill } from "react-icons/bs";
 import {
+	OverflowIndicatorBottom,
 	OverflowIndicatorTop,
 	StyledMessageLogContainer,
 } from "./MessageLog.styled";
@@ -13,6 +14,8 @@ const MessageLogContainer = ({
 	children,
 }: MessageLogContainerProps): JSX.Element => {
 	const [showTopOverflow, setShowTopOverflow] = useState<boolean>(false);
+	const [showBottomOverflow, setShowBottomOverflow] =
+		useState<boolean>(false);
 
 	const messagesEndRef = useRef<HTMLDivElement>(null);
 	const messageContainerRef = useRef<HTMLDivElement>(null);
@@ -32,12 +35,25 @@ const MessageLogContainer = ({
 
 	const showTopOverflowIndicator = (): void => {
 		if (messageContainerRef.current) {
-			setShowTopOverflow(messageContainerRef.current.scrollTop > 0);
+			setShowTopOverflow(messageContainerRef.current.scrollTop > 50);
+		}
+	};
+
+	const showBottomOverflowIndicator = (): void => {
+		if (messageContainerRef.current) {
+			// returm true if the last message is not visible
+			setShowBottomOverflow(
+				messageContainerRef.current.scrollHeight -
+					messageContainerRef.current.scrollTop -
+					messageContainerRef.current.clientHeight >
+					50
+			);
 		}
 	};
 
 	const scrollIndicators = (): void => {
 		showTopOverflowIndicator();
+		showBottomOverflowIndicator();
 	};
 
 	useEffect(() => {
@@ -50,11 +66,13 @@ const MessageLogContainer = ({
 			ref={messageContainerRef}
 		>
 			<OverflowIndicatorTop $visible={showTopOverflow}>
-				<BsArrowUpCircleFill size={15} onClick={scrollToTop} />
+				<BsArrowUpCircleFill size={13.5} onClick={scrollToTop} />
 			</OverflowIndicatorTop>
 			{children}
-
 			<div ref={messagesEndRef} />
+			<OverflowIndicatorBottom $visible={showBottomOverflow}>
+				<BsArrowDownCircleFill size={13.5} onClick={scrollToBottom} />
+			</OverflowIndicatorBottom>
 		</StyledMessageLogContainer>
 	);
 };
