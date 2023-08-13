@@ -12,6 +12,7 @@ const UserBubbles = (props: { userListInRoom: string[] }): JSX.Element => {
 					<UserBubble
 						user={user}
 						key={crypto.getRandomValues(new Uint32Array(1))[0]}
+						size={30}
 					/>
 				))
 			) : (
@@ -20,6 +21,7 @@ const UserBubbles = (props: { userListInRoom: string[] }): JSX.Element => {
 						<UserBubble
 							user={user}
 							key={crypto.getRandomValues(new Uint32Array(1))[0]}
+							size={30}
 						/>
 					))}
 					<MultiUserBubble users={userListInRoom.slice(6)} />

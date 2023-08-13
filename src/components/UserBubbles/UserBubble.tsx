@@ -1,7 +1,12 @@
 import { TooltipContainer, UserBubbleStyled } from "./UserBubble.styled";
 
-const UserBubble = (props: { user: string }): JSX.Element => {
-	const { user } = props;
+interface UserBubbleProps {
+	user: string;
+	size: number;
+}
+
+const UserBubble = (props: UserBubbleProps): JSX.Element => {
+	const { user, size } = props;
 	return (
 		<TooltipContainer>
 			<UserBubbleStyled
@@ -9,6 +14,7 @@ const UserBubble = (props: { user: string }): JSX.Element => {
 				data-tooltip-id="my-tooltip"
 				data-tooltip-content={user}
 				data-tooltip-place="top"
+				$size={size}
 			>
 				{user[0]
 					.toUpperCase()

@@ -37,13 +37,40 @@ export const StyledMessageLogContainer = styled.div`
 export const StyledMessageLogBubble = styled.div`
 	display: flex;
 	flex-direction: row;
-	justify-content: space-between;
+	margin-bottom: 10px;
 `;
 
 export const MessageLogMessage = styled.span`
 	font-size: 12px;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: left;
+	max-width: 200px;
+	margin-left: 5px;
 `;
 
 export const MessageLogDate = styled.span`
 	font-size: 9px;
+
+	display: flex;
+	flex-direction: row;
+`;
+
+export const MessageDateDiv = styled.div`
+	margin-left: auto;
+`;
+
+export const MessageLogCenterDiv = styled.div`
+	display: flex;
+	flex-direction: column;
+`;
+
+export const OverflowIndicatorTop = styled.div<{ $visible: boolean }>`
+	display: ${(props): string => (props.$visible ? "flex" : "none")};
+	justify-content: center;
+	align-items: center;
+
+	position: sticky;
+	top: -8px;
 `;

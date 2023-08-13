@@ -12,6 +12,7 @@ const MessageLogs = ({ messageList }: MessageLogsProps): JSX.Element | null => {
 				<MessageLog
 					message={msg.message}
 					date={msg.date}
+					userName={msg.userName}
 					key={crypto.randomUUID()}
 				/>
 			))}
