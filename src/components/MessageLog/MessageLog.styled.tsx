@@ -80,7 +80,6 @@ export const OverflowIndicatorBottom = styled.div<{ $visible: boolean }>`
 	justify-content: center;
 	align-items: center;
 
-	// position on top of other elements and dont push anything down
 	position: sticky;
 	bottom: -8px;
 `;
