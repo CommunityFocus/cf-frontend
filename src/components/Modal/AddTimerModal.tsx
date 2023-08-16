@@ -1,11 +1,13 @@
 import { useEffect } from "react";
 import AddTimerButton from "../TimerButton/AddTimerButton";
+import RunCustomTimer from "../TimerButton/RunCustomTimer";
 
 interface AddTimerModalProps {
 	timerMinuteButtons: number[];
 	setTimerMinuteButtons: React.Dispatch<React.SetStateAction<number[]>>;
 	setIsTimerAddModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
 	isTimerAddModalOpen: boolean;
+	roomName: string;
 }
 const AddTimerModal = (props: AddTimerModalProps): JSX.Element => {
 	const {
@@ -13,6 +15,7 @@ const AddTimerModal = (props: AddTimerModalProps): JSX.Element => {
 		setTimerMinuteButtons,
 		setIsTimerAddModalOpen,
 		isTimerAddModalOpen,
+		roomName,
 	} = props;
 
 	useEffect(() => {
@@ -26,6 +29,11 @@ const AddTimerModal = (props: AddTimerModalProps): JSX.Element => {
 			<AddTimerButton
 				timerMinuteButtons={timerMinuteButtons}
 				setTimerMinuteButtons={setTimerMinuteButtons}
+				setIsTimerAddModalOpen={setIsTimerAddModalOpen}
+			/>
+
+			<RunCustomTimer
+				roomName={roomName}
 				setIsTimerAddModalOpen={setIsTimerAddModalOpen}
 			/>
 		</div>
