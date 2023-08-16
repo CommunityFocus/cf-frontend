@@ -5,7 +5,7 @@ import { Theme } from "../../../common/theme";
 const StyledModal = styled(ReactModal)<{ theme: Theme }>`
 	background-color: white;
 	border-radius: 10px;
-	min-height: 280px;
+	height: 280px;
 	width: 400px;
 	display: flex;
 	flex-direction: column;

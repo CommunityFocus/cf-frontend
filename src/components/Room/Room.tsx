@@ -241,7 +241,6 @@ const Room = (props: RoomProps): JSX.Element => {
 						setTimerMinuteButtons={setTimerMinuteButtons}
 						setIsTimerAddModalOpen={setIsTimerAddModalOpen}
 						isTimerAddModalOpen={isTimerAddModalOpen}
-						roomName={roomName}
 					/>
 				</ModalComponent>
 
