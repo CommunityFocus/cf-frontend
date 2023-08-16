@@ -32,6 +32,7 @@ import UsernameContext from "../Username/UsernameContext";
 import RoomProps from "./RoomProps";
 import ModalComponent from "../Modal/Modal";
 import AddTimerModal from "../Modal/AddTimerModal";
+import MessageLogs from "../MessageLog/MessageLogs";
 
 const Room = (props: RoomProps): JSX.Element => {
 	const {
@@ -55,6 +56,10 @@ const Room = (props: RoomProps): JSX.Element => {
 	const [isLoaded, setIsLoaded] = useState<boolean>(false);
 	const [isTimerAddModalOpen, setIsTimerAddModalOpen] =
 		useState<boolean>(false);
+
+	const [messageList, setMessageList] = useState<
+		{ message: string; userName: string; date: Date }[]
+	>([]);
 
 	const { themeGroup } = useContext(ThemeContext);
 	const { setIsUsernameModalOpen } = useContext(ModalContext);
@@ -127,12 +132,34 @@ const Room = (props: RoomProps): JSX.Element => {
 		setIsBreak(isBreakMode);
 	};
 
+	const onMessageLog = (message: {
+		messageLog: string;
+		date: Date;
+	}): void => {
+		setMessageList((prev) => [
+			...prev,
+			{
+				message: message.messageLog,
+				userName: userName || "Anonymous",
+				date: message.date,
+			},
+		]);
+	};
+
+	const onMessageLogArray = (message: {
+		messageHistory: { message: string; userName: string; date: Date }[];
+	}): void => {
+		setMessageList(message.messageHistory);
+	};
+
 	useEffect(() => {
 		socket.on("connect", onConnect);
 		socket.on("disconnect", onDisconnect);
 		socket.on("timerResponse", onTimerResponse);
 		socket.on("usersInRoom", onUsersInRoom);
 		socket.on("workBreakResponse", onWorkBreakResponse);
+		socket.on("messageLog", onMessageLog);
+		socket.on("messageLogArray", onMessageLogArray);
 
 		return () => {
 			socket.off("connect", onConnect);
@@ -140,6 +167,8 @@ const Room = (props: RoomProps): JSX.Element => {
 			socket.off("timerResponse", onTimerResponse);
 			socket.off("usersInRoom", onUsersInRoom);
 			socket.off("workBreakResponse", onWorkBreakResponse);
+			socket.off("messageLog", onMessageLog);
+			socket.off("messageLogArray", onMessageLogArray);
 		};
 	}, []);
 
@@ -197,6 +226,9 @@ const Room = (props: RoomProps): JSX.Element => {
 						isLoaded={isLoaded}
 					/>
 				</Center>
+
+				<MessageLogs messageList={messageList} />
+
 				<ToastContainer theme="dark" pauseOnFocusLoss />
 				<UserBubbles userListInRoom={userListInRoom} />
 

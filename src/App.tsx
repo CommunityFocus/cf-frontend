@@ -20,7 +20,8 @@ const App = (): JSX.Element => {
 			? (localStorage.getItem("themeGroup") as keyof typeof ThemeType)
 			: "original"
 	);
-	const [isUsernamModalOpen, setIsUsernameModalOpen] = useState<boolean>(false);
+	const [isUsernamModalOpen, setIsUsernameModalOpen] =
+		useState<boolean>(false);
 	const [userName, setUserName] = useState<string>(
 		localStorage.getItem("userName") || ""
 	);
