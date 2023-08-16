@@ -34,4 +34,17 @@ export const StyledWorkBreakBanner = styled.h1<{
 	color: ${({ color }): string => color};
 	font-size: 3rem;
 	visibility: ${({ isLoaded }): string => (isLoaded ? "visible" : "hidden")};
+
+	// hide if window is too small
+	@media (max-height: 680px), (max-width: 680px) {
+		font-size: 1.5rem;
+	}
+
+	@media (max-height: 500px), (max-width: 500px) {
+		font-size: 1rem;
+	}
+
+	@media (max-width: 300px), (max-height: 400px) {
+		display: none;
+	}
 `;

@@ -12,6 +12,10 @@ export const StyledFooter = styled.div<{ backColor: string }>`
 
 	display: grid;
 	grid-template-columns: 1fr 5fr 1fr;
+
+	@media (max-width: 300px), (max-height: 500px) {
+		display: none;
+	}
 `;
 
 export const FooterText = styled.div`

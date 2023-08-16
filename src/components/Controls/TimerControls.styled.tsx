@@ -1,6 +1,9 @@
+import { BiAlarmAdd } from "react-icons/bi";
+import { BsFillShareFill } from "react-icons/bs";
+import { RxOpenInNewWindow } from "react-icons/rx";
 import styled from "styled-components";
 
-const StyledButtonRow = styled.div<{
+export const StyledButtonRow = styled.div<{
 	show: boolean;
 }>`
 	display: flex;
@@ -13,4 +16,20 @@ const StyledButtonRow = styled.div<{
 	visibility: ${({ show }): string => (show ? "visible" : "hidden")};
 `;
 
-export default StyledButtonRow;
+export const StyledShareIcon = styled(BsFillShareFill)`
+	@media (max-width: 300px), (max-height: 500px) {
+		display: none;
+	}
+`;
+
+export const StyledReopenIcon = styled(RxOpenInNewWindow)`
+	@media (max-width: 300px), (max-height: 500px) {
+		display: none;
+	}
+`;
+
+export const StyledAddTimerIcon = styled(BiAlarmAdd)`
+	@media (max-width: 300px), (max-height: 500px) {
+		display: none;
+	}
+`;

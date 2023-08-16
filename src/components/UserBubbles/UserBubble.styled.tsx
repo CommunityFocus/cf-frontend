@@ -29,6 +29,11 @@ export const UserBubblesContainer = styled.div`
 	right: 0;
 	margin: auto;
 	gap: 5px;
+
+	// hide if window is too small
+	@media (max-height: 680px), (max-width: 680px) {
+		display: none;
+	}
 `;
 
 export const TooltipContainer = styled.div`
