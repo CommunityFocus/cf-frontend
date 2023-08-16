@@ -73,6 +73,14 @@ const Timestamp = (props: TimestampProps): JSX.Element => {
 		buildCircle();
 	}, [timerMinuteButtons]);
 
+	useEffect(() => {
+		// if timestamp gets to 1, then play audio
+		if (timestamp === 1) {
+			const audio = new Audio("/audio/chirptone.wav");
+			audio.play();
+		}
+	}, [timestamp]);
+
 	return (
 		<div>
 			<StyledBigCircle>
