@@ -1,9 +1,11 @@
 import { FaRegPauseCircle, FaRegPlayCircle } from "react-icons/fa";
 import { LuTimerReset } from "react-icons/lu";
-import { BiAlarmAdd } from "react-icons/bi";
-import { BsFillShareFill } from "react-icons/bs";
-import { RxOpenInNewWindow } from "react-icons/rx";
-import StyledButtonRow from "./TimerControls.styled";
+import {
+	StyledAddTimerIcon,
+	StyledButtonRow,
+	StyledReopenIcon,
+	StyledShareIcon,
+} from "./TimerControls.styled";
 
 const TimerControls = ({
 	pauseTimer,
@@ -51,7 +53,7 @@ const TimerControls = ({
 				data-tooltip-content="Reset the Timer to the original previously set time"
 				data-tooltip-place="top"
 			/>
-			<BsFillShareFill
+			<StyledShareIcon
 				onClick={shareRoom}
 				size={30}
 				data-tooltip-id="my-tooltip"
@@ -59,13 +61,13 @@ const TimerControls = ({
 				data-tooltip-place="top"
 			/>
 
-			<BiAlarmAdd
+			<StyledAddTimerIcon
 				type="button"
 				onClick={(): void => setIsTimerAddModalOpen(true)}
 				size="30px"
 			/>
 
-			<RxOpenInNewWindow
+			<StyledReopenIcon
 				type="button"
 				onClick={(): void => {
 					window.open(

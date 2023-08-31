@@ -1,7 +1,7 @@
 import { ThemeContext } from "styled-components";
 import { useContext } from "react";
 import { Tooltip } from "react-tooltip";
-// import Modal from "react-modal";
+import useWindowSize from "use-window-size-v2";
 import {
 	StyledConnectionState,
 	StyledFooter,
@@ -23,6 +23,7 @@ const Footer = ({
 	usersInRoom = undefined,
 }: FooterProps): JSX.Element => {
 	const { themeGroup } = useContext(ThemeContext);
+	const { width } = useWindowSize();
 
 	const { workAccent, breakAccent, workGrey } =
 		theme[themeGroup as keyof typeof theme];
@@ -31,15 +32,28 @@ const Footer = ({
 		<StyledFooter backColor={!isBreak ? workAccent : breakAccent}>
 			<StyledText color={workGrey}>
 				<span>
-					{usersInRoom !== undefined &&
+					{width > 400 &&
+						usersInRoom !== undefined &&
 						`${usersInRoom} ${
 							usersInRoom === 0 || usersInRoom > 1
 								? "users are"
 								: "user is"
-						} in the room || `}
-					{`${numUsers} ${
-						numUsers === 0 || numUsers > 1 ? "users are" : "user is"
-					} currently using the Community Focus app`}
+						} in the room `}
+
+					{width < 400 &&
+						usersInRoom !== undefined &&
+						`${usersInRoom} ${
+							usersInRoom === 0 || usersInRoom > 1
+								? "users"
+								: "user"
+						}`}
+
+					{width > 865 &&
+						`|| ${numUsers} ${
+							numUsers === 0 || numUsers > 1
+								? "users are"
+								: "user is"
+						} currently using the Community Focus app`}
 				</span>
 			</StyledText>
 			<StyledConnectionState>{connectionStatus}</StyledConnectionState>

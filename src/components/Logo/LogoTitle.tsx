@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import useWindowSize from "use-window-size-v2";
 import { LogoText, StyledDiv, StyledImg } from "./LogoTitle.styled";
 
 interface LogoTitleProps {
@@ -9,6 +10,7 @@ const LogoTitle = (props: LogoTitleProps): JSX.Element => {
 	const { color } = props;
 	// useNavigate to go to home page
 	const navigate = useNavigate();
+	const { width } = useWindowSize();
 
 	return (
 		<StyledDiv>
@@ -19,7 +21,10 @@ const LogoTitle = (props: LogoTitleProps): JSX.Element => {
 				color={color}
 			>
 				<StyledImg src="/images/communityFocus.png" alt="logo" />
-				CommunityFocus
+
+				{width > 700 ? "CommunityFocus" : null}
+				{width < 700 && width > 500 ? "CFocus" : null}
+				{width < 500 && width > 400 ? "CF" : null}
 			</LogoText>
 		</StyledDiv>
 	);

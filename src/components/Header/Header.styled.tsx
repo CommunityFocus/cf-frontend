@@ -13,6 +13,10 @@ export const StyledHeader = styled.div<{ backColor: string }>`
 	top: 0;
 	left: 0;
 	right: 0;
+
+	@media (max-width: 300px), (max-height: 500px) {
+		display: none;
+	}
 `;
 
 export const StyledDiv = styled.div`
