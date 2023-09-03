@@ -4,7 +4,6 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ConnectionState from "../ConnectionState/ConnectionState";
 import Timestamp from "../Timestamp/Timestamp";
-import formatTimestamp from "../../helpers/formatTimestamp";
 import shareRoom from "../../helpers/shareRoom";
 import startCountdown from "../../helpers/startCountdown";
 import { roomName } from "../../../common/common";
@@ -12,7 +11,6 @@ import TimerControls from "../Controls/TimerControls";
 import Footer from "../Footer/Footer";
 import UserBubbles from "../UserBubbles/UserBubbles";
 import {
-	TimerResponseArgs,
 	UsersInRoomArgs,
 	WorkBreakResponseArgs,
 } from "../../../common/types/types";
@@ -43,7 +41,6 @@ const Room = (props: RoomProps): JSX.Element => {
 		setIsConnected,
 	} = props;
 
-	const [timestamp, setTimestamp] = useState<number>(0);
 	const [usersInRoom, setUsersInRoom] = useState<number>(0);
 	const [isTimerPaused, setIsTimerPaused] = useState<boolean>(false);
 	const [userListInRoom, setUserListInRoom] = useState<string[]>([]);
@@ -70,17 +67,6 @@ const Room = (props: RoomProps): JSX.Element => {
 
 	const { workBackground, breakBackground, workGrey } =
 		theme[themeGroup as keyof typeof theme];
-
-	/*
-	 * A store of the timer interval for a given client.
-	 * This is used to store and clear the interval.
-	 *
-	 * clientTimerStore ={
-	 * 	timer: setInterval(),
-	 * }
-	 */
-
-	const clientTimerStore: Record<string, ReturnType<typeof setInterval>> = {};
 
 	const pauseTimer = (): void => {
 		socket.emit("pauseCountdown", { roomName });
@@ -118,29 +104,6 @@ const Room = (props: RoomProps): JSX.Element => {
 	const onUsersInRoom = ({ numUsers, userList }: UsersInRoomArgs): void => {
 		setUsersInRoom(numUsers);
 		setUserListInRoom(userList);
-	};
-
-	const onTimerResponse = ({
-		secondsRemaining,
-		isPaused,
-		isTimerRunning,
-		isBreakMode,
-	}: TimerResponseArgs): void => {
-		setIsLoaded(true);
-		setTimestamp(secondsRemaining);
-
-		setIsTimerPaused(isPaused);
-
-		startCountdown({
-			durationInSeconds: secondsRemaining,
-			clientTimerStore,
-			setTimestamp,
-			isTimerPaused: isPaused,
-		});
-
-		setIsTimerRunningClient(isTimerRunning);
-
-		setIsBreak(isBreakMode);
 	};
 
 	// eslint-disable-next-line no-shadow
@@ -184,7 +147,6 @@ const Room = (props: RoomProps): JSX.Element => {
 	useEffect(() => {
 		socket.on("connect", onConnect);
 		socket.on("disconnect", onDisconnect);
-		socket.on("timerResponse", onTimerResponse);
 		socket.on("usersInRoom", onUsersInRoom);
 		socket.on("workBreakResponse", onWorkBreakResponse);
 		socket.on("messageLog", onMessageLog);
@@ -194,7 +156,6 @@ const Room = (props: RoomProps): JSX.Element => {
 		return () => {
 			socket.off("connect", onConnect);
 			socket.off("disconnect", onDisconnect);
-			socket.off("timerResponse", onTimerResponse);
 			socket.off("usersInRoom", onUsersInRoom);
 			socket.off("workBreakResponse", onWorkBreakResponse);
 			socket.off("messageLog", onMessageLog);
@@ -202,11 +163,6 @@ const Room = (props: RoomProps): JSX.Element => {
 			socket.off("timerButtons", onTimerButtons);
 		};
 	}, []);
-
-	useEffect(() => {
-		// update the document title, with roomName and timestamp
-		document.title = `${formatTimestamp(timestamp)}`;
-	}, [isTimerPaused, timestamp]);
 
 	useEffect(() => {
 		if (!userName) {
@@ -229,7 +185,6 @@ const Room = (props: RoomProps): JSX.Element => {
 					</StyledWorkBreakBanner>
 
 					<Timestamp
-						timestamp={timestamp}
 						color={workGrey}
 						roomName={roomName}
 						timerMinuteButtons={
@@ -241,6 +196,11 @@ const Room = (props: RoomProps): JSX.Element => {
 						isBreak={isBreak}
 						isTimerPaused={isTimerPaused}
 						isLoaded={isLoaded}
+						setIsLoaded={setIsLoaded}
+						setIsTimerPaused={setIsTimerPaused}
+						startCountdown={startCountdown}
+						setIsTimerRunningClient={setIsTimerRunningClient}
+						setIsBreak={setIsBreak}
 					/>
 
 					<TimerControls

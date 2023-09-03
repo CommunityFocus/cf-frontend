@@ -7,9 +7,10 @@ import {
 	StyledTimestamp,
 } from "./Timestamp.styled";
 import TimerButtons from "../TimerButton/TimerButtons";
+import socket from "../Socket/socket";
+import { TimerResponseArgs } from "../../../common/types/types";
 
 interface TimestampProps {
-	timestamp: number;
 	color: string;
 	timerMinuteButtons: number[];
 	roomName: string;
@@ -17,6 +18,21 @@ interface TimestampProps {
 	isBreak: boolean;
 	isTimerPaused: boolean;
 	isLoaded: boolean;
+	setIsLoaded: React.Dispatch<React.SetStateAction<boolean>>;
+	setIsTimerPaused: React.Dispatch<React.SetStateAction<boolean>>;
+	startCountdown: ({
+		durationInSeconds,
+		clientTimerStore,
+		setTimestamp,
+		isTimerPaused,
+	}: {
+		durationInSeconds: number;
+		clientTimerStore: Record<string, ReturnType<typeof setInterval>>;
+		setTimestamp: React.Dispatch<React.SetStateAction<number>>;
+		isTimerPaused: boolean;
+	}) => void;
+	setIsTimerRunningClient: React.Dispatch<React.SetStateAction<boolean>>;
+	setIsBreak: React.Dispatch<React.SetStateAction<boolean>>;
 }
 export interface ICircleState {
 	timeCircle: {
@@ -29,7 +45,6 @@ export interface ICircleState {
 
 const Timestamp = (props: TimestampProps): JSX.Element => {
 	const {
-		timestamp,
 		color,
 		timerMinuteButtons,
 		roomName,
@@ -37,10 +52,27 @@ const Timestamp = (props: TimestampProps): JSX.Element => {
 		isBreak,
 		isTimerPaused,
 		isLoaded,
+		setIsLoaded,
+		setIsTimerPaused,
+		startCountdown,
+		setIsTimerRunningClient,
+		setIsBreak,
 	} = props;
 	const [circleState, setCircleState] = useState<ICircleState>({
 		timeCircle: [],
 	});
+	const [timestamp, setTimestamp] = useState<number>(0);
+
+	/*
+	 * A store of the timer interval for a given client.
+	 * This is used to store and clear the interval.
+	 *
+	 * clientTimerStore ={
+	 * 	timer: setInterval(),
+	 * }
+	 */
+
+	const clientTimerStore: Record<string, ReturnType<typeof setInterval>> = {};
 
 	const buildCircle = (): void => {
 		const num = timerMinuteButtons.length; // Number of Square to be generate
@@ -69,6 +101,29 @@ const Timestamp = (props: TimestampProps): JSX.Element => {
 		});
 	};
 
+	const onTimerResponse = ({
+		secondsRemaining,
+		isPaused,
+		isTimerRunning,
+		isBreakMode,
+	}: TimerResponseArgs): void => {
+		setIsLoaded(true);
+		setTimestamp(secondsRemaining);
+
+		setIsTimerPaused(isPaused);
+
+		startCountdown({
+			durationInSeconds: secondsRemaining,
+			clientTimerStore,
+			setTimestamp,
+			isTimerPaused: isPaused,
+		});
+
+		setIsTimerRunningClient(isTimerRunning);
+
+		setIsBreak(isBreakMode);
+	};
+
 	useEffect(() => {
 		buildCircle();
 	}, [timerMinuteButtons]);
@@ -80,6 +135,24 @@ const Timestamp = (props: TimestampProps): JSX.Element => {
 			audio.play();
 		}
 	}, [timestamp]);
+
+	useEffect(() => {
+		socket.on("timerResponse", onTimerResponse);
+
+		return () => {
+			socket.off("timerResponse", onTimerResponse);
+		};
+	}, []);
+
+	useEffect(() => {
+		if (!isTimerRunningClient) {
+			document.title = "Community Focus";
+			return;
+		}
+
+		// update the document title, with roomName and timestamp
+		document.title = `${formatTimestamp(timestamp)}`;
+	}, [isTimerPaused, timestamp, isTimerRunningClient]);
 
 	return (
 		<div>

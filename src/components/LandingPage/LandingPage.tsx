@@ -54,6 +54,7 @@ const LandingPage = (props: {
 
 	useEffect(() => {
 		getSlug();
+		document.title = "Community Focus";
 	}, []);
 
 	return (

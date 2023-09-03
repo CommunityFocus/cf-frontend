@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { ThemeContext } from "styled-components";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
@@ -21,6 +21,10 @@ const DefaultRoom = (props: {
 
 	const { workBackground, breakBackground, workGrey } =
 		theme[themeGroup as keyof typeof theme];
+
+	useEffect(() => {
+		document.title = "Community Focus";
+	}, []);
 
 	return (
 		<>
