@@ -1,19 +1,39 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { ThemeContext } from "styled-components";
 import ValidationInput from "../Modal/ValidationInput";
 import { StyledButton } from "../Button/Button";
 import { StyledDiv, StyledGap, StyledTitle } from "./AddTimerButton.styled";
+import { StyledPillButton } from "./TimerButtons.styled";
+import { theme } from "../../../common/theme";
 
 interface AddTimerButtonProps {
 	timerMinuteButtons: number[];
-	setTimerMinuteButtons: React.Dispatch<React.SetStateAction<number[]>>;
 	setIsTimerAddModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+	isBreak: boolean;
+	updateTimerButtons: ({
+		timerButtons,
+		isBreak,
+	}: {
+		timerButtons: number[];
+		isBreak: boolean;
+	}) => void;
 }
 const AddTimerButton = (props: AddTimerButtonProps): JSX.Element => {
 	const {
-		setTimerMinuteButtons,
 		timerMinuteButtons,
 		setIsTimerAddModalOpen,
+		isBreak,
+		updateTimerButtons,
 	} = props;
+
+	const { themeGroup } = useContext(ThemeContext);
+
+	const {
+		workButtonColor,
+		workButtonTextColor,
+		breakButtonColor,
+		breakButtonTextColor,
+	} = theme[themeGroup as keyof typeof theme];
 
 	const [minuteValue, setMinuteValue] = useState<number | null>(null);
 
@@ -34,11 +54,17 @@ const AddTimerButton = (props: AddTimerButtonProps): JSX.Element => {
 			.sort((a, b) => a - b)
 			.filter((value, index, array) => array.indexOf(value) === index);
 		// add timer to list of timers
-		setTimerMinuteButtons(ascendingTimers);
+		updateTimerButtons({
+			timerButtons: ascendingTimers,
+			isBreak,
+		});
 		setIsTimerAddModalOpen(false);
 	};
 
 	const inputValidation = (input: string): string | false => {
+		if (timerMinuteButtons.length >= 6) {
+			return "Max number of timers reached. Delete an existing timer below.";
+		}
 		if (parseInt(input) < 1) {
 			return "Timer must be at least 1 minute long";
 		}
@@ -76,7 +102,9 @@ const AddTimerButton = (props: AddTimerButtonProps): JSX.Element => {
 		<div>
 			<form onSubmit={onSubmit}>
 				<StyledDiv>
-					<StyledTitle>Add a Timer</StyledTitle>
+					<StyledTitle>{`Add a ${
+						!isBreak ? "Work" : "Break"
+					} Timer`}</StyledTitle>
 					<StyledGap>
 						<ValidationInput
 							type="number"
@@ -93,6 +121,39 @@ const AddTimerButton = (props: AddTimerButtonProps): JSX.Element => {
 								}
 							}}
 						/>
+						<div>
+							{/* create a row of  timerButtons with an x mark to delete them */}
+							{timerMinuteButtons.map((timer, index) => (
+								<StyledPillButton
+									key={timer}
+									type="button"
+									color={
+										!isBreak
+											? workButtonColor
+											: breakButtonColor
+									}
+									fontColor={
+										!isBreak
+											? workButtonTextColor
+											: breakButtonTextColor
+									}
+									// submit on click
+									onClick={(event): void => {
+										event.preventDefault();
+										const newTimerButtons = [
+											...timerMinuteButtons,
+										];
+										newTimerButtons.splice(index, 1);
+										updateTimerButtons({
+											timerButtons: newTimerButtons,
+											isBreak,
+										});
+									}}
+								>
+									{timer}
+								</StyledPillButton>
+							))}
+						</div>
 						<StyledButton
 							type="submit"
 							disabled={

@@ -36,3 +36,40 @@ export const StyledWorkBreakButtonDiv = styled.div<{ show: boolean }>`
 	align-items: center;
 	visibility: ${({ show }): string => (show ? "visible" : "hidden")};
 `;
+
+export const StyledPillButton = styled(StyledButton)<{
+	color: string;
+	fontColor: string;
+}>`
+	position: relative;
+	background-color: ${({ color }): string => color};
+	border-radius: 50px;
+	height: 30px;
+	width: 50px;
+	border: none;
+	color: ${({ fontColor }): string => fontColor};
+	margin: 5px;
+	padding: 5px;
+	font-size: 0.8em;
+	// shadow
+	box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+
+	// x mark at the top right that is in a grey circle
+	&::after {
+		content: "x";
+		position: absolute;
+		top: -5px;
+		right: -5px;
+		height: 15px;
+		width: 15px;
+		border-radius: 50%;
+		background-color: #c4c4c4;
+		color: white;
+		text-align: center;
+		line-height: 15px;
+		font-size: 0.7em;
+
+		// shadow
+		box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+	}
+`;

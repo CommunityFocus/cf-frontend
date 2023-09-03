@@ -31,7 +31,7 @@ export const UserBubblesContainer = styled.div`
 	gap: 5px;
 
 	// hide if window is too small
-	@media (max-height: 680px), (max-width: 680px) {
+	@media (max-height: 680px), (max-width: 300px) {
 		display: none;
 	}
 `;
