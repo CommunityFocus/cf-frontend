@@ -2,6 +2,7 @@ import { useState, useEffect, useContext } from "react";
 import { ThemeContext } from "styled-components";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import useWindowSize from "use-window-size-v2";
 import ConnectionState from "../ConnectionState/ConnectionState";
 import Timestamp from "../Timestamp/Timestamp";
 import shareRoom from "../../helpers/shareRoom";
@@ -41,15 +42,16 @@ const Room = (props: RoomProps): JSX.Element => {
 		setIsConnected,
 	} = props;
 
+	const { width, height } = useWindowSize();
 	const [usersInRoom, setUsersInRoom] = useState<number>(0);
 	const [isTimerPaused, setIsTimerPaused] = useState<boolean>(false);
 	const [userListInRoom, setUserListInRoom] = useState<string[]>([]);
 	const [workTimerMinuteButtons, setWorkTimerMinuteButtons] = useState<
 		number[]
-	>([2, 10]);
+	>([]);
 	const [breakTimerMinuteButtons, setBreakTimerMinuteButtons] = useState<
 		number[]
-	>([1, 5]);
+	>([]);
 	const [isTimerRunningClient, setIsTimerRunningClient] =
 		useState<boolean>(false);
 
@@ -211,15 +213,20 @@ const Room = (props: RoomProps): JSX.Element => {
 						isLoaded={isLoaded}
 						isTimerRunningClient={isTimerRunningClient}
 						setIsTimerAddModalOpen={setIsTimerAddModalOpen}
-					/>
-
-					<WorkBreakButton
 						roomName={roomName}
 						isBreak={isBreak}
-						isTimerPaused={isTimerPaused}
-						isTimerRunningClient={isTimerRunningClient}
-						isLoaded={isLoaded}
 					/>
+					{height > 530 && width > 300 && (
+						<WorkBreakButton
+							roomName={roomName}
+							isBreak={isBreak}
+							isTimerPaused={isTimerPaused}
+							isTimerRunningClient={isTimerRunningClient}
+							isLoaded={isLoaded}
+							// eslint-disable-next-line react/jsx-boolean-value
+							hasText={true}
+						/>
+					)}
 				</Center>
 
 				<MessageLogs messageList={messageList} />

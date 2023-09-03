@@ -1,11 +1,13 @@
 import { FaRegPauseCircle, FaRegPlayCircle } from "react-icons/fa";
 import { LuTimerReset } from "react-icons/lu";
+import useWindowSize from "use-window-size-v2";
 import {
 	StyledAddTimerIcon,
 	StyledButtonRow,
 	StyledReopenIcon,
 	StyledShareIcon,
 } from "./TimerControls.styled";
+import WorkBreakButton from "../TimerButton/WorkBreakButton";
 
 const TimerControls = ({
 	pauseTimer,
@@ -15,6 +17,8 @@ const TimerControls = ({
 	isLoaded,
 	isTimerRunningClient,
 	setIsTimerAddModalOpen,
+	roomName,
+	isBreak,
 }: {
 	pauseTimer: () => void;
 	isTimerPaused: boolean;
@@ -22,8 +26,12 @@ const TimerControls = ({
 	shareRoom: () => void;
 	isLoaded: boolean;
 	isTimerRunningClient: boolean;
+	roomName: string;
+	isBreak: boolean;
 	setIsTimerAddModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }): JSX.Element => {
+	const { width, height } = useWindowSize();
+
 	return (
 		<StyledButtonRow show={isLoaded}>
 			{isTimerRunningClient &&
@@ -67,17 +75,28 @@ const TimerControls = ({
 				size="30px"
 			/>
 
-			<StyledReopenIcon
-				type="button"
-				onClick={(): void => {
-					window.open(
-						window.location.href,
-						"minimode",
-						"resizable,width=480=height=575"
-					);
-				}}
-				size="30px"
-			/>
+			{width < 300 || height < 530 ? (
+				<WorkBreakButton
+					roomName={roomName}
+					isBreak={isBreak}
+					isTimerRunningClient={isTimerRunningClient}
+					isTimerPaused={isTimerPaused}
+					isLoaded={isLoaded}
+					hasText={false}
+				/>
+			) : (
+				<StyledReopenIcon
+					type="button"
+					onClick={(): void => {
+						window.open(
+							window.location.href,
+							"minimode",
+							"resizable,width=480=height=575"
+						);
+					}}
+					size="30px"
+				/>
+			)}
 		</StyledButtonRow>
 	);
 };

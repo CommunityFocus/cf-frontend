@@ -9,6 +9,7 @@ interface WorkBreakButtonProps {
 	isTimerRunningClient: boolean;
 	isTimerPaused: boolean;
 	isLoaded: boolean;
+	hasText: boolean;
 }
 
 const WorkBreakButton = ({
@@ -17,6 +18,7 @@ const WorkBreakButton = ({
 	isTimerRunningClient,
 	isTimerPaused,
 	isLoaded,
+	hasText,
 }: WorkBreakButtonProps): JSX.Element => {
 	const onClickHandler = (): void => {
 		if (!isBreak) {
@@ -41,7 +43,7 @@ const WorkBreakButton = ({
 			data-tooltip-place="top"
 		>
 			<AiOutlineCoffee size={30} />
-			<span>Take a Break</span>
+			{hasText && <span>Take a Break</span>}
 		</StyledWorkBreakButtonDiv>
 	) : (
 		<StyledWorkBreakButtonDiv
@@ -52,7 +54,7 @@ const WorkBreakButton = ({
 			data-tooltip-place="top"
 		>
 			<MdOutlineWork size={30} />
-			<span>Do some Work</span>
+			{hasText && <span>Do some Work</span>}
 		</StyledWorkBreakButtonDiv>
 	);
 };
