@@ -5,14 +5,22 @@ import { StyledDiv, StyledGap, StyledTitle } from "./AddTimerButton.styled";
 
 interface AddTimerButtonProps {
 	timerMinuteButtons: number[];
-	setTimerMinuteButtons: React.Dispatch<React.SetStateAction<number[]>>;
 	setIsTimerAddModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+	isBreak: boolean;
+	updateTimerButtons: ({
+		timerButtons,
+		isBreak,
+	}: {
+		timerButtons: number[];
+		isBreak: boolean;
+	}) => void;
 }
 const AddTimerButton = (props: AddTimerButtonProps): JSX.Element => {
 	const {
-		setTimerMinuteButtons,
 		timerMinuteButtons,
 		setIsTimerAddModalOpen,
+		isBreak,
+		updateTimerButtons,
 	} = props;
 
 	const [minuteValue, setMinuteValue] = useState<number | null>(null);
@@ -34,7 +42,10 @@ const AddTimerButton = (props: AddTimerButtonProps): JSX.Element => {
 			.sort((a, b) => a - b)
 			.filter((value, index, array) => array.indexOf(value) === index);
 		// add timer to list of timers
-		setTimerMinuteButtons(ascendingTimers);
+		updateTimerButtons({
+			timerButtons: ascendingTimers,
+			isBreak,
+		});
 		setIsTimerAddModalOpen(false);
 	};
 
@@ -76,7 +87,9 @@ const AddTimerButton = (props: AddTimerButtonProps): JSX.Element => {
 		<div>
 			<form onSubmit={onSubmit}>
 				<StyledDiv>
-					<StyledTitle>Add a Timer</StyledTitle>
+					<StyledTitle>{`Add a ${
+						!isBreak ? "Work" : "Break"
+					} Timer`}</StyledTitle>
 					<StyledGap>
 						<ValidationInput
 							type="number"

@@ -47,9 +47,12 @@ const Room = (props: RoomProps): JSX.Element => {
 	const [usersInRoom, setUsersInRoom] = useState<number>(0);
 	const [isTimerPaused, setIsTimerPaused] = useState<boolean>(false);
 	const [userListInRoom, setUserListInRoom] = useState<string[]>([]);
-	const [timerMinuteButtons, setTimerMinuteButtons] = useState<number[]>([
-		1, 5, 10, 15, 20, 25, 30,
-	]);
+	const [workTimerMinuteButtons, setWorkTimerMinuteButtons] = useState<
+		number[]
+	>([2, 10]);
+	const [breakTimerMinuteButtons, setBreakTimerMinuteButtons] = useState<
+		number[]
+	>([1, 5]);
 	const [isTimerRunningClient, setIsTimerRunningClient] =
 		useState<boolean>(false);
 
@@ -85,6 +88,21 @@ const Room = (props: RoomProps): JSX.Element => {
 
 	const resetTimer = (): void => {
 		socket.emit("resetCountdown", { roomName });
+	};
+
+	const updateTimerButtons = ({
+		timerButtons,
+		// eslint-disable-next-line @typescript-eslint/no-shadow
+		isBreak,
+	}: {
+		timerButtons: number[];
+		isBreak: boolean;
+	}): void => {
+		socket.emit("updateTimerButtons", {
+			roomName,
+			timerButtons,
+			isBreak,
+		});
 	};
 
 	const onConnect = (): void => {
@@ -152,6 +170,17 @@ const Room = (props: RoomProps): JSX.Element => {
 		setMessageList(message.messageHistory);
 	};
 
+	const onTimerButtons = ({
+		workTimerButtons,
+		breakTimerButtons,
+	}: {
+		workTimerButtons: number[];
+		breakTimerButtons: number[];
+	}): void => {
+		setWorkTimerMinuteButtons(workTimerButtons);
+		setBreakTimerMinuteButtons(breakTimerButtons);
+	};
+
 	useEffect(() => {
 		socket.on("connect", onConnect);
 		socket.on("disconnect", onDisconnect);
@@ -160,6 +189,7 @@ const Room = (props: RoomProps): JSX.Element => {
 		socket.on("workBreakResponse", onWorkBreakResponse);
 		socket.on("messageLog", onMessageLog);
 		socket.on("messageLogArray", onMessageLogArray);
+		socket.on("timerButtons", onTimerButtons);
 
 		return () => {
 			socket.off("connect", onConnect);
@@ -169,6 +199,7 @@ const Room = (props: RoomProps): JSX.Element => {
 			socket.off("workBreakResponse", onWorkBreakResponse);
 			socket.off("messageLog", onMessageLog);
 			socket.off("messageLogArray", onMessageLogArray);
+			socket.off("timerButtons", onTimerButtons);
 		};
 	}, []);
 
@@ -201,7 +232,11 @@ const Room = (props: RoomProps): JSX.Element => {
 						timestamp={timestamp}
 						color={workGrey}
 						roomName={roomName}
-						timerMinuteButtons={timerMinuteButtons}
+						timerMinuteButtons={
+							isBreak
+								? breakTimerMinuteButtons
+								: workTimerMinuteButtons
+						}
 						isTimerRunningClient={isTimerRunningClient}
 						isBreak={isBreak}
 						isTimerPaused={isTimerPaused}
@@ -237,8 +272,13 @@ const Room = (props: RoomProps): JSX.Element => {
 					setIsModalOpen={setIsTimerAddModalOpen}
 				>
 					<AddTimerModal
-						timerMinuteButtons={timerMinuteButtons}
-						setTimerMinuteButtons={setTimerMinuteButtons}
+						timerMinuteButtons={
+							isBreak
+								? breakTimerMinuteButtons
+								: workTimerMinuteButtons
+						}
+						isBreak={isBreak}
+						updateTimerButtons={updateTimerButtons}
 						setIsTimerAddModalOpen={setIsTimerAddModalOpen}
 						isTimerAddModalOpen={isTimerAddModalOpen}
 					/>

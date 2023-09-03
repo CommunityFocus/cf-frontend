@@ -3,16 +3,24 @@ import AddTimerButton from "../TimerButton/AddTimerButton";
 
 interface AddTimerModalProps {
 	timerMinuteButtons: number[];
-	setTimerMinuteButtons: React.Dispatch<React.SetStateAction<number[]>>;
 	setIsTimerAddModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
 	isTimerAddModalOpen: boolean;
+	isBreak: boolean;
+	updateTimerButtons: ({
+		timerButtons,
+		isBreak,
+	}: {
+		timerButtons: number[];
+		isBreak: boolean;
+	}) => void;
 }
 const AddTimerModal = (props: AddTimerModalProps): JSX.Element => {
 	const {
 		timerMinuteButtons,
-		setTimerMinuteButtons,
 		setIsTimerAddModalOpen,
 		isTimerAddModalOpen,
+		isBreak,
+		updateTimerButtons,
 	} = props;
 
 	useEffect(() => {
@@ -25,8 +33,9 @@ const AddTimerModal = (props: AddTimerModalProps): JSX.Element => {
 		<div>
 			<AddTimerButton
 				timerMinuteButtons={timerMinuteButtons}
-				setTimerMinuteButtons={setTimerMinuteButtons}
 				setIsTimerAddModalOpen={setIsTimerAddModalOpen}
+				isBreak={isBreak}
+				updateTimerButtons={updateTimerButtons}
 			/>
 		</div>
 	);
