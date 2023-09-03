@@ -40,6 +40,7 @@ export const StyledWorkBreakButtonDiv = styled.div<{ show: boolean }>`
 export const StyledPillButton = styled(StyledButton)<{
 	color: string;
 	fontColor: string;
+	hasDelete: boolean;
 }>`
 	position: relative;
 	background-color: ${({ color }): string => color};
@@ -54,7 +55,6 @@ export const StyledPillButton = styled(StyledButton)<{
 	// shadow
 	box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
 
-	// x mark at the top right that is in a grey circle
 	&::after {
 		content: "x";
 		position: absolute;
@@ -71,5 +71,8 @@ export const StyledPillButton = styled(StyledButton)<{
 
 		// shadow
 		box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+
+		visibility: ${({ hasDelete }): string =>
+			hasDelete ? "visible" : "hidden"};
 	}
 `;

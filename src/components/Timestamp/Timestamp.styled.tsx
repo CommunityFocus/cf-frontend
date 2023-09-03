@@ -23,3 +23,18 @@ export const StyledCircleHold = styled.div`
 	top: 90px; /* calculate circle height / 2 - .square height / 2 */
 	/* transform: translate(-40%, -50%); */
 `;
+
+export const StyledCenterDiv = styled.div`
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+`;
+
+export const StyledPillCenterDiv = styled.div`
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: row;
+	flex-wrap: wrap;
+`;

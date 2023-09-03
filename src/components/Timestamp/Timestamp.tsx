@@ -1,14 +1,20 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import ReactLoading from "react-loading";
+import useWindowSize from "use-window-size-v2";
+import { ThemeContext } from "styled-components";
 import formatTimestamp from "../../helpers/formatTimestamp";
 import {
 	StyledBigCircle,
+	StyledCenterDiv,
 	StyledCircleHold,
+	StyledPillCenterDiv,
 	StyledTimestamp,
 } from "./Timestamp.styled";
 import TimerButtons from "../TimerButton/TimerButtons";
 import socket from "../Socket/socket";
 import { TimerResponseArgs } from "../../../common/types/types";
+import { StyledPillButton } from "../TimerButton/TimerButtons.styled";
+import { theme } from "../../../common/theme";
 
 interface TimestampProps {
 	color: string;
@@ -62,6 +68,17 @@ const Timestamp = (props: TimestampProps): JSX.Element => {
 		timeCircle: [],
 	});
 	const [timestamp, setTimestamp] = useState<number>(0);
+
+	const { width, height } = useWindowSize();
+
+	const { themeGroup } = useContext(ThemeContext);
+
+	const {
+		workButtonColor,
+		workButtonTextColor,
+		breakButtonColor,
+		breakButtonTextColor,
+	} = theme[themeGroup as keyof typeof theme];
 
 	/*
 	 * A store of the timer interval for a given client.
@@ -156,32 +173,96 @@ const Timestamp = (props: TimestampProps): JSX.Element => {
 
 	return (
 		<div>
-			<StyledBigCircle>
-				{isLoaded
-					? (!isTimerRunningClient || isTimerPaused) && (
-							<StyledCircleHold>
-								<TimerButtons
-									roomName={roomName}
-									timerMinuteButtons={timerMinuteButtons}
-									circleState={circleState}
-									isBreak={isBreak}
-								/>
-							</StyledCircleHold>
-					  )
-					: null}
-				{isLoaded ? (
-					<StyledTimestamp color={color}>
-						{formatTimestamp(timestamp)}
-					</StyledTimestamp>
-				) : (
-					<ReactLoading
-						type="bubbles"
-						color="#fff"
-						height={100}
-						width={100}
-					/>
-				)}
-			</StyledBigCircle>
+			{width > 300 && height > 530 ? (
+				<StyledBigCircle>
+					{isLoaded
+						? (!isTimerRunningClient || isTimerPaused) && (
+								<StyledCircleHold>
+									<TimerButtons
+										roomName={roomName}
+										timerMinuteButtons={timerMinuteButtons}
+										circleState={circleState}
+										isBreak={isBreak}
+									/>
+								</StyledCircleHold>
+						  )
+						: null}
+					{isLoaded ? (
+						<StyledTimestamp color={color}>
+							{formatTimestamp(timestamp)}
+						</StyledTimestamp>
+					) : (
+						<ReactLoading
+							type="bubbles"
+							color="#fff"
+							height={100}
+							width={100}
+						/>
+					)}
+				</StyledBigCircle>
+			) : (
+				<div>
+					{isLoaded ? (
+						<StyledCenterDiv>
+							<StyledTimestamp color={color}>
+								{formatTimestamp(timestamp)}
+							</StyledTimestamp>
+							<StyledPillCenterDiv>
+								{!isTimerRunningClient || isTimerPaused
+									? timerMinuteButtons.map(
+											(timerMinuteButton) => {
+												return (
+													<StyledPillButton
+														key={timerMinuteButton}
+														type="button"
+														color={
+															!isBreak
+																? workButtonColor
+																: breakButtonColor
+														}
+														fontColor={
+															!isBreak
+																? workButtonTextColor
+																: breakButtonTextColor
+														}
+														// eslint-disable-next-line react/jsx-boolean-value
+														hasDelete={false}
+														// submit on click
+														onClick={(
+															event
+														): void => {
+															event.preventDefault();
+															const minutes =
+																timerMinuteButton *
+																60;
+															socket.emit(
+																"startCountdown",
+																{
+																	roomName,
+																	durationInSeconds:
+																		minutes,
+																}
+															);
+														}}
+													>
+														{timerMinuteButton}
+													</StyledPillButton>
+												);
+											}
+									  )
+									: null}
+							</StyledPillCenterDiv>
+						</StyledCenterDiv>
+					) : (
+						<ReactLoading
+							type="bubbles"
+							color="#fff"
+							height={100}
+							width={100}
+						/>
+					)}
+				</div>
+			)}
 		</div>
 	);
 };
