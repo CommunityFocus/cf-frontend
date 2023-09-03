@@ -33,3 +33,9 @@ export const StyledAddTimerIcon = styled(BiAlarmAdd)`
 		display: none;
 	}
 `;
+
+export const StyledMobileWorkBreakButtonDiv = styled.div<{
+	isMobile: boolean;
+}>`
+	display: ${({ isMobile }): string => (isMobile ? "flex" : "none")};
+`;

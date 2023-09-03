@@ -34,7 +34,7 @@ export const StyledWorkBreakButtonDiv = styled.div<{ show: boolean }>`
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	visibility: ${({ show }): string => (show ? "visible" : "hidden")};
+	display: ${({ show }): string => (show ? "flex" : "none")};
 `;
 
 export const StyledPillButton = styled(StyledButton)<{

@@ -1,6 +1,6 @@
 import { FaRegPauseCircle, FaRegPlayCircle } from "react-icons/fa";
 import { LuTimerReset } from "react-icons/lu";
-import useWindowSize from "use-window-size-v2";
+
 import {
 	StyledAddTimerIcon,
 	StyledButtonRow,
@@ -19,6 +19,7 @@ const TimerControls = ({
 	setIsTimerAddModalOpen,
 	roomName,
 	isBreak,
+	showWorkButtonOnMobile,
 }: {
 	pauseTimer: () => void;
 	isTimerPaused: boolean;
@@ -29,9 +30,8 @@ const TimerControls = ({
 	roomName: string;
 	isBreak: boolean;
 	setIsTimerAddModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+	showWorkButtonOnMobile: boolean;
 }): JSX.Element => {
-	const { width, height } = useWindowSize();
-
 	return (
 		<StyledButtonRow show={isLoaded}>
 			{isTimerRunningClient &&
@@ -75,14 +75,14 @@ const TimerControls = ({
 				size="30px"
 			/>
 
-			{width < 300 || height < 530 ? (
+			{showWorkButtonOnMobile ? (
 				<WorkBreakButton
 					roomName={roomName}
 					isBreak={isBreak}
 					isTimerRunningClient={isTimerRunningClient}
 					isTimerPaused={isTimerPaused}
 					isLoaded={isLoaded}
-					hasText={false}
+					isMobile={!showWorkButtonOnMobile}
 				/>
 			) : (
 				<StyledReopenIcon

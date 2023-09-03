@@ -43,6 +43,7 @@ const Room = (props: RoomProps): JSX.Element => {
 	} = props;
 
 	const { width, height } = useWindowSize();
+	const showWorkButtonOnMobile = width < 300 || height < 530;
 	const [usersInRoom, setUsersInRoom] = useState<number>(0);
 	const [isTimerPaused, setIsTimerPaused] = useState<boolean>(false);
 	const [userListInRoom, setUserListInRoom] = useState<string[]>([]);
@@ -215,8 +216,9 @@ const Room = (props: RoomProps): JSX.Element => {
 						setIsTimerAddModalOpen={setIsTimerAddModalOpen}
 						roomName={roomName}
 						isBreak={isBreak}
+						showWorkButtonOnMobile={showWorkButtonOnMobile}
 					/>
-					{height > 530 && width > 300 && (
+					{!showWorkButtonOnMobile && (
 						<WorkBreakButton
 							roomName={roomName}
 							isBreak={isBreak}
@@ -224,7 +226,7 @@ const Room = (props: RoomProps): JSX.Element => {
 							isTimerRunningClient={isTimerRunningClient}
 							isLoaded={isLoaded}
 							// eslint-disable-next-line react/jsx-boolean-value
-							hasText={true}
+							isMobile={!showWorkButtonOnMobile}
 						/>
 					)}
 				</Center>
