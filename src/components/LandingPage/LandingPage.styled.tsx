@@ -16,7 +16,11 @@ export const StyledText = styled.p<{ color: string }>`
 `;
 
 export const StyledShareText = styled(StyledText)`
-	margin-right: 20px;
+	margin: 10px 20px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	max-width: 600px;
 `;
 
 export const Center = styled.div`
@@ -46,4 +50,10 @@ export const StyledDivSpacer = styled.div`
 	justify-content: center;
 	align-items: center;
 	gap: 20px;
+`;
+
+export const StyledBottomText = styled.div`
+	// display at the bottom of the page withouth pushing the footer down
+	position: absolute;
+	bottom: 60px;
 `;

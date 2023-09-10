@@ -11,6 +11,7 @@ import {
 	StyledDivRow,
 	StyledDivSpacer,
 	StyledShareText,
+	StyledBottomText,
 } from "./LandingPage.styled";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
@@ -19,6 +20,9 @@ import { GlobalStyle } from "../Room/Room.styled";
 import ConnectionState from "../ConnectionState/ConnectionState";
 import ValidationInput from "../Modal/ValidationInput";
 import validRoomname from "../../helpers/validRoomname";
+import { StyledImg } from "../Logo/LogoTitle.styled";
+import { AiFillGithub } from "react-icons/ai";
+import { BsDiscord } from "react-icons/bs";
 
 const LandingPage = (props: {
 	globalUsersConnected: number;
@@ -65,7 +69,15 @@ const LandingPage = (props: {
 			/>
 
 			<Center>
-				<Title color={workGrey}>Community Focus</Title>
+				<Title color={workGrey}>
+					<StyledImg src="/images/communityFocus.png" alt="logo" />
+					Community Focus
+				</Title>
+
+				<StyledShareText color={workGrey}>
+					Pomodoro Timer for the Community. Join a room and work with
+					others. Share the link and they can join you!
+				</StyledShareText>
 				<StyledShareText color={workGrey}>
 					Create a shareable link
 				</StyledShareText>
@@ -122,6 +134,31 @@ const LandingPage = (props: {
 						Join a room
 					</Button>
 				</StyledDivSpacer>
+				<StyledBottomText>
+					<StyledShareText color={workGrey}>
+						Made by commununity members of #100Devs Discord{" "}
+						<BsDiscord
+							size={20}
+							style={{ cursor: "pointer", margin: "0 0 0 5px" }}
+							onClick={() =>
+								window.open(
+									"https://leonnoel.com/100devs/",
+									"_blank"
+								)
+							}
+						/>
+						<AiFillGithub
+							size={20}
+							style={{ cursor: "pointer", margin: "0 0 0 5px" }}
+							onClick={() =>
+								window.open(
+									"https://github.com/CommunityFocus/",
+									"_blank"
+								)
+							}
+						/>
+					</StyledShareText>
+				</StyledBottomText>
 				<Footer
 					numUsers={globalUsersConnected}
 					isBreak={isBreak}
