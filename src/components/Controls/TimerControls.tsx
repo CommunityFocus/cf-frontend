@@ -73,6 +73,9 @@ const TimerControls = ({
 				type="button"
 				onClick={(): void => setIsTimerAddModalOpen(true)}
 				size="30px"
+				data-tooltip-id="my-tooltip"
+				data-tooltip-content="Add or remove a timer to the roon"
+				data-tooltip-place="top"
 			/>
 
 			{showWorkButtonOnMobile ? (
@@ -95,6 +98,9 @@ const TimerControls = ({
 						);
 					}}
 					size="30px"
+					data-tooltip-id="my-tooltip"
+					data-tooltip-content="Open in a popup window"
+					data-tooltip-place="top"
 				/>
 			)}
 		</StyledButtonRow>

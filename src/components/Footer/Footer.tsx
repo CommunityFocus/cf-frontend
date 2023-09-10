@@ -48,8 +48,10 @@ const Footer = ({
 								: "user"
 						}`}
 
+					{width > 865 && usersInRoom !== undefined && " || "}
+					
 					{width > 865 &&
-						`|| ${numUsers} ${
+						` ${numUsers} ${
 							numUsers === 0 || numUsers > 1
 								? "users are"
 								: "user is"

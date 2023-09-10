@@ -104,6 +104,9 @@ const LandingPage = (props: {
 								transform: isActivated ? "rotate(360deg)" : "",
 								transition: "transform 0.5s ease",
 							}}
+							data-tooltip-id="my-tooltip"
+							data-tooltip-content="Generate a new room name"
+							data-tooltip-place="top"
 						/>
 					</StyledDivRow>
 					<Button
@@ -112,6 +115,9 @@ const LandingPage = (props: {
 							navigateToRoom();
 						}}
 						disabled={validRoomname(slugName) !== false}
+						data-tooltip-id="my-tooltip"
+						data-tooltip-content="Join a shareable room"
+						data-tooltip-place="top"
 					>
 						Join a room
 					</Button>
