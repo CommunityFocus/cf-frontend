@@ -26,6 +26,7 @@ const ContributorsWidget = (props: { isHomePage: boolean }): JSX.Element => {
 	const { isHomePage } = props;
 	const navigate = useNavigate();
 	const [contributors, setContributors] = useState<Contributor[]>([]);
+	const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
 	const { themeGroup } = useContext(ThemeContext);
 
@@ -42,15 +43,18 @@ const ContributorsWidget = (props: { isHomePage: boolean }): JSX.Element => {
 	];
 
 	const getContributors = async (): Promise<void> => {
+		setIsLoaded(false);
 		axios
 			.get(`${SERVER_URL}/api/v1/getContributors`)
 			.then((res) => {
 				// randomize the order of the contributors
 				res.data.contributors.sort(() => Math.random() - 0.5);
 				setContributors(res.data.contributors);
+				setIsLoaded(true);
 			})
 			.catch((err) => {
 				console.error(err);
+				setIsLoaded(true);
 			});
 	};
 
@@ -77,8 +81,17 @@ const ContributorsWidget = (props: { isHomePage: boolean }): JSX.Element => {
 			const contributorsListItem = document.getElementById(
 				"contributorsListItem"
 			);
-			if (contributorsListItem) {
-				contributorsListContainer.appendChild(contributorsListItem);
+			// clone the first element and append it to the end of the list
+			const contributorsListItemClone =
+				contributorsListItem?.cloneNode(true);
+
+			if (contributorsListItemClone) {
+				contributorsListContainer.removeChild(
+					contributorsListItem as Node
+				);
+				contributorsListContainer.appendChild(
+					contributorsListItemClone as Node
+				);
 			}
 		}
 	};
@@ -101,7 +114,7 @@ const ContributorsWidget = (props: { isHomePage: boolean }): JSX.Element => {
 					: ""}
 			</ContributorsTitle>
 
-			{!isHomePage && contributors.length === 0 ? (
+			{isLoaded && !isHomePage && contributors.length === 0 ? (
 				<>
 					<ContributionGraphLinks color={workGrey}>
 						Unable to load contributors. Please check the links
