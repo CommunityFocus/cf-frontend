@@ -53,7 +53,10 @@ export const StyledDivSpacer = styled.div`
 `;
 
 export const StyledBottomText = styled.div`
-	// display at the bottom of the page withouth pushing the footer down
 	position: absolute;
 	bottom: 60px;
+
+	@media (max-width: 600px), (max-height: 550px) {
+		display: none;
+	}
 `;

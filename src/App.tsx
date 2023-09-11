@@ -9,6 +9,7 @@ import ModalContext from "./components/Modal/ModalContext";
 import UsernameContext from "./components/Username/UsernameContext";
 import ValidRoom from "./components/Room/ValidRoom";
 import DefaultRoom from "./components/DefaultRoom/DefaultRoom";
+import ContributorsPage from "./components/Contributors/ContributorsPage";
 
 const App = (): JSX.Element => {
 	const [globalUsersConnected, setGlobalUsersConnected] = useState<number>(0);
@@ -80,6 +81,19 @@ const App = (): JSX.Element => {
 								path="/"
 								element={
 									<LandingPage
+										globalUsersConnected={
+											globalUsersConnected
+										}
+										isBreak={isBreak}
+										isConnected={isConnected}
+									/>
+								}
+							/>
+
+							<Route
+								path="/contributors"
+								element={
+									<ContributorsPage
 										globalUsersConnected={
 											globalUsersConnected
 										}

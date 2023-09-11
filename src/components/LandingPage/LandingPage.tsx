@@ -3,6 +3,8 @@ import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { ThemeContext } from "styled-components";
 import { HiOutlineRefresh } from "react-icons/hi";
+import { AiFillGithub } from "react-icons/ai";
+import { BsDiscord } from "react-icons/bs";
 import { SERVER_URL } from "../../../common/common";
 import {
 	Title,
@@ -21,8 +23,8 @@ import ConnectionState from "../ConnectionState/ConnectionState";
 import ValidationInput from "../Modal/ValidationInput";
 import validRoomname from "../../helpers/validRoomname";
 import { StyledImg } from "../Logo/LogoTitle.styled";
-import { AiFillGithub } from "react-icons/ai";
-import { BsDiscord } from "react-icons/bs";
+import ContributorsWidget from "../Contributors/ContributorsWidget";
+import { ContributorsWidgetPosition } from "../Contributors/ContributorsWidget.styled";
 
 const LandingPage = (props: {
 	globalUsersConnected: number;
@@ -54,6 +56,10 @@ const LandingPage = (props: {
 	const navigateToRoom = (): void => {
 		navigate(`/${slugName}`);
 		window.location.reload();
+	};
+
+	const navigateToContributors = (): void => {
+		navigate("/contributors");
 	};
 
 	useEffect(() => {
@@ -134,13 +140,32 @@ const LandingPage = (props: {
 						Join a room
 					</Button>
 				</StyledDivSpacer>
+
 				<StyledBottomText>
 					<StyledShareText color={workGrey}>
-						Made by commununity members of #100Devs Discord{" "}
+						{/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
+						<span
+							style={{
+								cursor: "pointer",
+							}}
+							onClick={(): void => {
+								navigateToContributors();
+							}}
+							onKeyDown={(
+								event: React.KeyboardEvent<HTMLInputElement>
+							): void => {
+								if (event.key === "l") {
+									navigateToContributors();
+								}
+							}}
+						>
+							Made by commununity members of #100Devs Discord
+							server
+						</span>
 						<BsDiscord
 							size={20}
 							style={{ cursor: "pointer", margin: "0 0 0 5px" }}
-							onClick={() =>
+							onClick={(): Window | null =>
 								window.open(
 									"https://leonnoel.com/100devs/",
 									"_blank"
@@ -150,7 +175,7 @@ const LandingPage = (props: {
 						<AiFillGithub
 							size={20}
 							style={{ cursor: "pointer", margin: "0 0 0 5px" }}
-							onClick={() =>
+							onClick={(): Window | null =>
 								window.open(
 									"https://github.com/CommunityFocus/",
 									"_blank"
@@ -159,6 +184,7 @@ const LandingPage = (props: {
 						/>
 					</StyledShareText>
 				</StyledBottomText>
+
 				<Footer
 					numUsers={globalUsersConnected}
 					isBreak={isBreak}
@@ -167,6 +193,9 @@ const LandingPage = (props: {
 					}
 				/>
 			</Center>
+			<ContributorsWidgetPosition>
+				<ContributorsWidget />
+			</ContributorsWidgetPosition>
 		</>
 	);
 };
