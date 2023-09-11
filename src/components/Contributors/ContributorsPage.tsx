@@ -27,7 +27,7 @@ const ContributorsPage = (props: {
 				backColor={!isBreak ? workBackground : breakBackground}
 			/>
 			<Center>
-				<ContributorsWidget />
+				<ContributorsWidget isHomePage={false} />
 			</Center>
 			<Footer
 				numUsers={globalUsersConnected}

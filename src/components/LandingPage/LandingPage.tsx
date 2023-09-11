@@ -194,7 +194,7 @@ const LandingPage = (props: {
 				/>
 			</Center>
 			<ContributorsWidgetPosition>
-				<ContributorsWidget />
+				<ContributorsWidget isHomePage={!false} />
 			</ContributorsWidgetPosition>
 		</>
 	);

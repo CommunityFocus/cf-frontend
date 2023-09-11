@@ -72,3 +72,28 @@ export const ContributorName = styled.span<{ color: string }>`
 	font-size: 13px;
 	text-align: center;
 `;
+
+export const StyledList = styled.ul<{ color: string }>`
+	color: ${({ color }): string => color};
+	font-family: monospace;
+	font-size: 13px;
+	text-align: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	gap: 5px;
+`;
+
+export const ContributionGraphLinks = styled.p<{ color: string }>`
+	color: ${({ color }): string => color};
+	font-family: monospace;
+	font-size: 13px;
+	text-align: center;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	gap: 5px;
+`;

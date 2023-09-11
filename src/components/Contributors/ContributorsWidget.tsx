@@ -4,12 +4,14 @@ import { useNavigate } from "react-router-dom";
 import { ThemeContext } from "styled-components";
 import { SERVER_URL } from "../../../common/common";
 import {
+	ContributionGraphLinks,
 	ContributorImg,
 	ContributorName,
 	ContributorsListContainer,
 	ContributorsListItem,
 	ContributorsTitle,
 	ContributorsWidgetContainer,
+	StyledList,
 } from "./ContributorsWidget.styled";
 import { theme } from "../../../common/theme";
 
@@ -20,7 +22,8 @@ interface Contributor {
 	contributions: number;
 }
 
-const ContributorsWidget = (): JSX.Element => {
+const ContributorsWidget = (props: { isHomePage: boolean }): JSX.Element => {
+	const { isHomePage } = props;
 	const navigate = useNavigate();
 	const [contributors, setContributors] = useState<Contributor[]>([]);
 
@@ -31,6 +34,12 @@ const ContributorsWidget = (): JSX.Element => {
 	const navigateToContributors = (): void => {
 		navigate("/contributors");
 	};
+
+	const repoContributorsLink = [
+		"https://github.com/CommunityFocus/cf-frontend/graphs/contributors",
+		"https://github.com/CommunityFocus/cf-backend/graphs/contributors",
+		"https://github.com/CommunityFocus/CommunityFocus/graphs/contributors",
+	];
 
 	const getContributors = async (): Promise<void> => {
 		axios
@@ -87,8 +96,47 @@ const ContributorsWidget = (): JSX.Element => {
 				color={workGrey}
 				onClick={(): void => navigateToContributors()}
 			>
-				Project Contributors
+				{!isHomePage || contributors.length > 0
+					? "Project Contributors"
+					: ""}
 			</ContributorsTitle>
+
+			{!isHomePage && contributors.length === 0 ? (
+				<>
+					<ContributionGraphLinks color={workGrey}>
+						Unable to load contributors. Please check the links
+						below.
+					</ContributionGraphLinks>
+
+					<StyledList color={workGrey}>
+						{repoContributorsLink.map((link) => {
+							return (
+								<li
+									key={link}
+									style={{
+										listStyleType: "none",
+										margin: "0 10px",
+									}}
+								>
+									<a
+										href={link}
+										target="_blank"
+										rel="noreferrer"
+										style={{
+											color: workGrey,
+											textDecoration: "none",
+										}}
+									>
+										{link}
+									</a>
+								</li>
+							);
+						})}
+					</StyledList>
+				</>
+			) : (
+				""
+			)}
 
 			<ContributorsListContainer id="contributorsListContainer">
 				{contributors.map((contributor) => {
