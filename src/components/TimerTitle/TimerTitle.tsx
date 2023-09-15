@@ -34,7 +34,10 @@ const TimerTitle = (props: TimerTitleProps): JSX.Element => {
 		<>
 			<TitleEditButtonPosition>
 				<StyledWorkBreakBanner color={workGrey} isLoaded={isLoaded}>
-					{timerTitle || (isBreak ? "Break" : "Work")}
+					{timerTitle ||
+						(isBreak
+							? "Time to take a break!"
+							: "Let's get some work done!")}
 				</StyledWorkBreakBanner>
 				<TitleEditEmojiSize color={workGrey} isLoaded={isLoaded}>
 					<FiEdit onClick={(): void => setIsTitleModalOpen(true)} />
