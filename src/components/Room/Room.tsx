@@ -16,12 +16,7 @@ import {
 	WorkBreakResponseArgs,
 } from "../../../common/types/types";
 import Header from "../Header/Header";
-import {
-	Center,
-	GlobalStyle,
-	StyledDiv,
-	StyledWorkBreakBanner,
-} from "./Room.styled";
+import { Center, GlobalStyle, StyledDiv } from "./Room.styled";
 import WorkBreakButton from "../TimerButton/WorkBreakButton";
 import { theme } from "../../../common/theme";
 import "react-dropdown/style.css";
@@ -32,6 +27,7 @@ import RoomProps from "./RoomProps";
 import ModalComponent from "../Modal/Modal";
 import AddTimerModal from "../Modal/AddTimerModal";
 import MessageLogs from "../MessageLog/MessageLogs";
+import TimerTitle from "../TimerTitle/TimerTitle";
 
 const Room = (props: RoomProps): JSX.Element => {
 	const {
@@ -181,11 +177,11 @@ const Room = (props: RoomProps): JSX.Element => {
 			/>
 			<StyledDiv>
 				<Center>
-					<StyledWorkBreakBanner color={workGrey} isLoaded={isLoaded}>
-						{isBreak
-							? "Time for a break!"
-							: "Let's get some work done!"}
-					</StyledWorkBreakBanner>
+					<TimerTitle
+						isLoaded={isLoaded}
+						workGrey={workGrey}
+						isBreak={isBreak}
+					/>
 
 					<Timestamp
 						color={workGrey}

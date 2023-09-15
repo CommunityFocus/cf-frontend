@@ -1,6 +1,15 @@
 import styled from "styled-components";
 import { StyledButton } from "../Button/Button";
 
+export const StyledTitleModalContainer = styled.div`
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+	align-items: center;
+	height: 100%;
+	width: 100%;
+`;
+
 export const StyledTitle = styled.h3`
 	text-align: center;
 `;
@@ -16,14 +25,5 @@ export const StyledInput = styled.input`
 	padding: 10px;
 	// shadow
 	box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
-	width: 100%;
-`;
-
-export const StyledUsernameModalContainer = styled.div`
-	display: flex;
-	flex-direction: column;
-	justify-content: space-evenly;
-	align-items: center;
-	height: 100%;
 	width: 100%;
 `;
