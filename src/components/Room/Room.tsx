@@ -30,6 +30,7 @@ import MessageLogs from "../MessageLog/MessageLogs";
 import TimerTitle from "../TimerTitle/TimerTitle";
 import PomoCounter from "../PomoCounter/PomoCounter";
 import { PomoCounterPosition } from "../PomoCounter/PomoCounter.styled";
+import TimerForm from "../Controls/TimerForm";
 
 const Room = (props: RoomProps): JSX.Element => {
 	const {
@@ -39,6 +40,8 @@ const Room = (props: RoomProps): JSX.Element => {
 		isConnected,
 		setIsConnected,
 	} = props;
+	// ask for notification permission
+	Notification.requestPermission();
 
 	const { width, height } = useWindowSize();
 	const showWorkButtonOnMobile = width < 300 || height < 530;
@@ -240,6 +243,7 @@ const Room = (props: RoomProps): JSX.Element => {
 							isMobile={!showWorkButtonOnMobile}
 						/>
 					)}
+					<TimerForm isLoaded={isLoaded} />
 				</Center>
 
 				<MessageLogs messageList={messageList} />

@@ -1,40 +1,50 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import socket from "../Socket/socket";
 import { roomName } from "../../../common/common";
+import { TimerFormContainer } from "./TimerControls.styled";
 
-const TimerForm = (): JSX.Element => {
+interface TimerFormProps {
+	isLoaded: boolean;
+}
+
+const TimerForm = (props: TimerFormProps): JSX.Element => {
+	const { isLoaded } = props;
 	const [value, setValue] = useState<string>("");
-	const [isLoading, setIsLoading] = useState<boolean>(false);
+	const [debugMode, setDebugMode] = useState<boolean>(false);
 
 	const onSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
 		event.preventDefault();
-		setIsLoading(true);
 
-		socket.timeout(1000).emit(
-			"startCountdown",
-			{
-				roomName,
-				durationInSeconds: parseInt(value),
-			},
-			() => {
-				setIsLoading(false);
-			}
-		);
+		socket.emit("startCountdown", {
+			roomName,
+			durationInSeconds: parseInt(value),
+		});
 	};
 
-	return (
-		<form onSubmit={onSubmit}>
-			<input
-				onChange={(e): void => setValue(e.target.value)}
-				value={value}
-				type="number"
-				placeholder="Enter something"
-			/>
+	// eslint-disable-next-line
+	// @ts-ignore
+	window.magic = (): void => {
+		setDebugMode(true);
+		console.log("Magic mode enabled");
+	};
 
-			<button type="submit" disabled={isLoading}>
-				Submit
-			</button>
-		</form>
+	useEffect(() => {
+		console.log("isLoaded", isLoaded);
+	}, [isLoaded]);
+
+	return (
+		<TimerFormContainer isVisibile={debugMode} isLoaded={isLoaded}>
+			<form onSubmit={onSubmit}>
+				<input
+					onChange={(e): void => setValue(e.target.value)}
+					value={value}
+					type="number"
+					placeholder="Enter something"
+				/>
+
+				<button type="submit">Submit</button>
+			</form>
+		</TimerFormContainer>
 	);
 };
 

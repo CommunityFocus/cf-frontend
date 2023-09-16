@@ -150,27 +150,38 @@ const Timestamp = (props: TimestampProps): JSX.Element => {
 		buildCircle();
 	}, [timerMinuteButtons]);
 
-	useEffect(() => {
-		// if timestamp gets to 1, then play audio
-		if (timestamp === 1) {
-			const audio = new Audio("/audio/chirptone.wav");
-			audio.play();
+	const onEndTimer = (): void => {
+		const audio = new Audio("/audio/chirptone.wav");
+		audio.play();
 
-			updatePomoCounter({
-				roomName,
-				updatedPomoCount: 1,
-				isBreakCounter: isBreak,
-				setWorkSessions,
-				setBreakSessions,
-			});
-		}
-	}, [timestamp]);
+		const notification = new Notification(`Community Focus`, {
+			body: `Your timer (${
+				isBreak ? "break" : "work"
+			} session) for ${roomName} has ended!`,
+			icon: "/favicon.ico",
+		});
+
+		notification.onclick = (): void => {
+			window.focus();
+			notification.close();
+		};
+
+		updatePomoCounter({
+			roomName,
+			updatedPomoCount: 1,
+			isBreakCounter: isBreak,
+			setWorkSessions,
+			setBreakSessions,
+		});
+	};
 
 	useEffect(() => {
 		socket.on("timerResponse", onTimerResponse);
+		socket.on("endTimer", onEndTimer);
 
 		return () => {
 			socket.off("timerResponse", onTimerResponse);
+			socket.off("endTimer", onEndTimer);
 		};
 	}, []);
 

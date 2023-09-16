@@ -5,6 +5,11 @@ export const PomoCounterPosition = styled.div`
 	// top right corner
 	top: 90px;
 	right: 25px;
+	z-index: 1;
+
+	@media (max-width: 970px), (max-height: 600px) {
+		display: none;
+	}
 `;
 
 export const PomoCounterContainer = styled.div<{ color: string }>`

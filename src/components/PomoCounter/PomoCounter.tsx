@@ -42,6 +42,9 @@ const PomoCounter = (props: PomoCounterProps): JSX.Element => {
 		<PomoCounterContainer color={workGrey}>
 			<PomoCounterText color={workGrey}>
 				<PiEraserBold
+					data-tooltip-id="my-tooltip"
+					data-tooltip-content="Clear the work session counter"
+					data-tooltip-place="top"
 					onClick={(): void =>
 						updatePomoCounter({
 							roomName,
@@ -52,10 +55,19 @@ const PomoCounter = (props: PomoCounterProps): JSX.Element => {
 						})
 					}
 				/>
-				# of work sessions {workSessions}
+				<span
+					data-tooltip-id="my-tooltip"
+					data-tooltip-content="Number of work sessions you've completed"
+					data-tooltip-place="top"
+				>
+					# of work sessions: {workSessions}
+				</span>
 			</PomoCounterText>
 			<PomoCounterText color={workGrey}>
 				<PiEraserBold
+					data-tooltip-id="my-tooltip"
+					data-tooltip-content="Clear the break session counter"
+					data-tooltip-place="top"
 					onClick={(): void => {
 						updatePomoCounter({
 							roomName,
@@ -66,7 +78,13 @@ const PomoCounter = (props: PomoCounterProps): JSX.Element => {
 						});
 					}}
 				/>
-				# of breaks sessions {breakSessions}
+				<span
+					data-tooltip-id="my-tooltip"
+					data-tooltip-content="Number of break sessions you've completed"
+					data-tooltip-place="top"
+				>
+					# of breaks sessions: {breakSessions}
+				</span>
 			</PomoCounterText>
 		</PomoCounterContainer>
 	);

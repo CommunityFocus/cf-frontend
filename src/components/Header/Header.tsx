@@ -42,6 +42,7 @@ const Header = ({ isBreak }: HeaderProps): JSX.Element => {
 					value={themeGroup}
 					placeholder="Pick a theme"
 				/>
+
 				<WelcomeMessage
 					name={userName || "Guest"}
 					color={workGrey}

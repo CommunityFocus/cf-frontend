@@ -7,6 +7,7 @@ interface UserBubbleProps {
 
 const UserBubble = (props: UserBubbleProps): JSX.Element => {
 	const { user, size } = props;
+
 	return (
 		<TooltipContainer>
 			<UserBubbleStyled
@@ -16,9 +17,9 @@ const UserBubble = (props: UserBubbleProps): JSX.Element => {
 				data-tooltip-place="top"
 				$size={size}
 			>
-				{user[0]
-					.toUpperCase()
-					.concat(user[user.length - 1].toUpperCase())}
+				{user
+					? user.slice(0, 3).toUpperCase()
+					: Math.floor(Math.random() * 100)}
 			</UserBubbleStyled>
 		</TooltipContainer>
 	);
