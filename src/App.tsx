@@ -11,7 +11,7 @@ import ModalContext from "./components/Modal/ModalContext";
 import UsernameContext from "./components/Username/UsernameContext";
 import ValidRoom from "./components/Room/ValidRoom";
 import DefaultRoom from "./components/DefaultRoom/DefaultRoom";
-import { OPENREPLAY_KEY } from "../common/common";
+import { OPENREPLAY_KEY, roomName } from "../common/common";
 
 const tracker = new Tracker({
 	projectKey: OPENREPLAY_KEY,
@@ -34,9 +34,14 @@ const App = (): JSX.Element => {
 	);
 
 	useEffect(() => {
-		tracker.start();
+		tracker.start({
+			userID: userName,
+			metadata: {
+				roomName,
+			},
+		});
 	}, []);
-	tracker.setUserID(userName);
+
 	const onGlobalUsers = ({
 		globalUsersCount,
 	}: {
