@@ -34,10 +34,9 @@ const App = (): JSX.Element => {
 	);
 
 	useEffect(() => {
-		console.log("tracker started", OPENREPLAY_KEY);
 		tracker.start();
 	}, []);
-	// tracker.setUserID(userName);
+	tracker.setUserID(userName);
 	const onGlobalUsers = ({
 		globalUsersCount,
 	}: {
