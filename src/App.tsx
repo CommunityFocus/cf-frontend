@@ -32,8 +32,12 @@ const App = (): JSX.Element => {
 	const [userName, setUserName] = useState<string>(
 		localStorage.getItem("userName") || ""
 	);
-	tracker.setUserID(userName);
 
+	useEffect(() => {
+		console.log("tracker started", OPENREPLAY_KEY);
+		tracker.start();
+	}, []);
+	// tracker.setUserID(userName);
 	const onGlobalUsers = ({
 		globalUsersCount,
 	}: {
@@ -49,11 +53,6 @@ const App = (): JSX.Element => {
 	const onDisconnect = (): void => {
 		setIsConnected(false);
 	};
-
-	useEffect(() => {
-		console.log("tracker started", OPENREPLAY_KEY);
-		tracker.start();
-	}, []);
 
 	useEffect(() => {
 		socket.on("globalUsers", onGlobalUsers);
