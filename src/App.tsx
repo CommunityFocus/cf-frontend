@@ -51,6 +51,7 @@ const App = (): JSX.Element => {
 	};
 
 	useEffect(() => {
+		console.log("tracker started", OPENREPLAY_KEY);
 		tracker.start();
 	}, []);
 
