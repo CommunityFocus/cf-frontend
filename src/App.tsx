@@ -1,7 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { useEffect, useMemo, useState } from "react";
 import { ThemeProvider } from "styled-components";
-import Tracker from "@openreplay/tracker";
 import socket from "./components/Socket/socket";
 import LandingPage from "./components/LandingPage/LandingPage";
 import { ThemeType } from "../common/theme";
@@ -11,11 +10,7 @@ import ModalContext from "./components/Modal/ModalContext";
 import UsernameContext from "./components/Username/UsernameContext";
 import ValidRoom from "./components/Room/ValidRoom";
 import DefaultRoom from "./components/DefaultRoom/DefaultRoom";
-import { OPENREPLAY_KEY, roomName } from "../common/common";
-
-const tracker = new Tracker({
-	projectKey: OPENREPLAY_KEY,
-});
+import { tracker } from "../common/common";
 
 const App = (): JSX.Element => {
 	const [globalUsersConnected, setGlobalUsersConnected] = useState<number>(0);
@@ -36,9 +31,6 @@ const App = (): JSX.Element => {
 	useEffect(() => {
 		tracker.start({
 			userID: userName,
-			metadata: {
-				roomName,
-			},
 		});
 	}, []);
 
