@@ -5,3 +5,5 @@ export const SERVER_URL =
 	NODE_ENV === "production" ? BACKEND_URL : "http://localhost:4000";
 
 export const roomName = window.location.href.split("/")[3] || "default";
+
+export const OPENREPLAY_KEY = process.env.OPENREPLAY_KEY || "null";
