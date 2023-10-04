@@ -1,7 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import socket from "../Socket/socket";
 import { roomName } from "../../../common/common";
-import { TimerFormContainer } from "./TimerControls.styled";
+import { StyledRowDiv, TimerFormContainer } from "./TimerControls.styled";
+import { StyledButton } from "../Button/Button";
+import ValidationInput from "../Modal/ValidationInput";
 
 interface TimerFormProps {
 	isLoaded: boolean;
@@ -28,21 +30,41 @@ const TimerForm = (props: TimerFormProps): JSX.Element => {
 		console.log("Magic mode enabled");
 	};
 
-	useEffect(() => {
-		console.log("isLoaded", isLoaded);
-	}, [isLoaded]);
+	const inputValidation = (input: string): string | false => {
+		const parsedInput = parseInt(input);
+
+		if (parsedInput < 0) {
+			return "Please enter a positive number";
+		}
+
+		if (parsedInput > 999999999999) {
+			return "Please enter a number less than 999999999999";
+		}
+
+		return false;
+	};
 
 	return (
 		<TimerFormContainer isVisibile={debugMode} isLoaded={isLoaded}>
 			<form onSubmit={onSubmit}>
-				<input
-					onChange={(e): void => setValue(e.target.value)}
-					value={value}
-					type="number"
-					placeholder="Enter something"
-				/>
+				<StyledRowDiv>
+					<ValidationInput
+						type="number"
+						id="custom-timer"
+						placeholder="Enter a custom timer duration"
+						value={value}
+						validationText={inputValidation(value)}
+						onChange={(e): void => setValue(e.target.value)}
+						onKeyDown={(): void => {}}
+					/>
 
-				<button type="submit">Submit</button>
+					<StyledButton
+						type="submit"
+						disabled={inputValidation(value) !== false}
+					>
+						Submit
+					</StyledButton>
+				</StyledRowDiv>
 			</form>
 		</TimerFormContainer>
 	);

@@ -57,3 +57,17 @@ export const TimerFormContainer = styled.div<{
 	width: 100%;
 	height: 100%;
 `;
+
+export const StyledRowDiv = styled.div`
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	gap: 20px;
+	margin-top: 20px;
+
+	@media (max-width: 300px), (max-height: 600px) {
+		display: none;
+	}
+`;
