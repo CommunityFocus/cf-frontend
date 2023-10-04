@@ -14,8 +14,6 @@ export default (props: UpdatePomoCountProps): void => {
 		setBreakSessions,
 	} = props;
 
-	console.log(props);
-
 	const currentPomoCount = isBreakCounter
 		? Number(
 				Number(

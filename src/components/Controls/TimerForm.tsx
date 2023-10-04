@@ -27,6 +27,8 @@ const TimerForm = (props: TimerFormProps): JSX.Element => {
 	// @ts-ignore
 	window.magic = (): void => {
 		setDebugMode(true);
+
+		// eslint-disable-next-line no-console
 		console.log("Magic mode enabled");
 	};
 
