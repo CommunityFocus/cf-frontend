@@ -1,6 +1,5 @@
 import { ThemeContext } from "styled-components";
 import { useContext } from "react";
-import { Tooltip } from "react-tooltip";
 import useWindowSize from "use-window-size-v2";
 import {
 	StyledConnectionState,
@@ -49,7 +48,7 @@ const Footer = ({
 						}`}
 
 					{width > 865 && usersInRoom !== undefined && " || "}
-					
+
 					{width > 865 &&
 						` ${numUsers} ${
 							numUsers === 0 || numUsers > 1
@@ -59,7 +58,6 @@ const Footer = ({
 				</span>
 			</StyledText>
 			<StyledConnectionState>{connectionStatus}</StyledConnectionState>
-			<Tooltip id="my-tooltip" />
 		</StyledFooter>
 	);
 };

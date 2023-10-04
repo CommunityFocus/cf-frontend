@@ -39,3 +39,35 @@ export const StyledMobileWorkBreakButtonDiv = styled.div<{
 }>`
 	display: ${({ isMobile }): string => (isMobile ? "flex" : "none")};
 `;
+
+export const TimerFormContainer = styled.div<{
+	isVisibile: boolean;
+	isLoaded: boolean;
+}>`
+	// both not loading but isVisibile is true
+	display: ${({ isVisibile, isLoaded }): string => {
+		if (isLoaded && isVisibile) {
+			return "flex";
+		}
+		return "none";
+	}};
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	height: 100%;
+`;
+
+export const StyledRowDiv = styled.div`
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	gap: 20px;
+	margin-top: 20px;
+
+	@media (max-width: 300px), (max-height: 600px) {
+		display: none;
+	}
+`;

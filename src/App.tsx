@@ -1,6 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { useEffect, useMemo, useState } from "react";
 import { ThemeProvider } from "styled-components";
+import { Tooltip } from "react-tooltip";
 import socket from "./components/Socket/socket";
 import LandingPage from "./components/LandingPage/LandingPage";
 import { ThemeType } from "../common/theme";
@@ -82,6 +83,7 @@ const App = (): JSX.Element => {
 						[isUsernamModalOpen, setIsUsernameModalOpen]
 					)}
 				>
+					<Tooltip id="my-tooltip" style={{ zIndex: 99 }} />
 					<BrowserRouter>
 						<Routes>
 							<Route

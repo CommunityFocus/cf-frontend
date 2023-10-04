@@ -1,4 +1,3 @@
-import { Tooltip } from "react-tooltip";
 import { TooltipContainer, UserBubbleStyled } from "./UserBubble.styled";
 
 const MultiUserBubble = (props: { users: string[] }): JSX.Element => {
@@ -7,11 +6,10 @@ const MultiUserBubble = (props: { users: string[] }): JSX.Element => {
 		<TooltipContainer>
 			<UserBubbleStyled
 				$borderColor="brown"
-				data-tooltip-id="my-tooltip-multilin"
+				data-tooltip-id="my-tooltip"
 				data-tooltip-html={users.join("<br />")}
 				data-tooltip-place="top"
 			>
-				<Tooltip id="my-tooltip-multilin" />
 				{`${users.length}+`}
 			</UserBubbleStyled>
 		</TooltipContainer>

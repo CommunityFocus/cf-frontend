@@ -7,6 +7,7 @@ interface UserBubbleProps {
 
 const UserBubble = (props: UserBubbleProps): JSX.Element => {
 	const { user, size } = props;
+
 	return (
 		<TooltipContainer>
 			<UserBubbleStyled

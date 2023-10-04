@@ -28,6 +28,9 @@ import ModalComponent from "../Modal/Modal";
 import AddTimerModal from "../Modal/AddTimerModal";
 import MessageLogs from "../MessageLog/MessageLogs";
 import TimerTitle from "../TimerTitle/TimerTitle";
+import PomoCounter from "../PomoCounter/PomoCounter";
+import { PomoCounterPosition } from "../PomoCounter/PomoCounter.styled";
+import TimerForm from "../Controls/TimerForm";
 
 const Room = (props: RoomProps): JSX.Element => {
 	const {
@@ -37,6 +40,8 @@ const Room = (props: RoomProps): JSX.Element => {
 		isConnected,
 		setIsConnected,
 	} = props;
+	// ask for notification permission
+	Notification.requestPermission();
 
 	const { width, height } = useWindowSize();
 	const showWorkButtonOnMobile = width < 300 || height < 530;
@@ -59,6 +64,17 @@ const Room = (props: RoomProps): JSX.Element => {
 	const [messageList, setMessageList] = useState<
 		{ message: string; userName: string; date: Date }[]
 	>([]);
+
+	const [workSessions, setWorkSessions] = useState<number>(
+		Number(
+			JSON.parse(localStorage.getItem(roomName) || "{}").workSessions
+		) || 0
+	);
+	const [breakSessions, setBreakSessions] = useState<number>(
+		Number(
+			JSON.parse(localStorage.getItem(roomName) || "{}").breakSessions
+		) || 0
+	);
 
 	const { themeGroup } = useContext(ThemeContext);
 	const { setIsUsernameModalOpen } = useContext(ModalContext);
@@ -204,6 +220,8 @@ const Room = (props: RoomProps): JSX.Element => {
 						startCountdown={startCountdown}
 						setIsTimerRunningClient={setIsTimerRunningClient}
 						setIsBreak={setIsBreak}
+						setWorkSessions={setWorkSessions}
+						setBreakSessions={setBreakSessions}
 					/>
 
 					<TimerControls
@@ -229,12 +247,22 @@ const Room = (props: RoomProps): JSX.Element => {
 							isMobile={!showWorkButtonOnMobile}
 						/>
 					)}
+					<TimerForm isLoaded={isLoaded} />
 				</Center>
 
 				<MessageLogs messageList={messageList} />
 
 				<ToastContainer theme="dark" pauseOnFocusLoss />
 				<UserBubbles userListInRoom={userListInRoom} />
+
+				<PomoCounterPosition>
+					<PomoCounter
+						workSessions={workSessions}
+						breakSessions={breakSessions}
+						setWorkSessions={setWorkSessions}
+						setBreakSessions={setBreakSessions}
+					/>
+				</PomoCounterPosition>
 
 				<ModalComponent
 					isModalOpen={isTimerAddModalOpen}

@@ -15,6 +15,7 @@ import socket from "../Socket/socket";
 import { TimerResponseArgs } from "../../../common/types/types";
 import { StyledPillButton } from "../TimerButton/TimerButtons.styled";
 import { theme } from "../../../common/theme";
+import updatePomoCounter from "../../helpers/updatePomoCount";
 
 interface TimestampProps {
 	color: string;
@@ -39,6 +40,8 @@ interface TimestampProps {
 	}) => void;
 	setIsTimerRunningClient: React.Dispatch<React.SetStateAction<boolean>>;
 	setIsBreak: React.Dispatch<React.SetStateAction<boolean>>;
+	setWorkSessions: React.Dispatch<React.SetStateAction<number>>;
+	setBreakSessions: React.Dispatch<React.SetStateAction<number>>;
 }
 export interface ICircleState {
 	timeCircle: {
@@ -63,6 +66,8 @@ const Timestamp = (props: TimestampProps): JSX.Element => {
 		startCountdown,
 		setIsTimerRunningClient,
 		setIsBreak,
+		setWorkSessions,
+		setBreakSessions,
 	} = props;
 	const [circleState, setCircleState] = useState<ICircleState>({
 		timeCircle: [],
@@ -145,19 +150,38 @@ const Timestamp = (props: TimestampProps): JSX.Element => {
 		buildCircle();
 	}, [timerMinuteButtons]);
 
-	useEffect(() => {
-		// if timestamp gets to 1, then play audio
-		if (timestamp === 1) {
-			const audio = new Audio("/audio/chirptone.wav");
-			audio.play();
-		}
-	}, [timestamp]);
+	const onEndTimer = ({ isBreakMode }: { isBreakMode: boolean }): void => {
+		const audio = new Audio("/audio/chirptone.wav");
+		audio.play();
+
+		const notification = new Notification(`Community Focus`, {
+			body: `Your timer (${
+				isBreakMode ? "break" : "work"
+			} session) for ${roomName} has ended!`,
+			icon: "/favicon.ico",
+		});
+
+		notification.onclick = (): void => {
+			window.focus();
+			notification.close();
+		};
+
+		updatePomoCounter({
+			roomName,
+			updatedPomoCount: 1,
+			isBreakCounter: isBreakMode,
+			setWorkSessions,
+			setBreakSessions,
+		});
+	};
 
 	useEffect(() => {
 		socket.on("timerResponse", onTimerResponse);
+		socket.on("endTimer", onEndTimer);
 
 		return () => {
 			socket.off("timerResponse", onTimerResponse);
+			socket.off("endTimer", onEndTimer);
 		};
 	}, []);
 
