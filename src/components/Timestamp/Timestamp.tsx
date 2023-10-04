@@ -150,13 +150,13 @@ const Timestamp = (props: TimestampProps): JSX.Element => {
 		buildCircle();
 	}, [timerMinuteButtons]);
 
-	const onEndTimer = (): void => {
+	const onEndTimer = ({ isBreakMode }: { isBreakMode: boolean }): void => {
 		const audio = new Audio("/audio/chirptone.wav");
 		audio.play();
 
 		const notification = new Notification(`Community Focus`, {
 			body: `Your timer (${
-				isBreak ? "break" : "work"
+				isBreakMode ? "break" : "work"
 			} session) for ${roomName} has ended!`,
 			icon: "/favicon.ico",
 		});
@@ -169,7 +169,7 @@ const Timestamp = (props: TimestampProps): JSX.Element => {
 		updatePomoCounter({
 			roomName,
 			updatedPomoCount: 1,
-			isBreakCounter: isBreak,
+			isBreakCounter: isBreakMode,
 			setWorkSessions,
 			setBreakSessions,
 		});
