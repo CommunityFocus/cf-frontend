@@ -17,9 +17,12 @@ const UserBubble = (props: UserBubbleProps): JSX.Element => {
 				data-tooltip-place="top"
 				$size={size}
 			>
-				{user
-					? user.slice(0, 3).toUpperCase()
-					: Math.floor(Math.random() * 100)}
+				{(user &&
+					user.length > 0 &&
+					user[0]
+						?.toUpperCase()
+						.concat(user[user.length - 1]?.toUpperCase())) ||
+					Math.random().toString(36).substring(2, 4).toUpperCase()}
 			</UserBubbleStyled>
 		</TooltipContainer>
 	);

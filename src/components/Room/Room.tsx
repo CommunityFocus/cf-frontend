@@ -7,7 +7,7 @@ import ConnectionState from "../ConnectionState/ConnectionState";
 import Timestamp from "../Timestamp/Timestamp";
 import shareRoom from "../../helpers/shareRoom";
 import startCountdown from "../../helpers/startCountdown";
-import { roomName } from "../../../common/common";
+import { roomName, tracker } from "../../../common/common";
 import TimerControls from "../Controls/TimerControls";
 import Footer from "../Footer/Footer";
 import UserBubbles from "../UserBubbles/UserBubbles";
@@ -141,6 +141,10 @@ const Room = (props: RoomProps): JSX.Element => {
 			},
 		]);
 	};
+
+	useEffect(() => {
+		tracker.setMetadata("roomName", roomName);
+	}, []);
 
 	const onMessageLogArray = (message: {
 		messageHistory: { message: string; userName: string; date: Date }[];
