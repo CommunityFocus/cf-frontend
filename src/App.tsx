@@ -11,7 +11,7 @@ import ModalContext from "./components/Modal/ModalContext";
 import UsernameContext from "./components/Username/UsernameContext";
 import ValidRoom from "./components/Room/ValidRoom";
 import DefaultRoom from "./components/DefaultRoom/DefaultRoom";
-// import { tracker } from "../common/common";
+import { tracker } from "../common/common";
 
 const App = (): JSX.Element => {
 	const [globalUsersConnected, setGlobalUsersConnected] = useState<number>(0);
@@ -29,11 +29,11 @@ const App = (): JSX.Element => {
 		localStorage.getItem("userName") || ""
 	);
 
-	// useEffect(() => {
-	// 	tracker.start({
-	// 		userID: userName,
-	// 	});
-	// }, []);
+	useEffect(() => {
+		tracker.start({
+			userID: userName,
+		});
+	}, []);
 
 	const onGlobalUsers = ({
 		globalUsersCount,

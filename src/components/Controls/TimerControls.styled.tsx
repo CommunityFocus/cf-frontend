@@ -17,7 +17,7 @@ export const StyledButtonRow = styled.div<{
 	color: ${({ iconColor }): string => (iconColor )};
 	visibility: ${({ show }): string => (show ? "visible" : "hidden")};
 `;
-//added color
+
 export const StyledShareIcon = styled(BsFillShareFill)`
 	@media (max-width: 300px), (max-height: 500px) {
 		display: none;
