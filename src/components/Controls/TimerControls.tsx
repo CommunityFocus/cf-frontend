@@ -9,6 +9,20 @@ import {
 } from "./TimerControls.styled";
 import WorkBreakButton from "../TimerButton/WorkBreakButton";
 
+interface TimerControlProps {
+	pauseTimer: () => void;
+	isTimerPaused: boolean;
+	resetTimer: () => void;
+	shareRoom: () => void;
+	isLoaded: boolean;
+	isTimerRunningClient: boolean;
+	roomName: string;
+	isBreak: boolean;
+	setIsTimerAddModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+	showWorkButtonOnMobile: boolean;
+	iconColor:string;
+}
+
 const TimerControls = ({
 	pauseTimer,
 	isTimerPaused,
@@ -20,20 +34,10 @@ const TimerControls = ({
 	roomName,
 	isBreak,
 	showWorkButtonOnMobile,
-}: {
-	pauseTimer: () => void;
-	isTimerPaused: boolean;
-	resetTimer: () => void;
-	shareRoom: () => void;
-	isLoaded: boolean;
-	isTimerRunningClient: boolean;
-	roomName: string;
-	isBreak: boolean;
-	setIsTimerAddModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
-	showWorkButtonOnMobile: boolean;
-}): JSX.Element => {
+	iconColor,
+}: TimerControlProps ): JSX.Element => {
 	return (
-		<StyledButtonRow show={isLoaded}>
+		<StyledButtonRow show={isLoaded} iconColor = {iconColor} >
 			{isTimerRunningClient &&
 				(isTimerPaused ? (
 					<FaRegPlayCircle
@@ -86,6 +90,7 @@ const TimerControls = ({
 					isTimerPaused={isTimerPaused}
 					isLoaded={isLoaded}
 					isMobile={!showWorkButtonOnMobile}
+					iconColor={iconColor}
 				/>
 			) : (
 				<StyledReopenIcon

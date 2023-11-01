@@ -5,6 +5,7 @@ import styled from "styled-components";
 
 export const StyledButtonRow = styled.div<{
 	show: boolean;
+	iconColor: string;
 }>`
 	display: flex;
 	flex-direction: row;
@@ -13,9 +14,10 @@ export const StyledButtonRow = styled.div<{
 	width: 100%;
 	gap: 10px;
 	margin: 20px;
+	color: ${({ iconColor }): string => (iconColor )};
 	visibility: ${({ show }): string => (show ? "visible" : "hidden")};
 `;
-
+//added color
 export const StyledShareIcon = styled(BsFillShareFill)`
 	@media (max-width: 300px), (max-height: 500px) {
 		display: none;
