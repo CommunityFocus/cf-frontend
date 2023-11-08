@@ -29,13 +29,16 @@ export const StyledTimeButton = styled(StyledButton)<{
 	}
 `;
 
-export const StyledWorkBreakButtonDiv = styled.div<{ show: boolean , iconColor:string}>`
+export const StyledWorkBreakButtonDiv = styled.div<{
+	show: boolean;
+	iconColor: string;
+}>`
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 	display: ${({ show }): string => (show ? "flex" : "none")};
-	color: ${({ iconColor}): string => (iconColor)};
+	color: ${({ iconColor }): string => iconColor};
 `;
 
 export const StyledPillButton = styled(StyledButton)<{
