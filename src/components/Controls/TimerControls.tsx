@@ -20,7 +20,7 @@ interface TimerControlProps {
 	isBreak: boolean;
 	setIsTimerAddModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
 	showWorkButtonOnMobile: boolean;
-	iconColor:string;
+	iconColor: string;
 }
 
 const TimerControls = ({
@@ -35,9 +35,9 @@ const TimerControls = ({
 	isBreak,
 	showWorkButtonOnMobile,
 	iconColor,
-}: TimerControlProps ): JSX.Element => {
+}: TimerControlProps): JSX.Element => {
 	return (
-		<StyledButtonRow show={isLoaded} iconColor = {iconColor} >
+		<StyledButtonRow show={isLoaded} iconColor={iconColor}>
 			{isTimerRunningClient &&
 				(isTimerPaused ? (
 					<FaRegPlayCircle

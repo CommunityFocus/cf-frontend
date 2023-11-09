@@ -237,7 +237,7 @@ const Room = (props: RoomProps): JSX.Element => {
 						showWorkButtonOnMobile={showWorkButtonOnMobile}
 						iconColor={workGrey}
 					/>
-					
+
 					{!showWorkButtonOnMobile && (
 						<WorkBreakButton
 							roomName={roomName}

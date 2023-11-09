@@ -10,7 +10,7 @@ interface WorkBreakButtonProps {
 	isTimerPaused: boolean;
 	isLoaded: boolean;
 	isMobile: boolean;
-	iconColor:string;
+	iconColor: string;
 }
 
 const WorkBreakButton = ({
