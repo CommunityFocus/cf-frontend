@@ -10,6 +10,7 @@ interface WorkBreakButtonProps {
 	isTimerPaused: boolean;
 	isLoaded: boolean;
 	isMobile: boolean;
+	iconColor: string;
 }
 
 const WorkBreakButton = ({
@@ -19,6 +20,7 @@ const WorkBreakButton = ({
 	isTimerPaused,
 	isLoaded,
 	isMobile,
+	iconColor,
 }: WorkBreakButtonProps): JSX.Element => {
 	const onClickHandler = (): void => {
 		if (!isBreak) {
@@ -41,6 +43,7 @@ const WorkBreakButton = ({
 			data-tooltip-id="my-tooltip"
 			data-tooltip-content="Take a Break!"
 			data-tooltip-place="top"
+			iconColor={iconColor}
 		>
 			<AiOutlineCoffee size={30} />
 			{isMobile && <span>Take a Break</span>}
@@ -52,6 +55,7 @@ const WorkBreakButton = ({
 			data-tooltip-id="my-tooltip"
 			data-tooltip-content="Do some Work!"
 			data-tooltip-place="top"
+			iconColor={iconColor}
 		>
 			<MdOutlineWork size={30} />
 			{isMobile && <span>Do some Work</span>}
