@@ -235,7 +235,9 @@ const Room = (props: RoomProps): JSX.Element => {
 						roomName={roomName}
 						isBreak={isBreak}
 						showWorkButtonOnMobile={showWorkButtonOnMobile}
+						iconColor={workGrey}
 					/>
+
 					{!showWorkButtonOnMobile && (
 						<WorkBreakButton
 							roomName={roomName}
@@ -245,6 +247,7 @@ const Room = (props: RoomProps): JSX.Element => {
 							isLoaded={isLoaded}
 							// eslint-disable-next-line react/jsx-boolean-value
 							isMobile={!showWorkButtonOnMobile}
+							iconColor={workGrey}
 						/>
 					)}
 					<TimerForm isLoaded={isLoaded} />
