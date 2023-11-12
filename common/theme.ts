@@ -54,7 +54,7 @@ export const theme: { [key in ThemeType]: Theme } = {
 		workGrey: "#8bbfac",
 		workButtonColor: "#183D3D",
 		workButtonTextColor: "#93B1A6",
-		breakButtonColor: "#93B1A6",
+		breakButtonColor: "#486581",
 		breakButtonTextColor: "#93B1A6",
 	}
 };
