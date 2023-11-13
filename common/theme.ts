@@ -3,7 +3,7 @@ import { createContext } from "react";
 export enum ThemeType {
 	original = "original",
 	funky = "funky",
-	night = "night"
+	night = "night",
 }
 
 export const themeOptions = Object.keys(ThemeType).map((key) => ({
@@ -56,7 +56,7 @@ export const theme: { [key in ThemeType]: Theme } = {
 		workButtonTextColor: "#93B1A6",
 		breakButtonColor: "#486581",
 		breakButtonTextColor: "#93B1A6",
-	}
+	},
 };
 
 export const themeSwitchContext = createContext("original");
