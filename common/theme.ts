@@ -3,6 +3,7 @@ import { createContext } from "react";
 export enum ThemeType {
 	original = "original",
 	funky = "funky",
+	night = "night",
 }
 
 export const themeOptions = Object.keys(ThemeType).map((key) => ({
@@ -44,6 +45,17 @@ export const theme: { [key in ThemeType]: Theme } = {
 		workButtonTextColor: "#ffffff",
 		breakButtonColor: "#a37f19",
 		breakButtonTextColor: "#ffffff",
+	},
+	night: {
+		workBackground: "#040D12",
+		workAccent: "#183D3D",
+		breakBackground: "#102a43",
+		breakAccent: "#486581",
+		workGrey: "#8bbfac",
+		workButtonColor: "#183D3D",
+		workButtonTextColor: "#93B1A6",
+		breakButtonColor: "#486581",
+		breakButtonTextColor: "#93B1A6",
 	},
 };
 
