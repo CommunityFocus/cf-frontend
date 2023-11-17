@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import ReactGA from "react-ga4";
 import { useContext, useEffect, useState } from "react";
 import { ThemeContext } from "styled-components";
 import { HiOutlineRefresh } from "react-icons/hi";
@@ -25,6 +26,7 @@ import validRoomname from "../../helpers/validRoomname";
 import { StyledImg } from "../Logo/LogoTitle.styled";
 import ContributorsWidget from "../Contributors/ContributorsWidget";
 import { ContributorsWidgetPosition } from "../Contributors/ContributorsWidget.styled";
+import UsernameContext from "../Username/UsernameContext";
 
 const LandingPage = (props: {
 	globalUsersConnected: number;
@@ -34,6 +36,7 @@ const LandingPage = (props: {
 	const { globalUsersConnected, isBreak, isConnected } = props;
 	const [slugName, setSlugName] = useState<string>("");
 	const [isActivated, setIsActivated] = useState<boolean>(false);
+	const { userName } = useContext(UsernameContext);
 
 	const navigate = useNavigate();
 
@@ -65,6 +68,14 @@ const LandingPage = (props: {
 	useEffect(() => {
 		getSlug();
 		document.title = "Community Focus";
+	}, []);
+
+	useEffect(() => {
+		ReactGA.send({
+			hitType: "pageview",
+			page: `landingPage`,
+			userID: userName,
+		});
 	}, []);
 
 	return (
