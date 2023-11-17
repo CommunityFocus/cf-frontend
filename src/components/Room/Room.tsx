@@ -1,4 +1,5 @@
 import { useState, useEffect, useContext } from "react";
+import ReactGA from "react-ga4";
 import { ThemeContext } from "styled-components";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -144,6 +145,11 @@ const Room = (props: RoomProps): JSX.Element => {
 
 	useEffect(() => {
 		tracker.setMetadata("roomName", roomName);
+		ReactGA.send({
+			hitType: "pageview",
+			page: `/${roomName}`,
+			userID: userName,
+		});
 	}, []);
 
 	const onMessageLogArray = (message: {

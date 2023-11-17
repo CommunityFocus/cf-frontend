@@ -30,9 +30,11 @@ const App = (): JSX.Element => {
 	);
 
 	useEffect(() => {
-		tracker.start({
-			userID: userName,
-		});
+		if (process.env.NODE_ENV === "production") {
+			tracker.start({
+				userID: userName,
+			});
+		}
 	}, []);
 
 	const onGlobalUsers = ({
