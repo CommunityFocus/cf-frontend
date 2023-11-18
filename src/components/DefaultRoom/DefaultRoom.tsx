@@ -9,7 +9,6 @@ import { StyledDiv, StyledText } from "./DefaultRoom.styled";
 import { GlobalStyle } from "../Room/Room.styled";
 import ConnectionState from "../ConnectionState/ConnectionState";
 import { StyledButton } from "../Button/Button";
-import UsernameContext from "../Username/UsernameContext";
 
 const DefaultRoom = (props: {
 	globalUsersConnected: number;
@@ -20,21 +19,12 @@ const DefaultRoom = (props: {
 	const Navigate = useNavigate();
 
 	const { themeGroup } = useContext(ThemeContext);
-	const { userName } = useContext(UsernameContext);
 
 	const { workBackground, breakBackground, workGrey } =
 		theme[themeGroup as keyof typeof theme];
 
 	useEffect(() => {
 		document.title = "Community Focus";
-	}, []);
-
-	useEffect(() => {
-		ReactGA.send({
-			hitType: "pageview",
-			page: `/default`,
-			userID: userName,
-		});
 	}, []);
 
 	return (
@@ -52,6 +42,13 @@ const DefaultRoom = (props: {
 					type="button"
 					onClick={(): void => {
 						Navigate("/");
+
+						// react ga
+						ReactGA.event({
+							category: "Default Room",
+							action: "Click",
+							label: "Go Back",
+						});
 					}}
 				>
 					Go Back

@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import useWindowSize from "use-window-size-v2";
+import ReactGA from "react-ga4";
 import { LogoText, StyledDiv, StyledImg } from "./LogoTitle.styled";
 
 interface LogoTitleProps {
@@ -17,6 +18,13 @@ const LogoTitle = (props: LogoTitleProps): JSX.Element => {
 			<LogoText
 				onClick={(): void => {
 					navigate("/");
+
+					// react ga
+					ReactGA.event({
+						category: "Logo",
+						action: "Click",
+						label: "Home Page",
+					});
 				}}
 				color={color}
 			>
@@ -31,15 +39,3 @@ const LogoTitle = (props: LogoTitleProps): JSX.Element => {
 };
 
 export default LogoTitle;
-
-/*
- *				<Button
-					type="button"
-					onClick={(): void => {
-						navigate(`/${slugName}`);
-						window.location.reload();
-					}}
-				>
-					Join a room
-				</Button>
- */

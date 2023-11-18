@@ -1,5 +1,6 @@
 import { AiOutlineCoffee } from "react-icons/ai";
 import { MdOutlineWork } from "react-icons/md";
+import ReactGA from "react-ga4";
 import socket from "../Socket/socket";
 import { StyledWorkBreakButtonDiv } from "./TimerButtons.styled";
 
@@ -38,7 +39,16 @@ const WorkBreakButton = ({
 
 	return !isBreak ? (
 		<StyledWorkBreakButtonDiv
-			onClick={onClickHandler}
+			onClick={(): void => {
+				onClickHandler();
+
+				// react ga
+				ReactGA.event({
+					category: "Timer",
+					action: "Break/Work Button",
+					label: isBreak ? "Break" : "Work",
+				});
+			}}
 			show={(isLoaded && !isTimerRunningClient) || isTimerPaused}
 			data-tooltip-id="my-tooltip"
 			data-tooltip-content="Take a Break!"
@@ -50,7 +60,16 @@ const WorkBreakButton = ({
 		</StyledWorkBreakButtonDiv>
 	) : (
 		<StyledWorkBreakButtonDiv
-			onClick={onClickHandler}
+			onClick={(): void => {
+				onClickHandler();
+
+				// react ga
+				ReactGA.event({
+					category: "Timer",
+					action: "Break/Work Button",
+					label: isBreak ? "Break" : "Work",
+				});
+			}}
 			show={(isLoaded && !isTimerRunningClient) || isTimerPaused}
 			data-tooltip-id="my-tooltip"
 			data-tooltip-content="Do some Work!"

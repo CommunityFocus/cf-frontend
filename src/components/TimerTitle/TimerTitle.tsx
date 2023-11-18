@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import ReactGA from "react-ga4";
 import { FiEdit } from "react-icons/fi";
 import socket from "../Socket/socket";
 import { StyledWorkBreakBanner } from "../Room/Room.styled";
@@ -40,7 +41,18 @@ const TimerTitle = (props: TimerTitleProps): JSX.Element => {
 							: "Let's get some work done!")}
 				</StyledWorkBreakBanner>
 				<TitleEditEmojiSize color={workGrey} isLoaded={isLoaded}>
-					<FiEdit onClick={(): void => setIsTitleModalOpen(true)} />
+					<FiEdit
+						onClick={(): void => {
+							setIsTitleModalOpen(true);
+
+							// react ga
+							ReactGA.event({
+								category: "Timer",
+								action: "Edit Title",
+								label: "Edit Title",
+							});
+						}}
+					/>
 				</TitleEditEmojiSize>
 			</TitleEditButtonPosition>
 			<ModalComponent

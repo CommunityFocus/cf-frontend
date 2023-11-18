@@ -1,3 +1,4 @@
+import ReactGA from "react-ga4";
 import StyledModal from "./Modal.styled";
 import { StyledModalButton } from "./UsernameModal.styled";
 
@@ -24,7 +25,16 @@ const ModalComponent = ({
 			{children}
 			<StyledModalButton
 				type="button"
-				onClick={(): void => setIsModalOpen(false)}
+				onClick={(): void => {
+					setIsModalOpen(false);
+
+					// react ga
+					ReactGA.event({
+						category: "Modal",
+						action: "Click",
+						label: "Close Modal",
+					});
+				}}
 			>
 				Close
 			</StyledModalButton>

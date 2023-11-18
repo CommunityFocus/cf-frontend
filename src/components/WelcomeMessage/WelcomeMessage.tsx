@@ -1,4 +1,5 @@
 import { FiEdit } from "react-icons/fi";
+import ReactGA from "react-ga4";
 import StyledText from "./WelcomeMessage.styled";
 
 type WelcomeMessageProps = {
@@ -13,7 +14,19 @@ const WelcomeMessage = ({
 	onClick,
 }: WelcomeMessageProps): JSX.Element => {
 	return (
-		<StyledText color={color} onClick={onClick}>
+		<StyledText
+			color={color}
+			onClick={(): void => {
+				onClick();
+
+				// react ga
+				ReactGA.event({
+					category: "Welcome Message",
+					action: "Click",
+					label: "Edit Name",
+				});
+			}}
+		>
 			Hello, {name}! <FiEdit />
 		</StyledText>
 	);
