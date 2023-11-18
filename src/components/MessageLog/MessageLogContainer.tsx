@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { BsArrowDownCircleFill, BsArrowUpCircleFill } from "react-icons/bs";
+import ReactGA from "react-ga4";
 import {
 	OverflowIndicatorBottom,
 	OverflowIndicatorTop,
@@ -66,12 +67,34 @@ const MessageLogContainer = ({
 			ref={messageContainerRef}
 		>
 			<OverflowIndicatorTop $visible={showTopOverflow}>
-				<BsArrowUpCircleFill size={13.5} onClick={scrollToTop} />
+				<BsArrowUpCircleFill
+					size={13.5}
+					onClick={(): void => {
+						scrollToTop();
+
+						// react ga
+						ReactGA.event({
+							category: "Message Log",
+							action: "Scroll to Top",
+						});
+					}}
+				/>
 			</OverflowIndicatorTop>
 			{children}
 			<div ref={messagesEndRef} />
 			<OverflowIndicatorBottom $visible={showBottomOverflow}>
-				<BsArrowDownCircleFill size={13.5} onClick={scrollToBottom} />
+				<BsArrowDownCircleFill
+					size={13.5}
+					onClick={(): void => {
+						scrollToBottom();
+
+						// react ga
+						ReactGA.event({
+							category: "Message Log",
+							action: "Scroll to Bottom",
+						});
+					}}
+				/>
 			</OverflowIndicatorBottom>
 		</StyledMessageLogContainer>
 	);

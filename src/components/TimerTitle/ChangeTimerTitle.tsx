@@ -1,4 +1,5 @@
 import { useState } from "react";
+import ReactGA from "react-ga4";
 import socket from "../Socket/socket";
 import { roomName } from "../../../common/common";
 import {
@@ -74,7 +75,15 @@ const ChangeTimerTitle = (props: ChangeTimerTitleProps): JSX.Element => {
 			/>
 			<StyledModalButton
 				type="button"
-				onClick={submitHandler}
+				onClick={(e): void => {
+					submitHandler(e as React.MouseEvent | React.FormEvent);
+
+					// react ga
+					ReactGA.event({
+						category: "Timer",
+						action: "Change Timer Title",
+					});
+				}}
 				disabled={inputValidation(inputValue) !== false}
 			>
 				Save Title

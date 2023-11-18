@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import ReactGA from "react-ga4";
+import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { ThemeContext } from "styled-components";
 import { HiOutlineRefresh } from "react-icons/hi";
@@ -26,7 +26,6 @@ import validRoomname from "../../helpers/validRoomname";
 import { StyledImg } from "../Logo/LogoTitle.styled";
 import ContributorsWidget from "../Contributors/ContributorsWidget";
 import { ContributorsWidgetPosition } from "../Contributors/ContributorsWidget.styled";
-import UsernameContext from "../Username/UsernameContext";
 
 const LandingPage = (props: {
 	globalUsersConnected: number;
@@ -36,7 +35,6 @@ const LandingPage = (props: {
 	const { globalUsersConnected, isBreak, isConnected } = props;
 	const [slugName, setSlugName] = useState<string>("");
 	const [isActivated, setIsActivated] = useState<boolean>(false);
-	const { userName } = useContext(UsernameContext);
 
 	const navigate = useNavigate();
 
@@ -68,14 +66,6 @@ const LandingPage = (props: {
 	useEffect(() => {
 		getSlug();
 		document.title = "Community Focus";
-	}, []);
-
-	useEffect(() => {
-		ReactGA.send({
-			hitType: "pageview",
-			page: `landingPage`,
-			userID: userName,
-		});
 	}, []);
 
 	return (
@@ -127,6 +117,13 @@ const LandingPage = (props: {
 								setTimeout(() => {
 									setIsActivated(false);
 								}, 500);
+
+								// react ga
+								ReactGA.event({
+									category: "Landing Page",
+									action: "Click",
+									label: "Refresh Room Name",
+								});
 							}}
 							style={{
 								cursor: "pointer",
@@ -142,6 +139,13 @@ const LandingPage = (props: {
 						type="button"
 						onClick={(): void => {
 							navigateToRoom();
+
+							// react ga
+							ReactGA.event({
+								category: "Landing Page",
+								action: "Click",
+								label: "Join a room",
+							});
 						}}
 						disabled={validRoomname(slugName) !== false}
 						data-tooltip-id="my-tooltip"
@@ -161,6 +165,13 @@ const LandingPage = (props: {
 							}}
 							onClick={(): void => {
 								navigateToContributors();
+
+								// react ga
+								ReactGA.event({
+									category: "Landing Page",
+									action: "Click",
+									label: "Contributors",
+								});
 							}}
 							onKeyDown={(
 								event: React.KeyboardEvent<HTMLInputElement>
@@ -176,22 +187,36 @@ const LandingPage = (props: {
 						<BsDiscord
 							size={20}
 							style={{ cursor: "pointer", margin: "0 0 0 5px" }}
-							onClick={(): Window | null =>
-								window.open(
+							onClick={(): Window | null => {
+								// react ga
+								ReactGA.event({
+									category: "Landing Page",
+									action: "Click",
+									label: "Discord",
+								});
+
+								return window.open(
 									"https://leonnoel.com/100devs/",
 									"_blank"
-								)
-							}
+								);
+							}}
 						/>
 						<AiFillGithub
 							size={20}
 							style={{ cursor: "pointer", margin: "0 0 0 5px" }}
-							onClick={(): Window | null =>
-								window.open(
+							onClick={(): Window | null => {
+								// react ga
+								ReactGA.event({
+									category: "Landing Page",
+									action: "Click",
+									label: "Github",
+								});
+
+								return window.open(
 									"https://github.com/CommunityFocus/",
 									"_blank"
-								)
-							}
+								);
+							}}
 						/>
 					</StyledShareText>
 				</StyledBottomText>

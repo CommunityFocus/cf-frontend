@@ -1,4 +1,5 @@
 import { ThemeContext } from "styled-components";
+import ReactGA from "react-ga4";
 import { useContext } from "react";
 import socket from "../Socket/socket";
 import { StyledTimeButton } from "./TimerButtons.styled";
@@ -32,12 +33,27 @@ const TimerButton = (props: {
 			roomName,
 			durationInSeconds: minutes,
 		});
+
+		ReactGA.event({
+			category: "Timer Button",
+			action: "Click",
+			label: `${seconds} minutes`,
+		});
 	};
 
 	return (
 		<StyledTimeButton
 			type="button"
-			onClick={(): void => clickHandler(value)}
+			onClick={(): void => {
+				clickHandler(value);
+
+				// react ga
+				ReactGA.event({
+					category: "Timer Button",
+					action: "Click",
+					label: `${value} minutes`,
+				});
+			}}
 			color={!isBreak ? workButtonColor : breakButtonColor}
 			fontColor={!isBreak ? workButtonTextColor : breakButtonTextColor}
 			size={size}

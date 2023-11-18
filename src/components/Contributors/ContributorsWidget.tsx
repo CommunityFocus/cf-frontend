@@ -1,4 +1,5 @@
 import axios from "axios";
+import ReactGA from "react-ga4";
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ThemeContext } from "styled-components";
@@ -107,7 +108,16 @@ const ContributorsWidget = (props: { isHomePage: boolean }): JSX.Element => {
 		<ContributorsWidgetContainer>
 			<ContributorsTitle
 				color={workGrey}
-				onClick={(): void => navigateToContributors()}
+				onClick={(): void => {
+					navigateToContributors();
+
+					// react ga
+					ReactGA.event({
+						category: "Contributors",
+						action: "Click",
+						label: "Contributors",
+					});
+				}}
 			>
 				{!isHomePage || contributors.length > 0
 					? "Project Contributors"
@@ -159,6 +169,13 @@ const ContributorsWidget = (props: { isHomePage: boolean }): JSX.Element => {
 							key={contributor.login}
 							onClick={(): void => {
 								window.open(contributor.url, "_blank");
+
+								// react ga
+								ReactGA.event({
+									category: "Contributors",
+									action: "Click",
+									label: contributor.login,
+								});
 							}}
 						>
 							<ContributorImg

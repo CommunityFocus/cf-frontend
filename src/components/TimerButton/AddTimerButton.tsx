@@ -1,4 +1,5 @@
 import { useContext, useState } from "react";
+import ReactGA from "react-ga4";
 import { ThemeContext } from "styled-components";
 import ValidationInput from "../Modal/ValidationInput";
 import { StyledButton } from "../Button/Button";
@@ -149,6 +150,13 @@ const AddTimerButton = (props: AddTimerButtonProps): JSX.Element => {
 										updateTimerButtons({
 											timerButtons: newTimerButtons,
 											isBreak,
+										});
+
+										// react ga
+										ReactGA.event({
+											category: "Timer Button",
+											action: "Delete Timer",
+											label: `${timer} minutes`,
 										});
 									}}
 								>

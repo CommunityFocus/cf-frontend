@@ -1,4 +1,5 @@
 import { useContext, useEffect } from "react";
+import ReactGA from "react-ga4";
 import { PiEraserBold } from "react-icons/pi";
 import { ThemeContext } from "styled-components";
 import { PomoCounterContainer, PomoCounterText } from "./PomoCounter.styled";
@@ -45,15 +46,21 @@ const PomoCounter = (props: PomoCounterProps): JSX.Element => {
 					data-tooltip-id="my-tooltip"
 					data-tooltip-content="Clear the work session counter"
 					data-tooltip-place="top"
-					onClick={(): void =>
+					onClick={(): void => {
 						updatePomoCounter({
 							roomName,
 							updatedPomoCount: 0,
 							isBreakCounter: false,
 							setWorkSessions,
 							setBreakSessions,
-						})
-					}
+						});
+
+						// react ga
+						ReactGA.event({
+							category: "Pomo Counter",
+							action: "Clear Work Counter",
+						});
+					}}
 				/>
 				<span
 					data-tooltip-id="my-tooltip"
@@ -75,6 +82,12 @@ const PomoCounter = (props: PomoCounterProps): JSX.Element => {
 							isBreakCounter: true,
 							setWorkSessions,
 							setBreakSessions,
+						});
+
+						// react ga
+						ReactGA.event({
+							category: "Pomo Counter",
+							action: "Clear Break Counter",
 						});
 					}}
 				/>

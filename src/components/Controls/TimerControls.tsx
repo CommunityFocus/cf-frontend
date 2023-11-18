@@ -1,5 +1,6 @@
 import { FaRegPauseCircle, FaRegPlayCircle } from "react-icons/fa";
 import { LuTimerReset } from "react-icons/lu";
+import ReactGA from "react-ga4";
 
 import {
 	StyledAddTimerIcon,
@@ -42,7 +43,15 @@ const TimerControls = ({
 				(isTimerPaused ? (
 					<FaRegPlayCircle
 						size={30}
-						onClick={pauseTimer}
+						onClick={(): void => {
+							pauseTimer();
+
+							// react ga
+							ReactGA.event({
+								category: "Timer",
+								action: "Resume Timer",
+							});
+						}}
 						data-tooltip-id="my-tooltip"
 						data-tooltip-content="Resume the Timer"
 						data-tooltip-place="top"
@@ -50,7 +59,15 @@ const TimerControls = ({
 				) : (
 					<FaRegPauseCircle
 						size={30}
-						onClick={pauseTimer}
+						onClick={(): void => {
+							pauseTimer();
+
+							// react ga
+							ReactGA.event({
+								category: "Timer",
+								action: "Pause Timer",
+							});
+						}}
 						data-tooltip-id="my-tooltip"
 						data-tooltip-content="Pause the Timer"
 						data-tooltip-place="top"
@@ -59,14 +76,30 @@ const TimerControls = ({
 
 			<LuTimerReset
 				type="button"
-				onClick={resetTimer}
+				onClick={(): void => {
+					resetTimer();
+
+					// react ga
+					ReactGA.event({
+						category: "Timer",
+						action: "Reset Timer",
+					});
+				}}
 				size={30}
 				data-tooltip-id="my-tooltip"
 				data-tooltip-content="Reset the Timer to the original previously set time"
 				data-tooltip-place="top"
 			/>
 			<StyledShareIcon
-				onClick={shareRoom}
+				onClick={(): void => {
+					shareRoom();
+
+					// react ga
+					ReactGA.event({
+						category: "Timer",
+						action: "Share Timer",
+					});
+				}}
 				size={30}
 				data-tooltip-id="my-tooltip"
 				data-tooltip-content="Share the timer with friends!"
@@ -75,7 +108,15 @@ const TimerControls = ({
 
 			<StyledAddTimerIcon
 				type="button"
-				onClick={(): void => setIsTimerAddModalOpen(true)}
+				onClick={(): void => {
+					setIsTimerAddModalOpen(true);
+
+					// react ga
+					ReactGA.event({
+						category: "Timer",
+						action: "Add Timer",
+					});
+				}}
 				size="30px"
 				data-tooltip-id="my-tooltip"
 				data-tooltip-content="Add or remove a timer to the roon"
@@ -101,6 +142,12 @@ const TimerControls = ({
 							"minimode",
 							"resizable,width=480=height=575"
 						);
+
+						// react ga
+						ReactGA.event({
+							category: "Timer",
+							action: "Open in a popup window",
+						});
 					}}
 					size="30px"
 					data-tooltip-id="my-tooltip"

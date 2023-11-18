@@ -1,5 +1,6 @@
 import { ThemeContext } from "styled-components";
 import { useContext } from "react";
+import ReactGA from "react-ga4";
 import Dropdown from "react-dropdown";
 import LogoTitle from "../Logo/LogoTitle";
 import WelcomeMessage from "../WelcomeMessage/WelcomeMessage";
@@ -48,6 +49,13 @@ const Header = ({ isBreak }: HeaderProps): JSX.Element => {
 					color={workGrey}
 					onClick={(): void => {
 						setIsUsernameModalOpen(!isUsernamModalOpen);
+
+						// react ga
+						ReactGA.event({
+							category: "Username",
+							action: "Click",
+							label: "Username Modal Open",
+						});
 					}}
 				/>
 				<ModalComponent

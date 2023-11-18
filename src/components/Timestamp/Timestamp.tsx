@@ -1,4 +1,5 @@
 import { useContext, useEffect, useState } from "react";
+import ReactGA from "react-ga4";
 import ReactLoading from "react-loading";
 import useWindowSize from "use-window-size-v2";
 import { ThemeContext } from "styled-components";
@@ -164,6 +165,13 @@ const Timestamp = (props: TimestampProps): JSX.Element => {
 		notification.onclick = (): void => {
 			window.focus();
 			notification.close();
+
+			// react ga
+			ReactGA.event({
+				category: "Notification",
+				action: "Click",
+				label: `Timer ended`,
+			});
 		};
 
 		updatePomoCounter({
@@ -267,6 +275,14 @@ const Timestamp = (props: TimestampProps): JSX.Element => {
 																		minutes,
 																}
 															);
+
+															// react ga
+															ReactGA.event({
+																category:
+																	"Timer Button",
+																action: "Click",
+																label: `${timerMinuteButton} minutes`,
+															});
 														}}
 													>
 														{timerMinuteButton}

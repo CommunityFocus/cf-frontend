@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import ReactGA from "react-ga4";
 import {
 	StyledModalButton,
 	StyledTitle,
@@ -97,7 +98,16 @@ const UsernameModal = (props: UsernameModalProps): JSX.Element => {
 			/>
 			<StyledModalButton
 				type="button"
-				onClick={submitHandler}
+				onClick={(e): void => {
+					submitHandler(e as React.MouseEvent | React.FormEvent);
+
+					// react ga
+					ReactGA.event({
+						category: "Username",
+						action: "Click",
+						label: "Username Modal Save",
+					});
+				}}
 				disabled={inputValidation(inputValue) !== false}
 			>
 				Save username
