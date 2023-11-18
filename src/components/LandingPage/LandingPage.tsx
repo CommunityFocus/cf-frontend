@@ -129,6 +129,7 @@ const LandingPage = (props: {
 								cursor: "pointer",
 								transform: isActivated ? "rotate(360deg)" : "",
 								transition: "transform 0.5s ease",
+								color: workGrey,
 							}}
 							data-tooltip-id="my-tooltip"
 							data-tooltip-content="Generate a new room name"
