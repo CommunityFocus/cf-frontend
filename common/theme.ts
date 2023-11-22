@@ -4,6 +4,7 @@ export enum ThemeType {
 	original = "original",
 	// funky = "funky",
 	night = "night",
+	"Suprise me" = "Suprise me",
 }
 
 export const themeOptions = Object.keys(ThemeType).map((key) => ({
@@ -22,6 +23,11 @@ export interface Theme {
 	breakButtonColor: string;
 	breakButtonTextColor: string;
 }
+
+export const generateRandomColor = (): string => {
+	const randomColor = `#${Math.floor(Math.random() * 16777215).toString(16)}`;
+	return randomColor;
+};
 
 export const theme: { [key in ThemeType]: Theme } = {
 	original: {
@@ -56,6 +62,17 @@ export const theme: { [key in ThemeType]: Theme } = {
 		workButtonTextColor: "#93B1A6",
 		breakButtonColor: "#486581",
 		breakButtonTextColor: "#93B1A6",
+	},
+	"Suprise me": {
+		workBackground: generateRandomColor(),
+		workAccent: generateRandomColor(),
+		breakBackground: generateRandomColor(),
+		breakAccent: generateRandomColor(),
+		workGrey: generateRandomColor(),
+		workButtonColor: generateRandomColor(),
+		workButtonTextColor: generateRandomColor(),
+		breakButtonColor: generateRandomColor(),
+		breakButtonTextColor: generateRandomColor(),
 	},
 };
 
