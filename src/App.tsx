@@ -12,7 +12,6 @@ import UsernameContext from "./components/Username/UsernameContext";
 import ValidRoom from "./Pages/Room/ValidRoom";
 import DefaultRoom from "./Pages/DefaultRoom/DefaultRoom";
 import { tracker } from "../common/common";
-import TimerList from "./Pages/TimerList/TimerList";
 
 const App = (): JSX.Element => {
 	const [globalUsersConnected, setGlobalUsersConnected] = useState<number>(0);
@@ -116,7 +115,10 @@ const App = (): JSX.Element => {
 							/>
 
 							<Route path="admin" element={<h2>Admin</h2>} />
-							<Route path="timerlist" element={<TimerList />} />
+							<Route
+								path="timerlist"
+								element={<h2>timerlist</h2>}
+							/>
 
 							<Route
 								path="/:room"
