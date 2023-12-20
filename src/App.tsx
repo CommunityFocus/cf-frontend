@@ -3,16 +3,15 @@ import { useEffect, useMemo, useState } from "react";
 import { ThemeProvider } from "styled-components";
 import { Tooltip } from "react-tooltip";
 import socket from "./components/Socket/socket";
-import LandingPage from "./Pages/LandingPage/LandingPage";
+import LandingPage from "./components/LandingPage/LandingPage";
 import { ThemeType } from "../common/theme";
 import "reactjs-popup/dist/index.css";
-import ContributorsPage from "./Pages/Contributors/ContributorsPage";
+import ContributorsPage from "./components/Contributors/ContributorsPage";
 import ModalContext from "./components/Modal/ModalContext";
 import UsernameContext from "./components/Username/UsernameContext";
-import ValidRoom from "./Pages/Room/ValidRoom";
-import DefaultRoom from "./Pages/DefaultRoom/DefaultRoom";
+import ValidRoom from "./components/Room/ValidRoom";
+import DefaultRoom from "./components/DefaultRoom/DefaultRoom";
 import { tracker } from "../common/common";
-import TimerList from "./Pages/TimerList/TimerList";
 
 const App = (): JSX.Element => {
 	const [globalUsersConnected, setGlobalUsersConnected] = useState<number>(0);
@@ -114,9 +113,6 @@ const App = (): JSX.Element => {
 									/>
 								}
 							/>
-
-							<Route path="admin" element={<h2>Admin</h2>} />
-							<Route path="timerlist" element={<TimerList />} />
 
 							<Route
 								path="/:room"

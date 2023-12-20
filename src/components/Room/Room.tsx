@@ -4,34 +4,34 @@ import { ThemeContext } from "styled-components";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import useWindowSize from "use-window-size-v2";
-import ConnectionState from "../../components/ConnectionState/ConnectionState";
-import Timestamp from "../../components/Timestamp/Timestamp";
+import ConnectionState from "../ConnectionState/ConnectionState";
+import Timestamp from "../Timestamp/Timestamp";
 import shareRoom from "../../helpers/shareRoom";
 import startCountdown from "../../helpers/startCountdown";
 import { roomName, tracker } from "../../../common/common";
-import TimerControls from "../../components/Controls/TimerControls";
-import Footer from "../../components/Footer/Footer";
-import UserBubbles from "../../components/UserBubbles/UserBubbles";
+import TimerControls from "../Controls/TimerControls";
+import Footer from "../Footer/Footer";
+import UserBubbles from "../UserBubbles/UserBubbles";
 import {
 	UsersInRoomArgs,
 	WorkBreakResponseArgs,
 } from "../../../common/types/types";
-import Header from "../../components/Header/Header";
+import Header from "../Header/Header";
 import { Center, GlobalStyle, StyledDiv } from "./Room.styled";
-import WorkBreakButton from "../../components/TimerButton/WorkBreakButton";
+import WorkBreakButton from "../TimerButton/WorkBreakButton";
 import { theme } from "../../../common/theme";
 import "react-dropdown/style.css";
-import socket from "../../components/Socket/socket";
-import ModalContext from "../../components/Modal/ModalContext";
-import UsernameContext from "../../components/Username/UsernameContext";
+import socket from "../Socket/socket";
+import ModalContext from "../Modal/ModalContext";
+import UsernameContext from "../Username/UsernameContext";
 import RoomProps from "./RoomProps";
-import ModalComponent from "../../components/Modal/Modal";
-import AddTimerModal from "../../components/Modal/AddTimerModal";
-import MessageLogs from "../../components/MessageLog/MessageLogs";
-import TimerTitle from "../../components/TimerTitle/TimerTitle";
-import PomoCounter from "../../components/PomoCounter/PomoCounter";
-import { PomoCounterPosition } from "../../components/PomoCounter/PomoCounter.styled";
-import TimerForm from "../../components/Controls/TimerForm";
+import ModalComponent from "../Modal/Modal";
+import AddTimerModal from "../Modal/AddTimerModal";
+import MessageLogs from "../MessageLog/MessageLogs";
+import TimerTitle from "../TimerTitle/TimerTitle";
+import PomoCounter from "../PomoCounter/PomoCounter";
+import { PomoCounterPosition } from "../PomoCounter/PomoCounter.styled";
+import TimerForm from "../Controls/TimerForm";
 
 const Room = (props: RoomProps): JSX.Element => {
 	const {

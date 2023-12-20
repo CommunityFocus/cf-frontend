@@ -2,13 +2,13 @@ import { useNavigate } from "react-router-dom";
 import ReactGA from "react-ga4";
 import { useContext, useEffect } from "react";
 import { ThemeContext } from "styled-components";
-import Footer from "../../components/Footer/Footer";
-import Header from "../../components/Header/Header";
+import Footer from "../Footer/Footer";
+import Header from "../Header/Header";
 import { theme } from "../../../common/theme";
 import { StyledDiv, StyledText } from "./DefaultRoom.styled";
 import { GlobalStyle } from "../Room/Room.styled";
-import ConnectionState from "../../components/ConnectionState/ConnectionState";
-import { StyledButton } from "../../components/Button/Button";
+import ConnectionState from "../ConnectionState/ConnectionState";
+import { StyledButton } from "../Button/Button";
 
 const DefaultRoom = (props: {
 	globalUsersConnected: number;
