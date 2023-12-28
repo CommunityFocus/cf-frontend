@@ -1,58 +1,61 @@
+// RoomList.styled.ts
 import styled from "styled-components";
 
-export const RoomListTable = styled.table`
-	// // width: 100%;
-	// border-collapse: collapse;
+export const RoomListContainer = styled.div`
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	// height: 400px;
 
 	// width: 60%;
-	// // height: 100px;
-
-	// // overflow: none;
 `;
 
-export const RoomListTableBody = styled.tbody`
-	// // height: 200px;
-	// overflow: scroll;
+export const RoomListTableWrapper = styled.div`
+	// width: 60%;
+	// overflow: hidden;
+	// border: 1px solid black;
+`;
 
-	// height: 100px;
-	// overflow: scroll;
+export const RoomListTable = styled.table`
+	width: 80vh;
+	border-collapse: collapse;
+	border: 1px solid black;
 `;
 
 export const RoomListTableHeader = styled.thead`
-	// border: 1px solid black;
-	// padding: 10px;
+	position: sticky;
+	top: 0;
+	border: 1px solid black;
+	background-color: white;
 `;
 
-export const RoomListTableHeaderCell = styled.th`
-	// border: 1px solid black;
-	// padding: 10px;
-	// width: 33%;
+export const RoomListTableBody = styled.tbody`
+	// max-height: 200px;
+	// overflow-y: auto;
 `;
 
 export const RoomListTableRow = styled.tr`
-	// border: 1px solid black;
-	// padding: 10px;
-	// height: 5px;
+	height: 50px;
+	border: 1px solid white;
+	border-collapse: collapse;
+	border-radius: 5%;
 `;
 
 export const RoomListTableRowCell = styled.td`
-	// border: 1px solid black;
-	// padding: 10px;
+	// Your existing styles for table cells
+`;
 
-	// width: 33%;
-
-	// text-align: center;
-	// vertical-align: middle;
+export const RoomListTableHeaderCell = styled.th`
+	// Your existing styles for table header cells
 `;
 
 export const RoomListTableButton = styled.button`
-	// width: 50%;
-	// height: 100%;
-	// background-color: #4caf50;
-	// color: white;
+	// Your existing styles for buttons
+`;
 
-	// border: none;
-	// border-radius: 5px;
-	// padding: 5px;
-	// text-align: center;
+export const TableContainer = styled.div`
+	height: 400px;
+	overflow: auto;
+	border: 3px solid black;
+	border-radius: 5%;
 `;

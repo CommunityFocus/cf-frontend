@@ -6,6 +6,7 @@ import {
 	RoomListTableHeaderCell,
 	RoomListTableRow,
 	RoomListTableRowCell,
+	TableContainer,
 } from "./RoomList.styled";
 
 interface IRoom {
@@ -40,22 +41,26 @@ const ListRow = (props: { room: IRoom }): JSX.Element => {
 const RoomList = (props: IRoomList): JSX.Element => {
 	const { rooms } = props;
 	return (
-		<RoomListTable>
-			<RoomListTableHeader>
-				<tr>
-					<RoomListTableHeaderCell>Room Name</RoomListTableHeaderCell>
-					<RoomListTableHeaderCell>
-						Number of Users
-					</RoomListTableHeaderCell>
-					<RoomListTableHeaderCell>Join</RoomListTableHeaderCell>
-				</tr>
-			</RoomListTableHeader>
-			<RoomListTableBody>
-				{rooms.map((room) => {
-					return <ListRow room={room} key={room.room} />;
-				})}
-			</RoomListTableBody>
-		</RoomListTable>
+		<TableContainer>
+			<RoomListTable>
+				<RoomListTableHeader>
+					<tr>
+						<RoomListTableHeaderCell>
+							Room Name
+						</RoomListTableHeaderCell>
+						<RoomListTableHeaderCell>
+							Number of Users
+						</RoomListTableHeaderCell>
+						<RoomListTableHeaderCell>Join</RoomListTableHeaderCell>
+					</tr>
+				</RoomListTableHeader>
+				<RoomListTableBody>
+					{rooms.map((room) => {
+						return <ListRow room={room} key={room.room} />;
+					})}
+				</RoomListTableBody>
+			</RoomListTable>
+		</TableContainer>
 	);
 };
 
