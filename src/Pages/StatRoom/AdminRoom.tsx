@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import socket from "../../components/Socket/socket";
 import { ITimerRooms } from "../../../common/types/types";
+import RoomList from "../../components/RoomList/RoomList";
+import { Centered } from "./StatRoom.styled";
 
 export interface IAdminRoom {
 	setIsConnected: (isConnected: boolean) => void;
@@ -27,21 +29,8 @@ export const AdminRoom = (): JSX.Element => {
 	}, []);
 
 	return (
-		<div>
-			{timerRooms.map((timerRoom: ITimerRooms) => {
-				return (
-					<div>
-						<p>room: {timerRoom.room}</p>
-						<p>Number of people: {timerRoom.numUsers}</p>
-						<p>
-							users in the room:
-							{timerRoom.userList.map((user: string) => {
-								return <div>{user}</div>;
-							})}
-						</p>
-					</div>
-				);
-			})}
-		</div>
+		<Centered>
+			<RoomList rooms={timerRooms} />
+		</Centered>
 	);
 };
