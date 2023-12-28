@@ -1,14 +1,21 @@
 import styled from "styled-components";
 
 export const RoomListTable = styled.table`
-	width: 100%;
+	// width: 100%;
 	border-collapse: collapse;
 
 	width: 60%;
-	height: 60%;
+	// height: 100px;
+
+	// overflow: none;
 `;
 
-export const RoomListTableHeader = styled.tr`
+export const RoomListTableBody = styled.tbody`
+	// height: 200px;
+	// overflow-y: visible;
+`;
+
+export const RoomListTableHeader = styled.thead`
 	border: 1px solid black;
 	padding: 10px;
 `;
@@ -22,6 +29,7 @@ export const RoomListTableHeaderCell = styled.th`
 export const RoomListTableRow = styled.tr`
 	border: 1px solid black;
 	padding: 10px;
+	height: 5px;
 `;
 
 export const RoomListTableRowCell = styled.td`
@@ -45,8 +53,3 @@ export const RoomListTableButton = styled.button`
 	padding: 5px;
 	text-align: center;
 `;
-
-// export const RoomListTableButtonContainer = styled.div`
-// 	width: 100%;
-// 	height: 100%;
-// `;

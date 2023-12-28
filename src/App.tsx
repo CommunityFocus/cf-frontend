@@ -122,6 +122,7 @@ const App = (): JSX.Element => {
 										roomName="admin"
 										userName={userName}
 										setIsConnected={setIsConnected}
+										isBreak={isBreak}
 									/>
 								}
 							/>
@@ -132,6 +133,7 @@ const App = (): JSX.Element => {
 										roomName="timerlist"
 										userName={userName}
 										setIsConnected={setIsConnected}
+										isBreak={isBreak}
 									/>
 								}
 							/>

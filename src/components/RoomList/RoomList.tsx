@@ -1,22 +1,9 @@
-/*
- * RoomList is a component that displays a list of rooms.
- * The columns are Room Name, Number of Users, Active status, timer length, and Join button.
- * The rows are the rooms.
- * The button is a link to the room.
- * The timer length is the length of the room's timer thats running.
- * The active status is whether the room is currently running a timer or not.
- * The number of users is the number of users in the room.
- * The room name is the name of the room.
- *
- * Inputs:
- *     - an array of rooms to display (roomName, numUsers, timerLength, isActive)
- */
-
 import {
 	RoomListTable,
+	RoomListTableBody,
 	RoomListTableButton,
-	// RoomListTableButtonContainer,
 	RoomListTableHeader,
+	RoomListTableHeaderCell,
 	RoomListTableRow,
 	RoomListTableRowCell,
 } from "./RoomList.styled";
@@ -55,13 +42,19 @@ const RoomList = (props: IRoomList): JSX.Element => {
 	return (
 		<RoomListTable>
 			<RoomListTableHeader>
-				<RoomListTableRowCell>Room Name</RoomListTableRowCell>
-				<RoomListTableRowCell>Number of Users</RoomListTableRowCell>
-				<RoomListTableRowCell>Join</RoomListTableRowCell>
+				<tr>
+					<RoomListTableHeaderCell>Room Name</RoomListTableHeaderCell>
+					<RoomListTableHeaderCell>
+						Number of Users
+					</RoomListTableHeaderCell>
+					<RoomListTableHeaderCell>Join</RoomListTableHeaderCell>
+				</tr>
 			</RoomListTableHeader>
-			{rooms.map((room) => {
-				return <ListRow room={room} />;
-			})}
+			<RoomListTableBody>
+				{rooms.map((room) => {
+					return <ListRow room={room} key={room.room} />;
+				})}
+			</RoomListTableBody>
 		</RoomListTable>
 	);
 };

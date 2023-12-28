@@ -7,10 +7,11 @@ interface IStatRoomRouterProps {
 	setIsConnected: (isConnected: boolean) => void;
 	roomName: string;
 	userName: string;
+	isBreak: boolean;
 }
 
 const StatRoomRouter = (props: IStatRoomRouterProps): JSX.Element => {
-	const { setIsConnected, roomName, userName } = props;
+	const { setIsConnected, roomName, userName, isBreak } = props;
 
 	const onConnect = (): void => {
 		socket.emit("join", { roomName, userName: userName || "defaultUser" });
@@ -34,7 +35,7 @@ const StatRoomRouter = (props: IStatRoomRouterProps): JSX.Element => {
 	const isAdmin = true;
 
 	if (isAdmin) {
-		return <AdminRoom />;
+		return <AdminRoom isBreak={isBreak} />;
 	}
 
 	return <PublicRoom />;

@@ -1,16 +1,22 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { ThemeContext } from "styled-components";
 import socket from "../../components/Socket/socket";
 import { ITimerRooms } from "../../../common/types/types";
 import RoomList from "../../components/RoomList/RoomList";
 import { Centered } from "./StatRoom.styled";
+import Header from "../../components/Header/Header";
+import { GlobalStyle } from "../Room/Room.styled";
+import { theme } from "../../../common/theme";
 
 export interface IAdminRoom {
-	setIsConnected: (isConnected: boolean) => void;
-	roomName: string;
-	userName: string;
+	// roomName: string;
+	// userName: string;
+	// setIsConnected: (isConnected: boolean) => void;
+	isBreak: boolean;
 }
 
-export const AdminRoom = (): JSX.Element => {
+export const AdminRoom = (props: IAdminRoom): JSX.Element => {
+	const { isBreak } = props;
 	const [timerRooms, setTimerRooms] = useState<ITimerRooms[]>([]);
 	const onPublicTimers = ({
 		roomStats,
@@ -19,6 +25,11 @@ export const AdminRoom = (): JSX.Element => {
 	}): void => {
 		setTimerRooms(roomStats);
 	};
+
+	const { themeGroup } = useContext(ThemeContext);
+
+	const { workBackground, breakBackground } =
+		theme[themeGroup as keyof typeof theme];
 
 	useEffect(() => {
 		socket.on("publicTimers", onPublicTimers);
@@ -29,8 +40,14 @@ export const AdminRoom = (): JSX.Element => {
 	}, []);
 
 	return (
-		<Centered>
-			<RoomList rooms={timerRooms} />
-		</Centered>
+		<>
+			<Header isBreak={isBreak} />
+			<GlobalStyle
+				backColor={!isBreak ? workBackground : breakBackground}
+			/>
+			<Centered>
+				<RoomList rooms={timerRooms} />
+			</Centered>
+		</>
 	);
 };
