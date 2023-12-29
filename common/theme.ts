@@ -2,7 +2,7 @@ import { createContext } from "react";
 
 export enum ThemeType {
 	original = "original",
-	// funky = "funky",
+	funky = "funky",
 	night = "night",
 }
 
@@ -35,17 +35,17 @@ export const theme: { [key in ThemeType]: Theme } = {
 		breakButtonColor: "#0589e8",
 		breakButtonTextColor: "#ffffff",
 	},
-	// funky: {
-	// 	workBackground: "#c200fb",
-	// 	workAccent: "#a101d2",
-	// 	breakBackground: "#ffbc0a",
-	// 	breakAccent: "#c5930c",
-	// 	workGrey: "#1f1f1f",
-	// 	workButtonColor: "#9419ad",
-	// 	workButtonTextColor: "#ffffff",
-	// 	breakButtonColor: "#a37f19",
-	// 	breakButtonTextColor: "#ffffff",
-	// },
+	funky: {
+		workBackground: "brown",
+		workAccent: "darkgreen",
+		breakBackground: "#e3c852",
+		breakAccent: "#818237",
+		workGrey: "white",
+		workButtonColor: "#e3c852",
+		workButtonTextColor: "#ffffff",
+		breakButtonColor: "brown",
+		breakButtonTextColor: "#ffffff",
+	},
 	night: {
 		workBackground: "#040D12",
 		workAccent: "#183D3D",
