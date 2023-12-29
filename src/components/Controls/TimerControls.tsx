@@ -119,7 +119,7 @@ const TimerControls = ({
 				}}
 				size="30px"
 				data-tooltip-id="my-tooltip"
-				data-tooltip-content="Add or remove a timer to the roon"
+				data-tooltip-content="Add or remove a timer to the room"
 				data-tooltip-place="top"
 			/>
 
