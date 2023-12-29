@@ -5,6 +5,7 @@ export enum ThemeType {
 	// funky = "funky",
 	night = "night",
 	sunset = "sunset",
+	neon ="neon",
 }
 
 export const themeOptions = Object.keys(ThemeType).map((key) => ({
@@ -69,6 +70,17 @@ export const theme: { [key in ThemeType]: Theme } = {
 		breakButtonColor: "#1e2c3e", //colors of button for break
 		breakButtonTextColor: "#ffffff", //text color on top of buttons for break
 
+	},
+	neon: {
+		workBackground: "linear-gradient(100deg, #0062ff, #da61ff)",
+		workAccent: "#4ea9c0",
+		breakBackground: "linear-gradient(150deg, #0a2468, #973882)",
+		breakAccent: "#003f66",
+		workGrey: "#baeddf",
+		workButtonColor: "#0f54cd",
+		workButtonTextColor: "#fff",
+		breakButtonColor: "#7e13a3",
+		breakButtonTextColor: "#b2d7c9",
 	},
 };
 
