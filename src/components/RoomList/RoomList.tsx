@@ -1,3 +1,5 @@
+import { useContext } from "react";
+import { ThemeContext } from "styled-components";
 import {
 	RoomListTable,
 	RoomListTableBody,
@@ -8,6 +10,7 @@ import {
 	RoomListTableRowCell,
 	TableContainer,
 } from "./RoomList.styled";
+import { theme } from "../../../common/theme";
 
 interface IRoom {
 	room: string;
@@ -16,17 +19,27 @@ interface IRoom {
 
 interface IRoomList {
 	rooms: IRoom[];
+	isBreak: boolean;
 }
 
-const ListRow = (props: { room: IRoom }): JSX.Element => {
-	const { room } = props;
+const ListRow = (props: {
+	room: IRoom;
+	textColor: string;
+	accentColor: string;
+}): JSX.Element => {
+	const { room, textColor, accentColor } = props;
 	return (
 		<RoomListTableRow>
-			<RoomListTableRowCell>{room.room}</RoomListTableRowCell>
-			<RoomListTableRowCell>{room.numUsers}</RoomListTableRowCell>
+			<RoomListTableRowCell color={textColor}>
+				{room.room}
+			</RoomListTableRowCell>
+			<RoomListTableRowCell color={textColor}>
+				{room.numUsers}
+			</RoomListTableRowCell>
 
-			<RoomListTableRowCell>
+			<RoomListTableRowCell color={textColor}>
 				<RoomListTableButton
+					color={accentColor}
 					onClick={(): void => {
 						window.location.href = `/${room.room}`;
 					}}
@@ -39,24 +52,39 @@ const ListRow = (props: { room: IRoom }): JSX.Element => {
 };
 
 const RoomList = (props: IRoomList): JSX.Element => {
-	const { rooms } = props;
+	const { rooms, isBreak } = props;
+
+	const { themeGroup } = useContext(ThemeContext);
+
+	const { workAccent, workGrey, breakAccent } =
+		theme[themeGroup as keyof typeof theme];
+
 	return (
 		<TableContainer>
 			<RoomListTable>
-				<RoomListTableHeader>
+				<RoomListTableHeader color={isBreak ? breakAccent : workAccent}>
 					<tr>
-						<RoomListTableHeaderCell>
+						<RoomListTableHeaderCell color={workGrey}>
 							Room Name
 						</RoomListTableHeaderCell>
-						<RoomListTableHeaderCell>
+						<RoomListTableHeaderCell color={workGrey}>
 							Number of Users
 						</RoomListTableHeaderCell>
-						<RoomListTableHeaderCell>Join</RoomListTableHeaderCell>
+						<RoomListTableHeaderCell color={workGrey}>
+							Join
+						</RoomListTableHeaderCell>
 					</tr>
 				</RoomListTableHeader>
 				<RoomListTableBody>
 					{rooms.map((room) => {
-						return <ListRow room={room} key={room.room} />;
+						return (
+							<ListRow
+								room={room}
+								key={room.room}
+								textColor={workGrey}
+								accentColor={isBreak ? breakAccent : workAccent}
+							/>
+						);
 					})}
 				</RoomListTableBody>
 			</RoomListTable>

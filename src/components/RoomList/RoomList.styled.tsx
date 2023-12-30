@@ -5,34 +5,23 @@ export const RoomListContainer = styled.div`
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	// height: 400px;
-
-	// width: 60%;
 `;
 
-export const RoomListTableWrapper = styled.div`
-	// width: 60%;
-	// overflow: hidden;
-	// border: 1px solid black;
-`;
+export const RoomListTableWrapper = styled.div``;
 
 export const RoomListTable = styled.table`
 	width: 80vh;
 	border-collapse: collapse;
-	border: 1px solid black;
 `;
 
-export const RoomListTableHeader = styled.thead`
+export const RoomListTableHeader = styled.thead<{ color: string }>`
 	position: sticky;
 	top: 0;
-	border: 1px solid black;
-	background-color: white;
+
+	background-color: ${(props): string => props.color};
 `;
 
-export const RoomListTableBody = styled.tbody`
-	// max-height: 200px;
-	// overflow-y: auto;
-`;
+export const RoomListTableBody = styled.tbody``;
 
 export const RoomListTableRow = styled.tr`
 	height: 50px;
@@ -41,21 +30,38 @@ export const RoomListTableRow = styled.tr`
 	border-radius: 5%;
 `;
 
-export const RoomListTableRowCell = styled.td`
-	// Your existing styles for table cells
+export const RoomListTableRowCell = styled.td<{ color: string }>`
+	height: 50px;
+	border-collapse: collapse;
+	border-radius: 5%;
+	text-align: center;
+	color: ${(props): string => props.color};
 `;
 
-export const RoomListTableHeaderCell = styled.th`
-	// Your existing styles for table header cells
+export const RoomListTableHeaderCell = styled.th<{
+	color: string;
+}>`
+	height: 50px;
+	color: ${(props): string => props.color};
 `;
 
-export const RoomListTableButton = styled.button`
-	// Your existing styles for buttons
+export const RoomListTableButton = styled.button<{
+	color: string;
+}>`
+	background-color: ${(props): string => props.color};
+
+	border: none;
+	border-radius: 5px;
+	padding: 5px 10px;
+
+	&:hover {
+		transform: translateY(0.8px);
+	}
 `;
 
 export const TableContainer = styled.div`
 	height: 400px;
 	overflow: auto;
-	border: 3px solid black;
-	border-radius: 5%;
+	border: 3px solid white;
+	border-radius: 50px;
 `;

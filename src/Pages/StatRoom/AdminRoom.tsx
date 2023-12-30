@@ -46,7 +46,8 @@ export const AdminRoom = (props: IAdminRoom): JSX.Element => {
 				backColor={!isBreak ? workBackground : breakBackground}
 			/>
 			<Centered>
-				<RoomList rooms={timerRooms} />
+				<h2>Public Timers</h2>
+				<RoomList rooms={timerRooms} isBreak={isBreak} />
 			</Centered>
 		</>
 	);
