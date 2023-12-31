@@ -15,22 +15,22 @@ import { theme } from "../../../common/theme";
 import UserBubble from "../UserBubbles/UserBubble";
 import MultiUserBubble from "../UserBubbles/MultiUserBubble";
 
-interface IRoom {
-	room: string;
+export interface ITimerRooms {
 	numUsers: number;
-	isPublic: boolean;
 	userList: string[];
+	room: string;
+	isPublic: boolean;
 }
 
 interface IRoomList {
-	rooms: IRoom[];
+	rooms: ITimerRooms[];
 	isBreak: boolean;
 	isAdminMode: boolean;
 	roomName: string;
 }
 
 const ListRow = (props: {
-	room: IRoom;
+	room: ITimerRooms;
 	textColor: string;
 	accentColor: string;
 	isAdminMode: boolean;

@@ -128,7 +128,6 @@ const Room = (props: RoomProps): JSX.Element => {
 		setUserListInRoom(userList);
 	};
 
-	// eslint-disable-next-line no-shadow
 	const onWorkBreakResponse = ({
 		isBreakMode,
 	}: WorkBreakResponseArgs): void => {
@@ -268,7 +267,6 @@ const Room = (props: RoomProps): JSX.Element => {
 							isTimerPaused={isTimerPaused}
 							isTimerRunningClient={isTimerRunningClient}
 							isLoaded={isLoaded}
-							// eslint-disable-next-line react/jsx-boolean-value
 							isMobile={!showWorkButtonOnMobile}
 							iconColor={workGrey}
 						/>

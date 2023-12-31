@@ -1,7 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { ThemeContext } from "styled-components";
 import socket from "../../components/Socket/socket";
-import { ITimerRooms } from "../../../common/types/types";
 import { Centered } from "./StatRoom.styled";
 import Header from "../../components/Header/Header";
 import { GlobalStyle } from "../Room/Room.styled";
@@ -11,6 +10,7 @@ import ConnectionState from "../../components/ConnectionState/ConnectionState";
 
 import PublicRoomRouter from "./PublicRoomRouter";
 import { AdminContext } from "../../../common/common";
+import { ITimerRooms } from "../../components/RoomList/RoomList";
 
 export interface IPublicRoom {
 	isBreak: boolean;

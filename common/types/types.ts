@@ -14,10 +14,3 @@ export interface WorkBreakResponseArgs {
 	userNameFromServer: string;
 	isBreakMode: boolean;
 }
-
-export interface ITimerRooms {
-	numUsers: number;
-	userList: string[];
-	room: string;
-	isPublic: boolean;
-}
