@@ -32,6 +32,7 @@ import TimerTitle from "../../components/TimerTitle/TimerTitle";
 import PomoCounter from "../../components/PomoCounter/PomoCounter";
 import { PomoCounterPosition } from "../../components/PomoCounter/PomoCounter.styled";
 import TimerForm from "../../components/Controls/TimerForm";
+import SettingsModal from "../../components/Modal/SettingsModal";
 
 const Room = (props: RoomProps): JSX.Element => {
 	const {
@@ -61,6 +62,11 @@ const Room = (props: RoomProps): JSX.Element => {
 	const [isLoaded, setIsLoaded] = useState<boolean>(false);
 	const [isTimerAddModalOpen, setIsTimerAddModalOpen] =
 		useState<boolean>(false);
+
+	const [isSettingsModalOpen, setIsSettingsModalOpen] =
+		useState<boolean>(false);
+
+	const [isPublicRoom, setIsPublicRoom] = useState<boolean>(false);
 
 	const [messageList, setMessageList] = useState<
 		{ message: string; userName: string; date: Date }[]
@@ -169,6 +175,14 @@ const Room = (props: RoomProps): JSX.Element => {
 		setBreakTimerMinuteButtons(breakTimerButtons);
 	};
 
+	const ontogglePublicUpdate = ({
+		isPublic,
+	}: {
+		isPublic: boolean;
+	}): void => {
+		setIsPublicRoom(isPublic);
+	};
+
 	useEffect(() => {
 		socket.on("connect", onConnect);
 		socket.on("disconnect", onDisconnect);
@@ -177,6 +191,7 @@ const Room = (props: RoomProps): JSX.Element => {
 		socket.on("messageLog", onMessageLog);
 		socket.on("messageLogArray", onMessageLogArray);
 		socket.on("timerButtons", onTimerButtons);
+		socket.on("togglePublicUpdate", ontogglePublicUpdate);
 
 		return () => {
 			socket.off("connect", onConnect);
@@ -207,6 +222,7 @@ const Room = (props: RoomProps): JSX.Element => {
 						isLoaded={isLoaded}
 						workGrey={workGrey}
 						isBreak={isBreak}
+						isPublicRoom={isPublicRoom}
 					/>
 
 					<Timestamp
@@ -242,6 +258,7 @@ const Room = (props: RoomProps): JSX.Element => {
 						isBreak={isBreak}
 						showWorkButtonOnMobile={showWorkButtonOnMobile}
 						iconColor={workGrey}
+						setIsSettingsModalOpen={setIsSettingsModalOpen}
 					/>
 
 					{!showWorkButtonOnMobile && (
@@ -287,6 +304,16 @@ const Room = (props: RoomProps): JSX.Element => {
 						updateTimerButtons={updateTimerButtons}
 						setIsTimerAddModalOpen={setIsTimerAddModalOpen}
 						isTimerAddModalOpen={isTimerAddModalOpen}
+					/>
+				</ModalComponent>
+
+				<ModalComponent
+					isModalOpen={isSettingsModalOpen}
+					setIsModalOpen={setIsSettingsModalOpen}
+				>
+					<SettingsModal
+						roomName={roomName}
+						isPublicRoom={isPublicRoom}
 					/>
 				</ModalComponent>
 

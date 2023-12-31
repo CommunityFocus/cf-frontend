@@ -19,4 +19,5 @@ export interface ITimerRooms {
 	numUsers: number;
 	userList: string[];
 	room: string;
+	isPublic: boolean;
 }

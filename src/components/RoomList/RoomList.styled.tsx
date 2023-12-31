@@ -1,55 +1,74 @@
+// RoomList.styled.ts
 import styled from "styled-components";
 
+export const RoomListContainer = styled.div`
+	display: flex;
+	justify-content: center;
+	align-items: center;
+`;
+
+export const RoomListTableWrapper = styled.div``;
+
 export const RoomListTable = styled.table`
-	// width: 100%;
+	width: 80vh;
 	border-collapse: collapse;
-
-	width: 60%;
-	// height: 100px;
-
-	// overflow: none;
 `;
 
-export const RoomListTableBody = styled.tbody`
-	// height: 200px;
-	// overflow-y: visible;
+export const RoomListTableHeader = styled.thead<{ color: string }>`
+	position: sticky;
+	top: 0;
+
+	background-color: ${(props): string => props.color};
 `;
 
-export const RoomListTableHeader = styled.thead`
-	border: 1px solid black;
-	padding: 10px;
-`;
-
-export const RoomListTableHeaderCell = styled.th`
-	border: 1px solid black;
-	padding: 10px;
-	width: 33%;
-`;
+export const RoomListTableBody = styled.tbody``;
 
 export const RoomListTableRow = styled.tr`
-	border: 1px solid black;
-	padding: 10px;
-	height: 5px;
+	height: 50px;
+	border: 1px solid white;
+	border-collapse: collapse;
+	border-radius: 5%;
 `;
 
-export const RoomListTableRowCell = styled.td`
-	border: 1px solid black;
-	padding: 10px;
-
-	width: 33%;
-
+export const RoomListTableRowCell = styled.td<{ color: string }>`
+	height: 50px;
+	border-collapse: collapse;
+	border-radius: 5%;
 	text-align: center;
-	vertical-align: middle;
+	color: ${(props): string => props.color};
 `;
 
-export const RoomListTableButton = styled.button`
-	width: 50%;
-	height: 100%;
-	background-color: #4caf50;
-	color: white;
+export const RoomListTableHeaderCell = styled.th<{
+	color: string;
+}>`
+	height: 50px;
+	color: ${(props): string => props.color};
+`;
+
+export const RoomListTableButton = styled.button<{
+	color: string;
+}>`
+	background-color: ${(props): string => props.color};
 
 	border: none;
 	border-radius: 5px;
-	padding: 5px;
-	text-align: center;
+	padding: 5px 10px;
+
+	&:hover {
+		transform: translateY(0.8px);
+	}
+`;
+
+export const TableContainer = styled.div`
+	height: 400px;
+	overflow: auto;
+	border: 3px solid white;
+	border-radius: 50px;
+`;
+
+export const UserListDiv = styled.div`
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 5px;
 `;

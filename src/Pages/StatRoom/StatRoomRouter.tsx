@@ -1,17 +1,25 @@
 import { useEffect } from "react";
 import socket from "../../components/Socket/socket";
 import { PublicRoom } from "./PublicRoom";
-import { AdminRoom } from "./AdminRoom";
 
 interface IStatRoomRouterProps {
 	setIsConnected: (isConnected: boolean) => void;
 	roomName: string;
 	userName: string;
 	isBreak: boolean;
+	globalUsersConnected: number;
+	isConnected: boolean;
 }
 
 const StatRoomRouter = (props: IStatRoomRouterProps): JSX.Element => {
-	const { setIsConnected, roomName, userName, isBreak } = props;
+	const {
+		setIsConnected,
+		roomName,
+		userName,
+		isBreak,
+		globalUsersConnected,
+		isConnected,
+	} = props;
 
 	const onConnect = (): void => {
 		socket.emit("join", { roomName, userName: userName || "defaultUser" });
@@ -32,13 +40,14 @@ const StatRoomRouter = (props: IStatRoomRouterProps): JSX.Element => {
 		};
 	}, []);
 
-	const isAdmin = true;
-
-	if (isAdmin) {
-		return <AdminRoom isBreak={isBreak} />;
-	}
-
-	return <PublicRoom />;
+	return (
+		<PublicRoom
+			isBreak={isBreak}
+			globalUsersConnected={globalUsersConnected}
+			isConnected={isConnected}
+			roomName={roomName}
+		/>
+	);
 };
 
 export default StatRoomRouter;

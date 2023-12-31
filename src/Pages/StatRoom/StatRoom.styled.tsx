@@ -1,11 +1,15 @@
 import styled from "styled-components";
 
+// eslint-disable-next-line
 export const Centered = styled.div`
 	display: flex;
 	justify-content: center;
-	// align-items: center;
-	flex-direction: row;
-	// height: 20vh;
+	align-items: center;
+	height: 100vh;
 
-	margin-top: 20vh;
+	flex-direction: column;
+`;
+
+export const StyledTitle = styled.h2<{ color: string }>`
+	color: ${({ color }): string => color};
 `;

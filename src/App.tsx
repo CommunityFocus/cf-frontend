@@ -123,17 +123,25 @@ const App = (): JSX.Element => {
 										userName={userName}
 										setIsConnected={setIsConnected}
 										isBreak={isBreak}
+										isConnected={isConnected}
+										globalUsersConnected={
+											globalUsersConnected
+										}
 									/>
 								}
 							/>
 							<Route
-								path="timerlist"
+								path="public-timers"
 								element={
 									<StatRoomRouter
-										roomName="timerlist"
+										roomName="public-timers"
 										userName={userName}
 										setIsConnected={setIsConnected}
 										isBreak={isBreak}
+										isConnected={isConnected}
+										globalUsersConnected={
+											globalUsersConnected
+										}
 									/>
 								}
 							/>
