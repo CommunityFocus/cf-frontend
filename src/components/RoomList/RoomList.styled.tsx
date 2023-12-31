@@ -65,3 +65,10 @@ export const TableContainer = styled.div`
 	border: 3px solid white;
 	border-radius: 50px;
 `;
+
+export const UserListDiv = styled.div`
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 5px;
+`;

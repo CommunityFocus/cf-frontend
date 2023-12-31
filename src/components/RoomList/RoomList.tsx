@@ -9,32 +9,78 @@ import {
 	RoomListTableRow,
 	RoomListTableRowCell,
 	TableContainer,
+	UserListDiv,
 } from "./RoomList.styled";
 import { theme } from "../../../common/theme";
+import UserBubble from "../UserBubbles/UserBubble";
+import MultiUserBubble from "../UserBubbles/MultiUserBubble";
 
 interface IRoom {
 	room: string;
 	numUsers: number;
+	isPublic: boolean;
+	userList: string[];
 }
 
 interface IRoomList {
 	rooms: IRoom[];
 	isBreak: boolean;
+	isAdminMode: boolean;
+	roomName: string;
 }
 
 const ListRow = (props: {
 	room: IRoom;
 	textColor: string;
 	accentColor: string;
+	isAdminMode: boolean;
+	roomName: string;
 }): JSX.Element => {
-	const { room, textColor, accentColor } = props;
+	const { room, textColor, accentColor, isAdminMode, roomName } = props;
 	return (
 		<RoomListTableRow>
 			<RoomListTableRowCell color={textColor}>
 				{room.room}
 			</RoomListTableRowCell>
 			<RoomListTableRowCell color={textColor}>
-				{room.numUsers}
+				<UserListDiv>
+					{room.numUsers}
+
+					{room.userList.length > 0 &&
+						(room.userList.length < 5 ? (
+							room.userList.map((user: string) => (
+								<UserBubble
+									user={user}
+									key={
+										crypto.getRandomValues(
+											new Uint32Array(1)
+										)[0]
+									}
+									size={20}
+								/>
+							))
+						) : (
+							<>
+								{room.userList
+									.slice(0, 4)
+									.map((user: string) => (
+										<UserBubble
+											user={user}
+											key={
+												crypto.getRandomValues(
+													new Uint32Array(1)
+												)[0]
+											}
+											size={20}
+										/>
+									))}
+								<MultiUserBubble
+									users={room.userList.slice(4)}
+									size={20}
+								/>
+							</>
+						))}
+				</UserListDiv>
 			</RoomListTableRowCell>
 
 			<RoomListTableRowCell color={textColor}>
@@ -47,12 +93,18 @@ const ListRow = (props: {
 					Join
 				</RoomListTableButton>
 			</RoomListTableRowCell>
+
+			{isAdminMode && roomName === "admin" && (
+				<RoomListTableRowCell color={textColor}>
+					{room.isPublic ? "Public" : "Private"}
+				</RoomListTableRowCell>
+			)}
 		</RoomListTableRow>
 	);
 };
 
 const RoomList = (props: IRoomList): JSX.Element => {
-	const { rooms, isBreak } = props;
+	const { rooms, isBreak, isAdminMode, roomName } = props;
 
 	const { themeGroup } = useContext(ThemeContext);
 
@@ -73,6 +125,12 @@ const RoomList = (props: IRoomList): JSX.Element => {
 						<RoomListTableHeaderCell color={workGrey}>
 							Join
 						</RoomListTableHeaderCell>
+
+						{isAdminMode && roomName === "admin" && (
+							<RoomListTableHeaderCell color={workGrey}>
+								Public
+							</RoomListTableHeaderCell>
+						)}
 					</tr>
 				</RoomListTableHeader>
 				<RoomListTableBody>
@@ -90,6 +148,8 @@ const RoomList = (props: IRoomList): JSX.Element => {
 								key={room.room}
 								textColor={workGrey}
 								accentColor={isBreak ? breakAccent : workAccent}
+								isAdminMode={isAdminMode}
+								roomName={roomName}
 							/>
 						);
 					})}

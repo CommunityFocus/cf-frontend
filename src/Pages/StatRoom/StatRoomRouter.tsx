@@ -45,6 +45,7 @@ const StatRoomRouter = (props: IStatRoomRouterProps): JSX.Element => {
 			isBreak={isBreak}
 			globalUsersConnected={globalUsersConnected}
 			isConnected={isConnected}
+			roomName={roomName}
 		/>
 	);
 };
