@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import ReactGA from "react-ga4";
 import { FiEdit } from "react-icons/fi";
+import { FaRegEye } from "react-icons/fa";
 import socket from "../Socket/socket";
 import { StyledWorkBreakBanner } from "../../Pages/Room/Room.styled";
 import {
@@ -14,10 +15,11 @@ interface TimerTitleProps {
 	isLoaded: boolean;
 	workGrey: string;
 	isBreak: boolean;
+	isPublicRoom: boolean;
 }
 
 const TimerTitle = (props: TimerTitleProps): JSX.Element => {
-	const { isLoaded, workGrey, isBreak } = props;
+	const { isLoaded, workGrey, isBreak, isPublicRoom } = props;
 	const [timerTitle, setTimerTitle] = useState<string>("");
 	const [isTitleModalOpen, setIsTitleModalOpen] = useState<boolean>(false);
 
@@ -35,6 +37,7 @@ const TimerTitle = (props: TimerTitleProps): JSX.Element => {
 		<>
 			<TitleEditButtonPosition>
 				<StyledWorkBreakBanner color={workGrey} isLoaded={isLoaded}>
+					{isPublicRoom && <FaRegEye />}
 					{timerTitle ||
 						(isBreak
 							? "Time to take a break!"
