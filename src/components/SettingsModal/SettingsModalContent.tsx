@@ -1,3 +1,4 @@
+import ReactGA from "react-ga4";
 import socket from "../Socket/socket";
 import {
 	StyledSettingsLine,
@@ -22,21 +23,23 @@ const SettingsModalContent = (
 					type="checkbox"
 					id="public-toggle"
 					checked={isPublicRoom}
-					// onClick={(): void => {
-					// 	console.log("toggle public");
-					// 	socket.emit("togglePublic", {
-					// 		roomName,
-					// 	});
-					// }}
-
 					onClick={(): void => {
-						console.log("toggle public");
 						socket.emit("togglePublic", {
 							roomName,
 						});
+
+						// react ga
+						ReactGA.event({
+							category: "Settings",
+							action: "Toggle Public",
+						});
 					}}
 				/>
-				<span>Public</span>
+				<span>
+					Make Room Public? ( See{" "}
+					<a href="/public-timers">Room List </a>
+					here)
+				</span>
 			</StyledSettingsLine>
 		</StyledSettingsModalContainer>
 	);

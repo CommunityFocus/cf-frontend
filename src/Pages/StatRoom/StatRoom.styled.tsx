@@ -9,3 +9,7 @@ export const Centered = styled.div`
 
 	flex-direction: column;
 `;
+
+export const StyledTitle = styled.h2<{ color: string }>`
+	color: ${({ color }): string => color};
+`;

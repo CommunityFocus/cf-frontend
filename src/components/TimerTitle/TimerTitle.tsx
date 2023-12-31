@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import ReactGA from "react-ga4";
 import { FiEdit } from "react-icons/fi";
-import { FaRegEye } from "react-icons/fa";
 import socket from "../Socket/socket";
 import { StyledWorkBreakBanner } from "../../Pages/Room/Room.styled";
 import {
+	StyledEye,
 	TitleEditButtonPosition,
 	TitleEditEmojiSize,
 } from "./TimerTitle.styled";
@@ -37,7 +37,22 @@ const TimerTitle = (props: TimerTitleProps): JSX.Element => {
 		<>
 			<TitleEditButtonPosition>
 				<StyledWorkBreakBanner color={workGrey} isLoaded={isLoaded}>
-					{isPublicRoom && <FaRegEye />}
+					{isPublicRoom && (
+						<StyledEye
+							data-tooltip-id="my-tooltip"
+							data-tooltip-content="Room is Public"
+							data-tooltip-place="top"
+							onClick={(): void => {
+								// react ga
+								ReactGA.event({
+									category: "Timer",
+									action: "Click Public Eye",
+									label: "",
+								});
+							}}
+						/>
+					)}
+
 					{timerTitle ||
 						(isBreak
 							? "Time to take a break!"

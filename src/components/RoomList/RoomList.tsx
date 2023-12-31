@@ -76,6 +76,13 @@ const RoomList = (props: IRoomList): JSX.Element => {
 					</tr>
 				</RoomListTableHeader>
 				<RoomListTableBody>
+					{rooms.length === 0 && (
+						<RoomListTableRow>
+							<RoomListTableRowCell color={workGrey}>
+								No rooms available
+							</RoomListTableRowCell>
+						</RoomListTableRow>
+					)}
 					{rooms.map((room) => {
 						return (
 							<ListRow
