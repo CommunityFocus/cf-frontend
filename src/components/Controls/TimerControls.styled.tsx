@@ -1,6 +1,7 @@
 import { BiAlarmAdd } from "react-icons/bi";
 import { BsFillShareFill } from "react-icons/bs";
 import { RxOpenInNewWindow } from "react-icons/rx";
+import { IoSettingsSharp } from "react-icons/io5";
 import styled from "styled-components";
 
 export const StyledButtonRow = styled.div<{
@@ -23,6 +24,8 @@ export const StyledShareIcon = styled(BsFillShareFill)`
 		display: none;
 	}
 `;
+
+export const StyledSettingsIcon = styled(IoSettingsSharp)``;
 
 export const StyledReopenIcon = styled(RxOpenInNewWindow)`
 	@media (max-width: 300px), (max-height: 500px) {
