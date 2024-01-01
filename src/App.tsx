@@ -59,6 +59,12 @@ const App = (): JSX.Element => {
 		socket.on("connect", onConnect);
 		socket.on("disconnect", onDisconnect);
 
+		socket.on("require-admin-auth", (callback) => {
+			callback({
+				password: localStorage.getItem("adminPassword"),
+			});
+		});
+
 		return () => {
 			socket.off("globalUsers", onGlobalUsers);
 			socket.off("connect", onConnect);
