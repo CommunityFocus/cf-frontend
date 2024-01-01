@@ -10,7 +10,7 @@ export const RoomListContainer = styled.div`
 export const RoomListTableWrapper = styled.div``;
 
 export const RoomListTable = styled.table`
-	width: 80vh;
+	width: 70vw;
 	border-collapse: collapse;
 `;
 
@@ -60,7 +60,7 @@ export const RoomListTableButton = styled.button<{
 `;
 
 export const TableContainer = styled.div`
-	height: 400px;
+	height: 70vh;
 	overflow: auto;
 	border: 3px solid white;
 	border-radius: 50px;
