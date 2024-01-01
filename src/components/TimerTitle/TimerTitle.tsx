@@ -4,6 +4,7 @@ import { FiEdit } from "react-icons/fi";
 import socket from "../Socket/socket";
 import { StyledWorkBreakBanner } from "../Room/Room.styled";
 import {
+	StyledEye,
 	TitleEditButtonPosition,
 	TitleEditEmojiSize,
 } from "./TimerTitle.styled";
@@ -14,10 +15,11 @@ interface TimerTitleProps {
 	isLoaded: boolean;
 	workGrey: string;
 	isBreak: boolean;
+	isPublicRoom: boolean;
 }
 
 const TimerTitle = (props: TimerTitleProps): JSX.Element => {
-	const { isLoaded, workGrey, isBreak } = props;
+	const { isLoaded, workGrey, isBreak, isPublicRoom } = props;
 	const [timerTitle, setTimerTitle] = useState<string>("");
 	const [isTitleModalOpen, setIsTitleModalOpen] = useState<boolean>(false);
 
@@ -35,6 +37,22 @@ const TimerTitle = (props: TimerTitleProps): JSX.Element => {
 		<>
 			<TitleEditButtonPosition>
 				<StyledWorkBreakBanner color={workGrey} isLoaded={isLoaded}>
+					{isPublicRoom && (
+						<StyledEye
+							data-tooltip-id="my-tooltip"
+							data-tooltip-content="Room is Public"
+							data-tooltip-place="top"
+							onClick={(): void => {
+								// react ga
+								ReactGA.event({
+									category: "Timer",
+									action: "Click Public Eye",
+									label: "",
+								});
+							}}
+						/>
+					)}
+
 					{timerTitle ||
 						(isBreak
 							? "Time to take a break!"

@@ -9,7 +9,7 @@ interface LogoTitleProps {
 
 const LogoTitle = (props: LogoTitleProps): JSX.Element => {
 	const { color } = props;
-	// useNavigate to go to home page
+
 	const navigate = useNavigate();
 	const { width } = useWindowSize();
 
