@@ -5,7 +5,7 @@ export enum ThemeType {
 	funky = "funky",
 	night = "night",
 	sunset = "sunset",
-	neon ="neon",
+	neon = "neon",
 }
 
 export const themeOptions = Object.keys(ThemeType).map((key) => ({
@@ -60,16 +60,15 @@ export const theme: { [key in ThemeType]: Theme } = {
 		breakButtonTextColor: "#93B1A6",
 	},
 	sunset: {
-		workBackground: "#6e000a", //background-color for work
-		workAccent: "#580a14", //for now effects the header and footer bgcolors
-		breakBackground: "#0d131a", //
-		breakAccent: "#710007", //for now effects the header and footer bgcolors
-		workGrey: "#cc4f1d", //workGrey mainly effects both the work and break fonts, can be separated for different color schemes
-		workButtonColor: "#84000a",//Colors of buttons for work
-		workButtonTextColor: "#ffffff", //text color on top of buttons for work
-		breakButtonColor: "#1e2c3e", //colors of button for break
-		breakButtonTextColor: "#ffffff", //text color on top of buttons for break
-
+		workBackground: "#6e000a",
+		workAccent: "#580a14",
+		breakBackground: "#0d131a",
+		breakAccent: "#710007",
+		workGrey: "#cc4f1d",
+		workButtonColor: "#84000a",
+		workButtonTextColor: "#ffffff",
+		breakButtonColor: "#1e2c3e",
+		breakButtonTextColor: "#ffffff",
 	},
 	neon: {
 		workBackground: "linear-gradient(100deg, #0062ff, #da61ff)",
