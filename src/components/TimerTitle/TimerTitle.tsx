@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import ReactGA from "react-ga4";
 import { FiEdit } from "react-icons/fi";
 import socket from "../Socket/socket";
-import { StyledWorkBreakBanner } from "../../Pages/Room/Room.styled";
+import { StyledWorkBreakBanner } from "../Room/Room.styled";
 import {
 	StyledEye,
 	TitleEditButtonPosition,
