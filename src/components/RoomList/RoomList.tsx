@@ -35,8 +35,12 @@ const ListRow = (props: {
 	accentColor: string;
 	isAdminMode: boolean;
 	roomName: string;
+	isPublic: boolean;
 }): JSX.Element => {
-	const { room, textColor, accentColor, isAdminMode, roomName } = props;
+	const { room, textColor, accentColor, isAdminMode, roomName, isPublic } =
+		props;
+
+	console.log(room, room.isPublic);
 	return (
 		<RoomListTableRow>
 			<RoomListTableRowCell color={textColor}>
@@ -96,7 +100,7 @@ const ListRow = (props: {
 
 			{isAdminMode && roomName === "admin" && (
 				<RoomListTableRowCell color={textColor}>
-					{room.isPublic ? "Public" : "Private"}
+					{isPublic ? "Public" : "Private"}
 				</RoomListTableRowCell>
 			)}
 		</RoomListTableRow>
@@ -110,6 +114,8 @@ const RoomList = (props: IRoomList): JSX.Element => {
 
 	const { workAccent, workGrey, breakAccent } =
 		theme[themeGroup as keyof typeof theme];
+
+	console.log(rooms);
 
 	return (
 		<TableContainer>
@@ -150,6 +156,7 @@ const RoomList = (props: IRoomList): JSX.Element => {
 								accentColor={isBreak ? breakAccent : workAccent}
 								isAdminMode={isAdminMode}
 								roomName={roomName}
+								isPublic={room.isPublic}
 							/>
 						);
 					})}
