@@ -24,7 +24,10 @@ const UserBubbles = (props: { userListInRoom: string[] }): JSX.Element => {
 							size={30}
 						/>
 					))}
-					<MultiUserBubble users={userListInRoom.slice(6)} />
+					<MultiUserBubble
+						users={userListInRoom.slice(6)}
+						size={30}
+					/>
 				</>
 			)}
 		</UserBubblesContainer>
