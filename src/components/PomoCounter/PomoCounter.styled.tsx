@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const PomoCounterPosition = styled.div`
 	position: absolute;
-
+	// top right corner
 	top: 90px;
 	right: 25px;
 	z-index: 1;

@@ -15,7 +15,6 @@ import {
 	StyledDivSpacer,
 	StyledShareText,
 	StyledBottomText,
-	StyledJoinRow,
 } from "./LandingPage.styled";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
@@ -62,12 +61,6 @@ const LandingPage = (props: {
 
 	const navigateToContributors = (): void => {
 		navigate("/contributors");
-		window.location.reload();
-	};
-
-	const navigateToPublic = (): void => {
-		navigate("/public-timers");
-		window.location.reload();
 	};
 
 	useEffect(() => {
@@ -143,47 +136,25 @@ const LandingPage = (props: {
 							data-tooltip-place="top"
 						/>
 					</StyledDivRow>
-					<StyledJoinRow>
-						<Button
-							type="button"
-							onClick={(): void => {
-								navigateToRoom();
+					<Button
+						type="button"
+						onClick={(): void => {
+							navigateToRoom();
 
-								// react ga
-								ReactGA.event({
-									category: "Landing Page",
-									action: "Click",
-									label: "Join a room",
-								});
-							}}
-							disabled={validRoomname(slugName) !== false}
-							data-tooltip-id="my-tooltip"
-							data-tooltip-content="Join a shareable room"
-							data-tooltip-place="top"
-						>
-							Join a room
-						</Button>
-
-						<Button
-							type="button"
-							onClick={(): void => {
-								navigateToPublic();
-
-								// react ga
-								ReactGA.event({
-									category: "Landing Page",
-									action: "Click",
-									label: "Join a public room",
-								});
-							}}
-							disabled={validRoomname(slugName) !== false}
-							data-tooltip-id="my-tooltip"
-							data-tooltip-content="Join a public room"
-							data-tooltip-place="top"
-						>
-							Join a public room
-						</Button>
-					</StyledJoinRow>
+							// react ga
+							ReactGA.event({
+								category: "Landing Page",
+								action: "Click",
+								label: "Join a room",
+							});
+						}}
+						disabled={validRoomname(slugName) !== false}
+						data-tooltip-id="my-tooltip"
+						data-tooltip-content="Join a shareable room"
+						data-tooltip-place="top"
+					>
+						Join a room
+					</Button>
 				</StyledDivSpacer>
 
 				<StyledBottomText>

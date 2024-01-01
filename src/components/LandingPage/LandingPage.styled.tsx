@@ -32,7 +32,8 @@ export const Center = styled.div`
 `;
 
 export const Button = styled(StyledButton)`
-	margin-right: 20px;
+	// push to the left
+	margin-right: 40px;
 `;
 
 export const StyledDivRow = styled.div`
@@ -44,14 +45,6 @@ export const StyledDivRow = styled.div`
 `;
 
 export const StyledDivSpacer = styled.div`
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	gap: 20px;
-`;
-
-export const StyledJoinRow = styled.div`
 	display: flex;
 	flex-direction: column;
 	justify-content: center;

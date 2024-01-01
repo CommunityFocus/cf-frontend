@@ -1,4 +1,3 @@
-import { FaRegEye } from "react-icons/fa";
 import styled from "styled-components";
 
 export const TitleEditButtonPosition = styled.div`
@@ -17,8 +16,4 @@ export const TitleEditEmojiSize = styled.div<{
 	margin-top: 0.5rem;
 	color: ${({ color }): string => color};
 	display: ${({ isLoaded }): string => (isLoaded ? "block" : "none")};
-`;
-
-export const StyledEye = styled(FaRegEye)`
-	margin-right: 0.5rem;
 `;

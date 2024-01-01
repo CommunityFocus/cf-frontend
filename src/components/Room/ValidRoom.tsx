@@ -11,6 +11,7 @@ const ValidRoom = (props: RoomProps): JSX.Element => {
 		isConnected,
 		setIsConnected,
 	} = props;
+	// catch everything after the first slash and after
 
 	const room = window.location.pathname.split("/")[1];
 

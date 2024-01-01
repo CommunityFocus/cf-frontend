@@ -12,7 +12,6 @@ import UsernameContext from "./components/Username/UsernameContext";
 import ValidRoom from "./components/Room/ValidRoom";
 import DefaultRoom from "./components/DefaultRoom/DefaultRoom";
 import { tracker } from "../common/common";
-import StatRoomRouter from "./Pages/StatRoom/StatRoomRouter";
 
 const App = (): JSX.Element => {
 	const [globalUsersConnected, setGlobalUsersConnected] = useState<number>(0);
@@ -58,12 +57,6 @@ const App = (): JSX.Element => {
 		socket.on("globalUsers", onGlobalUsers);
 		socket.on("connect", onConnect);
 		socket.on("disconnect", onDisconnect);
-
-		socket.on("require-admin-auth", (callback) => {
-			callback({
-				password: localStorage.getItem("adminPassword"),
-			});
-		});
 
 		return () => {
 			socket.off("globalUsers", onGlobalUsers);
@@ -117,37 +110,6 @@ const App = (): JSX.Element => {
 										}
 										isBreak={isBreak}
 										isConnected={isConnected}
-									/>
-								}
-							/>
-
-							<Route
-								path="admin"
-								element={
-									<StatRoomRouter
-										roomName="admin"
-										userName={userName}
-										setIsConnected={setIsConnected}
-										isBreak={isBreak}
-										isConnected={isConnected}
-										globalUsersConnected={
-											globalUsersConnected
-										}
-									/>
-								}
-							/>
-							<Route
-								path="public-timers"
-								element={
-									<StatRoomRouter
-										roomName="public-timers"
-										userName={userName}
-										setIsConnected={setIsConnected}
-										isBreak={isBreak}
-										isConnected={isConnected}
-										globalUsersConnected={
-											globalUsersConnected
-										}
 									/>
 								}
 							/>

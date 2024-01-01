@@ -18,6 +18,7 @@ const PomoCounter = (props: PomoCounterProps): JSX.Element => {
 	const { workSessions, breakSessions, setWorkSessions, setBreakSessions } =
 		props;
 
+	// theme
 	const { themeGroup } = useContext(ThemeContext);
 
 	const { workGrey } = theme[themeGroup as keyof typeof theme];

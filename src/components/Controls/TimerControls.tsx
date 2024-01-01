@@ -6,7 +6,6 @@ import {
 	StyledAddTimerIcon,
 	StyledButtonRow,
 	StyledReopenIcon,
-	StyledSettingsIcon,
 	StyledShareIcon,
 } from "./TimerControls.styled";
 import WorkBreakButton from "../TimerButton/WorkBreakButton";
@@ -23,7 +22,6 @@ interface TimerControlProps {
 	setIsTimerAddModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
 	showWorkButtonOnMobile: boolean;
 	iconColor: string;
-	setIsSettingsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const TimerControls = ({
@@ -38,7 +36,6 @@ const TimerControls = ({
 	isBreak,
 	showWorkButtonOnMobile,
 	iconColor,
-	setIsSettingsModalOpen,
 }: TimerControlProps): JSX.Element => {
 	return (
 		<StyledButtonRow show={isLoaded} iconColor={iconColor}>
@@ -123,22 +120,6 @@ const TimerControls = ({
 				size="30px"
 				data-tooltip-id="my-tooltip"
 				data-tooltip-content="Add or remove a timer to the room"
-				data-tooltip-place="top"
-			/>
-
-			<StyledSettingsIcon
-				size="30px"
-				onClick={(): void => {
-					setIsSettingsModalOpen(true);
-
-					// react ga
-					ReactGA.event({
-						category: "Timer",
-						action: "Settings",
-					});
-				}}
-				data-tooltip-id="my-tooltip"
-				data-tooltip-content="Settings"
 				data-tooltip-place="top"
 			/>
 

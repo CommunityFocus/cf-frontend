@@ -11,6 +11,7 @@ const TitleModal = (props: TitleModalProps): JSX.Element => {
 
 	useEffect(() => {
 		if (isTitleModalOpen) {
+			// focus on the input when the modal opens
 			document.getElementById("title-input")?.focus();
 		}
 	}, [isTitleModalOpen]);

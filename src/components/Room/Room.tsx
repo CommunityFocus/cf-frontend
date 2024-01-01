@@ -25,14 +25,13 @@ import socket from "../Socket/socket";
 import ModalContext from "../Modal/ModalContext";
 import UsernameContext from "../Username/UsernameContext";
 import RoomProps from "./RoomProps";
-import ModalComponent from "../../components/Modal/Modal";
-import AddTimerModal from "../../components/Modal/AddTimerModal";
-import MessageLogs from "../../components/MessageLog/MessageLogs";
-import TimerTitle from "../../components/TimerTitle/TimerTitle";
-import PomoCounter from "../../components/PomoCounter/PomoCounter";
-import { PomoCounterPosition } from "../../components/PomoCounter/PomoCounter.styled";
-import TimerForm from "../../components/Controls/TimerForm";
-import SettingsModal from "../../components/Modal/SettingsModal";
+import ModalComponent from "../Modal/Modal";
+import AddTimerModal from "../Modal/AddTimerModal";
+import MessageLogs from "../MessageLog/MessageLogs";
+import TimerTitle from "../TimerTitle/TimerTitle";
+import PomoCounter from "../PomoCounter/PomoCounter";
+import { PomoCounterPosition } from "../PomoCounter/PomoCounter.styled";
+import TimerForm from "../Controls/TimerForm";
 
 const Room = (props: RoomProps): JSX.Element => {
 	const {
@@ -62,11 +61,6 @@ const Room = (props: RoomProps): JSX.Element => {
 	const [isLoaded, setIsLoaded] = useState<boolean>(false);
 	const [isTimerAddModalOpen, setIsTimerAddModalOpen] =
 		useState<boolean>(false);
-
-	const [isSettingsModalOpen, setIsSettingsModalOpen] =
-		useState<boolean>(false);
-
-	const [isPublicRoom, setIsPublicRoom] = useState<boolean>(false);
 
 	const [messageList, setMessageList] = useState<
 		{ message: string; userName: string; date: Date }[]
@@ -128,6 +122,7 @@ const Room = (props: RoomProps): JSX.Element => {
 		setUserListInRoom(userList);
 	};
 
+	// eslint-disable-next-line no-shadow
 	const onWorkBreakResponse = ({
 		isBreakMode,
 	}: WorkBreakResponseArgs): void => {
@@ -174,14 +169,6 @@ const Room = (props: RoomProps): JSX.Element => {
 		setBreakTimerMinuteButtons(breakTimerButtons);
 	};
 
-	const ontogglePublicUpdate = ({
-		isPublic,
-	}: {
-		isPublic: boolean;
-	}): void => {
-		setIsPublicRoom(isPublic);
-	};
-
 	useEffect(() => {
 		socket.on("connect", onConnect);
 		socket.on("disconnect", onDisconnect);
@@ -190,7 +177,6 @@ const Room = (props: RoomProps): JSX.Element => {
 		socket.on("messageLog", onMessageLog);
 		socket.on("messageLogArray", onMessageLogArray);
 		socket.on("timerButtons", onTimerButtons);
-		socket.on("togglePublicUpdate", ontogglePublicUpdate);
 
 		return () => {
 			socket.off("connect", onConnect);
@@ -221,7 +207,6 @@ const Room = (props: RoomProps): JSX.Element => {
 						isLoaded={isLoaded}
 						workGrey={workGrey}
 						isBreak={isBreak}
-						isPublicRoom={isPublicRoom}
 					/>
 
 					<Timestamp
@@ -257,7 +242,6 @@ const Room = (props: RoomProps): JSX.Element => {
 						isBreak={isBreak}
 						showWorkButtonOnMobile={showWorkButtonOnMobile}
 						iconColor={workGrey}
-						setIsSettingsModalOpen={setIsSettingsModalOpen}
 					/>
 
 					{!showWorkButtonOnMobile && (
@@ -267,6 +251,7 @@ const Room = (props: RoomProps): JSX.Element => {
 							isTimerPaused={isTimerPaused}
 							isTimerRunningClient={isTimerRunningClient}
 							isLoaded={isLoaded}
+							// eslint-disable-next-line react/jsx-boolean-value
 							isMobile={!showWorkButtonOnMobile}
 							iconColor={workGrey}
 						/>
@@ -302,16 +287,6 @@ const Room = (props: RoomProps): JSX.Element => {
 						updateTimerButtons={updateTimerButtons}
 						setIsTimerAddModalOpen={setIsTimerAddModalOpen}
 						isTimerAddModalOpen={isTimerAddModalOpen}
-					/>
-				</ModalComponent>
-
-				<ModalComponent
-					isModalOpen={isSettingsModalOpen}
-					setIsModalOpen={setIsSettingsModalOpen}
-				>
-					<SettingsModal
-						roomName={roomName}
-						isPublicRoom={isPublicRoom}
 					/>
 				</ModalComponent>
 

@@ -199,6 +199,7 @@ const Timestamp = (props: TimestampProps): JSX.Element => {
 			return;
 		}
 
+		// update the document title, with roomName and timestamp
 		document.title = `${formatTimestamp(timestamp)}`;
 	}, [isTimerPaused, timestamp, isTimerRunningClient]);
 
@@ -256,7 +257,9 @@ const Timestamp = (props: TimestampProps): JSX.Element => {
 																? workButtonTextColor
 																: breakButtonTextColor
 														}
+														// eslint-disable-next-line react/jsx-boolean-value
 														hasDelete={false}
+														// submit on click
 														onClick={(
 															event
 														): void => {

@@ -140,6 +140,7 @@ const AddTimerButton = (props: AddTimerButtonProps): JSX.Element => {
 									}
 									// eslint-disable-next-line react/jsx-boolean-value
 									hasDelete={true}
+									// submit on click
 									onClick={(event): void => {
 										event.preventDefault();
 										const newTimerButtons = [

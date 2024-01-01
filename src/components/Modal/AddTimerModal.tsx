@@ -25,6 +25,7 @@ const AddTimerModal = (props: AddTimerModalProps): JSX.Element => {
 
 	useEffect(() => {
 		if (isTimerAddModalOpen) {
+			// focus on the input when the modal opens
 			document.getElementById("AddTimerInput")?.focus();
 		}
 	}, [isTimerAddModalOpen]);

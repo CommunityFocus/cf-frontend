@@ -59,6 +59,7 @@ const ChangeTimerTitle = (props: ChangeTimerTitleProps): JSX.Element => {
 					setInputValue(event.target.value);
 				}}
 				validationText={inputValidation(inputValue)}
+				// when you hit enter, it will submit the form
 				onKeyDown={(
 					event: React.KeyboardEvent<HTMLInputElement>
 				): void => {
