@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { StyledButton } from "../Button/Button";
+import { StyledButton } from "../../components/Button/Button";
 
 export const Title = styled.h1<{ color: string }>`
 	color: ${({ color }): string => color};

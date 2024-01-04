@@ -17,16 +17,16 @@ import {
 	StyledBottomText,
 	StyledJoinRow,
 } from "./LandingPage.styled";
-import Footer from "../Footer/Footer";
-import Header from "../Header/Header";
+import Footer from "../../components/Footer/Footer";
+import Header from "../../components/Header/Header";
 import { theme } from "../../../common/theme";
 import { GlobalStyle } from "../Room/Room.styled";
-import ConnectionState from "../ConnectionState/ConnectionState";
-import ValidationInput from "../Modal/ValidationInput";
+import ConnectionState from "../../components/ConnectionState/ConnectionState";
+import ValidationInput from "../../components/Modal/ValidationInput";
 import validRoomname from "../../helpers/validRoomname";
-import { StyledImg } from "../Logo/LogoTitle.styled";
-import ContributorsWidget from "../Contributors/ContributorsWidget";
-import { ContributorsWidgetPosition } from "../Contributors/ContributorsWidget.styled";
+import { StyledImg } from "../../components/Logo/LogoTitle.styled";
+import ContributorsWidget from "../../components/Contributors/ContributorsWidget";
+import { ContributorsWidgetPosition } from "../../components/Contributors/ContributorsWidget.styled";
 
 const LandingPage = (props: {
 	globalUsersConnected: number;

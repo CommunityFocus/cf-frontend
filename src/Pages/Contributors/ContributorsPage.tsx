@@ -1,12 +1,12 @@
 import { useContext } from "react";
 import { ThemeContext } from "styled-components";
-import ConnectionState from "../ConnectionState/ConnectionState";
-import Footer from "../Footer/Footer";
-import Header from "../Header/Header";
+import ConnectionState from "../../components/ConnectionState/ConnectionState";
+import Footer from "../../components/Footer/Footer";
+import Header from "../../components/Header/Header";
 import { GlobalStyle } from "../Room/Room.styled";
 import { theme } from "../../../common/theme";
 import { Center } from "../LandingPage/LandingPage.styled";
-import ContributorsWidget from "./ContributorsWidget";
+import ContributorsWidget from "../../components/Contributors/ContributorsWidget";
 
 const ContributorsPage = (props: {
 	globalUsersConnected: number;
