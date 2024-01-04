@@ -12,7 +12,7 @@ import UsernameContext from "./components/Username/UsernameContext";
 import ValidRoom from "./Pages/Room/ValidRoom";
 import DefaultRoom from "./Pages/DefaultRoom/DefaultRoom";
 import { tracker } from "../common/common";
-import StatRoomRouter from "./Pages/StatRoom/StatRoomRouter";
+import { PublicRoom } from "./Pages/StatRoom/PublicRoom";
 
 const App = (): JSX.Element => {
 	const [globalUsersConnected, setGlobalUsersConnected] = useState<number>(0);
@@ -124,7 +124,7 @@ const App = (): JSX.Element => {
 							<Route
 								path="admin"
 								element={
-									<StatRoomRouter
+									<PublicRoom
 										roomName="admin"
 										userName={userName}
 										setIsConnected={setIsConnected}
@@ -139,7 +139,7 @@ const App = (): JSX.Element => {
 							<Route
 								path="public-timers"
 								element={
-									<StatRoomRouter
+									<PublicRoom
 										roomName="public-timers"
 										userName={userName}
 										setIsConnected={setIsConnected}

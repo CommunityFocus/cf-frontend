@@ -40,7 +40,6 @@ const ListRow = (props: {
 	const { room, textColor, accentColor, isAdminMode, roomName, isPublic } =
 		props;
 
-	console.log(room, room.isPublic);
 	return (
 		<RoomListTableRow>
 			<RoomListTableRowCell color={textColor}>
@@ -114,8 +113,6 @@ const RoomList = (props: IRoomList): JSX.Element => {
 
 	const { workAccent, workGrey, breakAccent } =
 		theme[themeGroup as keyof typeof theme];
-
-	console.log(rooms);
 
 	return (
 		<TableContainer>

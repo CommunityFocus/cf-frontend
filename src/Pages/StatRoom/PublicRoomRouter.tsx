@@ -3,7 +3,7 @@ import { useContext } from "react";
 
 import { IPublicRoom } from "./PublicRoom";
 import { theme } from "../../../common/theme";
-import { StyledTitle } from "./StatRoom.styled";
+import { StyledTitle } from "./PublicRoom.styled";
 import RoomList, { ITimerRooms } from "../../components/RoomList/RoomList";
 import DefaultRoom from "../DefaultRoom/DefaultRoom";
 
