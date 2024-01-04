@@ -3,14 +3,14 @@ import { useEffect, useMemo, useState } from "react";
 import { ThemeProvider } from "styled-components";
 import { Tooltip } from "react-tooltip";
 import socket from "./components/Socket/socket";
-import LandingPage from "./components/LandingPage/LandingPage";
+import LandingPage from "./Pages/LandingPage/LandingPage";
 import { ThemeType } from "../common/theme";
 import "reactjs-popup/dist/index.css";
-import ContributorsPage from "./components/Contributors/ContributorsPage";
+import ContributorsPage from "./Pages/Contributors/ContributorsPage";
 import ModalContext from "./components/Modal/ModalContext";
 import UsernameContext from "./components/Username/UsernameContext";
-import ValidRoom from "./components/Room/ValidRoom";
-import DefaultRoom from "./components/DefaultRoom/DefaultRoom";
+import ValidRoom from "./Pages/Room/ValidRoom";
+import DefaultRoom from "./Pages/DefaultRoom/DefaultRoom";
 import { tracker } from "../common/common";
 import StatRoomRouter from "./Pages/StatRoom/StatRoomRouter";
 

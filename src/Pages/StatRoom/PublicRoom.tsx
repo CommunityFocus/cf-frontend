@@ -11,7 +11,7 @@ import ConnectionState from "../../components/ConnectionState/ConnectionState";
 import PublicRoomRouter from "./PublicRoomRouter";
 import { AdminContext } from "../../../common/common";
 import { ITimerRooms } from "../../components/RoomList/RoomList";
-import { GlobalStyle } from "../../components/Room/Room.styled";
+import { GlobalStyle } from "../Room/Room.styled";
 
 export interface IPublicRoom {
 	isBreak: boolean;

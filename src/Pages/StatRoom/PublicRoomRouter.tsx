@@ -5,7 +5,7 @@ import { IPublicRoom } from "./PublicRoom";
 import { theme } from "../../../common/theme";
 import { StyledTitle } from "./StatRoom.styled";
 import RoomList, { ITimerRooms } from "../../components/RoomList/RoomList";
-import DefaultRoom from "../../components/DefaultRoom/DefaultRoom";
+import DefaultRoom from "../DefaultRoom/DefaultRoom";
 
 interface IPublicRoomRouter extends IPublicRoom {
 	isAdminMode: boolean;
