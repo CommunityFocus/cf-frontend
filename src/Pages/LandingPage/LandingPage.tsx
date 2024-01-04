@@ -25,8 +25,8 @@ import ConnectionState from "../../components/ConnectionState/ConnectionState";
 import ValidationInput from "../../components/Modal/ValidationInput";
 import validRoomname from "../../helpers/validRoomname";
 import { StyledImg } from "../../components/Logo/LogoTitle.styled";
-import ContributorsWidget from "../Contributors/ContributorsWidget";
-import { ContributorsWidgetPosition } from "../Contributors/ContributorsWidget.styled";
+import ContributorsWidget from "../../components/Contributors/ContributorsWidget";
+import { ContributorsWidgetPosition } from "../../components/Contributors/ContributorsWidget.styled";
 
 const LandingPage = (props: {
 	globalUsersConnected: number;

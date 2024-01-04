@@ -6,7 +6,7 @@ import Header from "../../components/Header/Header";
 import { GlobalStyle } from "../Room/Room.styled";
 import { theme } from "../../../common/theme";
 import { Center } from "../LandingPage/LandingPage.styled";
-import ContributorsWidget from "./ContributorsWidget";
+import ContributorsWidget from "../../components/Contributors/ContributorsWidget";
 
 const ContributorsPage = (props: {
 	globalUsersConnected: number;
