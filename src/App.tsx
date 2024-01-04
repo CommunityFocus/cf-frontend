@@ -12,7 +12,7 @@ import UsernameContext from "./components/Username/UsernameContext";
 import ValidRoom from "./Pages/Room/ValidRoom";
 import DefaultRoom from "./Pages/DefaultRoom/DefaultRoom";
 import { tracker } from "../common/common";
-import { PublicRoom } from "./Pages/StatRoom/PublicRoom";
+import { PublicRoom } from "./Pages/PublicRoom/PublicRoom";
 
 const App = (): JSX.Element => {
 	const [globalUsersConnected, setGlobalUsersConnected] = useState<number>(0);
