@@ -200,6 +200,7 @@ const Room = (props: RoomProps): JSX.Element => {
 			socket.off("messageLog", onMessageLog);
 			socket.off("messageLogArray", onMessageLogArray);
 			socket.off("timerButtons", onTimerButtons);
+			socket.off("togglePublicUpdate", ontogglePublicUpdate);
 		};
 	}, []);
 
