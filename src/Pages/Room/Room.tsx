@@ -33,6 +33,7 @@ import PomoCounter from "../../components/PomoCounter/PomoCounter";
 import { PomoCounterPosition } from "../../components/PomoCounter/PomoCounter.styled";
 import TimerForm from "../../components/Controls/TimerForm";
 import SettingsModal from "../../components/Modal/SettingsModal";
+import Subtitle from "../../components/TimerTitle/Subtitle";
 
 const Room = (props: RoomProps): JSX.Element => {
 	const {
@@ -224,7 +225,11 @@ const Room = (props: RoomProps): JSX.Element => {
 						isBreak={isBreak}
 						isPublicRoom={isPublicRoom}
 					/>
-
+					<Subtitle
+						isLoaded={isLoaded}
+						workGrey={workGrey}
+						isBreak={isBreak}
+					/>
 					<Timestamp
 						color={workGrey}
 						roomName={roomName}

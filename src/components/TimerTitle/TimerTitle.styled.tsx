@@ -22,3 +22,13 @@ export const TitleEditEmojiSize = styled.div<{
 export const StyledEye = styled(FaRegEye)`
 	margin-right: 0.5rem;
 `;
+
+export const StyledSubtitle = styled.h4<{
+	color: string;
+	isLoaded: boolean;
+}>`
+	text-align: center;
+	color: ${({ color }): string => color};
+	visibility: ${({ isLoaded }): string => (isLoaded ? "visible" : "hidden")};
+`;
+
