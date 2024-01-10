@@ -1,13 +1,18 @@
-import { StyledSubtitle } from "./TimerTitle.styled"
+import { StyledSubtitle } from "./TimerTitle.styled";
 
-
-const Subtitle = ({isLoaded,workGrey,isBreak}: {isLoaded:boolean,workGrey:string,isBreak:boolean}) => {
-    return (
-        <StyledSubtitle isLoaded={isLoaded} color={workGrey}>
-					
-        {isBreak ? "BREAK" : "WORK"}
-        </StyledSubtitle>
-    )
+interface SubtitleProps {
+	isLoaded: boolean;
+	workGrey: string;
+	isBreak: boolean;
 }
 
-export default Subtitle
+const Subtitle = (props: SubtitleProps) => {
+	const { isLoaded, workGrey, isBreak } = props;
+	return (
+		<StyledSubtitle isLoaded={isLoaded} color={workGrey}>
+			{isBreak ? "BREAK" : "WORK"}
+		</StyledSubtitle>
+	);
+};
+
+export default Subtitle;
