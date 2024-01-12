@@ -31,4 +31,3 @@ export const StyledSubtitle = styled.h4<{
 	color: ${({ color }): string => color};
 	visibility: ${({ isLoaded }): string => (isLoaded ? "visible" : "hidden")};
 `;
-

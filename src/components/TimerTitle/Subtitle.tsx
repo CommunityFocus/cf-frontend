@@ -6,7 +6,7 @@ interface SubtitleProps {
 	isBreak: boolean;
 }
 
-const Subtitle = (props: SubtitleProps) : JSX.Element=> {
+const Subtitle = (props: SubtitleProps): JSX.Element => {
 	const { isLoaded, workGrey, isBreak } = props;
 	return (
 		<StyledSubtitle isLoaded={isLoaded} color={workGrey}>
