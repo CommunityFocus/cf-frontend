@@ -11,10 +11,14 @@ import ModalContext from "./components/Modal/ModalContext";
 import UsernameContext from "./components/Username/UsernameContext";
 import ValidRoom from "./Pages/Room/ValidRoom";
 import DefaultRoom from "./Pages/DefaultRoom/DefaultRoom";
-import { tracker } from "../common/common";
+import { roomName, tracker } from "../common/common";
 import { PublicRoom } from "./Pages/PublicRoom/PublicRoom";
+import { HelmetProvider } from 'react-helmet-async';
+import HelmetTags from "./helmet";
+
 
 const App = (): JSX.Element => {
+
 	const [globalUsersConnected, setGlobalUsersConnected] = useState<number>(0);
 	const [isConnected, setIsConnected] = useState<boolean>(false);
 	const [isBreak, setIsBreak] = useState<boolean>(false);
@@ -73,7 +77,15 @@ const App = (): JSX.Element => {
 	}, []);
 
 	return (
+		<HelmetProvider>
+		
 		<ThemeProvider theme={{ themeGroup, setThemeGroup }}>
+			
+				<HelmetTags 
+			title={userName} 
+			description={roomName} 
+			imageCard="https://raw.githubusercontent.com/CommunityFocus/cf-frontend/main/public/images/communityFocus-icon-meta.png"
+			/> 
 			<UsernameContext.Provider
 				value={useMemo(
 					() => ({
@@ -183,6 +195,7 @@ const App = (): JSX.Element => {
 				</ModalContext.Provider>
 			</UsernameContext.Provider>
 		</ThemeProvider>
+		</HelmetProvider>
 	);
 };
 
